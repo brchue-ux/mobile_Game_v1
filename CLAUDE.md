@@ -31,8 +31,23 @@ and question-at-a-time forced forks faster than they could be answered.
   user's words — never silently dropped. This rule exists because a rebuild is
   precisely what lost the tug-of-war rejection once already.
 - Resolved: 02 (combining = payload + modifiers, amended for small recipe sets)
-  and 13 (prototype). Provisional as of 2026-07-21: hero death is the loss
-  condition, the hero works the jungle automatically, ~100 cards / 20-card decks.
+  and 13 (prototype). **Shelved:** 09 (banking) — good shape, no payoff worth its
+  cost; not rejected.
+- Provisional as of 2026-07-21: the hero works the jungle automatically; hero
+  differentiation is asymmetry not power (rock-paper-scissors + one novel map
+  mechanic each); ~100 cards / 20-card decks; **base destruction ends the match,
+  hero death is only a temporary power-down** (reversed from an earlier
+  "hero-death-loses" call — the camera made the hero a commanded unit, not the
+  player's avatar); portrait 1080×2400; camera is a first-person UX layer over a
+  slightly angled overhead battlefield.
+- **Locked 2026-07-21:** all hero power variance is match-bound — in-match cards
+  and power-ups only, no persistent/purchased power, no gacha.
+- **⚠ Under live challenge:** skill-shot casting (03). The user is weighing
+  omitting it entirely on complexity grounds, which would reverse a locked
+  core-loop constraint. Not decided; don't work 03 as if its premise is safe.
+- **Ticket 18's "budget" governs what ships in a build, never what gets
+  explored.** It may not be invoked to discourage an idea. Define the term or
+  don't use it.
 
 ## Prototype
 
@@ -52,6 +67,15 @@ a phone over LAN or Tailscale — it is a touch game and does not read on deskto
   is kept as the record.
 - **Build from the user's words, not from a summary.** That v1 mistake came from
   working off a compressed gist that had dropped the correction.
+- **Don't over-read rough artifacts.** A napkin sketch answers only what it was
+  drawn to answer. On 2026-07-21 a super-rough layout sketch was read as evidence
+  the jungle didn't fit and portrait forces bare lanes — the user hadn't decided
+  either. Retracted. Same failure family as the confounded prototype (13): a
+  rough thing can't answer a question it wasn't built for.
+- **After every map rebuild, diff the deletions** (`git diff --cached`), don't
+  trust the insertion count. Two separate rebuilds this session silently dropped
+  live content (the central-risk note; 15's verbatim quotes) that only the
+  deletion diff caught.
 - **Don't rebuild DOM inside the animation loop.** v1 rebuilt the hand every
   frame, restarting CSS animations 60×/sec — cards flickered, taps missed, and
   the prototype was unusable. Board rendering belongs on canvas.
