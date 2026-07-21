@@ -1,0 +1,928 @@
+<title>Sixty Seconds — feel prototype</title>
+
+<style>
+  :root {
+    --base: #232136;
+    --surface: #2a273f;
+    --overlay: #393552;
+    --muted: #6e6a86;
+    --subtle: #908caa;
+    --text: #e0def4;
+    --foam: #9ccfd8;
+    --love: #eb6f92;
+    --gold: #f6c177;
+    --iris: #c4a7e7;
+    --pine: #3e8fb0;
+
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --r: 4px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--base);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .app {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 12px 12px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 100vh;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- header ---------- */
+
+  .hdr {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 1px solid var(--overlay);
+    padding-bottom: 8px;
+  }
+
+  .clock {
+    font-size: 30px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .clock.urgent { color: var(--gold); }
+
+  .tally { display: flex; gap: 5px; }
+
+  .pip {
+    width: 22px; height: 5px;
+    background: var(--overlay);
+    border-radius: 2px;
+  }
+  .pip.you  { background: var(--foam); }
+  .pip.them { background: var(--love); }
+
+  /* ---------- board ---------- */
+
+  .board { display: flex; flex-direction: column; gap: 7px; }
+
+  .lane {
+    position: relative;
+    height: 46px;
+    background: var(--surface);
+    border: 1px solid var(--overlay);
+    border-radius: var(--r);
+    overflow: hidden;
+    transition: border-color .12s;
+  }
+
+  .lane.armed { border-color: var(--iris); }
+
+  .fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: linear-gradient(90deg, rgba(156,207,216,.30), rgba(156,207,216,.13));
+    width: 50%;
+  }
+
+  .mid {
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--muted);
+    opacity: .5;
+  }
+
+  .marker {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--text);
+    left: 50%;
+    transition: left .18s linear;
+  }
+
+  .lane-meta {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    pointer-events: none;
+  }
+
+  .lane-val { font-variant-numeric: tabular-nums; color: var(--text); }
+
+  .tag {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    background: var(--overlay);
+    color: var(--text);
+    margin-left: 5px;
+  }
+  .tag.chill { background: var(--pine); color: var(--base); }
+  .tag.wall  { background: var(--iris); color: var(--base); }
+
+  /* ---------- jungle ---------- */
+
+  .jungle {
+    border: 1px dashed var(--overlay);
+    border-radius: var(--r);
+    padding: 7px 9px;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .jungle.live {
+    border-style: solid;
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ---------- cast strip ---------- */
+
+  .cast {
+    border: 1px solid var(--overlay);
+    border-radius: var(--r);
+    background: var(--surface);
+    padding: 9px;
+    min-height: 74px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    touch-action: none;
+    user-select: none;
+  }
+  .cast.ready { border-color: var(--foam); }
+  .cast.dragging { border-color: var(--iris); background: var(--overlay); }
+
+  .cast-row { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+
+  .chip {
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 2px;
+    background: var(--overlay);
+    border: 1px solid transparent;
+  }
+  .chip.payload { background: var(--foam); color: var(--base); }
+  .chip.mod { border-color: var(--muted); cursor: pointer; }
+  .chip.conflict { border-color: var(--love); color: var(--love); }
+
+  .cast-hint { font-size: 11px; color: var(--muted); }
+  .cast-power { font-variant-numeric: tabular-nums; color: var(--gold); }
+
+  /* ---------- hand ---------- */
+
+  .hand {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 6px;
+    min-height: 66px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--overlay);
+    border-radius: var(--r);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    animation: in .18s ease-out;
+  }
+  .card:focus-visible { outline: 2px solid var(--iris); outline-offset: 1px; }
+  .card .kind { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .card.p .kind { color: var(--foam); }
+  .card.sel { border-color: var(--foam); }
+  .card .eff { font-size: 10px; color: var(--subtle); }
+
+  .bankbtn {
+    align-self: flex-start;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .08em;
+    background: transparent;
+    border: 1px solid var(--overlay);
+    color: var(--gold);
+    border-radius: 2px;
+    padding: 1px 5px;
+    cursor: pointer;
+  }
+  .bankbtn:hover { border-color: var(--gold); }
+
+  @keyframes in { from { opacity: 0; transform: translateY(4px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- bank ---------- */
+
+  .bank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--overlay);
+    border-radius: var(--r);
+    padding: 7px 9px;
+  }
+  .bank-slots { display: flex; gap: 4px; }
+  .slot {
+    width: 26px; height: 16px;
+    border: 1px solid var(--overlay);
+    border-radius: 2px;
+  }
+  .slot.full { background: var(--gold); border-color: var(--gold); }
+
+  /* ---------- controls ---------- */
+
+  .row { display: flex; gap: 7px; }
+
+  button.act {
+    flex: 1;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 11px;
+    border-radius: var(--r);
+    border: 1px solid var(--foam);
+    background: transparent;
+    color: var(--foam);
+    cursor: pointer;
+  }
+  button.act.primary { background: var(--foam); color: var(--base); }
+  button.act:focus-visible { outline: 2px solid var(--iris); outline-offset: 2px; }
+
+  details.tune {
+    border: 1px solid var(--overlay);
+    border-radius: var(--r);
+  }
+  details.tune > summary {
+    padding: 9px;
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .tune-body {
+    padding: 0 9px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .ctl { display: flex; flex-direction: column; gap: 4px; }
+  .ctl-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+  .ctl-top b { color: var(--gold); font-weight: 400; font-variant-numeric: tabular-nums; }
+  .ctl-note { font-size: 10px; color: var(--muted); font-family: var(--sans); line-height: 1.4; }
+  input[type=range] { width: 100%; accent-color: var(--gold); }
+  .toggle { display: flex; align-items: center; gap: 7px; font-size: 11px; }
+  input[type=checkbox] { accent-color: var(--gold); width: 15px; height: 15px; }
+
+  /* ---------- log ---------- */
+
+  .log {
+    border-top: 1px solid var(--overlay);
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2px;
+    max-height: 130px;
+    overflow-y: auto;
+    font-size: 11px;
+  }
+  .log div { color: var(--subtle); }
+  .log b { color: var(--text); font-weight: 400; }
+  .log .t { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* ---------- debrief ---------- */
+
+  .over {
+    position: fixed; inset: 0;
+    background: rgba(35,33,54,.96);
+    display: flex; align-items: center; justify-content: center;
+    padding: 18px;
+    z-index: 10;
+  }
+  .over[hidden] { display: none; }
+  .sheet {
+    max-width: 400px;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--overlay);
+    border-radius: var(--r);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .sheet h2 { margin: 0; font-size: 17px; font-weight: 400; }
+  .sheet .verdict { font-size: 13px; color: var(--gold); }
+  .stats { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; font-size: 12px; }
+  .stats span:nth-child(even) { text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .asks { font-family: var(--sans); font-size: 12px; line-height: 1.55; color: var(--subtle); }
+  .asks li { margin-bottom: 6px; }
+  .asks b { color: var(--text); font-weight: 600; }
+
+  .aimline { position: fixed; pointer-events: none; z-index: 5; }
+</style>
+
+<div class="app">
+
+  <div class="hdr">
+    <div>
+      <div class="eyebrow">Sixty seconds</div>
+      <div class="clock" id="clock">60.0</div>
+    </div>
+    <div style="text-align:right">
+      <div class="eyebrow">Lanes held</div>
+      <div class="tally" id="tally"></div>
+    </div>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <div class="jungle" id="jungle">
+    <span>Jungle — idle</span>
+    <span id="jungleNote">fill the bank to claim</span>
+  </div>
+
+  <div class="cast" id="cast">
+    <div class="cast-row" id="castRow">
+      <span class="cast-hint">Tap a payload card to load it.</span>
+    </div>
+    <div class="cast-row" style="justify-content:space-between">
+      <span class="cast-hint" id="castHint">&nbsp;</span>
+      <span class="cast-power" id="castPower"></span>
+    </div>
+  </div>
+
+  <div class="hand" id="hand"></div>
+
+  <div class="bank">
+    <span class="eyebrow">Bank</span>
+    <div class="bank-slots" id="bankSlots"></div>
+    <span class="cast-hint" id="bankNote" style="margin-left:auto"></span>
+  </div>
+
+  <div class="row">
+    <button class="act primary" id="go">Start</button>
+    <button class="act" id="reset">Reset</button>
+  </div>
+
+  <details class="tune">
+    <summary>Tuning — change these while playing</summary>
+    <div class="tune-body">
+
+      <div class="ctl">
+        <div class="ctl-top"><label for="ci">Card arrives every</label><b id="ciV">4.0s</b></div>
+        <input type="range" id="ci" min="1" max="9" step="0.5" value="4">
+        <div class="ctl-note">The most texture-defining number in the game. Low feels frantic and disposable; high makes every card precious and creates dead time.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="ctl-top"><label for="mc">Modifier cap</label><b id="mcV">3</b></div>
+        <input type="range" id="mc" min="1" max="5" step="1" value="3">
+        <div class="ctl-note">How many modifiers can ride one payload. This is the ceiling on combination depth.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="ctl-top"><label for="ml">Match length</label><b id="mlV">60s</b></div>
+        <input type="range" id="ml" min="30" max="150" step="10" value="60">
+      </div>
+
+      <div class="ctl">
+        <div class="ctl-top"><label for="ai">Opponent acts every</label><b id="aiV">5.0s</b></div>
+        <input type="range" id="ai" min="2" max="10" step="0.5" value="5">
+      </div>
+
+      <div class="ctl">
+        <div class="ctl-top"><label for="sn">Creep snowball</label><b id="snV">0.40</b></div>
+        <input type="range" id="sn" min="0" max="1.5" step="0.05" value="0.4">
+        <div class="ctl-note">How hard a winning lane keeps winning on its own. Zero means creeps never compound a lead.</div>
+      </div>
+
+      <label class="toggle"><input type="checkbox" id="fb" checked> Free basic bolt (never a dead hand)</label>
+      <label class="toggle"><input type="checkbox" id="bk" checked> Banking enabled</label>
+    </div>
+  </details>
+
+  <div class="log" id="log"></div>
+</div>
+
+<div class="over" id="over" hidden>
+  <div class="sheet">
+    <h2 id="ovTitle">Match over</h2>
+    <div class="verdict" id="ovVerdict"></div>
+    <div class="stats" id="ovStats"></div>
+    <ul class="asks" id="ovAsks"></ul>
+    <button class="act primary" id="again">Run it again</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var PAYLOADS = [
+    { id: "bolt", name: "Bolt",  kind: "payload", power: 9,  eff: "single lane" },
+    { id: "wave", name: "Wave",  kind: "payload", power: 6,  eff: "hits neighbours at half" },
+    { id: "wall", name: "Wall",  kind: "payload", power: 3,  eff: "blocks next enemy push" }
+  ];
+
+  var MODS = [
+    { id: "dmg",   name: "+Force", kind: "mod", power: 6, eff: "+6 push" },
+    { id: "split", name: "Split",  kind: "mod", power: 0, eff: "half push to neighbours" },
+    { id: "chill", name: "Chill",  kind: "mod", power: 2, eff: "slows enemy in lane" },
+    { id: "pierce",name: "Pierce", kind: "mod", power: 4, eff: "ignores Wall" },
+    { id: "ignite",name: "Ignite", kind: "mod", power: 3, eff: "burns over time" }
+  ];
+
+  var BASIC = { id: "basic", name: "Basic bolt", kind: "payload", power: 4, eff: "always available", free: true };
+
+  var S, raf = null, uid = 0;
+
+  var el = {
+    clock: document.getElementById("clock"),
+    tally: document.getElementById("tally"),
+    board: document.getElementById("board"),
+    hand: document.getElementById("hand"),
+    cast: document.getElementById("cast"),
+    castRow: document.getElementById("castRow"),
+    castHint: document.getElementById("castHint"),
+    castPower: document.getElementById("castPower"),
+    bankSlots: document.getElementById("bankSlots"),
+    bankNote: document.getElementById("bankNote"),
+    jungle: document.getElementById("jungle"),
+    jungleNote: document.getElementById("jungleNote"),
+    log: document.getElementById("log"),
+    go: document.getElementById("go"),
+    over: document.getElementById("over")
+  };
+
+  function cfg() {
+    return {
+      cardInterval: +document.getElementById("ci").value,
+      modCap: +document.getElementById("mc").value,
+      matchLen: +document.getElementById("ml").value,
+      aiInterval: +document.getElementById("ai").value,
+      snowball: +document.getElementById("sn").value,
+      freeBolt: document.getElementById("fb").checked,
+      banking: document.getElementById("bk").checked
+    };
+  }
+
+  function fresh() {
+    var c = cfg();
+    return {
+      running: false, over: false,
+      t: c.matchLen, elapsed: 0,
+      lanes: [
+        { v: 50, chill: 0, wall: 0, burn: 0 },
+        { v: 50, chill: 0, wall: 0, burn: 0 },
+        { v: 50, chill: 0, wall: 0, burn: 0 }
+      ],
+      hand: [], loaded: null, mods: [], bank: [],
+      jungleClaimed: false, jungleLane: null,
+      nextCard: 0, nextAi: 0,
+      casts: 0, banked: 0, wasted: 0, dead: 0,
+      log: []
+    };
+  }
+
+  function log(msg, t) {
+    S.log.push({ t: (S.matchLenAtStart - S.t), m: msg });
+    if (S.log.length > 60) S.log.shift();
+    renderLog();
+  }
+
+  function renderLog() {
+    var h = "";
+    for (var i = 0; i < S.log.length; i++) {
+      var e = S.log[i];
+      h += '<div><span class="t">' + e.t.toFixed(1) + 's</span> ' + e.m + "</div>";
+    }
+    el.log.innerHTML = h;
+  }
+
+  function draw() {
+    var c = cfg();
+    if (S.hand.length >= 5) { S.dead++; log("hand full — a card was <b>lost</b>"); return; }
+    var pool = Math.random() < 0.42 ? PAYLOADS : MODS;
+    var proto = pool[Math.floor(Math.random() * pool.length)];
+    var card = Object.assign({}, proto, { uid: ++uid });
+    S.hand.push(card);
+    renderHand();
+  }
+
+  function conflicts(mods) {
+    var ids = mods.map(function (m) { return m.id; });
+    return ids.indexOf("chill") > -1 && ids.indexOf("ignite") > -1;
+  }
+
+  function power() {
+    if (!S.loaded) return 0;
+    var p = S.loaded.power;
+    for (var i = 0; i < S.mods.length; i++) p += S.mods[i].power;
+    if (conflicts(S.mods)) p = Math.round(p * 0.5);
+    return p;
+  }
+
+  function loadCard(card) {
+    if (S.over) return;
+    if (card.kind === "payload") {
+      if (S.loaded && S.loaded.uid === card.uid) { S.loaded = null; S.mods = []; }
+      else {
+        if (S.loaded && !S.loaded.free) S.hand.push(S.loaded);
+        S.loaded = card;
+        S.hand = S.hand.filter(function (x) { return x.uid !== card.uid; });
+      }
+    } else {
+      if (!S.loaded) {
+        if (cfg().freeBolt) { S.loaded = Object.assign({}, BASIC, { uid: ++uid }); }
+        else { log("no payload loaded — <b>nothing to attach to</b>"); return; }
+      }
+      if (S.mods.length >= cfg().modCap) { log("modifier cap reached (" + cfg().modCap + ")"); return; }
+      S.mods.push(card);
+      S.hand = S.hand.filter(function (x) { return x.uid !== card.uid; });
+    }
+    renderAll();
+  }
+
+  function unstack(i) {
+    var m = S.mods.splice(i, 1)[0];
+    if (m) S.hand.push(m);
+    renderAll();
+  }
+
+  function bankCard(card) {
+    if (!cfg().banking || S.over) return;
+    if (S.bank.length >= 3) { log("bank is full"); return; }
+    S.hand = S.hand.filter(function (x) { return x.uid !== card.uid; });
+    S.bank.push(card);
+    S.banked++;
+    log("banked <b>" + card.name + "</b> (" + S.bank.length + "/3)");
+    if (S.bank.length === 3) mergeBank();
+    renderAll();
+  }
+
+  function mergeBank() {
+    var weakest = 0;
+    for (var i = 1; i < 3; i++) if (S.lanes[i].v < S.lanes[weakest].v) weakest = i;
+    S.jungleClaimed = true;
+    S.jungleLane = weakest;
+    S.bank = [];
+    log("<b>bank merged</b> → jungle camp claimed, feeding lane " + (weakest + 1));
+  }
+
+  function castAt(laneIdx) {
+    if (!S.loaded || S.over) return;
+    var c = cfg();
+    var p = power();
+    var L = S.lanes;
+    var bad = conflicts(S.mods);
+    var ids = S.mods.map(function (m) { return m.id; });
+    var isWall = S.loaded.id === "wall";
+    var spread = isWall ? false : (S.loaded.id === "wave" || ids.indexOf("split") > -1);
+
+    if (isWall) {
+      L[laneIdx].wall = 1;
+      L[laneIdx].v = Math.min(100, L[laneIdx].v + p);
+    } else {
+      L[laneIdx].v = Math.min(100, L[laneIdx].v + p);
+      if (spread) {
+        if (laneIdx > 0) L[laneIdx - 1].v = Math.min(100, L[laneIdx - 1].v + p / 2);
+        if (laneIdx < 2) L[laneIdx + 1].v = Math.min(100, L[laneIdx + 1].v + p / 2);
+      }
+    }
+    if (ids.indexOf("chill") > -1) L[laneIdx].chill = 4;
+    if (ids.indexOf("ignite") > -1) L[laneIdx].burn = 4;
+
+    var label = S.loaded.name + (S.mods.length ? " + " + S.mods.map(function (m) { return m.name; }).join(" + ") : "");
+    log("cast <b>" + label + "</b> → lane " + (laneIdx + 1) + " for " + p +
+        (bad ? ' <span style="color:var(--love)">(Chill+Ignite fought — halved)</span>' : "") +
+        (spread ? " (spread)" : ""));
+
+    S.casts++;
+    S.loaded = null;
+    S.mods = [];
+    renderAll();
+  }
+
+  function aiTurn() {
+    var c = cfg();
+    var best = 0;
+    for (var i = 1; i < 3; i++) if (S.lanes[i].v > S.lanes[best].v) best = i;
+    if (Math.random() < 0.35) best = Math.floor(Math.random() * 3);
+    var p = 8 + Math.random() * 7;
+    var L = S.lanes[best];
+    if (L.chill > 0) p *= 0.5;
+    if (L.wall > 0) { L.wall = 0; p *= 0.25; log("enemy hit your <b>Wall</b> in lane " + (best + 1)); }
+    L.v = Math.max(0, L.v - p);
+    log('<span style="color:var(--love)">enemy</span> pushes lane ' + (best + 1) + " for " + p.toFixed(0));
+  }
+
+  function tick(dt) {
+    var c = cfg();
+    S.t -= dt;
+    S.elapsed += dt;
+
+    S.nextCard -= dt;
+    if (S.nextCard <= 0) { draw(); S.nextCard = c.cardInterval; }
+
+    S.nextAi -= dt;
+    if (S.nextAi <= 0) { aiTurn(); S.nextAi = c.aiInterval; }
+
+    for (var i = 0; i < 3; i++) {
+      var L = S.lanes[i];
+      if (L.chill > 0) L.chill = Math.max(0, L.chill - dt);
+      if (L.burn > 0) { L.burn = Math.max(0, L.burn - dt); L.v = Math.min(100, L.v + 2 * dt); }
+      L.v += (L.v - 50) * c.snowball * 0.01 * dt * 10;
+      if (S.jungleClaimed && S.jungleLane === i) L.v = Math.min(100, L.v + 1.6 * dt);
+      L.v = Math.max(0, Math.min(100, L.v));
+    }
+
+    if (S.t <= 0) { S.t = 0; finish(); }
+    renderAll();
+  }
+
+  function finish() {
+    S.running = true;
+    S.over = true;
+    if (raf) cancelAnimationFrame(raf);
+    raf = null;
+    el.go.textContent = "Start";
+
+    var held = S.lanes.filter(function (L) { return L.v > 50; }).length;
+    var c = cfg();
+    document.getElementById("ovTitle").textContent =
+      held >= 2 ? "You held " + held + " lanes" : "You held " + held + " lane" + (held === 1 ? "" : "s");
+    document.getElementById("ovVerdict").textContent =
+      held >= 2 ? "A win — but the number that matters is how it felt getting there." :
+                  "A loss. Was it the cards, or the clock?";
+
+    var st = [
+      ["Card interval", c.cardInterval.toFixed(1) + "s"],
+      ["Modifier cap", c.modCap],
+      ["Spells cast", S.casts],
+      ["Cards banked", S.banked],
+      ["Cards lost to a full hand", S.dead],
+      ["Jungle claimed", S.jungleClaimed ? "yes" : "no"],
+      ["Avg seconds per cast", S.casts ? (c.matchLen / S.casts).toFixed(1) + "s" : "—"]
+    ];
+    document.getElementById("ovStats").innerHTML = st.map(function (r) {
+      return "<span>" + r[0] + "</span><span>" + r[1] + "</span>";
+    }).join("");
+
+    document.getElementById("ovAsks").innerHTML = [
+      "<li><b>Did you ever stop to think?</b> If you never once paused to consider a combination, the clock is beating the mechanic — and combining is the whole premise.</li>",
+      "<li><b>Did you bank anything?</b> If banking always felt like a luxury you couldn't afford, tempo is priced too high.</li>",
+      "<li><b>Did you watch the lanes, or only your hand?</b> If the board went unread, the board isn't doing enough work.</li>",
+      "<li><b>Change the card interval by 2s and run it again.</b> That single number probably moves the feel more than anything else here.</li>"
+    ].join("");
+
+    el.over.hidden = false;
+  }
+
+  /* ---------- rendering ---------- */
+
+  function renderBoard() {
+    var h = "";
+    for (var i = 0; i < 3; i++) {
+      var L = S.lanes[i];
+      var tags = "";
+      if (L.chill > 0) tags += '<span class="tag chill">chill</span>';
+      if (L.wall > 0) tags += '<span class="tag wall">wall</span>';
+      if (S.jungleClaimed && S.jungleLane === i) tags += '<span class="tag">camp</span>';
+      h += '<div class="lane" data-lane="' + i + '">' +
+             '<div class="fill" style="width:' + L.v + '%"></div>' +
+             '<div class="mid"></div>' +
+             '<div class="marker" style="left:' + L.v + '%"></div>' +
+             '<div class="lane-meta"><span>Lane ' + (i + 1) + tags + '</span>' +
+             '<span class="lane-val">' + L.v.toFixed(0) + '</span></div>' +
+           "</div>";
+    }
+    el.board.innerHTML = h;
+
+    var t = "";
+    for (var j = 0; j < 3; j++) {
+      t += '<div class="pip ' + (S.lanes[j].v > 50 ? "you" : "them") + '"></div>';
+    }
+    el.tally.innerHTML = t;
+  }
+
+  function renderHand() {
+    var h = "";
+    for (var i = 0; i < S.hand.length; i++) {
+      var c = S.hand[i];
+      h += '<button class="card ' + (c.kind === "payload" ? "p" : "") + '" data-uid="' + c.uid + '">' +
+             '<span class="kind">' + (c.kind === "payload" ? "payload" : "modifier") + "</span>" +
+             "<span>" + c.name + "</span>" +
+             '<span class="eff">' + c.eff + "</span>" +
+             (cfg().banking ? '<span class="bankbtn" data-bank="' + c.uid + '">BANK</span>' : "") +
+           "</button>";
+    }
+    if (!S.hand.length) h = '<span class="cast-hint">Empty hand — waiting on the timer.</span>';
+    el.hand.innerHTML = h;
+  }
+
+  function renderCast() {
+    var h = "";
+    if (S.loaded) {
+      h += '<span class="chip payload">' + S.loaded.name + "</span>";
+      for (var i = 0; i < S.mods.length; i++) {
+        h += '<span class="chip mod' + (conflicts(S.mods) ? " conflict" : "") +
+             '" data-un="' + i + '">' + S.mods[i].name + " ×</span>";
+      }
+    } else {
+      h = '<span class="cast-hint">Tap a payload card to load it.</span>';
+    }
+    el.castRow.innerHTML = h;
+    el.cast.classList.toggle("ready", !!S.loaded);
+    el.castPower.textContent = S.loaded ? power() + " push" : "";
+    el.castHint.innerHTML = S.loaded
+      ? (conflicts(S.mods)
+          ? '<span style="color:var(--love)">Chill and Ignite fight — halved</span>'
+          : "Drag up onto a lane to cast. Tap a modifier to take it back.")
+      : "&nbsp;";
+  }
+
+  function renderBank() {
+    var h = "";
+    for (var i = 0; i < 3; i++) h += '<div class="slot' + (i < S.bank.length ? " full" : "") + '"></div>';
+    el.bankSlots.innerHTML = h;
+    el.bankNote.textContent = cfg().banking
+      ? (S.bank.length ? S.bank.map(function (c) { return c.name; }).join(", ") : "tempo you gave up")
+      : "disabled";
+    el.jungle.classList.toggle("live", S.jungleClaimed);
+    el.jungle.firstElementChild.textContent = S.jungleClaimed
+      ? "Jungle — camp held, lane " + (S.jungleLane + 1)
+      : "Jungle — idle";
+    el.jungleNote.textContent = S.jungleClaimed ? "+1.6 push/sec" : "fill the bank to claim";
+  }
+
+  function renderAll() {
+    el.clock.textContent = S.t.toFixed(1);
+    el.clock.classList.toggle("urgent", S.t < 10);
+    renderBoard(); renderHand(); renderCast(); renderBank();
+  }
+
+  /* ---------- input ---------- */
+
+  el.hand.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-bank]");
+    if (b) {
+      e.stopPropagation();
+      var bc = S.hand.filter(function (x) { return x.uid === +b.getAttribute("data-bank"); })[0];
+      if (bc) bankCard(bc);
+      return;
+    }
+    var card = e.target.closest(".card");
+    if (!card) return;
+    var c = S.hand.filter(function (x) { return x.uid === +card.getAttribute("data-uid"); })[0];
+    if (c) loadCard(c);
+  });
+
+  el.castRow.addEventListener("click", function (e) {
+    var m = e.target.closest("[data-un]");
+    if (m) unstack(+m.getAttribute("data-un"));
+  });
+
+  var dragging = false, line = null;
+
+  el.cast.addEventListener("pointerdown", function (e) {
+    if (!S.loaded || S.over) return;
+    dragging = true;
+    el.cast.classList.add("dragging");
+    el.cast.setPointerCapture(e.pointerId);
+    line = document.createElement("div");
+    line.className = "aimline";
+    document.body.appendChild(line);
+    aim(e);
+  });
+
+  el.cast.addEventListener("pointermove", function (e) { if (dragging) aim(e); });
+
+  function aim(e) {
+    var lanes = el.board.querySelectorAll(".lane");
+    var hit = -1;
+    for (var i = 0; i < lanes.length; i++) {
+      var r = lanes[i].getBoundingClientRect();
+      var on = e.clientY >= r.top && e.clientY <= r.bottom;
+      lanes[i].classList.toggle("armed", on);
+      if (on) hit = i;
+    }
+    if (line) {
+      var cr = el.cast.getBoundingClientRect();
+      var x0 = cr.left + cr.width / 2, y0 = cr.top;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      var len = Math.sqrt(dx * dx + dy * dy);
+      line.style.cssText =
+        "position:fixed;left:" + x0 + "px;top:" + y0 + "px;width:" + len +
+        "px;height:2px;background:" + (hit > -1 ? "#c4a7e7" : "#6e6a86") +
+        ";transform-origin:0 50%;transform:rotate(" + Math.atan2(dy, dx) + "rad);pointer-events:none;z-index:5";
+    }
+    return hit;
+  }
+
+  el.cast.addEventListener("pointerup", function (e) {
+    if (!dragging) return;
+    dragging = false;
+    el.cast.classList.remove("dragging");
+    var hit = aim(e);
+    if (line) { line.remove(); line = null; }
+    var lanes = el.board.querySelectorAll(".lane");
+    for (var i = 0; i < lanes.length; i++) lanes[i].classList.remove("armed");
+    if (hit > -1) castAt(hit);
+    else log("released off-board — <b>no cast</b>");
+  });
+
+  /* ---------- loop ---------- */
+
+  var last = 0;
+  function loop(ts) {
+    if (!last) last = ts;
+    var dt = Math.min(0.05, (ts - last) / 1000);
+    last = ts;
+    if (S.running && !S.over) tick(dt);
+    raf = requestAnimationFrame(loop);
+  }
+
+  function start() {
+    if (S.over) reset();
+    S.running = !S.running;
+    el.go.textContent = S.running ? "Pause" : "Resume";
+    if (S.running) {
+      last = 0;
+      if (!raf) raf = requestAnimationFrame(loop);
+      if (!S.matchLenAtStart) S.matchLenAtStart = cfg().matchLen;
+    }
+  }
+
+  function reset() {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    S = fresh();
+    S.matchLenAtStart = cfg().matchLen;
+    S.nextCard = 0.4;
+    S.nextAi = cfg().aiInterval;
+    el.over.hidden = true;
+    el.go.textContent = "Start";
+    for (var i = 0; i < 3; i++) draw();
+    renderAll(); renderLog();
+  }
+
+  el.go.addEventListener("click", start);
+  document.getElementById("reset").addEventListener("click", reset);
+  document.getElementById("again").addEventListener("click", function () { reset(); start(); });
+
+  [["ci", "ciV", function (v) { return (+v).toFixed(1) + "s"; }],
+   ["mc", "mcV", function (v) { return v; }],
+   ["ml", "mlV", function (v) { return v + "s"; }],
+   ["ai", "aiV", function (v) { return (+v).toFixed(1) + "s"; }],
+   ["sn", "snV", function (v) { return (+v).toFixed(2); }]].forEach(function (p) {
+    var i = document.getElementById(p[0]), o = document.getElementById(p[1]);
+    i.addEventListener("input", function () { o.textContent = p[2](i.value); });
+  });
+
+  document.getElementById("bk").addEventListener("change", renderAll);
+
+  reset();
+})();
+</script>

@@ -1,0 +1,609 @@
+<title>Lane prototype — creeps, cards, bank</title>
+
+<style>
+  :root {
+    --base: #232136;
+    --surface: #2a273f;
+    --overlay: #393552;
+    --muted: #6e6a86;
+    --subtle: #908caa;
+    --text: #e0def4;
+    --foam: #9ccfd8;
+    --love: #eb6f92;
+    --gold: #f6c177;
+    --iris: #c4a7e7;
+    --pine: #3e8fb0;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --r: 4px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--base); color: var(--text);
+    font-family: var(--mono); font-size: 14px;
+    -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent;
+  }
+  .app {
+    max-width: 460px; margin: 0 auto; padding: 10px 10px 28px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .eyebrow { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .hdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .clock { font-size: 26px; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .clock.urgent { color: var(--gold); }
+  .bases { display: flex; flex-direction: column; gap: 3px; min-width: 116px; }
+  .bar { height: 7px; background: var(--overlay); border-radius: 2px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 100%; }
+  .bar.you i { background: var(--foam); }
+  .bar.them i { background: var(--love); }
+  .baselbl { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); }
+
+  canvas { width: 100%; display: block; border-radius: var(--r); background: var(--surface); touch-action: none; }
+
+  .cast {
+    border: 1px solid var(--overlay); border-radius: var(--r); background: var(--surface);
+    padding: 8px; min-height: 68px; display: flex; flex-direction: column; gap: 6px;
+    touch-action: none; user-select: none;
+  }
+  .cast.ready { border-color: var(--foam); }
+  .cast.dragging { border-color: var(--iris); background: var(--overlay); }
+  .cast-row { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .chip { font-size: 11px; padding: 3px 7px; border-radius: 2px; background: var(--overlay); border: 1px solid transparent; }
+  .chip.payload { background: var(--foam); color: var(--base); }
+  .chip.mod { border-color: var(--muted); cursor: pointer; }
+  .chip.conflict { border-color: var(--love); color: var(--love); }
+  .hint { font-size: 11px; color: var(--muted); }
+  .pw { font-variant-numeric: tabular-nums; color: var(--gold); }
+
+  .hand { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 6px; min-height: 64px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--overlay); border-radius: var(--r);
+    padding: 6px; display: flex; flex-direction: column; gap: 2px; cursor: pointer;
+    text-align: left; color: var(--text); font-family: var(--mono); font-size: 12px;
+  }
+  .card:focus-visible { outline: 2px solid var(--iris); outline-offset: 1px; }
+  .card .kind { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .card.p .kind { color: var(--foam); }
+  .card .eff { font-size: 10px; color: var(--subtle); }
+  .bankbtn {
+    align-self: flex-start; font-family: var(--mono); font-size: 9px; letter-spacing: .08em;
+    background: transparent; border: 1px solid var(--overlay); color: var(--gold);
+    border-radius: 2px; padding: 1px 5px; cursor: pointer;
+  }
+
+  .bank { display: flex; align-items: center; gap: 8px; border: 1px solid var(--overlay); border-radius: var(--r); padding: 7px 9px; }
+  .slots { display: flex; gap: 4px; }
+  .slot { width: 26px; height: 16px; border: 1px solid var(--overlay); border-radius: 2px; }
+  .slot.full { background: var(--gold); border-color: var(--gold); }
+
+  .row { display: flex; gap: 7px; }
+  button.act {
+    flex: 1; font-family: var(--mono); font-size: 12px; letter-spacing: .06em;
+    text-transform: uppercase; padding: 11px; border-radius: var(--r);
+    border: 1px solid var(--foam); background: transparent; color: var(--foam); cursor: pointer;
+  }
+  button.act.primary { background: var(--foam); color: var(--base); }
+  button.act:focus-visible { outline: 2px solid var(--iris); outline-offset: 2px; }
+
+  details.tune { border: 1px solid var(--overlay); border-radius: var(--r); }
+  details.tune > summary { padding: 9px; cursor: pointer; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+  .tune-body { padding: 0 9px 10px; display: flex; flex-direction: column; gap: 10px; }
+  .ctl { display: flex; flex-direction: column; gap: 3px; }
+  .ctl-top { display: flex; justify-content: space-between; font-size: 11px; }
+  .ctl-top b { color: var(--gold); font-weight: 400; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--gold); }
+  .toggle { display: flex; align-items: center; gap: 7px; font-size: 11px; }
+  input[type=checkbox] { accent-color: var(--gold); width: 15px; height: 15px; }
+
+  .log {
+    border-top: 1px solid var(--overlay); padding-top: 7px;
+    display: flex; flex-direction: column-reverse; gap: 2px;
+    max-height: 108px; overflow-y: auto; font-size: 11px;
+  }
+  .log div { color: var(--subtle); }
+  .log b { color: var(--text); font-weight: 400; }
+  .log .t { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .over { position: fixed; inset: 0; background: rgba(35,33,54,.96); display: flex; align-items: center; justify-content: center; padding: 18px; z-index: 10; }
+  .over[hidden] { display: none; }
+  .sheet { max-width: 400px; width: 100%; background: var(--surface); border: 1px solid var(--overlay); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 88vh; overflow-y: auto; }
+  .sheet h2 { margin: 0; font-size: 17px; font-weight: 400; }
+  .stats { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; font-size: 12px; }
+  .stats span:nth-child(even) { text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .asks { font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.55; color: var(--subtle); padding-left: 18px; }
+  .asks li { margin-bottom: 6px; }
+  .asks b { color: var(--text); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <div class="hdr">
+    <div>
+      <div class="eyebrow">Match clock</div>
+      <div class="clock" id="clock">3:00</div>
+    </div>
+    <div class="bases">
+      <div class="baselbl"><span>Your base</span><span id="youHp">100</span></div>
+      <div class="bar you"><i id="youBar"></i></div>
+      <div class="baselbl"><span>Enemy base</span><span id="themHp">100</span></div>
+      <div class="bar them"><i id="themBar"></i></div>
+    </div>
+  </div>
+
+  <canvas id="cv"></canvas>
+
+  <div class="cast" id="cast">
+    <div class="cast-row" id="castRow"><span class="hint">Tap a payload card to load it.</span></div>
+    <div class="cast-row" style="justify-content:space-between">
+      <span class="hint" id="castHint">&nbsp;</span><span class="pw" id="castPower"></span>
+    </div>
+  </div>
+
+  <div class="hand" id="hand"></div>
+
+  <div class="bank">
+    <span class="eyebrow">Bank</span>
+    <div class="slots" id="slots"></div>
+    <span class="hint" id="bankNote" style="margin-left:auto"></span>
+  </div>
+
+  <div class="row">
+    <button class="act primary" id="go">Start</button>
+    <button class="act" id="reset">Reset</button>
+  </div>
+
+  <details class="tune">
+    <summary>Tuning — live</summary>
+    <div class="tune-body">
+      <div class="ctl"><div class="ctl-top"><label for="ci">Card arrives every</label><b id="ciV">4.0s</b></div>
+        <input type="range" id="ci" min="1" max="12" step="0.5" value="4"></div>
+      <div class="ctl"><div class="ctl-top"><label for="mc">Modifier cap</label><b id="mcV">3</b></div>
+        <input type="range" id="mc" min="1" max="5" step="1" value="3"></div>
+      <div class="ctl"><div class="ctl-top"><label for="ml">Match length</label><b id="mlV">3:00</b></div>
+        <input type="range" id="ml" min="60" max="900" step="30" value="180"></div>
+      <div class="ctl"><div class="ctl-top"><label for="wv">Creep wave every</label><b id="wvV">10s</b></div>
+        <input type="range" id="wv" min="4" max="30" step="1" value="10"></div>
+      <div class="ctl"><div class="ctl-top"><label for="cp">Creep strength</label><b id="cpV">1.0</b></div>
+        <input type="range" id="cp" min="0.4" max="2.5" step="0.1" value="1"></div>
+      <label class="toggle"><input type="checkbox" id="fb" checked> Free basic bolt (never a dead hand)</label>
+      <label class="toggle"><input type="checkbox" id="bk" checked> Banking enabled</label>
+    </div>
+  </details>
+
+  <div class="log" id="log"></div>
+</div>
+
+<div class="over" id="over" hidden>
+  <div class="sheet">
+    <h2 id="ovTitle">Match over</h2>
+    <div class="stats" id="ovStats"></div>
+    <ul class="asks" id="ovAsks"></ul>
+    <button class="act primary" id="again">Run it again</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var PAYLOADS = [
+    { id:"bolt", name:"Bolt", kind:"payload", power:14, eff:"damages enemy creeps" },
+    { id:"wave", name:"Wave", kind:"payload", power:9,  eff:"also hits neighbour lanes" },
+    { id:"rally",name:"Rally",kind:"payload", power:0,  eff:"heals + speeds your creeps" }
+  ];
+  var MODS = [
+    { id:"force", name:"+Force", kind:"mod", power:8, eff:"+8 damage" },
+    { id:"split", name:"Split",  kind:"mod", power:0, eff:"half to neighbours" },
+    { id:"chill", name:"Chill",  kind:"mod", power:3, eff:"slows enemy creeps" },
+    { id:"pierce",name:"Pierce", kind:"mod", power:6, eff:"+6, hits whole lane" },
+    { id:"ignite",name:"Ignite", kind:"mod", power:4, eff:"burns over time" }
+  ];
+  var BASIC = { id:"basic", name:"Basic bolt", kind:"payload", power:6, eff:"always available", free:true };
+
+  var cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+  var W = 0, H = 0, DPR = Math.min(2, window.devicePixelRatio || 1);
+  var LANE_Y = [0.24, 0.5, 0.76], BOW = [-0.10, 0.03, 0.10];
+
+  var S, raf = null, uid = 0, last = 0;
+  var el = {};
+  ["clock","youHp","themHp","youBar","themBar","hand","cast","castRow","castHint","castPower",
+   "slots","bankNote","log","go","over"].forEach(function (k) { el[k] = document.getElementById(k); });
+
+  function cfg() {
+    return {
+      ci:+document.getElementById("ci").value, mc:+document.getElementById("mc").value,
+      ml:+document.getElementById("ml").value, wv:+document.getElementById("wv").value,
+      cp:+document.getElementById("cp").value,
+      fb:document.getElementById("fb").checked, bk:document.getElementById("bk").checked
+    };
+  }
+
+  function mmss(s) {
+    var m = Math.floor(s / 60), r = Math.floor(s % 60);
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  function resize() {
+    W = cv.clientWidth;
+    H = Math.max(190, Math.min(300, Math.round(W * 0.66)));
+    cv.style.height = H + "px";
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+
+  /* curved lane path: quadratic from left base to right base */
+  function pt(lane, t) {
+    var x0 = W * 0.09, x1 = W * 0.91;
+    var y = H * LANE_Y[lane], cy = y + H * BOW[lane];
+    var mt = 1 - t;
+    return {
+      x: mt * mt * x0 + 2 * mt * t * (W * 0.5) + t * t * x1,
+      y: mt * mt * y + 2 * mt * t * cy + t * t * y
+    };
+  }
+
+  function fresh() {
+    var c = cfg();
+    return {
+      running:false, over:false, t:c.ml, len:c.ml,
+      lanes:[[],[],[]], hand:[], loaded:null, mods:[], bank:[],
+      camp:null, youHp:100, themHp:100,
+      nextCard:0.4, nextWave:1.5,
+      casts:0, banked:0, lost:0, log:[], dirty:true
+    };
+  }
+
+  function log(m) {
+    S.log.push({ t:S.len - S.t, m:m });
+    if (S.log.length > 50) S.log.shift();
+    var h = "";
+    for (var i = 0; i < S.log.length; i++)
+      h += '<div><span class="t">' + mmss(S.log[i].t) + "</span> " + S.log[i].m + "</div>";
+    el.log.innerHTML = h;
+  }
+
+  function spawnWave() {
+    var c = cfg();
+    for (var L = 0; L < 3; L++) {
+      for (var i = 0; i < 3; i++) {
+        S.lanes[L].push({ side:1, t:0.02 - i * 0.03, hp:20 * c.cp, mx:20 * c.cp, spd:0.020, slow:0, burn:0 });
+        S.lanes[L].push({ side:-1, t:0.98 + i * 0.03, hp:20 * c.cp, mx:20 * c.cp, spd:0.020, slow:0, burn:0 });
+      }
+    }
+  }
+
+  function conflicts(m) {
+    var i = m.map(function (x) { return x.id; });
+    return i.indexOf("chill") > -1 && i.indexOf("ignite") > -1;
+  }
+  function power() {
+    if (!S.loaded) return 0;
+    var p = S.loaded.power;
+    for (var i = 0; i < S.mods.length; i++) p += S.mods[i].power;
+    return conflicts(S.mods) ? Math.round(p * 0.5) : p;
+  }
+
+  function draw1() {
+    if (S.hand.length >= 5) { S.lost++; log("hand full — a card was <b>lost</b>"); return; }
+    var pool = Math.random() < 0.42 ? PAYLOADS : MODS;
+    S.hand.push(Object.assign({}, pool[Math.floor(Math.random() * pool.length)], { uid:++uid }));
+    S.dirty = true;
+  }
+
+  function loadCard(c) {
+    if (S.over) return;
+    if (c.kind === "payload") {
+      if (S.loaded && S.loaded.uid === c.uid) { S.loaded = null; S.mods = []; }
+      else {
+        if (S.loaded && !S.loaded.free) S.hand.push(S.loaded);
+        S.loaded = c;
+        S.hand = S.hand.filter(function (x) { return x.uid !== c.uid; });
+      }
+    } else {
+      if (!S.loaded) {
+        if (cfg().fb) S.loaded = Object.assign({}, BASIC, { uid:++uid });
+        else { log("no payload — <b>nothing to attach to</b>"); return; }
+      }
+      if (S.mods.length >= cfg().mc) { log("modifier cap reached (" + cfg().mc + ")"); return; }
+      S.mods.push(c);
+      S.hand = S.hand.filter(function (x) { return x.uid !== c.uid; });
+    }
+    S.dirty = true;
+  }
+
+  function bankCard(c) {
+    if (!cfg().bk || S.over || S.bank.length >= 3) return;
+    S.hand = S.hand.filter(function (x) { return x.uid !== c.uid; });
+    S.bank.push(c); S.banked++;
+    log("banked <b>" + c.name + "</b> (" + S.bank.length + "/3)");
+    if (S.bank.length === 3) {
+      var w = 0, fr = [frontline(0), frontline(1), frontline(2)];
+      for (var i = 1; i < 3; i++) if (fr[i] < fr[w]) w = i;
+      S.camp = w; S.bank = [];
+      log("<b>bank merged</b> → jungle camp feeding lane " + (w + 1));
+    }
+    S.dirty = true;
+  }
+
+  function frontline(L) {
+    var f = 0, any = false;
+    S.lanes[L].forEach(function (c) { if (c.side === 1 && c.t > f) { f = c.t; any = true; } });
+    return any ? f : 0.1;
+  }
+
+  function castAt(L) {
+    if (!S.loaded || S.over) return;
+    var p = power(), ids = S.mods.map(function (m) { return m.id; });
+    var spread = S.loaded.id === "wave" || ids.indexOf("split") > -1;
+    var all = ids.indexOf("pierce") > -1;
+
+    function hit(li, amt) {
+      if (li < 0 || li > 2) return;
+      var arr = S.lanes[li], front = -1;
+      arr.forEach(function (c) { if (c.side === -1 && (front < 0 || c.t < front)) front = c.t; });
+      arr.forEach(function (c) {
+        if (c.side !== -1) return;
+        if (!all && front >= 0 && c.t > front + 0.12) return;
+        c.hp -= amt;
+        if (ids.indexOf("chill") > -1) c.slow = 3;
+        if (ids.indexOf("ignite") > -1) c.burn = 4;
+      });
+    }
+
+    if (S.loaded.id === "rally") {
+      S.lanes[L].forEach(function (c) { if (c.side === 1) { c.hp = Math.min(c.mx, c.hp + 10 + p); c.slow = -3; } });
+    } else {
+      hit(L, p);
+      if (spread) { hit(L - 1, p / 2); hit(L + 1, p / 2); }
+    }
+
+    var lbl = S.loaded.name + (S.mods.length ? " + " + S.mods.map(function (m) { return m.name; }).join(" + ") : "");
+    log("cast <b>" + lbl + "</b> → lane " + (L + 1) + " for " + p +
+        (conflicts(S.mods) ? ' <span style="color:var(--love)">(Chill+Ignite fought — halved)</span>' : ""));
+    S.casts++; S.loaded = null; S.mods = []; S.dirty = true;
+  }
+
+  function step(dt) {
+    var c = cfg();
+    S.t -= dt;
+    S.nextCard -= dt; if (S.nextCard <= 0) { draw1(); S.nextCard = c.ci; }
+    S.nextWave -= dt; if (S.nextWave <= 0) { spawnWave(); S.nextWave = c.wv; }
+
+    for (var L = 0; L < 3; L++) {
+      var arr = S.lanes[L];
+      for (var i = 0; i < arr.length; i++) {
+        var a = arr[i];
+        if (a.slow > 0) a.slow -= dt;
+        if (a.burn > 0) { a.burn -= dt; a.hp -= 4 * dt; }
+        if (S.camp === L && a.side === 1) a.hp = Math.min(a.mx, a.hp + 3 * dt);
+      }
+      /* find the two front creeps */
+      var fy = null, fe = null;
+      for (i = 0; i < arr.length; i++) {
+        var b = arr[i];
+        if (b.side === 1) { if (!fy || b.t > fy.t) fy = b; }
+        else { if (!fe || b.t < fe.t) fe = b; }
+      }
+      var clash = fy && fe && (fe.t - fy.t) < 0.045;
+      for (i = 0; i < arr.length; i++) {
+        var u = arr[i];
+        var sp = u.spd * (u.slow > 0 ? 0.45 : (u.slow < 0 ? 1.5 : 1));
+        var blocked = clash && (u === fy || u === fe);
+        if (!blocked) u.t += u.side * sp * dt;
+        else u.hp -= 9 * c.cp * dt;
+        if (u.side === 1 && u.t >= 0.985) { S.themHp -= 4; u.hp = -1; log("your creep hit <b>their base</b>"); }
+        if (u.side === -1 && u.t <= 0.015) { S.youHp -= 4; u.hp = -1; log('<span style="color:var(--love)">their creep hit your base</span>'); }
+      }
+      S.lanes[L] = arr.filter(function (x) { return x.hp > 0; });
+    }
+
+    if (S.t <= 0 || S.youHp <= 0 || S.themHp <= 0) finish();
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* jungle between lanes */
+    ctx.fillStyle = "rgba(62,143,176,.10)";
+    for (var g = 0; g < 2; g++) {
+      var yy = H * (LANE_Y[g] + LANE_Y[g + 1]) / 2;
+      for (var k = 0; k < 5; k++) {
+        ctx.beginPath();
+        ctx.arc(W * (0.18 + k * 0.16), yy + (k % 2 ? 7 : -7), 11, 0, 6.284);
+        ctx.fill();
+      }
+    }
+
+    for (var L = 0; L < 3; L++) {
+      ctx.strokeStyle = (S.camp === L) ? "rgba(246,193,119,.5)" : "rgba(57,53,82,.9)";
+      ctx.lineWidth = 13; ctx.lineCap = "round";
+      ctx.beginPath();
+      var p0 = pt(L, 0);
+      ctx.moveTo(p0.x, p0.y);
+      for (var t = 0.02; t <= 1.0001; t += 0.02) { var q = pt(L, t); ctx.lineTo(q.x, q.y); }
+      ctx.stroke();
+
+      S.lanes[L].forEach(function (u) {
+        var tt = Math.max(0, Math.min(1, u.t)), q = pt(L, tt);
+        ctx.fillStyle = u.side === 1 ? "#9ccfd8" : "#eb6f92";
+        ctx.globalAlpha = u.slow > 0 ? 0.55 : 1;
+        ctx.beginPath(); ctx.arc(q.x, q.y, 4.2, 0, 6.284); ctx.fill();
+        ctx.globalAlpha = 1;
+        if (u.burn > 0) {
+          ctx.strokeStyle = "#f6c177"; ctx.lineWidth = 1.4;
+          ctx.beginPath(); ctx.arc(q.x, q.y, 6.4, 0, 6.284); ctx.stroke();
+        }
+      });
+    }
+
+    /* bases */
+    [[0, "#9ccfd8"], [1, "#eb6f92"]].forEach(function (b) {
+      for (var L = 0; L < 3; L++) {
+        var q = pt(L, b[0]);
+        ctx.fillStyle = b[1]; ctx.globalAlpha = .85;
+        ctx.fillRect(q.x - 5, q.y - 8, 10, 16);
+        ctx.globalAlpha = 1;
+      }
+    });
+
+    if (aimLane > -1) {
+      ctx.strokeStyle = "#c4a7e7"; ctx.lineWidth = 2;
+      ctx.beginPath();
+      var a0 = pt(aimLane, 0);
+      ctx.moveTo(a0.x, a0.y);
+      for (var s = 0.02; s <= 1.0001; s += 0.02) { var w = pt(aimLane, s); ctx.lineTo(w.x, w.y); }
+      ctx.stroke();
+    }
+  }
+
+  function renderDom() {
+    var h = "";
+    for (var i = 0; i < S.hand.length; i++) {
+      var c = S.hand[i];
+      h += '<button class="card ' + (c.kind === "payload" ? "p" : "") + '" data-uid="' + c.uid + '">' +
+           '<span class="kind">' + (c.kind === "payload" ? "payload" : "modifier") + "</span><span>" +
+           c.name + '</span><span class="eff">' + c.eff + "</span>" +
+           (cfg().bk ? '<span class="bankbtn" data-bank="' + c.uid + '">BANK</span>' : "") + "</button>";
+    }
+    el.hand.innerHTML = h || '<span class="hint">Empty hand — waiting on the timer.</span>';
+
+    var r = "";
+    if (S.loaded) {
+      r += '<span class="chip payload">' + S.loaded.name + "</span>";
+      for (i = 0; i < S.mods.length; i++)
+        r += '<span class="chip mod' + (conflicts(S.mods) ? " conflict" : "") + '" data-un="' + i + '">' + S.mods[i].name + " ×</span>";
+    } else r = '<span class="hint">Tap a payload card to load it.</span>';
+    el.castRow.innerHTML = r;
+    el.cast.classList.toggle("ready", !!S.loaded);
+    el.castPower.textContent = S.loaded ? power() + " dmg" : "";
+    el.castHint.innerHTML = S.loaded
+      ? (conflicts(S.mods) ? '<span style="color:var(--love)">Chill and Ignite fight — halved</span>'
+                           : "Drag onto a lane to cast. Tap a modifier to take it back.")
+      : "&nbsp;";
+
+    var b = "";
+    for (i = 0; i < 3; i++) b += '<div class="slot' + (i < S.bank.length ? " full" : "") + '"></div>';
+    el.slots.innerHTML = b;
+    el.bankNote.textContent = cfg().bk
+      ? (S.bank.length ? S.bank.map(function (x) { return x.name; }).join(", ") : "tempo you gave up")
+      : "disabled";
+    S.dirty = false;
+  }
+
+  function renderCheap() {
+    el.clock.textContent = mmss(Math.max(0, S.t));
+    el.clock.classList.toggle("urgent", S.t < 30);
+    el.youHp.textContent = Math.max(0, Math.round(S.youHp));
+    el.themHp.textContent = Math.max(0, Math.round(S.themHp));
+    el.youBar.style.width = Math.max(0, S.youHp) + "%";
+    el.themBar.style.width = Math.max(0, S.themHp) + "%";
+  }
+
+  function finish() {
+    if (S.over) return;
+    S.over = true; S.running = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    el.go.textContent = "Start";
+    var c = cfg();
+    document.getElementById("ovTitle").textContent =
+      S.themHp <= 0 ? "You broke their base" :
+      S.youHp <= 0 ? "Your base fell" :
+      (S.themHp < S.youHp ? "Ahead on bases at time" : "Behind on bases at time");
+    document.getElementById("ovStats").innerHTML = [
+      ["Match length", mmss(c.ml)], ["Card interval", c.ci.toFixed(1) + "s"],
+      ["Modifier cap", c.mc], ["Spells cast", S.casts],
+      ["Seconds per cast", S.casts ? ((c.ml - Math.max(0, S.t)) / S.casts).toFixed(1) + "s" : "—"],
+      ["Cards banked", S.banked], ["Cards lost to full hand", S.lost],
+      ["Jungle camp", S.camp === null ? "never claimed" : "lane " + (S.camp + 1)]
+    ].map(function (x) { return "<span>" + x[0] + "</span><span>" + x[1] + "</span>"; }).join("");
+    document.getElementById("ovAsks").innerHTML = [
+      "<li><b>Did you ever stop to think about a combination?</b> If not, the clock is beating the mechanic.</li>",
+      "<li><b>Did you watch the creeps, or only your hand?</b> If the board went unread, it isn't pulling its weight.</li>",
+      "<li><b>Is this match length closer?</b> Drag it further if not — it goes to 15:00.</li>",
+      "<li><b>Did banking ever feel affordable?</b></li>"
+    ].join("");
+    el.over.hidden = false;
+  }
+
+  function loop(ts) {
+    if (!last) last = ts;
+    var dt = Math.min(0.05, (ts - last) / 1000); last = ts;
+    if (S.running && !S.over) step(dt);
+    if (S.dirty) renderDom();
+    renderCheap(); render();
+    raf = requestAnimationFrame(loop);
+  }
+
+  /* input */
+  el.hand.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-bank]");
+    if (b) { e.stopPropagation();
+      var bc = S.hand.filter(function (x) { return x.uid === +b.getAttribute("data-bank"); })[0];
+      if (bc) bankCard(bc); return; }
+    var card = e.target.closest(".card"); if (!card) return;
+    var c = S.hand.filter(function (x) { return x.uid === +card.getAttribute("data-uid"); })[0];
+    if (c) loadCard(c);
+  });
+  el.castRow.addEventListener("click", function (e) {
+    var m = e.target.closest("[data-un]");
+    if (m) { var mm = S.mods.splice(+m.getAttribute("data-un"), 1)[0]; if (mm) S.hand.push(mm); S.dirty = true; }
+  });
+
+  var dragging = false, aimLane = -1;
+  function nearest(e) {
+    var r = cv.getBoundingClientRect();
+    if (e.clientY < r.top - 40 || e.clientY > r.bottom + 40) return -1;
+    var y = e.clientY - r.top, best = -1, bd = 1e9;
+    for (var L = 0; L < 3; L++) {
+      var d = Math.abs(y - H * (LANE_Y[L] + BOW[L] * 0.5));
+      if (d < bd) { bd = d; best = L; }
+    }
+    return bd < H * 0.28 ? best : -1;
+  }
+  el.cast.addEventListener("pointerdown", function (e) {
+    if (!S.loaded || S.over) return;
+    dragging = true; el.cast.classList.add("dragging");
+    el.cast.setPointerCapture(e.pointerId); aimLane = nearest(e);
+  });
+  el.cast.addEventListener("pointermove", function (e) { if (dragging) aimLane = nearest(e); });
+  el.cast.addEventListener("pointerup", function (e) {
+    if (!dragging) return;
+    dragging = false; el.cast.classList.remove("dragging");
+    var L = nearest(e); aimLane = -1;
+    if (L > -1) castAt(L); else log("released off-board — <b>no cast</b>");
+  });
+
+  function start() {
+    if (S.over) reset();
+    S.running = !S.running;
+    el.go.textContent = S.running ? "Pause" : "Resume";
+    last = 0;
+  }
+  function reset() {
+    S = fresh(); uid = 0;
+    el.over.hidden = true; el.go.textContent = "Start";
+    for (var i = 0; i < 3; i++) draw1();
+    spawnWave();
+    renderDom(); renderCheap();
+    S.log = []; el.log.innerHTML = "";
+  }
+  el.go.addEventListener("click", start);
+  document.getElementById("reset").addEventListener("click", reset);
+  document.getElementById("again").addEventListener("click", function () { reset(); start(); });
+
+  [["ci","ciV",function(v){return (+v).toFixed(1)+"s";}],
+   ["mc","mcV",function(v){return v;}],
+   ["ml","mlV",function(v){return mmss(+v);}],
+   ["wv","wvV",function(v){return v+"s";}],
+   ["cp","cpV",function(v){return (+v).toFixed(1);}]].forEach(function (p) {
+    var i = document.getElementById(p[0]), o = document.getElementById(p[1]);
+    i.addEventListener("input", function () { o.textContent = p[2](i.value); });
+  });
+  document.getElementById("bk").addEventListener("change", function () { S.dirty = true; });
+
+  resize(); reset();
+  raf = requestAnimationFrame(loop);
+})();
+</script>
