@@ -40,6 +40,56 @@ committing.
 **Still unanswered here:** how much of the map is visible at once, whether it
 scrolls, and how a player learns a lane is collapsing off-screen.
 
+### Orientation & first layout sketch — 2026-07-21
+
+**Orientation is portrait, 1080×2400.** `[provisional]` This is the one firm
+decision from the session; everything else below is a rough first pass.
+
+Artifact: `Misc Help/PENUP_20260721_175017.png` — a **super-rough hand sketch**,
+described as such by the user. What it shows: three lanes running top-to-bottom,
+a midline across the centre, a base at each end, "Hero Cam" picture-in-picture
+panels in two corners, and the card hand as a semi-transparent shadow overlay on
+the player's half.
+
+**What the sketch does and does not establish — read before building on it.**
+It is a napkin, not a spec. Over-reading it once already produced a wrong
+conclusion this session (see below).
+
+- **Establishes:** portrait orientation; a rough sense of where the player wants
+  major elements to sit; that the user is thinking about hero visibility (the
+  Hero Cams) and about saving screen space (cards as an overlay, which is a genX
+  idea worth keeping).
+- **Does NOT establish:** lane shape, jungle placement, or that the jungle is
+  excluded. The user was explicit: *"this is just a super rough hand drawing. i
+  am not excluding jungle based on it at all. it still needs to be further
+  fleshed out."* The jungle being absent from the sketch means nothing.
+
+**Retracted over-read.** The agent initially read the sketch as evidence that
+portrait forces bare Clash-Royale-style vertical tracks and squeezes the jungle
+out — treating a rough drawing as a considered layout. That was the same error
+this project already carries a scar for (13: rough artifacts can't answer
+questions they weren't built to answer). Retracted. The portrait-vs-Dota-shape
+tension is real and worth examining, but this sketch is not evidence for it.
+
+**Genuinely open, carried forward for the fleshing-out pass:**
+
+- The user's stated instinct that the top and bottom of the map feel *"a bit
+  long"* — worth taking seriously as an early legibility signal, not as a
+  measurement.
+- Whether the Hero Cam is the right way to show an autonomous jungle hero, or
+  whether the hero should be visible in the jungle directly. Interacts with 12
+  and 15.
+- Where the jungle physically lives on a portrait board.
+- How much of the opponent's side you see — which is **10's** whole question,
+  arriving here through the camera. See the 01/10 note below.
+
+### 01 and 10 have partly merged
+
+"How much of the opponent do you see" is 10's core question, and the camera
+decides it more directly than any card-visibility rule. 10 was written about hand
+and bank visibility; the spatial half of it now lives here. Keep both, but design
+them together.
+
 The map is committed to bending lanes with forest/jungle between them, not bare
 vertical tracks. That commitment has consequences this ticket has to pay for:
 

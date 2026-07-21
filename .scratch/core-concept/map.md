@@ -186,6 +186,11 @@ rather than performing certainty. Ticket 08 promotes or revises.
   (2026-07-21) — race, passives, size, weapons, attack style, plus one novel
   map-affecting mechanic each. Rock-paper-scissors: casters and ranged beat
   melee, melee wins once it closes. See [15](issues/15-heroes.md).
+- **Orientation is portrait, 1080×2400** `[provisional]` (2026-07-21) — from the
+  first layout sketch (`sketches/01-layout-portrait-v1.png`). Only the
+  orientation is decided; lane shape, jungle placement and the hero-visibility
+  approach are all still open. The sketch is a napkin — do not read anything else
+  into it. See [01](issues/01-battlefield-geometry.md).
 - **~100 cards, ~20 brought per match; all deck cards available in-match**
   `[provisional]` (2026-07-21) — see [16](issues/16-deckbuilding.md). This killed
   higher-tier merging as banking's payoff.
@@ -197,7 +202,7 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open, **camera answered** |
+| 01 | Battlefield geometry & phone readability | open; camera + portrait set |
 | 02 | What "combining cards" actually means | resolved + amended |
 | 03 | Gesture as skill expression | open, **⚠ existence challenged** |
 | 04 | Pressure vs. complexity — the learning curve | open |
@@ -206,7 +211,7 @@ method; treat them as "this informs that," not as a build order.
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
 | 09 | Banking — combining over time | **shelved** (not rejected) |
-| 10 | Information — what you see of your opponent | open |
+| 10 | Information — what you see of your opponent | open; **spatial half merged into 01** |
 | 11 | Card accrual economy | open |
 | 12 | The jungle — role and autonomy | open, updated |
 | 13 | Prototype — sixty seconds of a match | resolved |
