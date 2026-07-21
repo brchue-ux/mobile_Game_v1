@@ -165,7 +165,7 @@ method; treat them as "this informs that," not as a build order.
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
-| 09 | Banking — combining over time | open, **rewritten** |
+| 09 | Banking — combining over time | **shelved** (not rejected) |
 | 10 | Information — what you see of your opponent | open |
 | 11 | Card accrual economy | open |
 | 12 | The jungle — role and autonomy | open, updated |
@@ -178,9 +178,13 @@ method; treat them as "this informs that," not as a build order.
 
 ## Not yet specified
 
-- **What banking is for.** The shape (bank-or-cast under pressure) survives; the
-  payoff does not. 09 carries four candidates and one garbled instruction about
-  whether banking is shelved.
+- **Banking — shelved 2026-07-21, not rejected.** *"Just shelve it for now. If we
+  ever think of a way to make it reasonable or good then we can come back to
+  it."* The shape survives and is still the best fit the design has produced for
+  the accessibility constraint; it has no payoff attached, and after heroes,
+  items, gold and deckbuilding it was judged *"extra clutter."* Four candidate
+  uses preserved in 09. Do not treat as a locked "no"; do not reintroduce
+  unprompted.
 - **The ultimate.** *"I do like the ultimate idea"* — wanted, but no longer
   banking's payoff. Currently homeless.
 - **What mana does.** Heroes have mana; cards cost none. A stat without a verb.

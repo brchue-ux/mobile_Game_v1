@@ -1,7 +1,7 @@
 # Banking — combining over time
 
 Type: grilling
-Status: open
+Status: shelved
 Blocked by: 02
 
 ## Question
@@ -42,13 +42,34 @@ prototype produced.
 That leaves banking with a good shape and **no payoff attached** — which is
 precisely the open question.
 
-### Unresolved and not guessed
+### SHELVED — 2026-07-21
 
-The dump contained: *"Maybe banking just isn't the thing we can't do at the
-moment."* Transcription garbled a negation. It reads either as *banking is
-shelved for now* or *banking is unresolvable for now* — opposite instructions for
-this ticket. **Flagged, deliberately not resolved by assumption.** Settle it in
-the next dump on 09.
+The garbled sentence resolved to **shelve it**:
+
+> *"I'm looking for the word. I think that there is a possibility there. I'm not
+> really sure how to implement it. It could just be some extra clutter that,
+> after everything else, isn't necessary so just shelve it for now. If we ever
+> think of a way to make it reasonable or good then we can come back to it."*
+
+**This is a shelving, not a rejection.** The distinction matters for the
+append-only rule: banking has not been ruled out on its merits, and the user
+explicitly left the door open. Do not treat it as a locked "no," and do not
+reintroduce it unprompted either.
+
+**The condition for return:** a use for banking that is clearly worth its screen
+space and teaching cost. The shape was never the problem — bank-or-cast as a
+repeated low-load binary is still the best-fitting idea this design has produced
+for the accessibility constraint. What it lacks is a payoff, and every candidate
+payoff either died (higher-tier), moved elsewhere (transmutation → hero/jungle
+recipes), or was declined for this job (the ultimate).
+
+**The user's own reason for shelving is the sharpest argument in the ticket:**
+*"extra clutter that, after everything else, isn't necessary."* After everything
+else — heroes, items, gold, deckbuilding, recipes — banking is a system competing
+for a budget that 18 says is already oversubscribed. That is a sequencing call,
+and it is the right one.
+
+The four candidate uses below are preserved for whenever it comes back.
 
 ### Candidate uses, none chosen
 
