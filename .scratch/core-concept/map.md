@@ -68,9 +68,14 @@ currently installed.
   creeps fighting. A tug-of-war bar or fill-percentage has been **rejected
   twice** — do not reintroduce it.
 - Core loop: accrue cards → **combine into a compound spell** → **gesture to
-  cast** → aim into a lane.
+  cast** → aim into a lane. **⚠ CHALLENGED 2026-07-21 — see below.**
 - **Gestures are flicks, drags and aims — never drawn symbols.** No tracing
   shapes to cast. Physical and fast, not notational.
+- **All hero power variance is match-bound.** `[committed]` *"if power can change
+  on heroes at all from weapons or stats, it will come from in game cards or
+  match bound power ups. try to steer away from pay2win gacha mechanics."* No
+  persistent power, no purchased power, no gacha. Extends the card fairness
+  constraint to heroes and items. (2026-07-21)
 - **The jungle must be mechanically live, not scenery.**
 - **When accessibility and novelty conflict, accessibility wins.**
 - PvE and PvP are both intended modes.
@@ -82,6 +87,33 @@ currently installed.
 - **Large combinatorial recipe tables stay rejected** — authoring cost and
   opacity. Amended 2026-07-21 to permit a *small fixed set* (3–4, few
   ingredients, taught). The rejection was always about scale; see 02's amendment.
+
+### ⚠ Live challenge to a locked constraint — skill shots
+
+**The user is considering omitting skill-shot casting entirely**, on complexity
+grounds. *"I'm thinking about omitting it entirely because of the added layer of
+complexity it'll already add on top of everything else."* Filed prominently at
+their explicit instruction — *"do not file it quietly."*
+
+If cards act on a selected target (jungle, lane, or hero), casting becomes
+**selection rather than performance**, and ticket 03 loses its subject. The
+constraint above stands until reversed explicitly; this notice exists so the
+reversal can't happen by drift. See 03.
+
+### Reversal log
+
+Decisions that were recorded and then changed. Kept so the old version cannot be
+silently re-adopted.
+
+- **Loss condition** (2026-07-21, reversed same day). Was: *hero death ends the
+  match.* Now: *hero death is a temporary power-down; base destruction ends the
+  match* `[provisional]`. **Why:** the user spotted that an autonomous
+  jungle-farming hero plus an overhead commander camera means the hero is not the
+  player's avatar, so its death cannot be the player's defeat. The camera
+  decision (01) determined the win condition — worth remembering as an example of
+  how non-linear this design is.
+- **Banking** (2026-07-21) — shelved, not rejected. See below.
+- **Recipes** (2026-07-21) — narrowed, not reversed. See 02's amendment.
 
 ### The central risk
 
@@ -141,11 +173,19 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
-- **Hero death is the loss condition** `[provisional]` (2026-07-21) — see
-  [15](issues/15-heroes.md), [05](issues/05-match-shape-win-condition.md). The
-  mechanism of death is unresolved.
+- ~~**Hero death is the loss condition**~~ — **reversed same day**, see the
+  reversal log. Now: hero death is a temporary power-down, base destruction ends
+  the match `[provisional]`.
 - **The hero works the jungle, automatically** `[provisional]` (2026-07-21) — see
   [15](issues/15-heroes.md), [12](issues/12-jungle-role.md).
+- **The camera is a first-person UX layer over a slightly angled overhead
+  battlefield** `[provisional]` (2026-07-21) — explicitly not straight-down. The
+  hero is visible on the field; the jungle runs visible events. The player is a
+  commander, not an avatar. See [01](issues/01-battlefield-geometry.md).
+- **Hero differentiation is asymmetry, not power level** `[provisional]`
+  (2026-07-21) — race, passives, size, weapons, attack style, plus one novel
+  map-affecting mechanic each. Rock-paper-scissors: casters and ranged beat
+  melee, melee wins once it closes. See [15](issues/15-heroes.md).
 - **~100 cards, ~20 brought per match; all deck cards available in-match**
   `[provisional]` (2026-07-21) — see [16](issues/16-deckbuilding.md). This killed
   higher-tier merging as banking's payoff.
@@ -157,11 +197,11 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open |
+| 01 | Battlefield geometry & phone readability | open, **camera answered** |
 | 02 | What "combining cards" actually means | resolved + amended |
-| 03 | Gesture as skill expression | open |
+| 03 | Gesture as skill expression | open, **⚠ existence challenged** |
 | 04 | Pressure vs. complexity — the learning curve | open |
-| 05 | Match shape & win condition | open, partially answered |
+| 05 | Match shape & win condition | open, answer **reversed** 2026-07-21 |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
@@ -171,9 +211,9 @@ method; treat them as "this informs that," not as a build order.
 | 12 | The jungle — role and autonomy | open, updated |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new** |
-| 15 | Heroes — stats, roles, loss condition | open, **new** |
-| 16 | Deckbuilding — 100 cards, bring 20 | open, **new** |
-| 17 | Gold and items — the in-match economy | open, **new** |
+| 15 | Heroes — stats, roles, differentiation | open, **substantially answered** |
+| 16 | Deckbuilding — 100 cards, bring 20 | open |
+| 17 | Gold and items — the in-match economy | open, **flat-vs-tiered fork** |
 | 18 | Slice sequencing — what ships | open, **new**, standing gate |
 
 ## Not yet specified
@@ -187,7 +227,13 @@ method; treat them as "this informs that," not as a build order.
   unprompted.
 - **The ultimate.** *"I do like the ultimate idea"* — wanted, but no longer
   banking's payoff. Currently homeless.
-- **What mana does.** Heroes have mana; cards cost none. A stat without a verb.
+- **What mana does.** Heroes have mana; cards cost none. Live candidate: cards act
+  on jungle/lane/hero, mana is what the *hero* spends on its own abilities. Not
+  chosen, and whether mana exists at all is still open.
+- **Flat vs. tiered itemization.** One greatsword at 5 differentiated by attack
+  speed, or greatswords at 5/6/7 that can be found and upgraded? Decides whether
+  heroes differ laterally or vertically. Owned by 17, constrains 15.
+- **Whether skill-shot casting exists at all.** See the live challenge above.
 - **What "RPG elements" concretely means.** Stated as wanted, never defined.
   Heroes and items now cover part of it. Does any of it touch power?
 - **Meta-progression outside the match.** Partly owned by 06 and 11; the broader

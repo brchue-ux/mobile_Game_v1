@@ -45,6 +45,43 @@ The user's words:
   dynamics and 11.
 - **Whether the opponent can see your items.** Interacts with 10.
 
+### LOCKED — all power is match-bound (2026-07-21)
+
+> *"if power can change on heroes at all from weapons or stats, it will come from
+> in game cards or match bound power ups. try to steer away from pay2win gacha
+> mechanics."*
+
+`[committed]` Hero power variance comes **only** from in-match cards and in-match
+power-ups. Nothing persistent, nothing purchased, no gacha. Extends the existing
+fairness constraint from cards to heroes and items.
+
+**Consequence for this ticket:** itemization may tier *inside* a match; it may
+never carry power *between* matches. Whatever this ticket decides about drops,
+gold and slots, all of it resets at the final whistle.
+
+### Flat vs. tiered itemization — the fork this ticket must resolve
+
+Raised in the 2026-07-21 heroes dump, and it decides whether heroes differ
+laterally or vertically:
+
+> *"Does the great sword only exist and it only ever is five and a dagger is three
+> in terms of attack power? It's the only one there ever is but the attack speed
+> is 1.8 times as fast or 2.2 times as fast so you trade more attacks for less
+> damage per attack. Can you find a greatsword with six? Can you find a greatsword
+> with seven? Can you upgrade it to be that?"*
+
+**Flat** — one greatsword at 5, one dagger at 3, differentiated by attack-speed
+trades. Keeps every difference asymmetric, stays clean against the fairness
+constraint, and makes items an identity choice rather than a power climb.
+
+**Tiered** — greatswords at 5, 6, 7, findable or upgradeable. Creates in-match
+power progression, which is the snowball risk already flagged below, and makes
+matches decidable early. Permitted by the match-bound rule, but not made safe
+by it.
+
+The user's framing: *"These are all points that have to be answered at one point
+in time, which affects how heroes will differ in power."* Constrains 15.
+
 ### Complexity note
 
 This is the single largest complexity cost in the 2026-07-21 material: a

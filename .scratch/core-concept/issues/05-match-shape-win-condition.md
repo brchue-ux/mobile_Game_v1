@@ -11,19 +11,31 @@ What does a match look like from start to finish, and what ends it?
 The MOBA framing implies structure that has never been specified. Creeps march
 and contest lanes — but toward what?
 
-### Partial answer — 2026-07-21
+### Partial answer — 2026-07-21, then reversed the same day
 
-**The loss condition is your hero dying.** `[provisional]` From the dump: *"that
-hero is the thing that causes you to lose the game when it dies."* See 15.
+**Superseded:** *"The loss condition is your hero dying"* `[provisional]` — from
+the first dump, *"that hero is the thing that causes you to lose the game when it
+dies."* Kept per the append-only rule; do not silently re-adopt it.
 
-This closes the biggest gap in this ticket, and it kills the tug-of-war
-resolution option outright — consistent with creeps-are-units being locked.
+**Reversed by the user**, who spotted the contradiction unprompted: if the hero
+farms the jungle autonomously while the player commands from an angled overhead
+view (01), the hero is not the player's avatar, and its death cannot be the
+player's defeat without the fiction breaking.
 
-What it does **not** close: *how* a hero dies. Creeps reaching it? Spells cast at
-it? Both? Until 15 answers that, this ticket has a win condition with no
-mechanism. Comeback dynamics and match length also remain open, and both got
-harder — a single kill-target loss condition can end a match abruptly, which sits
-badly with 13's finding that matches should run minutes, not seconds.
+**Current leading candidates** `[provisional]`, which compose:
+
+1. **Hero death is a temporary power-down** until revival — a setback, not an
+   ending.
+2. **Base destruction is the loss condition.**
+
+This is the Dota lineage the map already commits to, and it is kinder to the
+other open questions here: a revive timer is a natural comeback valve, and a base
+with structures gives the match a shape longer than one decisive fight — which
+13's "far far too short" finding demands.
+
+**What is still unclosed:** whether bases have towers or intermediate objectives,
+what revive costs, and whether creeps alone can end a match or players must
+actively finish it.
 
 The answer must settle:
 

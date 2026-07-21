@@ -25,11 +25,30 @@ That is roughly eleven systems. Ticket 13 established that even the minimal
 version of this game was untestable without a tutorial: the one reaction it
 produced was confounded by having too much unfinished at once.
 
-### What this ticket is not
+### What this ticket is not — read this before invoking it
 
 **Nothing here is proposed for deletion.** The user wants this material and it is
-recorded as wanted. This ticket decides **sequence**, not scope — what the slice
-must contain to answer its question honestly, and what is deliberately deferred.
+recorded as wanted. This ticket decides **sequence**, not scope.
+
+**Definition, because the jargon caused a real misunderstanding on 2026-07-21.**
+"Budget" here means exactly two things: *the number of systems a player must
+learn in order to play one build*, and *the number of things competing for one
+phone screen*. Nothing else.
+
+**It does not mean ideas, design work, or what-ifs.** Those are unbounded and
+this ticket has no authority over them. The user, correctly, on being told the
+per-hero novel mechanic was "the most expensive line in the list":
+
+> *"it's also the novel mechanic that could drive people to the game. It's not a
+> reason to be like, 'Oh we're not gonna do it. We're not gonna even think of it
+> or we won't even flesh out the what-ifs.' ... I don't know what the budget is
+> and I don't know what oversubscribed means but if it's thoughts about specific
+> artifacts in the game or specific points of the game then the hell we're
+> oversubscribed."*
+
+**This ticket may never be used to discourage exploring an idea.** If it is being
+invoked against thinking rather than against a build's contents, it is being
+misused. Cost belongs in the footnotes of a design, not in its headline.
 
 ### The answer must settle
 
