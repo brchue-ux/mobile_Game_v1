@@ -6,10 +6,19 @@ underway; no code yet.
 ## Status
 
 **Concept design in progress.** The canonical artifact is the wayfinder map at
-[.scratch/core-concept/map.md](.scratch/core-concept/map.md), with its tickets
+[.scratch/core-concept/map.md](.scratch/core-concept/map.md), with its 18 tickets
 in `.scratch/core-concept/issues/`. Read the map before doing anything here.
 
-Work it with `/wayfinder .scratch/core-concept/map.md` — one ticket per session.
+**Working method (adopted 2026-07-21) — read `## Working method` in the map
+first.** One ticket per session; the user word-dumps everything they think about
+it; that dump is used to **rebuild the map**, not just to close the ticket.
+Confirm understanding, then wait for the user to say proceed.
+
+Sequential grilling was tried and dropped — this design is a graph, not a tree,
+and question-at-a-time forced forks faster than they could be answered.
+
+`/wayfinder` is referenced in older notes but is **not currently installed**.
+`/grilling` and `/prototype` are.
 
 ## Notes
 
@@ -17,8 +26,13 @@ Work it with `/wayfinder .scratch/core-concept/map.md` — one ticket per sessio
   scope until the concept settles.
 - Locked design constraints live in the map's `## Notes`. Don't re-litigate them
   without saying so explicitly.
-- Two decisions resolved so far: **What "combining cards" actually means**
-  (payload + modifiers) and **Prototype — sixty seconds of a match**.
+- **Rejections are append-only.** Every map rebuild carries forward every
+  recorded "no" with its reason. A reversal gets flagged *as* a reversal, in the
+  user's words — never silently dropped. This rule exists because a rebuild is
+  precisely what lost the tug-of-war rejection once already.
+- Resolved: 02 (combining = payload + modifiers, amended for small recipe sets)
+  and 13 (prototype). Provisional as of 2026-07-21: hero death is the loss
+  condition, the hero works the jungle automatically, ~100 cards / 20-card decks.
 
 ## Prototype
 

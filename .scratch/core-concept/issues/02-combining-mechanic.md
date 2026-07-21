@@ -87,3 +87,36 @@ means teaching four things under a running clock — the exact trade the
 accessibility call refuses. Recommend one for the vertical slice, the rest as
 expansion space. Ticket 09 owns this.
 
+## Amendment — 2026-07-21: recipes, scoped
+
+**This narrows a `[committed]` decision. Recorded explicitly rather than
+absorbed, per the map's rule on re-litigation.**
+
+Elemental recipes were rejected above on two grounds: authoring cost growing with
+the square of the pool, and opacity until memorized. The user has amended this:
+
+> *"I know that we talked about accessibility in not having 50 recipes but a
+> small amount of recipes that are very basic in terms of how many 'ingredients'
+> there are, along with tutorials. That shouldn't be that difficult to grasp."*
+
+**What is amended:** a *small, fixed* set of recipes — 3–4, each with few
+ingredients, taught explicitly — is now in scope. `[provisional]`
+
+**What is unchanged and still committed:** a large combinatorial recipe table is
+still rejected, and for the original reasons. Both stated grounds survive the
+amendment at small N — 4 recipes cost almost nothing to author, and 4 recipes
+with a tutorial are not opaque. The rejection was always about scale; this makes
+that explicit rather than reversing it.
+
+**What it is for:** the recipes are the proposed home for **transmutation**,
+which this ticket had ruled out. The user's construction is that a preset
+combination makes the hero take an action in the jungle that changes map state —
+so transmutation returns not as "two cards become a third card," but as "certain
+combinations produce a *map effect* via the hero." That is a materially different
+mechanic wearing the same name. See 09 and 12.
+
+**Watch item for 04 and 16:** the recipes must stay legible from the card face.
+If a player has to memorize which cards share a "common denominator" (16), recipe
+memorization has re-entered through the side door and this amendment has
+overreached. Accessibility beats novelty remains `[committed]`.
+
