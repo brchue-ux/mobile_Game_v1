@@ -62,7 +62,12 @@ Answered while working 01. `[provisional]`
   loop names in-jungle effects alongside in-lane ones. This answers "how a player
   interacts with it" without needing 09's banking.
 - **It is not a wall between lanes** — *"the hero would need to be able to go
-  through them."* Lane-to-lane traversal through jungle is required.
+  through them."* Lane-to-lane traversal through jungle is required. **This rule
+  became load-bearing later the same day:** terrain manipulation can *"block off
+  the ability for the hero to go to another lane"* (a giant tree root), which is
+  a play worth making **only because passage is the default**. Traversal-by-default
+  is now the baseline that terrain effects are priced against, not just a
+  movement rule. See [05](05-match-shape-win-condition.md).
 - **Lane creeps stay out of it, with an exception:** *"creeps from the lane won't
   go there unless they happen to be pulled there via aggro but then they would
   snap back once aggro is lost."* **First appearance of aggro in this design** —

@@ -48,18 +48,41 @@ Six readouts. Three observations worth keeping:
 - **"What skills they've chosen"** presumes heroes pick skills during a match.
   That is not recorded anywhere in 15 and is effectively new.
 
-### Net position
+### Hand visibility — answered 2026-07-26 `[provisional]`
 
-Everything spatial and nearly everything about the enemy hero is open by design.
-**The hidden-information budget is spent down to the hand alone** — and with
-enemy *intent* on the panel, even the hand's bluffing value drops, because
-knowing what they are trying to do is most of what a bluff would have concealed.
+Asked whether the drift toward fully-open information was intended:
 
-**So the ticket's original axis has resolved almost all the way to "fully open."**
-The framing question — bluffing and reads versus chess-like calculation — now has
-an answer trending hard toward calculation. Worth confirming that is intended,
-because it was written as an open question and got settled by accumulation rather
-than by a decision.
+> *"you won't know what cards they have. Maybe you can't know how they are able
+> to manipulate the field."*
+
+**The hand is hidden.** That is the deliberate reserve, and it settles the
+ticket's first bullet.
+
+**A second hidden element arrived with it:** *how* an opponent can manipulate the
+field — i.e. their terrain-effect capability (see [05](05-match-shape-win-condition.md))
+is concealed, not just the cards themselves. Hedged with *"maybe"*, so
+`[provisional]` and weakly held, but note what it buys: terrain manipulation is
+slow and accrued, so hiding the *capability* is what stops a telegraphed
+build-up from being fully readable in advance. Without it, accrual would announce
+itself.
+
+### Net position — the design is not fully open
+
+**Open:** the whole board (no fog), enemy hero position, and six readouts on
+enemy hero state including *"their goal"*, which is intent.
+
+**Hidden:** the hand, and probably the opponent's field-manipulation capability.
+
+**So the original axis lands off-centre, not at either pole.** Everything about
+the *battlefield* is calculable; everything about the *opponent's options* is
+not. That is a coherent split — you can always see what is happening, never quite
+what is coming — and it is worth stating as the ticket's answer rather than
+leaving it implied. The earlier concern that this was drifting to fully-open by
+accumulation is resolved: it was not intended, and the hand is the reserve.
+
+**Still open:** whether hand visibility is total darkness or partial (card
+*count* but not identity, payload but not modifiers — the ticket's original
+framing), and whether PvE mirrors it or the AI plays open-handed.
 
 ## Question
 

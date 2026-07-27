@@ -103,6 +103,17 @@ currently installed.
   purpose to farm it. This rules out the naive forms of the usual designs — flat
   behind-bounties, catch-up gold, underdog buffs — unless shaped so losing costs
   more than the bonus returns.
+  - **The test that came out of it** (2026-07-26): **preventive beats
+    restorative.** A device that applies to both players from the opening
+    whistle and stops a snowball *starting* gives a thrower nothing. A device
+    that pays out in proportion to how badly you are doing is what a thrower
+    farms. Pseudo-towers are explicitly the first kind — *"a way to just stall
+    the game"*, not a comeback.
+- **The hand is hidden; the board is not.** `[provisional]` (2026-07-26) *"you
+  won't know what cards they have. Maybe you can't know how they are able to
+  manipulate the field."* Settles the drift 10 was showing: everything about the
+  **battlefield** is calculable, everything about the opponent's **options** is
+  not. You always see what is happening, never quite what is coming.
 - **The jungle must be mechanically live, not scenery.**
 - **When accessibility and novelty conflict, accessibility wins.**
 - PvE and PvP are both intended modes.
@@ -343,7 +354,7 @@ method; treat them as "this informs that," not as a build order.
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
 | 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
-| 10 | Information — what you see of your opponent | **largely answered** — no fog, six enemy-hero readouts incl. intent; trending fully-open |
+| 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open |
 | 11 | Card accrual economy | open |
 | 12 | The jungle — role and autonomy | open, updated — playable space, not a wall, aggro leash |
 | 13 | Prototype — sixty seconds of a match | resolved |
@@ -389,22 +400,19 @@ method; treat them as "this informs that," not as a build order.
   *"may defend towers."* Nothing else about them exists: whether they shoot,
   whether they gate lane progress, whether they are the thing that gets destroyed
   instead of a base. Interacts hard with the win-condition challenge.
-- **⚠ Whether "stored benefits" means banking is back.** The 2026-07-26 terrain
-  proposal is powered by *"cards or a crew, like stored benefits"* — almost
-  certainly *"accrue"*, i.e. **exactly the shelved mechanic in
-  [09](issues/09-banking-mechanic.md)**, described from scratch and unnamed. If
-  so, terrain manipulation is the payoff whose absence got banking shelved. **Not
-  unshelved by me** — this is a yes/no the user has to give.
-- **What replaces towers in the lane.** Towers were proposed and doubted in the
-  same dump: the *job* is wanted — a breakpoint that segments a lane, slows a
-  pusher, and rewards being taken — but the turret is not, because *"it just
-  becomes you're copying every other MOBA that exists."* Design brief: **find a
-  lane breakpoint that isn't a tower**, and make it pay the attacker rather than
-  the defender, or it collides with the deliberate-losing rail.
-- **Whether the design intends to be fully-open-information.** 10's axis ran from
-  bluffing to chess-like calculation. Between no fog, full enemy hero state and
-  *"their goal"* on the panel, it has resolved most of the way to **calculation**
-  — by accumulation, never by a decision. Worth confirming that is wanted.
+- **⚠ Whether the accrual gate and banking are one system or two.** *"I did mean
+  accrue"* — confirmed 2026-07-26. But its stated job is **gating the cost of
+  powerful effects** (*"that shouldn't just be one card"*), whereas
+  [09](issues/09-banking-mechanic.md)'s job was tempo-vs-investment. Same shape,
+  different purpose, and held as *"just a hypothetical."* **The hazard is
+  bookkeeping, not design:** a shelved ticket whose mechanic is quietly in use
+  under another name is how a design loses track of itself. Pick one — 09
+  returns, or the design has two accrual systems and 18 must know it.
+- **What replaces towers in the lane.** The turret is rejected as copying, but
+  the *job* is wanted and was **clarified 2026-07-26 to be pacing, not catch-up**:
+  a **scaling gate** too strong to pass early, which stops an early bulldoze.
+  Design brief: a lane obstacle with a power curve that doesn't read as a
+  building. Terrain manipulation may share machinery with it.
 - **What terrain damage is** beyond its existence: permanent or decaying,
   repairable, counterable, and whether it hits your own units too. Plus the
   user's own dangling *"maybe that can somehow affect what the overall win

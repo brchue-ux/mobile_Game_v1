@@ -139,10 +139,41 @@ thing that segments the lane, slows a pushing opponent, and rewards taking it.
 What is not wanted is a turret, because it reads as copied. That is a design
 brief, and a decent one: *find a lane breakpoint that isn't a tower.*
 
-Note the friction with the comeback rail above: a breakpoint that *"slows your
-opponent down as a comeback mechanic"* is precisely the shape that can reward
-being behind. It has to pay the attacker for taking it, not pay the defender for
-being pushed to it.
+### Clarified later the same day — the breakpoint is a stall, not a comeback
+
+The agent flagged a friction: a breakpoint described as *"a comeback mechanic
+type thing"* is the shape that can reward being behind. **The user corrected the
+framing** rather than the mechanic:
+
+> *"I get what you're saying... it can't be something that you chase. You can't
+> chase being down in the match because you're looking for that comeback
+> mechanic. I don't view my pseudo towers as that. It's more of a way to just
+> stall the game. It prevents you from bulldozing through a lane at the beginning
+> because whatever is in that depth of that lane is too strong for you at the
+> current point of the game."*
+
+**The job is pacing, not catch-up.** `[provisional]` A pseudo-tower is a
+**scaling gate**: something deep in a lane that is simply too strong for you
+early, and becomes passable as you grow. It stops an early bulldoze from ever
+starting.
+
+**This resolves the friction, and it generalises into a useful test.** Preventing
+a snowball is not the same as rewarding being behind:
+
+- A **preventive** device applies equally to both players from the opening
+  whistle, and gives the losing player nothing they did not already have. It
+  passes the deliberate-losing rail cleanly.
+- A **restorative** device pays out in proportion to how badly you are doing,
+  which is what a thrower farms.
+
+**Keep pseudo-towers on the preventive side of that line.** The earlier "bonus
+gold for taking it, like League" idea is fine under this reading — that pays the
+*attacker* for clearing the gate — and would fail it only if the payout scaled
+with how far behind the attacker was.
+
+**Still open:** what the thing actually *is*, given the turret is rejected as
+copying. It needs to read as a lane obstacle with a power curve, not a building.
+Terrain manipulation is a neighbouring idea and may share machinery.
 
 ### Terrain manipulation — the new material `[provisional]`
 
@@ -168,6 +199,20 @@ Why it is a good fit, recorded so the reasoning survives:
 it can be repaired or countered, whether it hits your own units too, and the
 user's own *"maybe that can somehow affect what the overall win condition is"* —
 which is a hint, not a mechanism.
+
+**Concrete example, and its cost model — 2026-07-26.** *"a giant tree root
+blocks off the ability for the hero to go to another lane."* So terrain effects
+can **deny lane-to-lane traversal**, and the user's instinct is that an effect
+that strong *"shouldn't just be one card"* — it should be accrued. See
+[09](09-banking-mechanic.md) for what that accrual is and is not.
+
+> **⚠ Interaction to keep straight, not a contradiction.** [12](12-jungle-role.md)
+> records that the jungle *"is not a wall between lanes, because the hero would
+> need to be able to go through them."* A tree root that blocks traversal does
+> not violate that — it **temporarily creates** a wall where the default is
+> passage. In fact the rule is what gives the effect its value: blocking is only
+> a play worth making because traversal is the norm. If lanes were walled by
+> default, the card would do nothing.
 
 ### ⚠ "Cards or a crew, like stored benefits" — this may be banking
 

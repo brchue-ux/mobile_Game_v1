@@ -106,6 +106,41 @@ they did not name it, may have meant something else, and the alternate reading
 ("a crew" = a literal squad) would instead brush the locked constraint that
 players do not command an army. **This is a yes/no for the user.**
 
+#### Confirmed the same day: *"I did mean accrue."*
+
+The transcription question is settled — **"accrue"**, not "a crew". The
+commandable-squad reading is dead, and the locked no-direct-army constraint is
+untouched.
+
+**But the stated purpose is not the purpose banking had.** The user's reason:
+
+> *"if one of the decisions, like a giant tree root, blocks off the ability for
+> the hero to go to another lane, maybe that shouldn't just be one card, right?
+> Because that can be pretty powerful. It was just a hypothetical way to limit
+> power cards or powerful abilities."*
+
+So accrual here is a **cost gate on powerful effects** — a way to price a
+map-altering play so it cannot be a single card. That is *not* what 09 was:
+banking was a **tempo-vs-investment strategic choice**, valued for low cognitive
+load per instance and for giving the accessibility constraint something to work
+with. Same mechanical shape — save up, then spend — different job.
+
+**And it is held loosely:** *"it was just a hypothetical."* Not a proposal.
+
+**⚠ The unresolved thing is now a bookkeeping hazard, not a design question.**
+Two possibilities, and nobody has picked:
+
+1. **They are one system.** Then 09 is de facto back — being used under another
+   name while its ticket reads "shelved," which is precisely how a design loses
+   track of itself. The shelf note would need to become a return.
+2. **They are two systems.** Then the design has *both* an accrual-based cost
+   gate and a shelved accrual-based investment mechanic, and 18 needs to know
+   there are two, because they will look identical on screen.
+
+**Either way the current state — a shelved ticket whose mechanic is quietly in
+use — should not persist.** Still the user's call; flagged again because the
+confirmation made it sharper rather than resolving it.
+
 ### Candidate uses, none chosen
 
 The user asked for a novel use case rather than a payoff picked off the original
