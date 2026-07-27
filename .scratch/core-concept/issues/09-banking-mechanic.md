@@ -71,6 +71,41 @@ and it is the right one.
 
 The four candidate uses below are preserved for whenever it comes back.
 
+### ⚠ A fifth candidate may have arrived on its own — 2026-07-26
+
+**Unresolved, and it needs the user, not an inference.** While answering 05 on
+objectives, the user described **terrain manipulation** — creating water, lava or
+holes to impede enemy creeps and heroes — and said it would be powered by:
+
+> *"You get cards or a crew, like stored benefits, that can allow you to affect
+> the terrain."*
+
+**"a crew" is very likely "accrue."** The dumps arrive by voice, and *"you get
+cards, or accrue, like stored benefits"* is both grammatical and exactly what the
+sentence needs to mean. **Stored benefits accumulated over time and spent on a
+board-changing effect is banking**, described from scratch by the user who
+shelved it five days earlier without naming it.
+
+**Why this would satisfy the condition for return.** The condition above is *"a
+use for banking that is clearly worth its screen space and teaching cost"* —
+banking's problem was never its shape, it was the missing payoff. Terrain
+manipulation is a payoff with the right properties:
+
+- **Expensive and board-changing**, so it wants a build-up. A tempo card does not
+  reshape a map; an investment might.
+- **Naturally the "investment" pole** of the tempo-vs-investment split this
+  ticket was built around — and it is a *better* fit than any of the four
+  candidates below, none of which changed the board.
+- **Compatible with everything decided since**: it needs no skill shots, it gives
+  the pannable camera something to look at, and it makes terrain mechanically
+  live, which is a standing constraint.
+
+**Not unshelved, and deliberately so.** The rule is not to reintroduce banking
+unprompted. The user raised the shape themselves, which makes it prompted — but
+they did not name it, may have meant something else, and the alternate reading
+("a crew" = a literal squad) would instead brush the locked constraint that
+players do not command an army. **This is a yes/no for the user.**
+
 ### Candidate uses, none chosen
 
 The user asked for a novel use case rather than a payoff picked off the original

@@ -127,17 +127,50 @@ reversal is recorded as a reversal, not a deletion.
   No fog, so he is always visible if you point the camera at him. The Hero Cam
   picture-in-picture from the napkin sketch may be unnecessary — unreconciled,
   see 01.
-- **How autonomous "autonomous" is** — **sharpened 2026-07-26, still open.** The
-  user: the hero *"will follow these auto-programmed dynamic routes to farm
-  creeps and maybe defend towers or help his lanes or attack at certain points"*,
-  and — stated twice — *"you don't get to control your hero directly."* So the
-  hero runs a **route/behaviour system with several modes** (farm, defend, assist
-  lane, push). What remains open is whether the player influences *which* mode
-  is active, and by what means. Cards can *"help your hero"*, which is influence
-  on his power; nothing yet says whether anything influences his **priorities**.
-  Note "steerable with a flick" is now unlikely — flicks may not exist at all.
-- **Towers.** New on 2026-07-26 and unspecified — the hero *"may defend
-  towers."* See 05.
+- **How autonomous "autonomous" is** — **largely answered later the same day; see
+  "Standing orders" below.** The hero runs a **route/behaviour system with several
+  modes** (farm, defend, assist lane, push): *"auto-programmed dynamic routes to
+  farm creeps and maybe defend towers or help his lanes or attack at certain
+  points"*, and — stated twice — *"you don't get to control your hero directly."*
+- **Towers.** New on 2026-07-26, and **doubted the same day** — the user is wary
+  of lane towers as MOBA copying, while wanting the *job* a tower does. See 05.
+
+## Standing orders — 2026-07-26 `[provisional]`
+
+> *"Maybe there is a way to cue very simple commands to the hero, like: left
+> lane, mid lane, right lane, farm this part of the jungle, farm that part of
+> the jungle. Something like that."*
+
+**The player sets the hero's priority; the hero executes it autonomously.** This
+answers the open question of whether anything influences the hero's *priorities*
+as opposed to its power — cards do power, standing orders do priorities.
+
+**It also resolves the fork this ticket originally posed:** *"How autonomous
+'autonomous' is — untouchable, or steerable with a flick?"* Neither pole won.
+The hero is **not untouchable** — you can redirect it — but it is not steered
+either, and "with a flick" is dead on its own terms, since skill shots were
+removed and flicks may not exist anywhere in the design. The answer turned out to
+be a third thing: **coarse standing orders.**
+
+**It is not a reversal of "you don't get to control your hero directly."** A
+standing order is a destination, not steering: you say *mid lane*, you do not
+walk him there, and everything between the order and the outcome stays automated.
+Recorded explicitly because the two statements were made minutes apart and a cold
+read could see a contradiction. **If the user did mean this to loosen the
+no-direct-control rule, that needs saying.**
+
+Convergences worth noting:
+
+- It gives the **bottom command bar actual commands**, matching the Warcraft 3
+  analogy that named *"action commands"* — the panel now has a second job beyond
+  readouts.
+- It pairs with 10's *"their goal"* readout: if the panel shows the enemy hero's
+  current objective, and you set your own hero's objective, then orders and
+  intent-reading are the same mechanic seen from both sides.
+
+**Open within it:** how many orders exist, whether they are free or cost
+something, whether the hero can refuse or delay, and whether an order is a mode
+that persists or a one-shot instruction.
 - **What the hero does in the jungle**, concretely (12).
 - **Whether hero unlocks exist**, and if so how they stay clear of the match-bound
   power constraint (06, 07, 14).

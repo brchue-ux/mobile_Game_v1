@@ -96,6 +96,13 @@ currently installed.
   match bound power ups. try to steer away from pay2win gacha mechanics."* No
   persistent power, no purchased power, no gacha. Extends the card fairness
   constraint to heroes and items. (2026-07-21)
+- **No comeback mechanic may reward deliberate losing.** `[committed]`
+  (2026-07-26) *"people don't just purposely lose in order to get them to get
+  free things because it lets them snowball in reverse."* Comeback dynamics are
+  required, but every candidate must be tested against a player throwing on
+  purpose to farm it. This rules out the naive forms of the usual designs — flat
+  behind-bounties, catch-up gold, underdog buffs — unless shaped so losing costs
+  more than the bonus returns.
 - **The jungle must be mechanically live, not scenery.**
 - **When accessibility and novelty conflict, accessibility wins.**
 - PvE and PvP are both intended modes.
@@ -249,6 +256,25 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
+- **Terrain manipulation is the leading objective candidate** `[provisional]`
+  (2026-07-26) — players reshape the battlefield (*"create more water, create
+  lava, or create holes in the ground"*) to impede enemy creeps and heroes. The
+  best answer this design has produced for "an objective that isn't a copied MOBA
+  objective," and it makes terrain mechanically live without needing skill shots.
+  **⚠ It may also have handed [09](issues/09-banking-mechanic.md) the payoff that
+  got banking shelved — unresolved, see below.** See
+  [05](issues/05-match-shape-win-condition.md).
+- **The player gives the hero standing orders** `[provisional]` (2026-07-26) —
+  *"left lane, mid lane, right lane, farm this part of the jungle, farm that part
+  of the jungle."* Cards influence the hero's **power**; standing orders
+  influence its **priorities**. Not a reversal of *"you don't get to control your
+  hero directly"* — an order is a destination, not steering. See
+  [15](issues/15-heroes.md).
+- **PvE and PvP share one match shape** `[provisional]` (2026-07-26) — *"the same
+  thing, just human versus AI."*
+- **Hero death costs nothing; buybacks are limited** `[provisional]`
+  (2026-07-26) — death is a respawn timer, not a penalty. One or two buybacks per
+  match pay a price for an instant return. See 05.
 - **The camera is a pannable MOBA observer** `[provisional]` (2026-07-26) —
   *"almost like you're an observer in a MOBA... you use your finger to pan around
   the map but you don't get to control your hero directly."* The map is **larger
@@ -312,17 +338,17 @@ method; treat them as "this informs that," not as a build order.
 | 02 | What "combining cards" actually means | resolved + amended |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
-| 05 | Match shape & win condition | open; reversed 2026-07-21, **⚠ current answer held under protest** 2026-07-26 |
+| 05 | Match shape & win condition | open, **substantially answered**; win condition itself still **⚠ held under protest** |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
-| 09 | Banking — combining over time | **shelved** (not rejected) |
-| 10 | Information — what you see of your opponent | open; **spatial half ANSWERED — no fog**; hand visibility now carries it alone |
+| 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
+| 10 | Information — what you see of your opponent | **largely answered** — no fog, six enemy-hero readouts incl. intent; trending fully-open |
 | 11 | Card accrual economy | open |
 | 12 | The jungle — role and autonomy | open, updated — playable space, not a wall, aggro leash |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new** |
-| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; hero visibility closed, routes sharpened |
+| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26 |
 | 16 | Deckbuilding — 100 cards, bring 20 | open |
 | 17 | Gold and items — the in-match economy | open, **flat-vs-tiered fork** |
 | 18 | Slice sequencing — what ships | open, **new**, standing gate |
@@ -363,9 +389,26 @@ method; treat them as "this informs that," not as a build order.
   *"may defend towers."* Nothing else about them exists: whether they shoot,
   whether they gate lane progress, whether they are the thing that gets destroyed
   instead of a base. Interacts hard with the win-condition challenge.
-- **What "how their hero is doing" actually contains.** Health, level, gold,
-  items, current behaviour mode? Each is a different amount of the opponent's
-  plan given away, and none is chosen. Now 10's sharpest question.
+- **⚠ Whether "stored benefits" means banking is back.** The 2026-07-26 terrain
+  proposal is powered by *"cards or a crew, like stored benefits"* — almost
+  certainly *"accrue"*, i.e. **exactly the shelved mechanic in
+  [09](issues/09-banking-mechanic.md)**, described from scratch and unnamed. If
+  so, terrain manipulation is the payoff whose absence got banking shelved. **Not
+  unshelved by me** — this is a yes/no the user has to give.
+- **What replaces towers in the lane.** Towers were proposed and doubted in the
+  same dump: the *job* is wanted — a breakpoint that segments a lane, slows a
+  pusher, and rewards being taken — but the turret is not, because *"it just
+  becomes you're copying every other MOBA that exists."* Design brief: **find a
+  lane breakpoint that isn't a tower**, and make it pay the attacker rather than
+  the defender, or it collides with the deliberate-losing rail.
+- **Whether the design intends to be fully-open-information.** 10's axis ran from
+  bluffing to chess-like calculation. Between no fog, full enemy hero state and
+  *"their goal"* on the panel, it has resolved most of the way to **calculation**
+  — by accumulation, never by a decision. Worth confirming that is wanted.
+- **What terrain damage is** beyond its existence: permanent or decaying,
+  repairable, counterable, and whether it hits your own units too. Plus the
+  user's own dangling *"maybe that can somehow affect what the overall win
+  condition is."*
 - **What else fits in the bottom 25%.** It must hold the cards, readouts on both
   heroes, and — proposed for off-screen lane alerts — *"a notification or you'd
   have a mini map that would have a ping on it."* Three jobs, one quarter of a

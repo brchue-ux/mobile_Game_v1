@@ -28,13 +28,38 @@ whether this game has bluffing in it at all.
 **Enemy hero *state* is open too** `[provisional]` — not merely its position.
 The bottom command bar is specified to give *"a sort of insight into how their
 hero is doing"*, explicitly so the player can judge slow-their-hero vs.
-speed-mine vs. hit-their-lane. **What "how their hero is doing" contains is
-unspecified** — health, level, gold, items, current behaviour mode, all
-plausible, none chosen. That list is this ticket's next real question, because
-each entry is a different amount of the opponent's plan given away.
+speed-mine vs. hit-their-lane.
 
-**Net:** everything spatial and everything about the enemy hero is open by
-design. The hidden-information budget has been spent down to the hand alone.
+### What the panel shows about their hero — answered 2026-07-26 `[provisional]`
+
+> *"their current power status / their level / what skills they've chosen / their
+> goal / their current income / how strong they're getting"*
+
+Six readouts. Three observations worth keeping:
+
+- **"Their goal" is the aggressive one.** That is enemy *intent*, not enemy
+  state — the panel would be telling you what they are trying to do. Nothing
+  else in this design gives away intent, and it is the single largest concession
+  of hidden information made so far. Note it also implies the AI/hero behaviour
+  system has a legible, nameable current objective (see 15's route modes).
+- **"How strong they're getting" is a rate, not a snapshot.** It implies a trend
+  readout — a derivative — which is a different and harder UI object than a
+  number, and it needs a window ("since when?").
+- **"What skills they've chosen"** presumes heroes pick skills during a match.
+  That is not recorded anywhere in 15 and is effectively new.
+
+### Net position
+
+Everything spatial and nearly everything about the enemy hero is open by design.
+**The hidden-information budget is spent down to the hand alone** — and with
+enemy *intent* on the panel, even the hand's bluffing value drops, because
+knowing what they are trying to do is most of what a bluff would have concealed.
+
+**So the ticket's original axis has resolved almost all the way to "fully open."**
+The framing question — bluffing and reads versus chess-like calculation — now has
+an answer trending hard toward calculation. Worth confirming that is intended,
+because it was written as an open question and got settled by accumulation rather
+than by a decision.
 
 ## Question
 

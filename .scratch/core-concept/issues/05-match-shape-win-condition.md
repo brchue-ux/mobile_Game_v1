@@ -76,3 +76,123 @@ The answer must settle:
   have its own structure?
 - **What the player does when they have no cards.** Dead time is a real risk in a
   cooldown-gated design.
+
+## Dump — 2026-07-26
+
+### Answered
+
+**How a match ends procedurally.** `[provisional]` *"The match will end whenever
+one person leaves and the other defaults to winning or the win condition is met
+by the other person."* Concession/disconnect is a win by default. First time
+quitting has been addressed at all.
+
+**Comeback dynamics exist, with a hard rail attached.** `[committed]` — this is
+a requirement, not a candidate:
+
+> *"Comeback dynamics will need to exist but I need to make sure that whatever
+> they are, people don't just purposely lose in order to get them to get free
+> things because it lets them snowball in reverse."*
+
+**No comeback mechanic may reward deliberate losing.** Any candidate has to be
+tested against a player throwing on purpose to farm it. Note this rules out the
+naive version of the most common comeback designs — flat bounties for being
+behind, catch-up gold, scaling underdog buffs — unless they are shaped so the
+loss costs more than the bonus returns.
+
+**Hero death costs nothing.** `[provisional]` Death is a respawn timer, not a
+penalty — consistent with hero-death-as-power-down. **Buybacks:** one or two per
+match, *"they'll pay a price to get it back immediately."* So the free path is
+waiting; the paid path is instant. Cost unspecified.
+
+> ⚠ The sentence after buybacks — *"and then it probably doesn't come back for
+> healthful men either"* — did not transcribe. Best guess is that a bought-back
+> hero, or a subsequent death, carries a longer respawn. **Not recorded as
+> design.** Needs re-stating.
+
+**PvE and PvP share a match shape.** `[provisional]` *"PvE and PvP are the same
+thing, just human versus AI. Maybe there will be some subtle differences, I don't
+know."* Closes the ticket's PvE/PvP question at the structural level.
+
+**Creeps alone almost certainly cannot end a match.** `[provisional]` *"maybe
+Creeps alone could end it but I don't see that really ever happening."* So a
+player has to actively finish.
+
+### Towers — proposed, then doubted, in the same dump
+
+**Both statements are recorded; this is a live wobble, not a decision.**
+
+First, in favour of what a tower *does*:
+
+> *"towers because those usually break points in the lane, places where you can
+> slow your opponent down as a comeback mechanic type thing. You give those bonus
+> gold, like how we do in League of Legends, but I'm not really sure. I don't
+> really want to just copy that."*
+
+Then, against the tower itself:
+
+> *"I don't know if I want towers on the lanes because then it just becomes
+> you're copying every other MOBA that exists. Maybe there'll be something in the
+> lanes but maybe it's not a tower."*
+
+**The job survives the object.** What is wanted in a lane is a **breakpoint** — a
+thing that segments the lane, slows a pushing opponent, and rewards taking it.
+What is not wanted is a turret, because it reads as copied. That is a design
+brief, and a decent one: *find a lane breakpoint that isn't a tower.*
+
+Note the friction with the comeback rail above: a breakpoint that *"slows your
+opponent down as a comeback mechanic"* is precisely the shape that can reward
+being behind. It has to pay the attacker for taking it, not pay the defender for
+being pushed to it.
+
+### Terrain manipulation — the new material `[provisional]`
+
+> *"I was thinking something like you could mess up their terrain... You get cards
+> or a crew, like stored benefits, that can allow you to affect the terrain. Maybe
+> create more water, create lava, or create holes in the ground that can make it
+> harder for their creeps to traverse or for their heroes to traverse. Maybe that
+> can somehow affect what the overall win condition is."*
+
+**Players can reshape the battlefield** — water, lava, holes — to impede enemy
+creep and hero movement. This is the strongest candidate this ticket has produced
+for an objective that is not a copied MOBA objective.
+
+Why it is a good fit, recorded so the reasoning survives:
+
+- It gives **terrain a mechanical job that no other system was doing**, which the
+  map has wanted since "the jungle must be mechanically live, not scenery."
+- It is **spatial without needing skill shots** — the player is changing the
+  board, not aiming at it. Compatible with casting-as-selection.
+- It gives the **pannable observer camera something worth panning for.**
+
+**Unresolved within it:** whether terrain damage is permanent or decays, whether
+it can be repaired or countered, whether it hits your own units too, and the
+user's own *"maybe that can somehow affect what the overall win condition is"* —
+which is a hint, not a mechanism.
+
+### ⚠ "Cards or a crew, like stored benefits" — this may be banking
+
+**Flagged, not acted on.** Two readings, and they lead to different places:
+
+1. **"accrue"** — near-certain given voice input. *"you get cards, or accrue,
+   like stored benefits."* That describes **saving something up over time and
+   spending it on a terrain effect** — which is [09](09-banking-mechanic.md),
+   the mechanic **shelved on 2026-07-21**.
+2. **"a crew"** — a literal squad or unit, which would be new and would brush
+   the locked no-commandable-army constraint.
+
+If reading 1 is right, this matters a lot: **banking was shelved for having no
+payoff worth its cost, and terrain manipulation is a payoff.** It is expensive,
+board-changing, and naturally wants a build-up — exactly the "investment" half
+of the tempo-vs-investment split that 09 was designed around, and none of 09's
+four preserved candidates were this good.
+
+**Not unshelved.** The map says do not reintroduce banking unprompted; the user
+raised the shape themselves, which makes it prompted, but they did not name it
+and may not have meant it. **This needs a yes or no from the user, not an
+inference from me.**
+
+### Still not answered — the win condition itself
+
+Base destruction remains **held under protest**. Terrain manipulation was floated
+as possibly feeding into it, but no replacement was named. The ticket's headline
+question is still open.
