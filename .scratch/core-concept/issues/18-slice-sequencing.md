@@ -18,12 +18,18 @@ taught under a running clock is the trade the accessibility call refuses.
 
 The 2026-07-21 dump then added hero selection, hero stat blocks, an automated
 jungle hero, a gold economy, item drops, item slots, and deck construction — on
-top of card accrual, at-cast combining, gesture casting, lane aiming, three
-lanes, terrain, and creeps.
+top of card accrual, at-cast combining, ~~gesture casting, lane aiming~~ target
+selection, three lanes, terrain, and creeps.
 
-That is roughly eleven systems. Ticket 13 established that even the minimal
-version of this game was untestable without a tutorial: the one reaction it
-produced was confounded by having too much unfinished at once.
+That was roughly eleven systems. **2026-07-26: skill-shot casting was removed**
+(see [03](03-gesture-skill.md)), collapsing gesture casting and lane aiming into
+a single selection step — call it ten, and one fewer *dexterity* system to teach,
+which is the more expensive kind. **This is the first time the count has gone
+down.** It does not retire this ticket; it buys it room.
+
+Ticket 13 established that even the minimal version of this game was untestable
+without a tutorial: the one reaction it produced was confounded by having too
+much unfinished at once.
 
 ### What this ticket is not — read this before invoking it
 

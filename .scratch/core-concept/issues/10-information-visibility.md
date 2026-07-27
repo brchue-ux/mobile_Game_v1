@@ -25,6 +25,10 @@ The answer must settle:
   tempo-vs-investment play readable. Interacts with 09.
 - **Cast telegraphing.** Between committing a combination and it landing, does
   the opponent see anything? A window to react changes the game profoundly.
+  **Reframed 2026-07-26:** with skill shots removed there is no gesture to read,
+  so this is purely about whether a *spell in flight* (or a committed target) is
+  visible — a property of the spell, not a tell from the caster. Note this is now
+  the design's main remaining source of reactive play.
 - **How this reads on a phone.** Every piece of visible information is screen
   space competing with three lanes and a jungle. Constrained hard by 01.
 - **Whether PvE mirrors PvP here**, or the AI plays open-handed.

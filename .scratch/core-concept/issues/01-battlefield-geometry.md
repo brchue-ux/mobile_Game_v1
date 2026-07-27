@@ -102,10 +102,17 @@ vertical tracks. That commitment has consequences this ticket has to pay for:
   Royale.
 - **Off-lane space.** Is the jungle playable — somewhere creeps or spells can go
   — or is it a wall between lanes?
-- **Aiming surface.** What is a player's thumb actually pointing at: a lane, a
-  point, an arc, a region?
+- **Target granularity** (was "aiming surface"; **rescoped 2026-07-26** when
+  skill shots were removed). Casting is now selection, so the question is no
+  longer what a thumb *aims* at — it is what a player can *pick*. A whole lane? A
+  point inside one? A region, an arc, a specific creep clump? This inherited the
+  live half of 03 and matters more than it looks: it sets how much positional
+  thinking survives in a game that just gave up its execution layer. A
+  lane-granular answer makes the board a set of three buttons; anything finer
+  keeps geometry load-bearing.
 
 Prototype the board at real phone dimensions before deciding. A sketch at desktop
 scale will lie about legibility.
 
-Blocks 03 (gesture) and constrains creep design.
+Constrains creep design. (Formerly blocked 03, now closed — see
+[03](03-gesture-skill.md).)

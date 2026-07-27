@@ -31,8 +31,9 @@ and question-at-a-time forced forks faster than they could be answered.
   user's words — never silently dropped. This rule exists because a rebuild is
   precisely what lost the tug-of-war rejection once already.
 - Resolved: 02 (combining = payload + modifiers, amended for small recipe sets)
-  and 13 (prototype). **Shelved:** 09 (banking) — good shape, no payoff worth its
-  cost; not rejected.
+  and 13 (prototype). **Closed by removal:** 03 (gesture) — the subject was cut,
+  not answered. **Shelved:** 09 (banking) — good shape, no payoff worth its cost;
+  not rejected.
 - Provisional as of 2026-07-21: the hero works the jungle automatically; hero
   differentiation is asymmetry not power (rock-paper-scissors + one novel map
   mechanic each); ~100 cards / 20-card decks; **base destruction ends the match,
@@ -42,9 +43,12 @@ and question-at-a-time forced forks faster than they could be answered.
   slightly angled overhead battlefield.
 - **Locked 2026-07-21:** all hero power variance is match-bound — in-match cards
   and power-ups only, no persistent/purchased power, no gacha.
-- **⚠ Under live challenge:** skill-shot casting (03). The user is weighing
-  omitting it entirely on complexity grounds, which would reverse a locked
-  core-loop constraint. Not decided; don't work 03 as if its premise is safe.
+- **Reversed 2026-07-26 — skill shots removed** (*"remove it"*). Casting is
+  **selection, not performance**: a combined spell acts on a chosen lane, the
+  jungle, or the hero. This reverses the locked core-loop constraint that casting
+  is a skill-based gesture, and **closes 03**. Three things it opened: where
+  execution skill lives now (04), target granularity (01), and whether any
+  gesture survives anywhere. "Never drawn symbols" still stands.
 - **Ticket 18's "budget" governs what ships in a build, never what gets
   explored.** It may not be invoked to discourage an idea. Define the term or
   don't use it.

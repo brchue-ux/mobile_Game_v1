@@ -18,9 +18,11 @@ The pass must:
 - **Re-read every decision in sequence**, and for each one tagged
   `[provisional]`, either promote it to `[committed]` or revise it.
 - **Hunt for pairs that no longer agree.** Especially: does the combining model
-  (02) still work at the pace 04 settled on? Does the gesture (03) still make
-  sense on the board 01 produced? Does monetization (07) still have anything to
-  sell given what 06 decided?
+  (02) still work at the pace 04 settled on? ~~Does the gesture (03) still make
+  sense on the board 01 produced?~~ (03 removed 2026-07-26 — ask instead whether
+  **target granularity** (01) leaves the board enough to think about now that
+  casting is selection.) Does monetization (07) still have anything to sell given
+  what 06 decided?
 - **Check the destination is actually reached.** Is this deep enough to build a
   vertical-slice prototype from? Name what a prototype-builder would still have
   to invent themselves.

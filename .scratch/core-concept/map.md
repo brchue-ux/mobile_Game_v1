@@ -67,10 +67,15 @@ currently installed.
 - **Creeps are units, not a meter.** The front line emerges from individual
   creeps fighting. A tug-of-war bar or fill-percentage has been **rejected
   twice** — do not reintroduce it.
-- Core loop: accrue cards → **combine into a compound spell** → **gesture to
-  cast** → aim into a lane. **⚠ CHALLENGED 2026-07-21 — see below.**
-- **Gestures are flicks, drags and aims — never drawn symbols.** No tracing
-  shapes to cast. Physical and fast, not notational.
+- Core loop: accrue cards → **combine into a compound spell** → **select a
+  target** — a lane, the jungle, or your hero. **Casting is selection, not
+  performance.** `[committed]` **Reversed 2026-07-26** from *"gesture to cast →
+  aim into a lane"*; see the reversal log.
+- **Gestures are never drawn symbols.** No tracing shapes to cast. Physical and
+  fast, not notational. This rejection survives the skill-shot removal and binds
+  *any* touch interaction the design adopts. **But its scope is now open:** with
+  casting reduced to selection, whether flick/drag gestures remain anywhere at
+  all — combining, hero steering — is unanswered. See "Not yet specified."
 - **All hero power variance is match-bound.** `[committed]` *"if power can change
   on heroes at all from weapons or stats, it will come from in game cards or
   match bound power ups. try to steer away from pay2win gacha mechanics."* No
@@ -88,23 +93,42 @@ currently installed.
   opacity. Amended 2026-07-21 to permit a *small fixed set* (3–4, few
   ingredients, taught). The rejection was always about scale; see 02's amendment.
 
-### ⚠ Live challenge to a locked constraint — skill shots
+### ✅ Resolved challenge — skill shots removed (2026-07-26)
 
-**The user is considering omitting skill-shot casting entirely**, on complexity
-grounds. *"I'm thinking about omitting it entirely because of the added layer of
-complexity it'll already add on top of everything else."* Filed prominently at
-their explicit instruction — *"do not file it quietly."*
+**The challenge filed 2026-07-21 was resolved by removal.** Asked directly
+whether skill-shot casting exists at all, the user: *"remove it."*
 
-If cards act on a selected target (jungle, lane, or hero), casting becomes
-**selection rather than performance**, and ticket 03 loses its subject. The
-constraint above stands until reversed explicitly; this notice exists so the
-reversal can't happen by drift. See 03.
+The constraint it challenged is **reversed**. Cards act on a selected target — a
+lane, the jungle, or the hero — so casting is **selection, not performance**.
+Ticket 03 loses its subject and closes; its file is kept as the record, not
+deleted.
+
+**What this costs, recorded now so it is not rediscovered later as a surprise:**
+the gesture was the only proposed home for *execution* skill. Player skill now
+lives entirely in selection, timing, combining and deckbuilding — a more
+accessible game and a flatter one. The trade was made knowingly. Where (or
+whether) execution skill returns is now an open question owned by 04 and 06.
+
+Both 2026-07-21 quotes are preserved verbatim in the reversal log below and in
+[03](issues/03-gesture-skill.md).
 
 ### Reversal log
 
 Decisions that were recorded and then changed. Kept so the old version cannot be
 silently re-adopted.
 
+- **Skill-shot casting** (challenged 2026-07-21, **removed 2026-07-26**)
+  `[committed]`. Was: *casting is skill-based execution — accrue → combine →
+  gesture to cast → aim into a lane*, a locked core-loop constraint. Now:
+  *casting is selection — a combined spell acts on a chosen lane, the jungle, or
+  the hero.* **Why, in the user's words:** *"If the cards can affect the jungle
+  and the cards can affect the lane and the cards can affect your hero, then we
+  don't necessarily need to add in the user having to skill shot something
+  there"*, and *"I'm thinking about omitting it entirely because of the added
+  layer of complexity it'll already add on top of everything else."* Confirmed
+  2026-07-26: *"remove it."* Closes ticket 03. Note this is the **first
+  simplification** the design has taken — every other 2026-07-21 decision added
+  systems.
 - **Loss condition** (2026-07-21, reversed same day). Was: *hero death ends the
   match.* Now: *hero death is a temporary power-down; base destruction ends the
   match* `[provisional]`. **Why:** the user spotted that an autonomous
@@ -123,6 +147,12 @@ real-time is pressure. Those two fight each other. **Ticket 04 owns this.**
 It got materially worse on 2026-07-21. Heroes, items, gold and deckbuilding all
 add things to know and things to watch, and every one of them spends the same
 budget the combining mechanic needs. 18 exists because of this.
+
+**It got better on 2026-07-26 — the first time.** Removing skill shots takes an
+entire execution layer out of the moment where combining is already asking the
+player to think under a clock. That was the sharpest instance of the deliberate
+-vs-pressure conflict: a puzzle decision immediately followed by a dexterity
+test. It is gone. 04's problem is now smaller and more purely cognitive.
 
 ### Superseded principles — kept deliberately, not deleted
 
@@ -173,6 +203,13 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
+- **Skill-shot casting is removed; casting is selection** `[committed]`
+  (2026-07-26) — a combined spell acts on a chosen lane, the jungle, or the hero.
+  Reverses a locked core-loop constraint at the user's explicit instruction
+  (*"remove it"*). Closes [03](issues/03-gesture-skill.md); simplifies
+  [01](issues/01-battlefield-geometry.md)'s aiming surface; removes one system
+  from [18](issues/18-slice-sequencing.md)'s count. Leaves execution skill
+  homeless — see "Not yet specified."
 - ~~**Hero death is the loss condition**~~ — **reversed same day**, see the
   reversal log. Now: hero death is a temporary power-down, base destruction ends
   the match `[provisional]`.
@@ -202,10 +239,10 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open; camera + portrait set |
+| 01 | Battlefield geometry & phone readability | open; camera + portrait set; aiming surface simplified |
 | 02 | What "combining cards" actually means | resolved + amended |
-| 03 | Gesture as skill expression | open, **⚠ existence challenged** |
-| 04 | Pressure vs. complexity — the learning curve | open |
+| 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
+| 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
 | 05 | Match shape & win condition | open, answer **reversed** 2026-07-21 |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
@@ -238,7 +275,21 @@ method; treat them as "this informs that," not as a build order.
 - **Flat vs. tiered itemization.** One greatsword at 5 differentiated by attack
   speed, or greatswords at 5/6/7 that can be found and upgraded? Decides whether
   heroes differ laterally or vertically. Owned by 17, constrains 15.
-- **Whether skill-shot casting exists at all.** See the live challenge above.
+- **Where execution skill lives now — or whether the design accepts having
+  none.** Opened by the 2026-07-26 removal. Skill currently lives in selection,
+  timing, combining and deckbuilding, all of them *cognitive*. Whether that is a
+  deliberate identity ("a commander game, not a dexterity game") or a gap needing
+  a replacement is undecided. Owned by 04, touches 06.
+- **Target granularity.** "Select a lane, the jungle, or the hero" does not say
+  at what resolution. A whole lane, a point inside it, a region, a specific creep
+  clump? This is what survives of 01's aiming-surface question and it is a real
+  design axis, not a UI detail — it sets how much positional thinking the game
+  has left. Owned by 01.
+- **Whether any gesture survives.** The "never drawn symbols" rejection still
+  binds, but with casting reduced to selection it is unclear whether flicks and
+  drags remain anywhere — combining cards together, steering the hero (15 asks
+  this), or nowhere at all. Tap-only is now a live possibility that nobody has
+  chosen.
 - **What "RPG elements" concretely means.** Stated as wanted, never defined.
   Heroes and items now cover part of it. Does any of it touch power?
 - **Meta-progression outside the match.** Partly owned by 06 and 11; the broader

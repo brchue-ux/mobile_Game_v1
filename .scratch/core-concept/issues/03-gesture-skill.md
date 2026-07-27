@@ -1,10 +1,36 @@
 # Gesture as skill expression
 
 Type: prototype
-Status: open — **existence challenged**
-Blocked by: 01, 02
+Status: **CLOSED — removed 2026-07-26.** Not resolved; the subject was cut.
+Blocked by: — (was 01, 02)
 
-## ⚠ OPEN CHALLENGE — this ticket may not survive (2026-07-21)
+## ✅ RESOLUTION — skill shots removed (2026-07-26)
+
+**The challenge below was answered: *"remove it."***
+
+Skill-shot casting does not exist in this design. A combined spell acts on a
+**selected target** — a lane, the jungle, or the hero. Casting is selection, not
+performance, which leaves this ticket with no subject. Nothing below is
+retracted; it is kept as the record of what was cut and why.
+
+**Everything this ticket was going to settle is now moot:** what the gesture
+controls, what missing looks like, thumb ergonomics, whether an assist mode costs
+you competitively, and whether your cast telegraphs by its gesture.
+
+**What did not close with it:**
+
+- **Where execution skill lives.** The gesture was its only proposed home. Now
+  homeless — reassigned to 04 (and 06 for the mastery curve), not to this file.
+- **Target granularity.** "A lane" vs. a point, arc or region inside it. That is
+  the surviving half of 01's aiming-surface question and stays with **01**.
+- **Cast telegraphing.** Survives in **10**, but reframed: the question is
+  whether a *spell in flight* is readable, not whether a gesture tells on you.
+- **"Never drawn symbols."** Still a locked rejection, still binding on any touch
+  interaction this design adopts.
+
+---
+
+## ⚠ OPEN CHALLENGE — this ticket may not survive (2026-07-21) — *now answered above*
 
 **The user is considering omitting skill shots entirely.** Filed loudly at the
 user's explicit instruction — *"so yes do not file it quietly."*

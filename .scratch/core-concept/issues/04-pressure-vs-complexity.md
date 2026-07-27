@@ -29,5 +29,20 @@ Things the answer must settle:
   combining as the mastery layer above? Or is combining mandatory from minute
   one?
 - **Where the skill floor sits** relative to where you want the ceiling.
+- **Where execution skill lives, or whether it lives at all** —
+  **inherited 2026-07-26** from [03](03-gesture-skill.md), which was closed by
+  removing skill-shot casting. All remaining skill is cognitive: selection,
+  timing, combining, deckbuilding. Two readings, and this ticket must pick one:
+  either that is the game's **identity** (a commander game, deliberately not a
+  dexterity game — which sits well with the accessibility-beats-novelty lock), or
+  it is a **hole** where the ceiling used to be. Do not fill it reflexively; the
+  removal was made on complexity grounds and re-adding a dexterity layer under
+  another name would undo it.
+
+**Note the tension eased on 2026-07-26.** Removing skill shots deleted the
+sharpest form of this ticket's problem: a deliberate puzzle decision immediately
+followed by a dexterity test under the same clock. What remains is thinking vs.
+the clock, which is still the central risk but is now one problem rather than
+two.
 
 Blocked until 02 defines what combining costs in attention and time.
