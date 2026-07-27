@@ -67,10 +67,25 @@ currently installed.
 - **Creeps are units, not a meter.** The front line emerges from individual
   creeps fighting. A tug-of-war bar or fill-percentage has been **rejected
   twice** — do not reintroduce it.
+  - **⚠ Language trap, filed 2026-07-26.** The user described the strategic
+    dynamic as *"you're trying to have that tug of war, right? Make your lanes
+    and heroes stronger than they are."* **This is not a reversal.** "Tug of
+    war" there names the back-and-forth *contest* — the thing three lanes of
+    fighting creeps produce — not a bar, meter or fill-percentage. The rejection
+    is about the **abstraction**, never the word. A future rebuild reading that
+    quote cold could easily mistake it for permission. It is not.
 - Core loop: accrue cards → **combine into a compound spell** → **select a
-  target** — a lane, the jungle, or your hero. **Casting is selection, not
-  performance.** `[committed]` **Reversed 2026-07-26** from *"gesture to cast →
-  aim into a lane"*; see the reversal log.
+  target**. **Casting is selection, not performance.** `[committed]` **Reversed
+  2026-07-26** from *"gesture to cast → aim into a lane"*; see the reversal log.
+- **Four target classes** `[provisional]` (2026-07-26): *"either help your hero,
+  help your lane, hurt their lane, or slow down their hero. That's the gameplay
+  loop."* Note this is the first statement that cards target the **enemy** side —
+  their lane and their hero — not just your own. Effects are described as
+  in-lane or in-jungle.
+- **No fog of war** `[provisional]` (2026-07-26). *"there won't be any fog
+  because we need to see their hero to be able to choose what we're going to do
+  to negatively affect it."* Forced by the targeting model: you cannot select
+  what you cannot see. Answers the spatial half of 10.
 - **Gestures are never drawn symbols.** No tracing shapes to cast. Physical and
   fast, not notational. This rejection survives the skill-shot removal and binds
   *any* touch interaction the design adopts. **But its scope is now open:** with
@@ -111,6 +126,26 @@ whether) execution skill returns is now an open question owned by 04 and 06.
 
 Both 2026-07-21 quotes are preserved verbatim in the reversal log below and in
 [03](issues/03-gesture-skill.md).
+
+### ⚠ Live challenge — "destroy their base" as the win condition (2026-07-26)
+
+**The user does not want the win condition it currently has**, and said so while
+answering a different ticket:
+
+> *"you can eventually, I guess, destroy their base. I don't really want it to be
+> 'destroy their base' so maybe there's something else that can be thought of
+> later on just because that's so prototypical."*
+
+**Status: dissatisfied, deferred, not decided.** Base destruction stands as the
+`[provisional]` answer because nothing has replaced it — but it is now explicitly
+**held under protest** rather than settled, and this is the second time the loss
+condition has moved (see the reversal log). The objection is *genre-fatigue*, not
+mechanics: it works, it's just the obvious thing.
+
+Filed here rather than quietly in 05 because the same design has now discarded
+hero-death *and* soured on base-destruction, which means the match's ending is
+one of the least settled things in the concept while reading like one of the most
+settled. **Owned by 05.**
 
 ### Reversal log
 
@@ -181,6 +216,17 @@ crude. Otherwise "unintuitive" measures the missing tutorial and the beating, no
 the mechanic — and must not be recorded as design evidence. This already happened
 once, on ticket 13.
 
+**Don't over-extend a cascade.** Corrected by the user, 2026-07-26. After skill
+shots were removed the agent proposed that terrain's job had shrunk and that
+bending lanes had lost what paid for them — reasoning that geometry mattered
+mainly because projectiles travelled through it. Wrong: *"you're referencing the
+skill shots of the user from the cards as opposed to what the heroes or the
+creeps might do."* **Terrain and lane shape are paid for by hero and creep
+movement, pathing, sightlines and combat** — none of which the card change
+touched. The removal was scoped to *player card targeting* and nothing else.
+Sibling error to over-reading a rough artifact: both invent implications the
+source never carried.
+
 **Explore-then-commit:** for any ticket whose answer cascades, put candidates on
 the table and trace each forward through the tickets it affects *before* choosing.
 
@@ -203,6 +249,29 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
+- **The camera is a pannable MOBA observer** `[provisional]` (2026-07-26) —
+  *"almost like you're an observer in a MOBA... you use your finger to pan around
+  the map but you don't get to control your hero directly."* The map is **larger
+  than the screen** and you drag to move around it; there is no fixed whole-map
+  view. This answers "how much of the map is visible at once" by making it a
+  navigation question instead of a fitting one, and it **defuses the angled-view
+  legibility problem** — a far lane that reads poorly can be panned to. See
+  [01](issues/01-battlefield-geometry.md).
+- **Screen split: Warcraft 3, zoomed out** `[provisional]` (2026-07-26) — **top
+  ~75% is the pannable map viewport**, bottom ~25% is an RTS-style command bar
+  holding *"the card stuff"* and readouts on **both** heroes. Confirmed to be a
+  **screen split, not a board layout** — the jungle's position on the
+  battlefield is still open. The WC3 analogy mentions *"your selectable army"*;
+  that describes **WC3's** bar, not a proposal for commandable units, and does
+  not touch the locked no-direct-army-command constraint.
+- **Cards must be judgeable against visible battle state** `[provisional]`
+  (2026-07-26) — the design's first stated UI *purpose*. *"That way you can
+  better make decisions on whether you should use your cards to attempt to slow
+  their hero down, speed your hero up, or attack their lanes... That makes the
+  information on the cards relevant to the state of battle."* The bottom bar is
+  the **decision substrate**, not a HUD. This binds card design as much as
+  layout: a card whose value cannot be read off visible state is a card the
+  player guesses with. Acceptance test in [01](issues/01-battlefield-geometry.md).
 - **Skill-shot casting is removed; casting is selection** `[committed]`
   (2026-07-26) — a combined spell acts on a chosen lane, the jungle, or the hero.
   Reverses a locked core-loop constraint at the user's explicit instruction
@@ -239,21 +308,21 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open; camera + portrait set; aiming surface simplified |
+| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split |
 | 02 | What "combining cards" actually means | resolved + amended |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
-| 05 | Match shape & win condition | open, answer **reversed** 2026-07-21 |
+| 05 | Match shape & win condition | open; reversed 2026-07-21, **⚠ current answer held under protest** 2026-07-26 |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
 | 09 | Banking — combining over time | **shelved** (not rejected) |
-| 10 | Information — what you see of your opponent | open; **spatial half merged into 01** |
+| 10 | Information — what you see of your opponent | open; **spatial half ANSWERED — no fog**; hand visibility now carries it alone |
 | 11 | Card accrual economy | open |
-| 12 | The jungle — role and autonomy | open, updated |
+| 12 | The jungle — role and autonomy | open, updated — playable space, not a wall, aggro leash |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new** |
-| 15 | Heroes — stats, roles, differentiation | open, **substantially answered** |
+| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; hero visibility closed, routes sharpened |
 | 16 | Deckbuilding — 100 cards, bring 20 | open |
 | 17 | Gold and items — the in-match economy | open, **flat-vs-tiered fork** |
 | 18 | Slice sequencing — what ships | open, **new**, standing gate |
@@ -280,11 +349,30 @@ method; treat them as "this informs that," not as a build order.
   timing, combining and deckbuilding, all of them *cognitive*. Whether that is a
   deliberate identity ("a commander game, not a dexterity game") or a gap needing
   a replacement is undecided. Owned by 04, touches 06.
-- **Target granularity.** "Select a lane, the jungle, or the hero" does not say
-  at what resolution. A whole lane, a point inside it, a region, a specific creep
-  clump? This is what survives of 01's aiming-surface question and it is a real
-  design axis, not a UI detail — it sets how much positional thinking the game
-  has left. Owned by 01.
+- **Target *resolution*, as opposed to target class.** 2026-07-26 answered
+  *what* you target — your hero, your lane, their lane, their hero, the jungle —
+  but not at what **granularity within** one. Does a lane-targeted spell hit the
+  whole lane, or a spot in it? The pannable no-fog camera makes a point-target
+  now *technically* available (you can see and touch any pixel of the map), so
+  this is a live choice rather than a constraint. Owned by 01. **The earlier
+  worry that lane-granular targeting reduces the board to three buttons is
+  substantially answered** — panning, no fog, and enemy-hero targeting keep
+  spatial reading in the game regardless.
+- **What replaces "destroy their base."** See the live challenge above. 05.
+- **Towers/structures.** Appeared for the first time on 2026-07-26 — the hero
+  *"may defend towers."* Nothing else about them exists: whether they shoot,
+  whether they gate lane progress, whether they are the thing that gets destroyed
+  instead of a base. Interacts hard with the win-condition challenge.
+- **What "how their hero is doing" actually contains.** Health, level, gold,
+  items, current behaviour mode? Each is a different amount of the opponent's
+  plan given away, and none is chosen. Now 10's sharpest question.
+- **What else fits in the bottom 25%.** It must hold the cards, readouts on both
+  heroes, and — proposed for off-screen lane alerts — *"a notification or you'd
+  have a mini map that would have a ping on it."* Three jobs, one quarter of a
+  phone. Whether a minimap survives that competition is unresolved. Note this is
+  a **newer statement than the napkin sketch**, which put Hero Cams in two
+  corners and cards as a semi-transparent overlay; the two are unreconciled and
+  the sketch is not retired.
 - **Whether any gesture survives.** The "never drawn symbols" rejection still
   binds, but with casting reduced to selection it is unclear whether flicks and
   drags remain anywhere — combining cards together, steering the hero (15 asks

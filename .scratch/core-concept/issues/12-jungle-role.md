@@ -53,3 +53,27 @@ proposed home for transmutation — see the amendment on 02 and the rewrite of 0
 
 Now interacting: 15 (the hero doing the work), 17 (gold), 09 (what cards do to
 the jungle). This ticket got substantially more constrained without being closed.
+
+### Update — 2026-07-26: the jungle is playable space, and it is not a wall
+
+Answered while working 01. `[provisional]`
+
+- **Spells can go into the jungle.** It is a legitimate target class — the core
+  loop names in-jungle effects alongside in-lane ones. This answers "how a player
+  interacts with it" without needing 09's banking.
+- **It is not a wall between lanes** — *"the hero would need to be able to go
+  through them."* Lane-to-lane traversal through jungle is required.
+- **Lane creeps stay out of it, with an exception:** *"creeps from the lane won't
+  go there unless they happen to be pulled there via aggro but then they would
+  snap back once aggro is lost."* **First appearance of aggro in this design** —
+  creeps have a threat model and a leash. That is a genuine new system, small but
+  real, and 18 should know about it.
+- **Forest and jungle otherwise behave like a typical MOBA**, minus fog of war
+  (see [10](10-information-visibility.md)).
+
+**Screen budget — reframed, not spent.** This ticket said "01 sets the budget;
+this ticket spends it." With a pannable camera, 01's budget is no longer a fixed
+allowance: the map exceeds the screen and the player navigates it. The jungle no
+longer has to win space away from three lanes. **Where the jungle physically
+sits on the board is still open** — the 2026-07-26 dump's "top two-thirds" line
+is recorded in 01 as being about the map viewport, and flagged for confirmation.

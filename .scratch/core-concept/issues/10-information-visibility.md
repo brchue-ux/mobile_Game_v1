@@ -1,8 +1,40 @@
 # Information — what you see of your opponent
 
 Type: grilling
-Status: open
+Status: open — **spatial half answered 2026-07-26**
 Blocked by: 02
+
+## Spatial visibility — answered: no fog of war `[provisional]`
+
+> *"the forests and the jungle will operate just like a typical MOBA does, except
+> that there won't be any fog because we need to see their hero to be able to
+> choose what we're going to do to negatively affect it."*
+
+**You see the whole battlefield, including their hero, at all times** (subject to
+panning — see [01](01-battlefield-geometry.md)). Not a preference: it is *forced*
+by casting-as-selection, since a card that slows their hero needs their hero
+visible and pickable.
+
+**This pushes the ticket hard toward the open end of its own axis.** The question
+was framed as running from fully hidden (bluffing, reads) to fully open
+(chess-like, pure calculation). Spatially, the answer is now **fully open**.
+Whatever hidden information this design keeps has to live in the **hand** — cards
+and combinations — because the map holds none.
+
+That sharpens rather than settles the rest: with the board fully visible, hand
+visibility is the only remaining lever, so it now carries the entire weight of
+whether this game has bluffing in it at all.
+
+**Enemy hero *state* is open too** `[provisional]` — not merely its position.
+The bottom command bar is specified to give *"a sort of insight into how their
+hero is doing"*, explicitly so the player can judge slow-their-hero vs.
+speed-mine vs. hit-their-lane. **What "how their hero is doing" contains is
+unspecified** — health, level, gold, items, current behaviour mode, all
+plausible, none chosen. That list is this ticket's next real question, because
+each entry is a different amount of the opponent's plan given away.
+
+**Net:** everything spatial and everything about the enemy hero is open by
+design. The hidden-information budget has been spent down to the hand alone.
 
 ## Question
 

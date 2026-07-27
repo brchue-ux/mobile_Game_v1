@@ -1,8 +1,31 @@
 # Match shape & win condition
 
 Type: grilling
-Status: open
+Status: open — **⚠ current answer held under protest** (2026-07-26)
 Blocked by: —
+
+## ⚠ The user does not want the win condition this ticket has (2026-07-26)
+
+> *"you can eventually, I guess, destroy their base. I don't really want it to be
+> 'destroy their base' so maybe there's something else that can be thought of
+> later on just because that's so prototypical."*
+
+**Base destruction stands only because nothing has replaced it.** The objection
+is genre-fatigue, not mechanics — it works, it is simply the obvious thing. Not a
+reversal, not a decision; a deferral with stated dissatisfaction, and it must not
+be read later as settled.
+
+**Why this is filed loudly.** This design has now discarded hero-death *and*
+soured on base-destruction. The ending of a match is one of the least settled
+things in the whole concept while presenting as one of the most settled. It also
+just acquired a new piece to work with: **towers** appeared for the first time on
+2026-07-26 (the hero *"may defend towers"*) and nothing about them is specified —
+whether they shoot, gate lane progress, or are themselves the thing destroyed.
+
+**Also relevant:** the match's strategic dynamic was described as *"trying to
+have that tug of war... make your lanes and heroes stronger than they are."*
+That names the contest, **not** a meter — see the language trap filed under the
+creeps constraint in the map.
 
 ## Question
 

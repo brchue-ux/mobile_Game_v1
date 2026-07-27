@@ -122,8 +122,22 @@ reversal is recorded as a reversal, not a deletion.
 - **What differentiates heroes mechanically** beyond the six axes — how much is
   stat spread versus genuinely distinct behaviour?
 - **What mana does**, if anything.
-- **Where the hero is on screen** and how the player tracks it (01).
-- **How autonomous "autonomous" is** — untouchable, or steerable with a flick?
+- ~~**Where the hero is on screen** and how the player tracks it (01).~~
+  **Answered 2026-07-26:** you pan the map like a MOBA observer and look at him.
+  No fog, so he is always visible if you point the camera at him. The Hero Cam
+  picture-in-picture from the napkin sketch may be unnecessary — unreconciled,
+  see 01.
+- **How autonomous "autonomous" is** — **sharpened 2026-07-26, still open.** The
+  user: the hero *"will follow these auto-programmed dynamic routes to farm
+  creeps and maybe defend towers or help his lanes or attack at certain points"*,
+  and — stated twice — *"you don't get to control your hero directly."* So the
+  hero runs a **route/behaviour system with several modes** (farm, defend, assist
+  lane, push). What remains open is whether the player influences *which* mode
+  is active, and by what means. Cards can *"help your hero"*, which is influence
+  on his power; nothing yet says whether anything influences his **priorities**.
+  Note "steerable with a flick" is now unlikely — flicks may not exist at all.
+- **Towers.** New on 2026-07-26 and unspecified — the hero *"may defend
+  towers."* See 05.
 - **What the hero does in the jungle**, concretely (12).
 - **Whether hero unlocks exist**, and if so how they stay clear of the match-bound
   power constraint (06, 07, 14).

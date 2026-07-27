@@ -102,17 +102,146 @@ vertical tracks. That commitment has consequences this ticket has to pay for:
   Royale.
 - **Off-lane space.** Is the jungle playable — somewhere creeps or spells can go
   — or is it a wall between lanes?
-- **Target granularity** (was "aiming surface"; **rescoped 2026-07-26** when
-  skill shots were removed). Casting is now selection, so the question is no
-  longer what a thumb *aims* at — it is what a player can *pick*. A whole lane? A
-  point inside one? A region, an arc, a specific creep clump? This inherited the
-  live half of 03 and matters more than it looks: it sets how much positional
-  thinking survives in a game that just gave up its execution layer. A
-  lane-granular answer makes the board a set of three buttons; anything finer
-  keeps geometry load-bearing.
+- **Target granularity** — **class answered 2026-07-26, resolution still open.**
+  You target your hero, your lane, their lane, their hero, or the jungle. What
+  that does *not* say is the resolution **within** one: a whole lane? A point
+  inside one? A region, an arc, a specific creep clump? The pannable no-fog
+  camera makes a point-target technically available — you can see and touch any
+  part of the map — so this is a free choice, not a constraint.
 
 Prototype the board at real phone dimensions before deciding. A sketch at desktop
 scale will lie about legibility.
 
 Constrains creep design. (Formerly blocked 03, now closed — see
 [03](03-gesture-skill.md).)
+
+## The observer camera — answered 2026-07-26
+
+> *"This one's point is to be able to somehow view all of your lanes. I guess
+> you're going to need to be able to touch the screen and pan or scroll the map.
+> You'll have it almost like you're an observer in a MOBA. Imagine it that way:
+> you're an observer and you use your finger to pan around the map but you don't
+> get to control your hero directly."*
+
+**The camera is a pannable MOBA observer.** `[provisional]` The map is larger
+than the screen; you drag to move around it. This reframes the ticket's opening
+question — "how much of a Dota-shaped map fits legibly on a phone" — from a
+*fitting* problem into a *navigation* problem, which is a materially easier
+problem and the first real answer this ticket has had.
+
+**Consequences worth holding:**
+
+- **The angled view's legibility cost is defused.** A tilted camera compresses
+  the far lane, and asymmetric legibility in a symmetric game was flagged as a
+  competitive problem. If you can pan to the far lane, the asymmetry stops being
+  structural. The user considers the angle settled: *"on the angled cast we've
+  discussed that."* It does not fully vanish — the lane you are *not* looking at
+  is the one that surprises you — which is what the alerting question below is
+  for.
+- **The observer framing completes the commander identity.** You pan like a
+  spectator and cannot drive your hero. Consistent with the camera decision that
+  reversed the loss condition on 2026-07-21.
+- **The portrait-vs-Dota-shape tension is largely dissolved**, not resolved. A
+  bending three-lane map with real jungle no longer has to fit in 1080×2400 at
+  once. Recorded as a genuine open tension in the map since 2026-07-21; panning
+  is what closes it.
+
+### Screen split & the control panel `[provisional]`
+
+> *"I kind of envision you have the panable map at the top and then your control
+> thing. You have some sort of screen that describes both heroes and gives
+> actions or something like that. That's just a rough thought right now. I don't
+> know."*
+
+**Confirmed 2026-07-26 — the reference is Warcraft 3, zoomed out.**
+
+> *"The top portion of the map is the top portion of your screen, like the top
+> 75%. That is the map that you play on, that you pan around and build on...
+> The very bottom of the screen would have action commands, a portrait of a hero,
+> and your selectable army. That is a rough idea of how I imagine the screen
+> being split."*
+
+- **Top ~75% is the map viewport** — pannable, the thing you actually play on.
+  This is a **screen split, not a board layout**: the earlier "top two-thirds"
+  line was about the viewport, and the jungle's physical position on the
+  battlefield remains open. Ambiguity resolved.
+- **Bottom ~25% is a command bar**, in the shape of an RTS one.
+- **What's in it, in this game:** *"that's where the card stuff is going to be
+  and then you would have a sort of insight into how their hero is doing."*
+- **⚠ Read the WC3 analogy carefully.** It names *"your selectable army"* — that
+  is a description of **Warcraft 3's** bottom bar, supplied as a visual
+  reference for the split and the kind of furniture that lives there. It is
+  **not** a proposal for commandable units, and it does not touch the locked
+  constraint that players influence lanes but do not directly command an army.
+  Filed because a cold read of that quote could easily mistake it for one.
+- The panel **describes both heroes.** Both — required by no fog and by cards
+  that target the enemy hero.
+- **Flagged as rough by the user** (*"I can't even picture one right now"*). Not
+  to be built on hard.
+
+**The panel has a stated job, and it is not decoration.** `[provisional]`
+
+> *"you would have a sort of insight into how their hero is doing. That way you
+> can better make decisions on whether you should use your cards to attempt to
+> slow their hero down, speed your hero up, or attack their lanes. The user needs
+> to be able to get information like that. That makes the information on the
+> cards relevant to the state of battle."*
+
+The bottom bar exists to make card decisions **informed** — it is the decision
+substrate, not a HUD. This is the first stated purpose any UI element in this
+design has had, and it sets an acceptance test: *if a player cannot tell from the
+bottom 25% whether slowing their hero beats attacking their lane right now, the
+panel has failed.* See the design principle it produced, in the map.
+- **Not reconciled with the napkin sketch**, which had Hero Cam picture-in-picture
+  panels in two corners and cards as a semi-transparent overlay. This is the
+  newer statement; the sketch is not retired. The Hero-Cam-vs-see-the-hero-directly
+  question is arguably answered by panning — you can just look at him.
+
+### Off-screen lane collapse — direction, not decision
+
+> *"I guess it would just be typical, right, a notification or you'd have a mini
+> map that would have a ping on it or something like that. Figure that out in
+> terms of what the control part of the screen looks like at the bottom."*
+
+Panning creates this problem — the price of not seeing everything at once — and
+the answer is deferred into the control-panel design. Candidates on the table: a
+notification, or a **minimap with pings**. Note a minimap competes for the same
+bottom quarter as the hand and the hero actions.
+
+### Terrain, jungle and fog — answered 2026-07-26
+
+**Forest and jungle behave like a typical MOBA, with one deliberate exception:
+there is no fog of war.** `[provisional]`
+
+> *"I think the forests and the jungle will operate just like a typical MOBA
+> does, except that there won't be any fog because we need to see their hero to
+> be able to choose what we're going to do to negatively affect it if that's what
+> the user chooses to do."*
+
+This is **forced by the targeting model** — casting is selection, and you cannot
+select what you cannot see. A card that slows their hero requires their hero to
+be on screen and pickable. It also settles the spatial half of [10](10-information-visibility.md).
+
+**Off-lane space** `[provisional]`:
+
+- **Spells can go into the jungle.** It is playable space.
+- **Lane creeps do not enter the jungle** — *unless pulled there by aggro, and
+  they snap back once aggro is lost.* First appearance of aggro in this design.
+- **It is not a wall between lanes**, because the hero has to move through it.
+
+### Correction — terrain's job did not shrink
+
+The agent proposed that removing skill shots reduced terrain to texture and left
+bending lanes unpaid-for. **Wrong, and corrected by the user:** *"you're
+referencing the skill shots of the user from the cards as opposed to what the
+heroes or the creeps might do."* Terrain and lane shape are paid for by hero and
+creep movement, pathing, sightlines and combat. The card change touched player
+targeting only. The "blocks/redirects spells" question survives for hero and
+creep abilities, not for card targeting.
+
+### Standing cautions — set aside for this pass
+
+The user, explicitly: *"your standing cautions, no let's just ignore those for
+now."* The napkin-sketch caution and the prototype-at-real-dimensions rule were
+waived for this round of thinking. **Waived, not repealed** — both still apply
+before anything here is promoted to `[committed]`.
