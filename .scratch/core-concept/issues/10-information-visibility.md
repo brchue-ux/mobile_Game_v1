@@ -30,6 +30,36 @@ The bottom command bar is specified to give *"a sort of insight into how their
 hero is doing"*, explicitly so the player can judge slow-their-hero vs.
 speed-mine vs. hit-their-lane.
 
+### Why the enemy hero panel exists — a second reason arrived 2026-07-29
+
+The panel's stated job so far was **card decisions** (01: slow their hero vs.
+speed mine vs. hit their lane). The 2026-07-29 win-condition dump gives it a
+possible **second** job — reading the enemy hero because his state is part of
+**how the match is won**:
+
+> *"Then there's a hero to take into account. So maybe the hero in it reaching a
+> certain power level should also come into the win condition. Because if part of
+> the UI is meant to display the other hero's current state, maybe part of the
+> reason why you want to be able to keep up on that current state is because that
+> hero reaching a certain state is part of the win condition? I'm not sure."*
+
+**The user's own hedge — *"I'm not sure"* — is part of this record.** He is
+asking the question, not answering it.
+
+**What the dump settled around it** (see [05](05-match-shape-win-condition.md)):
+hero power is **not** a separate win condition. It is **lever 3** on the single
+reinforcement-exhaustion condition — a card puts the hero into a lane for ~10
+seconds, and farmed power-ups make that push harder or more survivable. So under
+the current reading the enemy hero's power reaches the win condition **indirectly,
+through how hard he can push**. Whether it *also* has a direct threshold
+(*"reaching a certain state"*) is open.
+
+**Why this belongs in 10 and not only in 05:** it changes what the readouts are
+*for*. A readout that informs a card choice can be approximate. A readout that
+tells you how close the opponent is to winning cannot — it becomes a scoreboard,
+and the six readouts above were not designed to carry that weight. Not resolved
+here; flagged so the panel is not designed twice.
+
 ### What the panel shows about their hero — answered 2026-07-26 `[provisional]`
 
 > *"their current power status / their level / what skills they've chosen / their

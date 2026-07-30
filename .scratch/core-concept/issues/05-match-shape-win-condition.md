@@ -1,10 +1,54 @@
 # Match shape & win condition
 
 Type: grilling
-Status: open — **⚠ current answer held under protest** (2026-07-26)
+Status: open — **protest lifted and narrowed 2026-07-29**; win condition is
+**reinforcement exhaustion, one condition with three levers** `[provisional]`
 Blocked by: —
 
-## ⚠ The user does not want the win condition this ticket has (2026-07-26)
+## ✅ The protest is lifted, and what it narrowed to — 2026-07-29
+
+**This is a reversal, and it is flagged as one.** The 2026-07-26 protest below
+said the win condition was *"so prototypical"* and was recorded as **held under
+protest**. It is no longer held under protest. In the user's own words the
+objection is narrower than it was recorded as being:
+
+> *"So the issue that I have with the base dying being the win condition. It's
+> just that every game does it."*
+
+> *"while I want there to be a base because there needs to be logic like where
+> are the minions with the creeps coming from? I don't necessarily want - the
+> base can be the thing that dies. I guess that's fine. I just don't want it to
+> be the prototypical way of you push the minions through three towers through
+> like a barracks or something for powered up minions and then destroy more
+> towers to reach a core, right? Like that's how everyone's always done it."*
+
+**What is NOT rejected:** the base being the thing that dies. *"I guess that's
+fine."*
+
+**What IS rejected** `[committed by explicit rejection]`: **the prototypical
+route to it** — push creeps through three towers, through a barracks for
+powered-up creeps, then more towers, then a core. *"that's how everyone's always
+done it."* The rejection is of the **tower-chain path**, not of the ending.
+
+The original protest text is kept below, unedited, as the record of how the
+objection narrowed. Do not read it as still live in its original width.
+
+### ⚠ What this reversal does NOT reach
+
+**Pseudo-towers are untouched by it.** They are on record (2026-07-26, below) as
+a **stall and pacing device**, explicitly *not* a comeback mechanic, and
+explicitly on the preventive side of the deliberate-losing rail. Killing the
+tower **chain** as the *win path* does not change that job — a scaling gate that
+stops an early bulldoze is a different object from a link in a destruction
+sequence. The map carries a hard-won gotcha about exactly this failure
+("Don't over-extend a cascade"), and a previous over-read had to be retracted by
+the user. **Scope this reversal to the win path and nothing else.**
+
+## ⚠ The user does not want the win condition this ticket has (2026-07-26) — SUPERSEDED, kept as history
+
+**Superseded 2026-07-29 by the narrowing above. Kept verbatim per the
+append-only rule** — this is the record of the objection at its widest, and of
+how it narrowed.
 
 > *"you can eventually, I guess, destroy their base. I don't really want it to be
 > 'destroy their base' so maybe there's something else that can be thought of
@@ -59,6 +103,13 @@ with structures gives the match a shape longer than one decisive fight — which
 **What is still unclosed:** whether bases have towers or intermediate objectives,
 what revive costs, and whether creeps alone can end a match or players must
 actively finish it.
+
+> **⚠ Updated 2026-07-29, read this before building on candidate 2.** Base
+> destruction as an *ending* survives (*"the base can be the thing that dies. I
+> guess that's fine"*), but *"this is the Dota lineage the map already commits
+> to"* no longer describes the **route**: the tower-chain path is explicitly
+> rejected, and the live win condition is **reinforcement exhaustion**. Candidate
+> 1 (hero death as power-down) is untouched. See the 2026-07-29 dump.
 
 The answer must settle:
 
@@ -236,8 +287,256 @@ raised the shape themselves, which makes it prompted, but they did not name it
 and may not have meant it. **This needs a yes or no from the user, not an
 inference from me.**
 
-### Still not answered — the win condition itself
+### Still not answered — the win condition itself — ANSWERED 2026-07-29
 
-Base destruction remains **held under protest**. Terrain manipulation was floated
-as possibly feeding into it, but no replacement was named. The ticket's headline
-question is still open.
+**Superseded, kept as history.** This section read: *"Base destruction remains
+**held under protest**. Terrain manipulation was floated as possibly feeding into
+it, but no replacement was named. The ticket's headline question is still open."*
+The 2026-07-29 dump answers it — see below.
+
+## Dump — 2026-07-29
+
+**Standing caveat, stated by the user at the top of this dump and binding on
+everything in it:**
+
+> *"Just to confirm. Everything that I say is always open to change. Let's make
+> that clear."*
+
+Nothing in this section is a lock unless it is explicitly marked as one. Also
+recorded in the map's `## Notes`, because that is where a future rebuild will
+look.
+
+### The method statement — the standard this ticket is now working to
+
+> *"This is just what I'm trying to get at where there's already an existing idea
+> and I'm just trying to find ways to modify that existing idea and make it new
+> and fresh."*
+
+**That is the brief for this ticket.** Not "invent something with no lineage" and
+not "take the genre default" — take the existing idea and modify it until it is
+new. Recorded because it explains why the base survives while the tower chain
+does not, and because it sets the bar any candidate here must clear.
+
+**Per [18](18-slice-sequencing.md)'s own "What this ticket is not" section and
+`CLAUDE.md`, this may not be turned into an argument against exploring an idea.**
+Budget governs what ships in a build, never what gets explored.
+
+### The win condition — reinforcement exhaustion `[provisional]`
+
+> *"I can't remember where it was, maybe it's a battleground in World of Warcraft
+> or something, but it's like you have reinforcements and so like you only live
+> as long as you have reinforcements. And maybe it can be something like once you
+> run out of reinforcements, then your base doesn't spawn anymore minions or
+> something, and then all you have is your hero. I don't know."*
+
+**Each side has a pool of reinforcements. You live as long as you have them.**
+The stated consequence of running out is that **your base stops spawning creeps
+and all you have left is your hero** — the user's own hedge, *"or something...
+I don't know"*, is part of the record and must not be laundered into a decision.
+
+Note what this does to the objection: the base still exists and can still be the
+thing that dies, but the *route* is no longer a tower chain. It is a pool you
+drain.
+
+> **⚠ Language check, filed before a future rebuild trips on it.** A
+> reinforcement pool is **not** the rejected tug-of-war/fill-bar abstraction. The
+> rejected thing was a meter that *stands in for the front line* — creeps
+> abstracted into a fill percentage. This pool counts **how many creeps are left
+> to spawn**; the front line is still produced by individual creeps fighting, and
+> the locked constraint *"creeps are units, not a meter"* is untouched. The two
+> are different objects that happen to both be numbers. Do not read this as
+> permission to abstract the lane.
+
+### One win condition, three levers — accepted for now
+
+> *"I'm OK currently with having those 3 levers on the one win condition."*
+
+**This replaces an earlier reading** in which terrain manipulation, hero power
+and reinforcements were three **separate candidate win conditions**. They are
+not. They are **one scoreboard with three levers on it.** The user's own framing
+of the three axes, before they were consolidated:
+
+> *"But then there's the map mechanics, like altering the map mechanics that
+> could have some effect of leading up to a win condition. Then there's a hero to
+> take into account. So maybe the hero in it reaching a certain power level
+> should also come into the win condition. Because if part of the UI is meant to
+> display the other hero's current state, maybe part of the reason why you want
+> to be able to keep up on that current state is because that hero reaching a
+> certain state is part of the win condition? I'm not sure."*
+
+And what the levers actually are:
+
+> *"I think maybe your own creeps dying and then maybe like map condition, like
+> the way you can alter the map is like maybe one of the spells, you know,
+> creates like a black hole in the lane and you can cause some of their minions
+> to fall in it and they lose some extra reinforcements, you know. Or maybe you
+> get a card that allows your hero to move into the lane for 10 seconds and that
+> allows him to push the lane further. Things like that, right? And then the
+> power ups and things that he's getting while farming while this is happening
+> will allow him to push them further or not take as much damage by them."*
+
+**The three levers on the one pool** `[provisional]`, all hedged with *"maybe"*
+in the source:
+
+1. **Baseline drain — your own creeps dying.** The default, always-running lever.
+   Losing a lane costs reinforcements by ordinary attrition.
+2. **Terrain manipulation.** A black-hole-class spell in a lane that eats their
+   creeps and costs them **extra** reinforcements beyond the baseline. This is
+   the answer to the dangling 2026-07-26 hint *"maybe that can somehow affect
+   what the overall win condition is"* — it does, by draining the pool faster.
+3. **Hero intervention.** A card that puts your hero **into the lane for ~10
+   seconds** so he can push it further. Farmed power-ups make that push harder,
+   or make him take less damage doing it — which is how hero power reaches the
+   win condition without being a separate win condition.
+
+**Why this shape matters beyond the ticket:** it is *one* thing to teach, not
+three. See the note filed in [18](18-slice-sequencing.md).
+
+**Consequence for [10](10-information-visibility.md):** the enemy hero readouts
+now have a possible **win-condition** reason to be visible, not merely a
+card-decision reason — the user drew that line himself (*"maybe part of the
+reason why you want to be able to keep up on that current state is because that
+hero reaching a certain state is part of the win condition?"*), and hedged it
+with *"I'm not sure."*
+
+### The reinforcement pool is one per side, as of now `[provisional]`
+
+> *"reinforcements will be 1 pool per side as of right now. If we choose, or if
+> we end up deciding that you can more manually manipulate your hero's position,
+> then maybe a pool per lane would make sense."*
+
+**One pool per side** — *"as of right now"*, the user's own hedge.
+
+**A pool per lane is a live alternative, and it is conditional**, not deferred:
+it depends on whether hero position becomes **more manually manipulable**. That
+is a dependency on an open question, **not a decision**. The question it depends
+on lives in:
+
+- [15](15-heroes.md) — hero control granularity. Currently **coarse standing
+  orders**: *"you don't get to control your hero directly"*, an order is a
+  destination not steering. If that loosens, the per-lane pool comes back onto
+  the table.
+- [01](01-battlefield-geometry.md) — target *resolution* within a class (whole
+  lane, or a point inside it). A per-lane reinforcement pool would make lane
+  identity load-bearing for the win condition, which is a reason that question
+  matters that it did not previously have.
+
+Note the hero-intervention lever above (a card that moves the hero into a lane
+for ~10 seconds) is itself a partial manipulation of hero position — but it is a
+**card effect with a timer**, not manual control, so it does not by itself
+trigger the per-lane condition. Flagged because a cold read could take it as
+having already met the condition. **It has not.**
+
+### The base's spawn justification — and what breaks it `[open question]`
+
+The base exists for a stated reason:
+
+> *"I want there to be a base because there needs to be logic like where are the
+> minions with the creeps coming from?"*
+
+**The base is the answer to "where do creeps come from."** That is currently its
+whole stated job.
+
+But the forward-base idea below moves the spawn point off it:
+
+> *"maybe instead of like pseudo towers, instead of the units or the creeps
+> coming from the main base, maybe they start by coming from what would be
+> considered the outer tower, right? And so there's a base at where each tower
+> would be. And so no minions actually flow through the lane. They just start
+> with the tower is"*
+
+**If creeps spawn at forward positions, the main base has no stated job left.**
+Recorded as an **explicit open question, not a defect** — the user is
+mid-exploration and has not chosen the forward-spawn version. Options nobody has
+picked: the main base keeps a different job, the main base is what the
+reinforcement pool belongs to, the forward positions are what die, or the main
+base goes away. **None of these is chosen.**
+
+### The forward structure — OPEN, with the user's own test attached
+
+Both of the user's own candidates for what the forward structure does were
+**rejected by the user, on the same stated grounds.** Both are kept with their
+reasons, per the append-only rule.
+
+**Candidate A — guards at the forward position.** Rejected in the same breath as
+proposed: *"maybe that has like guards but that just makes it a tower. I don't
+know if that's just really like a forward base."*
+
+**Candidate B — vicinity buffs for units in range.** Rejected on the same
+grounds, at more length:
+
+> *"Perhaps instead of having guards at the towers? Maybe what they do is they
+> provide like certain buffs for the units that come out of them. But only in
+> like the vicinity. I don't know, 'cause that's just a different type of tower.
+> I was gonna be like, it only provides the benefits to your units when your
+> units are in range, but that's just a defensive tower structure, just a
+> different kind. It just delays your opponent from getting in the lane."*
+
+**The test that came out of it** `[committed]` — this governs any future
+candidate, including ones nobody has thought of yet:
+
+> *"I want to change how it makes your units interact with the game, not simply
+> just make it take your units longer to get to the core."*
+
+**A forward structure must change how units interact with the game.** A structure
+that only makes the opponent take longer to arrive is a defensive tower with new
+paint, and fails — that is precisely why both of the user's own candidates
+failed. Delay is not a mechanic here; interaction change is.
+
+### Firstmate-proposed candidates — NOT the user's, and NOT accepted
+
+Offered in answer to the user's *"So if you have any ideas there."* **The user
+did not react to them individually.** They are recorded as **proposals awaiting
+his reaction**, attributed to firstmate rather than to him, and **none of them is
+live or chosen.**
+
+1. **It decides what creeps come out** (composition), not how safely they travel.
+2. **It flips ownership instead of dying**, reversing the direction of the drain.
+3. **It is where surviving creeps return and get re-fielded**, making
+   reinforcements partly recoverable — so losing it denies *recovery* rather than
+   *passage*.
+4. **It is the anchor that terrain manipulation needs in a lane.**
+
+**Checked against every recorded rejection in the map and the issues before
+being written down** (this design has lost a rejection to a rebuild once
+already). **None of the four is something the user has already said no to.** Two
+near-misses worth recording so a future rebuild does not have to re-derive them:
+
+- **(1) is not the rejected "shape/positional composition."** That rejection
+  ([02](02-combining-mechanic.md)) is about *card* geometry — area, arc, spread —
+  and died with gestures. Word collision only. **(1) also does not brush the
+  locked no-commandable-army constraint**: choosing what a structure spawns is
+  influencing a lane, which is permitted; it is not issuing orders to units,
+  which is not. It is adjacent to the unspecified *"deployable units to bolster a
+  lane"* idea, which was floated and never rejected.
+- **(3) must be tested against the deliberate-losing rail before it can be
+  live.** Recoverable reinforcements are a *restorative*-shaped device, and the
+  rail is `[committed]`: no comeback mechanic may reward deliberate losing, and
+  preventive beats restorative. Note it may cut the other way — creeps that
+  survive are the *winning* player's creeps, which would make it snowball-forward
+  rather than restorative. Untested either way.
+
+**All four still have to pass the user's own test above** — change how units
+interact with the game, not how long they take to arrive. (4) is the weakest on
+that test as written, since "anchor for terrain" describes a *location*, not an
+interaction change.
+
+### Open questions this dump leaves explicitly open
+
+- **What is the main base for**, if creeps spawn at forward positions instead?
+- **What does the forward structure DO?** Both user candidates rejected; the test
+  is written down; no candidate passes it yet.
+- **Is hero-only-after-exhaustion a loss, or just an endgame state?** The user
+  said *"all you have is your hero"* and then *"I don't know."* Whether the match
+  ends at exhaustion, or exhaustion merely removes your creeps and the match
+  continues to a base kill, is unanswered.
+- **Does the pool go per-lane?** Conditional on hero position becoming more
+  manually manipulable. Not a decision.
+- **Does the pool refill, decay, or only ever drain?** Not raised.
+- **What number is a reinforcement pool**, and how does it read on a phone? Not
+  raised. Interacts with [01](01-battlefield-geometry.md)'s bottom 25%.
+- **What "reaching a certain state" means for the hero lever** — the user asked
+  whether hero power *"reaching a certain state is part of the win condition"*
+  and answered *"I'm not sure."* Under the three-lever reading it reaches the
+  pool indirectly, through pushing. Whether it also has a direct threshold is
+  open.

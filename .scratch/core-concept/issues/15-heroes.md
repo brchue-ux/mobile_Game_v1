@@ -171,6 +171,33 @@ Convergences worth noting:
 **Open within it:** how many orders exist, whether they are free or cost
 something, whether the hero can refuse or delay, and whether an order is a mode
 that persists or a one-shot instruction.
+
+### ⚠ Hero control granularity now has a dependent — 2026-07-29
+
+The open question *"how manually can the player manipulate the hero's
+position?"* stopped being a hero-only detail. The win condition
+([05](05-match-shape-win-condition.md)) hangs a structural choice off it:
+
+> *"reinforcements will be 1 pool per side as of right now. If we choose, or if
+> we end up deciding that you can more manually manipulate your hero's position,
+> then maybe a pool per lane would make sense."*
+
+**One pool per side is live; a pool per lane is conditional on this ticket
+loosening.** That is a dependency, **not** a decision, and *"as of right now"* is
+the user's hedge, kept.
+
+**Also new here, and it must not be mistaken for that loosening:** one of the
+three win-condition levers is **a card that puts your hero into a lane for ~10
+seconds** to push it further, with farmed power-ups making the push harder or
+letting him take less damage. That is a **card effect with a timer**, not manual
+control — the hero still is not steered. Recorded explicitly because a cold read
+could take "a card that moves my hero" as the direct-control rule having already
+loosened. **It has not.** The rule stands: *"you don't get to control your hero
+directly."*
+
+This is also the first mechanism by which **farmed hero power reaches the win
+condition** — indirectly, through how hard he can push a lane. See 05 and
+[10](10-information-visibility.md).
 - **What the hero does in the jungle**, concretely (12).
 - **Whether hero unlocks exist**, and if so how they stay clear of the match-bound
   power constraint (06, 07, 14).

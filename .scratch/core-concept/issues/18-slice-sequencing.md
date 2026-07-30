@@ -70,6 +70,34 @@ misused. Cost belongs in the footnotes of a design, not in its headline.
 - **How much tutorial is required before any reaction to it counts as evidence.**
   Non-negotiable per 13.
 
+### 2026-07-29 — what the win-condition dump did to the teachable surface
+
+**Recorded per the standing gate below. This does not answer the ticket.**
+
+The design grew, so this ticket gets its update:
+
+- **The match now has a stated win condition to teach**: **reinforcement
+  exhaustion** `[provisional]`. Before this dump it had base destruction *held
+  under protest*, which is not a teachable thing — a slice cannot teach a win
+  condition the design is trying to get rid of. **This is a net gain in
+  teachability even though it is a new system.**
+- **It is one win condition, not three.** *"I'm OK currently with having those 3
+  levers on the one win condition."* The map had been reading terrain
+  manipulation, hero power and reinforcements as three *separate* candidate
+  endings. They are one scoreboard with three levers. **One thing to teach, not
+  three** — and the levers are things the player already has to learn for other
+  reasons (creeps die, cards reshape terrain, the hero gets stronger), so they
+  land as *consequences* of known systems rather than as new systems.
+- **What it costs the count:** one new readable quantity (a reinforcement pool)
+  competing for the bottom 25%, plus one new card behaviour (the hero-into-lane
+  card, ~10 seconds).
+- **What is not teachable yet, and so cannot be in a slice as written:** the
+  forward structure. Both of the user's candidates for it were rejected by him,
+  and no candidate passes his test. A slice cannot ship an unspecified object.
+- **Sequencing observation, not a decision:** the win condition and its baseline
+  lever (creeps dying drains the pool) are teachable **without** the other two
+  levers. That is a possible seam. **This ticket is not being answered here.**
+
 ### Standing gate
 
 Per the working method adopted 2026-07-21, the design will keep growing between

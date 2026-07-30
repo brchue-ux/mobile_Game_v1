@@ -10,6 +10,100 @@ of that file is the authoritative record of every rebuild (one commit each).
 
 ---
 
+## 2026-07-29 — the win condition, and the protest that turned out to be narrower than recorded
+
+One rebuild, one commit. Ticket 05.
+
+### Rebuild 05: reinforcement exhaustion, one condition with three levers
+
+**The headline is a reversal of a status, not of a decision.** The map had
+carried *"destroy their base"* as **held under protest** since 2026-07-26, on the
+strength of *"that's so prototypical."* The dump narrowed it: *"the base can be
+the thing that dies. I guess that's fine."* What he actually objects to is the
+**route** — *"push the minions through three towers through like a barracks or
+something for powered up minions and then destroy more towers to reach a
+core... that's how everyone's always done it."* So the ending survives and the
+tower chain is rejected. The original protest text is kept in 05 as the record of
+how the objection narrowed; the map's live-challenge section became a resolved
+one rather than being deleted.
+
+**The win condition is reinforcement exhaustion** `[provisional]` — a WoW
+battleground reference, hedged (*"I can't remember where it was, maybe"*). You
+live as long as you have reinforcements; run out and *"your base doesn't spawn
+anymore minions or something, and then all you have is your hero. I don't
+know."* Both hedges are recorded as hedges. Whether hero-only is a **loss** or an
+**endgame state** is filed as an open question rather than guessed at.
+
+**One condition, three levers** — *"I'm OK currently with having those 3 levers
+on the one win condition."* This corrected **the map's** reading, not his: the
+map had been treating terrain manipulation, hero power and reinforcements as
+three separate candidate endings. They are one scoreboard. The levers are
+baseline creep attrition, a black-hole-class terrain spell that eats their creeps
+for extra reinforcements, and a card that puts the hero in a lane for ~10 seconds
+to push it further with his farmed power-ups behind him. That last one answers a
+2026-07-26 dangler in 10: the enemy hero readouts now have a possible
+**win-condition** reason to exist, not just a card-decision one.
+
+**Pool is one per side** *"as of right now"*. Per-lane is live but **conditional**
+on hero position becoming more manually manipulable — recorded as a dependency on
+15, not a decision. The hero-into-lane card is deliberately flagged as *not*
+meeting that condition, because a cold read could take "a card that moves my
+hero" for the direct-control rule loosening. It has not loosened.
+
+### Two traps filed before anyone trips on them
+
+**The reinforcement pool is not the rejected meter.** Creeps-are-units has been
+rejected twice as a fill-bar abstraction, and a pool that drains as creeps die is
+a number that could be mistaken for it. It is not: the rejected thing stands in
+for the *front line*; this counts *how many creeps are left to spawn*, and the
+front line is still individual creeps fighting. Filed alongside the existing
+"tug of war" language trap in the map's creeps constraint.
+
+**Pseudo-towers are untouched by the tower-chain rejection.** Killing the chain as
+a *win path* does not touch a scaling gate whose job is stalling an early
+bulldoze. The map's own "don't over-extend a cascade" gotcha exists because a
+previous over-read had to be retracted by the user; this is the same failure
+shape, so the scope limit is written into both the map and 05 explicitly.
+
+### The forward structure — open, with the user's own test attached
+
+He proposed creeps spawning at forward positions instead of the main base
+(*"no minions actually flow through the lane"*), then rejected both of his own
+candidates for what those positions do, on identical grounds: guards *"just makes
+it a tower"*, and vicinity buffs are *"just a defensive tower structure, just a
+different kind. It just delays your opponent from getting in the lane."* The test
+that fell out is now `[committed]` and governs anything proposed later: *"I want
+to change how it makes your units interact with the game, not simply just make it
+take your units longer to get to the core."*
+
+Forward spawning also knocks out the base's only stated job (*"there needs to be
+logic like where are the minions with the creeps coming from?"*). Filed as an
+open question, not a defect — he has not chosen the forward-spawn version.
+
+**Four firstmate candidates for what the structure does are parked in 05 as
+proposals awaiting his reaction**, explicitly attributed and explicitly not live,
+because he did not react to them individually. Each was checked against every
+recorded rejection in the map and the issues first; none was already rejected.
+Two near-misses were written down so the check does not have to be redone:
+"decides what creeps come out" is not the dead *shape-composition* rejection
+(word collision — that was card geometry) and does not brush no-commandable-army;
+and "surviving creeps get re-fielded" has to face the deliberate-losing rail,
+since partly recoverable reinforcements are restorative-shaped.
+
+### Method, and what else moved
+
+His standing caveat — *"Everything that I say is always open to change"* — went
+into the map's `## Notes` beside the locked constraints, since that is where a
+future rebuild looks, with a note that it does not weaken the append-only rule.
+His method statement went into 05 as the ticket's working standard: *"there's
+already an existing idea and I'm just trying to find ways to modify that existing
+idea and make it new and fresh"* — which is exactly why the base survives and the
+tower chain does not.
+
+18 got its standing-gate update: the slice now has a **teachable** win condition
+where before it had one held under protest, and it is one thing to teach rather
+than three. 18 was not answered. 10 and 15 took the cross-references above.
+
 ## 2026-07-26 — skill shots removed, the board answered, the match shaped
 
 Four map rebuilds in one session. The largest single day of design so far, and
