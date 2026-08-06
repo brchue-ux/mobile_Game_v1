@@ -1,0 +1,760 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Reinforcement exhaustion — match shape feel test</title>
+
+<style>
+  :root {
+    --base: #232136; --surface: #2a273f; --overlay: #393552;
+    --muted: #6e6a86; --subtle: #908caa; --text: #e0def4;
+    --foam: #9ccfd8; --love: #eb6f92; --gold: #f6c177; --iris: #c4a7e7; --pine: #3e8fb0;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --r: 4px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%; background: var(--base); color: var(--text);
+    font-family: var(--mono); font-size: 13px;
+    -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+  .app {
+    height: 100dvh; max-width: 520px; margin: 0 auto;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .crude {
+    flex: none; background: var(--gold); color: var(--base); font-size: 10px;
+    letter-spacing: .06em; padding: 3px 8px; text-align: center;
+  }
+
+  /* ---- top ~75%: map viewport ---- */
+  .mapwrap { flex: 3 1 0; min-height: 0; position: relative; background: var(--surface); }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  .clockchip {
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    background: rgba(35,33,54,.82); border: 1px solid var(--overlay); border-radius: var(--r);
+    padding: 3px 10px; font-size: 15px; font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+  }
+  .clockchip.urgent { color: var(--gold); }
+  .exhaustbanner {
+    position: absolute; left: 8px; right: 8px; bottom: 8px;
+    background: rgba(235,111,146,.16); border: 1px solid var(--love); border-radius: var(--r);
+    padding: 6px 8px; font-size: 10.5px; line-height: 1.4; color: var(--text); display: none;
+  }
+  .exhaustbanner.show { display: block; }
+  .exhaustbanner b { color: var(--love); }
+
+  /* ---- bottom ~25%: command bar ---- */
+  .bar { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; gap: 6px; padding: 6px 8px 8px; overflow-y: auto; }
+  .readouts { display: flex; gap: 8px; }
+  .ro { flex: 1; border: 1px solid var(--overlay); border-radius: var(--r); padding: 5px 7px; min-width: 0; }
+  .ro .lbl { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
+  .ro.you .lbl { color: var(--foam); }
+  .ro.them .lbl { color: var(--love); }
+  .ro .num { font-size: 18px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .pips { display: flex; gap: 1.5px; margin-top: 3px; flex-wrap: wrap; }
+  .pip { width: 5px; height: 8px; border-radius: 1px; background: var(--overlay); }
+  .pip.on.you { background: var(--foam); }
+  .pip.on.them { background: var(--love); }
+
+  .levers { display: flex; gap: 6px; }
+  button.lever {
+    flex: 1; font-family: var(--mono); font-size: 11px; letter-spacing: .02em;
+    padding: 9px 4px; border-radius: var(--r); border: 1px solid var(--iris);
+    background: transparent; color: var(--iris); cursor: pointer; position: relative;
+  }
+  button.lever:disabled { border-color: var(--muted); color: var(--muted); cursor: default; }
+  button.lever .cd {
+    position: absolute; inset: 0; background: var(--base); border-radius: var(--r);
+    display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted);
+  }
+  .lanepick { font-size: 10px; color: var(--muted); text-align: center; }
+  .lanepick b { color: var(--gold); }
+
+  .row2 { display: flex; gap: 6px; }
+  button.act {
+    flex: 1; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase;
+    padding: 8px; border-radius: var(--r); border: 1px solid var(--foam); background: transparent;
+    color: var(--foam); cursor: pointer;
+  }
+  button.act.primary { background: var(--foam); color: var(--base); }
+  button.act.ghost { border-color: var(--overlay); color: var(--subtle); }
+
+  details.tune { border: 1px solid var(--overlay); border-radius: var(--r); }
+  details.tune > summary { padding: 6px 8px; cursor: pointer; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+  .tune-body { padding: 2px 8px 9px; display: flex; flex-direction: column; gap: 9px; }
+  .ctl { display: flex; flex-direction: column; gap: 2px; }
+  .ctl-top { display: flex; justify-content: space-between; font-size: 10.5px; }
+  .ctl-top b { color: var(--gold); font-weight: 400; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--gold); }
+
+  .variants { display: flex; flex-direction: column; gap: 5px; }
+  .vopt {
+    display: flex; gap: 7px; align-items: flex-start; border: 1px solid var(--overlay); border-radius: var(--r);
+    padding: 6px 7px; cursor: pointer;
+  }
+  .vopt.sel { border-color: var(--iris); background: rgba(196,167,231,.08); }
+  .vopt input { margin-top: 2px; accent-color: var(--iris); }
+  .vopt .vt { font-size: 11px; color: var(--text); }
+  .vopt .vd { font-size: 9.5px; color: var(--subtle); line-height: 1.35; }
+  .vopt .vwarn { font-size: 9.5px; color: var(--gold); line-height: 1.35; margin-top: 2px; }
+  .rejected { font-size: 9.5px; color: var(--muted); line-height: 1.4; border-top: 1px dashed var(--overlay); padding-top: 6px; }
+
+  .log {
+    border-top: 1px solid var(--overlay); padding-top: 5px;
+    display: flex; flex-direction: column-reverse; gap: 2px; max-height: 84px; overflow-y: auto; font-size: 10.5px;
+  }
+  .log div { color: var(--subtle); }
+  .log b { color: var(--text); font-weight: 400; }
+  .log .t { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .over { position: fixed; inset: 0; background: rgba(35,33,54,.96); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 20; }
+  .over[hidden] { display: none; }
+  .sheet { max-width: 440px; width: 100%; background: var(--surface); border: 1px solid var(--overlay); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 11px; max-height: 88vh; overflow-y: auto; }
+  .sheet h2 { margin: 0; font-size: 16px; font-weight: 400; }
+  .sheet p { margin: 0; font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; color: var(--subtle); }
+  .sheet p b { color: var(--text); }
+  .stats { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; font-size: 12px; }
+  .stats span:nth-child(even) { text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .asks { font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.55; color: var(--subtle); padding-left: 18px; margin: 0; }
+  .asks li { margin-bottom: 6px; }
+  .asks b { color: var(--text); font-weight: 600; }
+  .step { font-family: system-ui, sans-serif; }
+  .step .n { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .step h2 { font-family: var(--mono); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <div class="crude">CRUDE FEEL PROTOTYPE — placeholder art &amp; simplified rules. See README.md.</div>
+
+  <div class="mapwrap">
+    <canvas id="cv"></canvas>
+    <div class="clockchip" id="clock">3:00</div>
+    <div class="exhaustbanner" id="exhaustBanner"></div>
+  </div>
+
+  <div class="bar">
+    <div class="readouts">
+      <div class="ro you">
+        <div class="lbl"><span>Your reinforcements</span><span id="youNum">—</span></div>
+        <div class="pips" id="youPips"></div>
+      </div>
+      <div class="ro them">
+        <div class="lbl"><span>Enemy reinforcements</span><span id="themNum">—</span></div>
+        <div class="pips" id="themPips"></div>
+      </div>
+    </div>
+
+    <div class="lanepick" id="lanepick">Tap a lane on the board to target it.</div>
+    <div class="levers">
+      <button class="lever" id="btnTerrain">Terrain Strike<span class="cd" id="cdTerrain" hidden></span></button>
+      <button class="lever" id="btnHero">Hero Push<span class="cd" id="cdHero" hidden></span></button>
+    </div>
+
+    <div class="row2">
+      <button class="act primary" id="go">Start</button>
+      <button class="act ghost" id="tutorialAgain">Tutorial</button>
+      <button class="act" id="reset">Reset</button>
+    </div>
+
+    <details class="tune">
+      <summary>Tuning &amp; forward-structure variant — live</summary>
+      <div class="tune-body">
+        <div class="ctl"><div class="ctl-top"><label for="ml">Match length</label><b id="mlV">3:00</b></div>
+          <input type="range" id="ml" min="90" max="900" step="30" value="180"></div>
+        <div class="ctl"><div class="ctl-top"><label for="ps">Reinforcement pool size</label><b id="psV">30</b></div>
+          <input type="range" id="ps" min="10" max="60" step="2" value="30"></div>
+        <div class="ctl"><div class="ctl-top"><label for="wv">Wave spawns every</label><b id="wvV">6s</b></div>
+          <input type="range" id="wv" min="2" max="15" step="1" value="6"></div>
+        <div class="ctl"><div class="ctl-top"><label for="df">Enemy difficulty</label><b id="dfV">Passive</b></div>
+          <input type="range" id="df" min="0" max="3" step="1" value="0"></div>
+
+        <div class="eyebrow" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Forward structure — what it does when it falls</div>
+        <div class="variants" id="variants"></div>
+        <div class="rejected">
+          Not built — already rejected by the user on his own test: <b>guards</b>
+          ("just makes it a tower") and <b>vicinity buffs</b> ("just a defensive
+          tower structure, just a different kind"). A plain <b>turret</b> is
+          rejected outright as MOBA copying. None of these are reconsidered here.
+        </div>
+      </div>
+    </details>
+
+    <div class="log" id="log"></div>
+  </div>
+</div>
+
+<div class="over" id="tutorial">
+  <div class="sheet step">
+    <div class="n">Guided first run — <span id="tStepN">1</span>/<span id="tStepMax">7</span></div>
+    <h2 id="tTitle"></h2>
+    <p id="tBody"></p>
+    <button class="act primary" id="tNext">Next</button>
+  </div>
+</div>
+
+<div class="over" id="over" hidden>
+  <div class="sheet">
+    <h2 id="ovTitle">Match end</h2>
+    <p>This build does not decide a win condition — the clock just ran out.
+    React to the shape, not to who "won."</p>
+    <div class="stats" id="ovStats"></div>
+    <ul class="asks" id="ovAsks"></ul>
+    <button class="act primary" id="again">Run it again</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- forward-structure variants (the four firstmate-proposed candidates
+  // parked in ticket 05, not yet reacted to by the user) ----
+  var VARIANTS = [
+    { id:"comp", name:"Composition gate",
+      desc:"Falling doesn't destroy it — it changes what it spawns next: grunts → runners → brutes, cycling. Changes what you face, not how long it takes to arrive." },
+    { id:"flip", name:"Ownership flip",
+      desc:"Falling flips who it spawns for. The drain direction in this lane reverses — your forward post can start feeding the enemy." },
+    { id:"salvage", name:"Salvage re-fielding",
+      desc:"A friendly creep that survives all the way past the enemy structure is pulled back and re-fielded — a partial reinforcement refund.",
+      warn:"Untested against the deliberate-losing rail: recoverable reinforcements are restorative-shaped. Flagged, not resolved, by the source ticket." },
+    { id:"anchor", name:"Terrain anchor",
+      desc:"Terrain Strike can only be cast into a lane while you hold that lane's forward structure. Lose it, lose the reach.",
+      warn:"Weakest on the user's own test as written — this changes where you can reach, not how units interact. Built anyway per the brief, labelled." }
+  ];
+
+  var cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+  var W = 0, H = 0, DPR = Math.min(2, window.devicePixelRatio || 1);
+  var LANE_Y = [0.22, 0.5, 0.78], BOW = [-0.09, 0.025, 0.09];
+  var STRUCT_T = [0.30, 0.70]; // slot0 near your base, slot1 near enemy base
+
+  var S, raf = null, last = 0, uid = 0;
+  var el = {};
+  ["clock","youNum","themNum","youPips","themPips","exhaustBanner","lanepick",
+   "btnTerrain","btnHero","cdTerrain","cdHero","go","over","log"].forEach(function (k) {
+    el[k] = document.getElementById(k);
+  });
+
+  function cfg() {
+    return {
+      ml:+document.getElementById("ml").value,
+      ps:+document.getElementById("ps").value,
+      wv:+document.getElementById("wv").value,
+      df:+document.getElementById("df").value,
+      variant: S ? S.variant : "comp"
+    };
+  }
+
+  function mmss(s) {
+    var m = Math.floor(s / 60), r = Math.floor(Math.max(0, s) % 60);
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  function resize() {
+    var r = cv.parentElement.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  window.addEventListener("orientationchange", function () { setTimeout(resize, 60); });
+
+  function pt(lane, t) {
+    var x0 = W * 0.08, x1 = W * 0.92;
+    var y = H * LANE_Y[lane], cy = y + H * BOW[lane];
+    var mt = 1 - t;
+    return {
+      x: mt * mt * x0 + 2 * mt * t * (W * 0.5) + t * t * x1,
+      y: mt * mt * y + 2 * mt * t * cy + t * t * y
+    };
+  }
+
+  function freshStruct(lane, slot) {
+    return {
+      lane:lane, slot:slot, t:STRUCT_T[slot], owner: slot === 0 ? 1 : -1,
+      hp:50, mx:50, tier:1, fallenFlash:0
+    };
+  }
+
+  function fresh() {
+    var c = cfg();
+    var structs = [];
+    for (var L = 0; L < 3; L++) structs.push([freshStruct(L, 0), freshStruct(L, 1)]);
+    return {
+      running:false, over:false, t:c.ml, len:c.ml,
+      variant:"comp",
+      pool:{ 1:c.ps, "-1":c.ps }, poolMax:c.ps,
+      exhausted:{ 1:false, "-1":false },
+      lanes:[[],[],[]], structs:structs,
+      hero:{ 1:{lane:-1,timer:0}, "-1":{lane:-1,timer:0} },
+      hazard:null,
+      cdTerrain:0, cdHero:0, aimLane:-1,
+      nextWave:1.0, respawnQ:[], aiTick:2,
+      casts:{terrain:0,hero:0}, salvaged:0, log:[], dirty:true
+    };
+  }
+
+  function log(m) {
+    S.log.push({ t:S.len - S.t, m:m });
+    if (S.log.length > 60) S.log.shift();
+    var h = "";
+    for (var i = 0; i < S.log.length; i++)
+      h += '<div><span class="t">' + mmss(S.log[i].t) + "</span> " + S.log[i].m + "</div>";
+    el.log.innerHTML = h;
+  }
+
+  // ---- reinforcement pool: counts creeps left to spawn, NOT a front-line
+  // meter. See README / CLAUDE.md gotcha. ----
+  function spend(side, n) {
+    var k = String(side);
+    S.pool[k] = Math.max(0, S.pool[k] - n);
+    if (S.pool[k] === 0 && !S.exhausted[k]) {
+      S.exhausted[k] = true;
+      log((side === 1 ? "<b>You</b>" : "<b>They</b>") +
+          " ran out of reinforcements — spawning stops, only the hero is left.");
+    }
+    S.dirty = true;
+  }
+  function refund(side, n) {
+    var k = String(side);
+    S.pool[k] = Math.min(S.poolMax, S.pool[k] + n);
+    if (S.pool[k] > 0) S.exhausted[k] = false;
+    S.dirty = true;
+  }
+
+  function spawnCreep(lane, owner, fromT) {
+    var k = String(owner);
+    if (S.pool[k] <= 0) return false;
+    spend(owner, 1);
+    S.lanes[lane].push({
+      side:owner, t:fromT, dir:owner, hp:16, mx:16, spd:0.024, slow:0, uid:++uid
+    });
+    return true;
+  }
+
+  function spawnWave() {
+    for (var L = 0; L < 3; L++) {
+      for (var s = 0; s < 2; s++) {
+        var st = S.structs[L][s];
+        spawnCreep(L, st.owner, st.t + (st.owner === 1 ? 0.01 : -0.01));
+      }
+    }
+  }
+
+  function structFall(st) {
+    st.fallenFlash = 1.4;
+    var v = S.variant;
+    if (v === "comp") {
+      st.tier = st.tier >= 3 ? 1 : st.tier + 1;
+      log("structure lane " + (st.lane + 1) + " (" + (st.owner === 1 ? "yours" : "theirs") +
+          ") broke — composition shifts to tier " + st.tier + ".");
+    } else if (v === "flip") {
+      st.owner = -st.owner;
+      log("structure lane " + (st.lane + 1) + " flipped — now spawns for " +
+          (st.owner === 1 ? "<b>you</b>" : "<b>them</b>") + ".");
+    } else {
+      log("structure lane " + (st.lane + 1) + " broke and reset.");
+    }
+    st.hp = st.mx;
+  }
+
+  function tierSpeedMul(tier) { return tier === 2 ? 1.35 : tier === 3 ? 0.8 : 1; }
+  function tierHpMul(tier) { return tier === 2 ? 0.65 : tier === 3 ? 1.9 : 1; }
+
+  function terrainStrike(side, lane) {
+    if (lane < 0) return;
+    if (S.cdTerrain > 0 && side === 1) return;
+    if (S.variant === "anchor") {
+      var mine = S.structs[lane][side === 1 ? 0 : 1];
+      if (mine.owner !== side || mine.fallenFlash > 0) {
+        if (side === 1) log('<span style="color:var(--love)">Terrain Strike blocked — your anchor structure in lane ' + (lane + 1) + " isn't held right now.</span>");
+        return;
+      }
+    }
+    S.hazard = { lane:lane, until: (S.len - S.t) + 4, dmgPerSec:15 };
+    var opp = -side;
+    spend(opp, 3);
+    if (side === 1) S.cdTerrain = 8;
+    S.casts.terrain += (side === 1 ? 1 : 0);
+    log((side === 1 ? "You" : "They") + " cast <b>Terrain Strike</b> on lane " + (lane + 1) +
+        " — extra reinforcement drain on the opponent.");
+    S.dirty = true;
+  }
+
+  function heroPush(side, lane) {
+    if (lane < 0) return;
+    if (S.cdHero > 0 && side === 1) return;
+    S.hero[side] = { lane:lane, timer:10 };
+    if (side === 1) S.cdHero = 12;
+    S.casts.hero += (side === 1 ? 1 : 0);
+    log((side === 1 ? "You" : "They") + " sent the hero into lane " + (lane + 1) + " for 10s.");
+    S.dirty = true;
+  }
+
+  function step(dt) {
+    var c = cfg();
+    S.t -= dt;
+    if (S.cdTerrain > 0) S.cdTerrain = Math.max(0, S.cdTerrain - dt);
+    if (S.cdHero > 0) S.cdHero = Math.max(0, S.cdHero - dt);
+    S.nextWave -= dt;
+    if (S.nextWave <= 0) { spawnWave(); S.nextWave = c.wv; }
+
+    // respawn queue (baseline attrition drain — losing creeps costs reinforcements)
+    var now = S.len - S.t;
+    S.respawnQ = S.respawnQ.filter(function (r) {
+      if (now >= r.at) {
+        var st = S.structs[r.lane][r.side === 1 ? 0 : 1];
+        if (st.owner === r.side) spawnCreep(r.lane, r.side, st.t + (r.side === 1 ? 0.01 : -0.01));
+        return false;
+      }
+      return true;
+    });
+
+    // heroes
+    [1, -1].forEach(function (side) {
+      var h = S.hero[side];
+      if (h.lane > -1) { h.timer -= dt; if (h.timer <= 0) h.lane = -1; }
+    });
+
+    // hazard
+    if (S.hazard && now > S.hazard.until) S.hazard = null;
+
+    // AI (near-passive at difficulty 0)
+    S.aiTick -= dt;
+    if (S.aiTick <= 0) {
+      S.aiTick = 2.2;
+      var d = c.df;
+      if (d > 0 && Math.random() < d * 0.16) {
+        var worst = 0, wv = -1;
+        for (var L = 0; L < 3; L++) {
+          var f = 0;
+          S.lanes[L].forEach(function (u) { if (u.side === 1 && u.t > f) f = u.t; });
+          if (f > wv) { wv = f; worst = L; }
+        }
+        if (Math.random() < 0.5) terrainStrike(-1, worst); else heroPush(-1, worst);
+      }
+    }
+
+    for (var L = 0; L < 3; L++) {
+      var arr = S.lanes[L];
+      for (var i = 0; i < arr.length; i++) {
+        var a = arr[i];
+        if (a.slow > 0) a.slow -= dt;
+        if (S.hazard && S.hazard.lane === L && Math.abs(a.t - 0.5) < 0.09 && a.side !== 1) {
+          a.hp -= S.hazard.dmgPerSec * dt;
+        }
+      }
+      var fy = null, fe = null;
+      for (i = 0; i < arr.length; i++) {
+        var b = arr[i];
+        if (b.side === 1) { if (!fy || b.t > fy.t) fy = b; }
+        else { if (!fe || b.t < fe.t) fe = b; }
+      }
+      var clash = fy && fe && (fe.t - fy.t) < 0.05;
+      var heroHere1 = S.hero[1].lane === L, heroHereN = S.hero[-1].lane === L;
+      for (i = 0; i < arr.length; i++) {
+        var u = arr[i];
+        var boosted = (u.side === 1 && heroHere1) || (u.side === -1 && heroHereN);
+        var sp = u.spd * (u.slow > 0 ? 0.45 : 1) * (boosted ? 1.25 : 1);
+        var blocked = clash && (u === fy || u === fe);
+        if (!blocked) u.t += u.dir * sp * dt;
+        else u.hp -= (9 + (boosted ? 4 : 0)) * dt;
+
+        // structure contest
+        var target = u.dir === 1 ? S.structs[L][1] : S.structs[L][0];
+        if (target.owner !== u.side && Math.abs(u.t - target.t) < 0.045) {
+          target.hp -= (7 + (boosted ? 5 : 0)) * dt;
+          if (target.hp <= 0) structFall(target);
+        }
+        if (target.fallenFlash > 0) target.fallenFlash = Math.max(0, target.fallenFlash - dt);
+
+        // hero direct chip when co-located with enemy structure
+        var hh = S.hero[u.side];
+        if (hh.lane === L) {
+          var farT = u.dir === 1 ? STRUCT_T[1] : STRUCT_T[0];
+          if (Math.abs(hh.timer % 1) < 1) { /* no-op, purely visual timer */ }
+        }
+
+        // reached past the far structure
+        var farStruct = u.dir === 1 ? STRUCT_T[1] : STRUCT_T[0];
+        if ((u.dir === 1 && u.t >= farStruct + 0.06) || (u.dir === -1 && u.t <= farStruct - 0.06)) {
+          if (S.variant === "salvage") {
+            refund(u.side, 1);
+            S.salvaged++;
+            log((u.side === 1 ? "your" : "their") + " creep survived through lane " + (L + 1) +
+                " — <b>salvaged</b>, reinforcement refunded.");
+          } else {
+            log((u.side === 1 ? "your" : "their") + " creep reached the far base — what that does is undecided here.");
+          }
+          u.hp = -1;
+        }
+      }
+      var died = arr.filter(function (x) { return x.hp <= 0; });
+      died.forEach(function (u) {
+        if (u.t > -0.5 && u.t < 1.5 && Math.abs(u.t) < 2) {
+          // count only combat deaths (not the "reached far end" removals, hp forced -1 there too —
+          // acceptable: replacement pressure still reads as attrition either way)
+          S.respawnQ.push({ lane:L, side:u.side, at: now + 1.4 });
+        }
+      });
+      S.lanes[L] = arr.filter(function (x) { return x.hp > 0; });
+    }
+
+    if (S.t <= 0) finish();
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "rgba(62,143,176,.08)";
+    for (var g = 0; g < 2; g++) {
+      var yy = H * (LANE_Y[g] + LANE_Y[g + 1]) / 2;
+      for (var k = 0; k < 6; k++) {
+        ctx.beginPath();
+        ctx.arc(W * (0.15 + k * 0.14), yy + (k % 2 ? 8 : -8), 10, 0, 6.284);
+        ctx.fill();
+      }
+    }
+
+    for (var L = 0; L < 3; L++) {
+      ctx.strokeStyle = S.aimLane === L ? "rgba(196,167,231,.55)" : "rgba(57,53,82,.9)";
+      ctx.lineWidth = 12; ctx.lineCap = "round";
+      ctx.beginPath();
+      var p0 = pt(L, 0); ctx.moveTo(p0.x, p0.y);
+      for (var t = 0.02; t <= 1.0001; t += 0.03) { var q = pt(L, t); ctx.lineTo(q.x, q.y); }
+      ctx.stroke();
+
+      // bases (inert — job undecided, drawn dim)
+      [0, 1].forEach(function (bi) {
+        var bp = pt(L, bi);
+        ctx.fillStyle = "rgba(224,222,244,.28)";
+        ctx.fillRect(bp.x - 4, bp.y - 6, 8, 12);
+      });
+
+      // structures
+      S.structs[L].forEach(function (st) {
+        var sp = pt(L, st.t);
+        var col = st.owner === 1 ? "#9ccfd8" : "#eb6f92";
+        ctx.globalAlpha = st.fallenFlash > 0 ? 0.35 + 0.4 * Math.sin(st.fallenFlash * 20) : 1;
+        ctx.fillStyle = col;
+        ctx.fillRect(sp.x - 7, sp.y - 10, 14, 20);
+        ctx.strokeStyle = "rgba(35,33,54,.9)"; ctx.lineWidth = 1.5;
+        ctx.strokeRect(sp.x - 7, sp.y - 10, 14, 20);
+        ctx.globalAlpha = 1;
+        var hpw = 14 * (st.hp / st.mx);
+        ctx.fillStyle = "rgba(35,33,54,.9)"; ctx.fillRect(sp.x - 7, sp.y - 14, 14, 3);
+        ctx.fillStyle = col; ctx.fillRect(sp.x - 7, sp.y - 14, hpw, 3);
+      });
+
+      S.lanes[L].forEach(function (u) {
+        var tt = Math.max(0, Math.min(1, u.t)), q = pt(L, tt);
+        ctx.fillStyle = u.side === 1 ? "#9ccfd8" : "#eb6f92";
+        ctx.globalAlpha = u.slow > 0 ? 0.55 : 1;
+        ctx.beginPath(); ctx.arc(q.x, q.y, 4, 0, 6.284); ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      // hazard
+      if (S.hazard && S.hazard.lane === L) {
+        var hp2 = pt(L, 0.5);
+        ctx.fillStyle = "rgba(20,10,30,.55)";
+        ctx.beginPath(); ctx.arc(hp2.x, hp2.y, 20, 0, 6.284); ctx.fill();
+        ctx.strokeStyle = "#c4a7e7"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(hp2.x, hp2.y, 20, 0, 6.284); ctx.stroke();
+      }
+
+      // heroes
+      [1, -1].forEach(function (side) {
+        var h = S.hero[side];
+        if (h.lane === L) {
+          var ht = side === 1 ? 0.5 - h.timer * 0.01 : 0.5 + h.timer * 0.01;
+          var hp3 = pt(L, Math.max(0.06, Math.min(0.94, ht)));
+          ctx.fillStyle = side === 1 ? "#f6c177" : "#eb6f92";
+          ctx.beginPath(); ctx.arc(hp3.x, hp3.y, 6.5, 0, 6.284); ctx.fill();
+          ctx.strokeStyle = "rgba(35,33,54,.9)"; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(hp3.x, hp3.y, 6.5, 0, 6.284); ctx.stroke();
+        }
+      });
+    }
+  }
+
+  function renderPips(elp, side) {
+    var k = String(side), h = "";
+    var per = Math.max(1, Math.round(S.poolMax / 24));
+    var count = Math.ceil(S.pool[k] / per);
+    var total = Math.ceil(S.poolMax / per);
+    for (var i = 0; i < total; i++) h += '<div class="pip' + (i < count ? " on " + (side === 1 ? "you" : "them") : "") + '"></div>';
+    elp.innerHTML = h;
+  }
+
+  function renderDom() {
+    el.youNum.textContent = S.pool["1"];
+    el.themNum.textContent = S.pool["-1"];
+    renderPips(el.youPips, 1);
+    renderPips(el.themPips, -1);
+
+    var exY = S.exhausted["1"], exT = S.exhausted["-1"];
+    if (exY || exT) {
+      el.exhaustBanner.classList.add("show");
+      el.exhaustBanner.innerHTML = (exY ? "<b>Your</b> base has stopped spawning creeps — only your hero remains. " : "") +
+        (exT ? "<b>Their</b> base has stopped spawning creeps — only their hero remains. " : "") +
+        "What this means (loss vs. endgame state) is not decided by this build.";
+    } else el.exhaustBanner.classList.remove("show");
+
+    el.lanepick.innerHTML = S.aimLane > -1
+      ? "Targeting lane <b>" + (S.aimLane + 1) + "</b> — tap a lever, or tap the board again to change lane."
+      : "Tap a lane on the board to target it.";
+
+    el.btnTerrain.disabled = S.aimLane < 0;
+    el.btnHero.disabled = S.aimLane < 0;
+    el.cdTerrain.hidden = S.cdTerrain <= 0;
+    el.cdTerrain.textContent = Math.ceil(S.cdTerrain) + "s";
+    el.cdHero.hidden = S.cdHero <= 0;
+    el.cdHero.textContent = Math.ceil(S.cdHero) + "s";
+
+    S.dirty = false;
+  }
+
+  function renderCheap() {
+    el.clock.textContent = mmss(Math.max(0, S.t));
+    el.clock.classList.toggle("urgent", S.t < 30);
+  }
+
+  function renderVariants() {
+    var wrap = document.getElementById("variants"), h = "";
+    VARIANTS.forEach(function (v) {
+      h += '<label class="vopt' + (S.variant === v.id ? " sel" : "") + '">' +
+           '<input type="radio" name="variant" value="' + v.id + '" ' + (S.variant === v.id ? "checked" : "") + '>' +
+           '<span><span class="vt">' + v.name + '</span><br><span class="vd">' + v.desc + '</span>' +
+           (v.warn ? '<div class="vwarn">⚠ ' + v.warn + '</div>' : '') + '</span></label>';
+    });
+    wrap.innerHTML = h;
+    wrap.querySelectorAll("input[name=variant]").forEach(function (inp) {
+      inp.addEventListener("change", function () {
+        S.variant = inp.value;
+        log("forward-structure variant switched to <b>" + VARIANTS.filter(function (v) { return v.id === inp.value; })[0].name + "</b>.");
+        renderVariants();
+        S.dirty = true;
+      });
+    });
+  }
+
+  function finish() {
+    if (S.over) return;
+    S.over = true; S.running = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    el.go.textContent = "Start";
+    var c = cfg();
+    document.getElementById("ovStats").innerHTML = [
+      ["Match length", mmss(c.ml)],
+      ["Your reinforcements left", S.pool["1"]],
+      ["Enemy reinforcements left", S.pool["-1"]],
+      ["You ran dry", S.exhausted["1"] ? "yes" : "no"],
+      ["They ran dry", S.exhausted["-1"] ? "yes" : "no"],
+      ["Terrain strikes cast (you)", S.casts.terrain],
+      ["Hero pushes cast (you)", S.casts.hero],
+      ["Creeps salvaged", S.salvaged],
+      ["Variant used", VARIANTS.filter(function (v) { return v.id === S.variant; })[0].name]
+    ].map(function (x) { return "<span>" + x[0] + "</span><span>" + x[1] + "</span>"; }).join("");
+    document.getElementById("ovAsks").innerHTML = [
+      "<li><b>Did the pool draining feel like the thing that mattered</b>, or did you stop watching it?</li>",
+      "<li><b>Did running out read as losing, or as a new phase?</b> Neither answer is wrong — that's the open question.</li>",
+      "<li><b>Did the forward structure's effect change how you played the lane</b>, or just add a number?</li>",
+      "<li><b>Was this match length closer to right?</b> Drag it further if not.</li>",
+      "<li><b>Did switching the variant mid-run feel like a different game</b>, or cosmetic?</li>"
+    ].join("");
+    el.over.hidden = false;
+  }
+
+  function loop(ts) {
+    if (!last) last = ts;
+    var dt = Math.min(0.05, (ts - last) / 1000); last = ts;
+    if (S.running && !S.over) step(dt);
+    if (S.dirty) renderDom();
+    renderCheap(); render();
+    raf = requestAnimationFrame(loop);
+  }
+
+  // ---- input: tap-only targeting, no gestures ----
+  function nearestLane(clientX, clientY) {
+    var r = cv.getBoundingClientRect();
+    if (clientY < r.top - 30 || clientY > r.bottom + 30) return -1;
+    var y = clientY - r.top, best = -1, bd = 1e9;
+    for (var L = 0; L < 3; L++) {
+      var d = Math.abs(y - H * (LANE_Y[L] + BOW[L] * 0.5));
+      if (d < bd) { bd = d; best = L; }
+    }
+    return bd < H * 0.24 ? best : -1;
+  }
+  cv.addEventListener("pointerdown", function (e) {
+    var L = nearestLane(e.clientX, e.clientY);
+    if (L > -1) { S.aimLane = L; S.dirty = true; }
+  });
+
+  el.btnTerrain.addEventListener("click", function () { terrainStrike(1, S.aimLane); });
+  el.btnHero.addEventListener("click", function () { heroPush(1, S.aimLane); });
+
+  function start() {
+    if (S.over) reset();
+    S.running = !S.running;
+    el.go.textContent = S.running ? "Pause" : "Resume";
+    last = 0;
+  }
+  function reset() {
+    var variant = S ? S.variant : "comp";
+    S = fresh(); S.variant = variant; uid = 0;
+    el.over.hidden = true; el.go.textContent = "Start";
+    spawnWave();
+    renderVariants(); renderDom(); renderCheap();
+    S.log = []; el.log.innerHTML = "";
+    log("match reset — reinforcement pool " + S.poolMax + " per side.");
+  }
+  el.go.addEventListener("click", start);
+  document.getElementById("reset").addEventListener("click", reset);
+  document.getElementById("again").addEventListener("click", function () { reset(); start(); });
+
+  var DFL = ["Passive", "Low", "Medium", "Aggressive"];
+  [["ml", "mlV", function (v) { return mmss(+v); }],
+   ["ps", "psV", function (v) { return v; }],
+   ["wv", "wvV", function (v) { return v + "s"; }],
+   ["df", "dfV", function (v) { return DFL[+v]; }]].forEach(function (p) {
+    var i = document.getElementById(p[0]), o = document.getElementById(p[1]);
+    i.addEventListener("input", function () { o.textContent = p[2](i.value); });
+    i.addEventListener("change", function () { if (p[0] === "ps" && S) { S.poolMax = +i.value; reset(); } });
+  });
+
+  // ---- guided first run ----
+  var STEPS = [
+    { t:"What you're testing", b:"This build is about <b>match shape under reinforcement exhaustion</b> — not spellcasting, not deckbuilding. Two readouts at the bottom show each side's reinforcement pool draining as creeps spawn." },
+    { t:"The pool is not a front-line meter", b:"Creeps are still individual units fighting on the board. The pool only counts <b>how many creeps are left to spawn</b> — a locked distinction from a rejected mechanic. Watch both numbers count down." },
+    { t:"Creeps spawn forward", b:"Creeps don't march the full lane from a main base — they spawn at a <b>forward structure</b> partway down each lane. The base behind it is drawn dim on purpose: what it's for is an open question this build does not answer." },
+    { t:"Two of the three win-condition levers, simplified", b:"Tap a lane on the board, then tap <b>Terrain Strike</b> (drains the opponent extra) or <b>Hero Push</b> (your hero enters that lane for 10s and boosts your creeps there). The third lever — ordinary creep attrition — runs automatically." },
+    { t:"The forward structure is switchable", b:"Open “Tuning” below the buttons. Four candidate behaviours for what happens when a structure falls are switchable mid-match — none of them is chosen yet. Flip between them and see how the lane changes." },
+    { t:"When a pool hits zero", b:"That side's base stops spawning creeps — only its hero is left. This build shows that state and does not decide whether it's a loss or a new phase. React to how it feels, not to who “won.”" },
+    { t:"Ready", b:"The enemy starts passive by default — raise “Enemy difficulty” in Tuning if you want more pressure. Tap Start when ready." }
+  ];
+  var tStep = 0;
+  var tEl = { over:document.getElementById("tutorial"), n:document.getElementById("tStepN"),
+              title:document.getElementById("tTitle"), body:document.getElementById("tBody"),
+              next:document.getElementById("tNext") };
+  document.getElementById("tStepMax").textContent = STEPS.length;
+  function showStep() {
+    var s = STEPS[tStep];
+    tEl.n.textContent = tStep + 1;
+    tEl.title.textContent = s.t;
+    tEl.body.innerHTML = s.b;
+    tEl.next.textContent = tStep === STEPS.length - 1 ? "Start" : "Next";
+  }
+  tEl.next.addEventListener("click", function () {
+    tStep++;
+    if (tStep >= STEPS.length) { tEl.over.hidden = true; return; }
+    showStep();
+  });
+  document.getElementById("tutorialAgain").addEventListener("click", function () {
+    tStep = 0; showStep(); tEl.over.hidden = false;
+  });
+
+  resize(); reset(); tStep = 0; showStep();
+  raf = requestAnimationFrame(loop);
+})();
+</script>
