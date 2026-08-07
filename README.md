@@ -9,9 +9,11 @@ Real-time mobile lane-battler with compound spellcasting.
   design artifact. Read this first.
 - `.scratch/core-concept/issues/` — the 18 concept tickets that feed the map.
 - `.scratch/core-concept/prototypes/` — throwaway HTML prototypes.
+- [`CONTEXT.md`](CONTEXT.md) — ubiquitous-language glossary of domain terms.
 - [`CHANGELOG.md`](CHANGELOG.md) — session narrative. Grep it for a past decision,
   a reversal, or why something was tried.
-- [`CLAUDE.md`](CLAUDE.md) — working agreement and current ticket state.
+- [`AGENTS.md`](AGENTS.md) (aliased as `CLAUDE.md`) — working agreement and
+  current ticket state.
 
 ## Method
 
