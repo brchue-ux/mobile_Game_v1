@@ -26,6 +26,15 @@ nothing; it makes the shape reactable.
   your own candidates (guards, vicinity buffs) and a plain turret are not
   built at all — they're already rejected on your own test.
 - Is the default match length (3:00, range 1:30–15:00) closer to right?
+- Flip **"Passive reinforcement trickle"** (Tuning panel) on and off mid-session.
+  Does a pool that refills change what *reinforcement exhaustion* feels like as a
+  win condition — is it still the thing you're playing toward, or does it become
+  background? And does the longer (or shorter) match it produces read as better
+  or worse? Whether the pool should ever refill has never been raised; this only
+  makes both answers playable. Off (drain-only) is the default and the built
+  behaviour; the rate (+1 every 8s) is untuned scaffolding like every other
+  number here, and the refill is identical for both sides — it never pays out
+  more for being behind.
 
 **Deliberately crude, labelled on screen:**
 - Placeholder shapes for creeps, heroes, and forward structures — dots and

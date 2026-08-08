@@ -98,6 +98,9 @@
   .vopt .vd { font-size: 9.5px; color: var(--subtle); line-height: 1.35; }
   .vopt .vwarn { font-size: 9.5px; color: var(--gold); line-height: 1.35; margin-top: 2px; }
   .rejected { font-size: 9.5px; color: var(--muted); line-height: 1.4; border-top: 1px dashed var(--overlay); padding-top: 6px; }
+  .togl { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text); }
+  .togl input { accent-color: var(--iris); width: 15px; height: 15px; }
+  .note { font-size: 9.5px; color: var(--subtle); line-height: 1.4; }
 
   .log {
     border-top: 1px solid var(--overlay); padding-top: 5px;
@@ -169,6 +172,18 @@
           <input type="range" id="wv" min="2" max="15" step="1" value="6"></div>
         <div class="ctl"><div class="ctl-top"><label for="df">Enemy difficulty</label><b id="dfV">Passive</b></div>
           <input type="range" id="df" min="0" max="3" step="1" value="0"></div>
+
+        <div class="eyebrow" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Pool refill — drain-only vs. trickle</div>
+        <label class="togl"><input type="checkbox" id="tr"> Passive reinforcement trickle</label>
+        <div class="ctl"><div class="ctl-top"><label for="trr">Trickle rate</label><b id="trrV">+1 every 8s</b></div>
+          <input type="range" id="trr" min="2" max="30" step="1" value="8"></div>
+        <div class="note">
+          Off by default — the pool only ever drains, as built. Switched on, <b>both</b>
+          sides refill at the same fixed rate, capped at the starting pool size; it never
+          pays out more for being behind (that shape is rejected outright). Flip it
+          mid-match to compare. Whether the pool should <i>ever</i> refill is an open
+          question this build does not answer — the rate is untuned scaffolding.
+        </div>
 
         <div class="eyebrow" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Forward structure — what it does when it falls</div>
         <div class="variants" id="variants"></div>
@@ -242,6 +257,8 @@
       ps:+document.getElementById("ps").value,
       wv:+document.getElementById("wv").value,
       df:+document.getElementById("df").value,
+      tr:document.getElementById("tr").checked,
+      trr:+document.getElementById("trr").value,
       variant: S ? S.variant : "comp"
     };
   }
@@ -289,6 +306,8 @@
       lanes:[[],[],[]], structs:structs,
       hero:{ 1:{lane:-1,timer:0}, "-1":{lane:-1,timer:0} },
       hazard:null,
+      trickleAcc:{ 1:0, "-1":0 }, trickled:{ 1:0, "-1":0 },
+      trickleResumeLogged:{ 1:false, "-1":false },
       cdTerrain:0, cdHero:0, aimLane:-1,
       nextWave:1.0, respawnQ:[], aiTick:2,
       casts:{terrain:0,hero:0}, salvaged:0, log:[], dirty:true
@@ -410,6 +429,29 @@
       }
       return true;
     });
+
+    // passive reinforcement trickle — symmetrical, fixed rate, never scaled by
+    // who is behind. Off by default; the built behaviour is drain-only.
+    if (c.tr) {
+      [1, -1].forEach(function (side) {
+        var k = String(side);
+        S.trickleAcc[k] += dt;
+        while (S.trickleAcc[k] >= c.trr) {
+          S.trickleAcc[k] -= c.trr;
+          if (S.pool[k] >= S.poolMax) continue;
+          var wasDry = S.exhausted[k];
+          refund(side, 1);
+          S.trickled[k]++;
+          // logged once per side per match: at zero the trickle is spent again
+          // almost immediately, and the churn would flood the log.
+          if (wasDry && !S.trickleResumeLogged[k]) {
+            S.trickleResumeLogged[k] = true;
+            log((side === 1 ? "<b>Your</b>" : "<b>Their</b>") +
+                " pool trickled back above zero — spawning resumes.");
+          }
+        }
+      });
+    } else { S.trickleAcc["1"] = 0; S.trickleAcc["-1"] = 0; }
 
     // heroes
     [1, -1].forEach(function (side) {
@@ -654,6 +696,8 @@
       ["Terrain strikes cast (you)", S.casts.terrain],
       ["Hero pushes cast (you)", S.casts.hero],
       ["Creeps salvaged", S.salvaged],
+      ["Pool refill", c.tr ? "trickle, +1 every " + c.trr + "s" : "off (drain-only)"],
+      ["Reinforcements trickled back (you / them)", S.trickled["1"] + " / " + S.trickled["-1"]],
       ["Variant used", VARIANTS.filter(function (v) { return v.id === S.variant; })[0].name]
     ].map(function (x) { return "<span>" + x[0] + "</span><span>" + x[1] + "</span>"; }).join("");
     document.getElementById("ovAsks").innerHTML = [
@@ -661,7 +705,8 @@
       "<li><b>Did running out read as losing, or as a new phase?</b> Neither answer is wrong — that's the open question.</li>",
       "<li><b>Did the forward structure's effect change how you played the lane</b>, or just add a number?</li>",
       "<li><b>Was this match length closer to right?</b> Drag it further if not.</li>",
-      "<li><b>Did switching the variant mid-run feel like a different game</b>, or cosmetic?</li>"
+      "<li><b>Did switching the variant mid-run feel like a different game</b>, or cosmetic?</li>",
+      "<li><b>With the trickle on, did \"reinforcement exhaustion\" still feel like the win condition</b> — and did the longer/shorter match read as better or worse?</li>"
     ].join("");
     el.over.hidden = false;
   }
@@ -717,10 +762,20 @@
   [["ml", "mlV", function (v) { return mmss(+v); }],
    ["ps", "psV", function (v) { return v; }],
    ["wv", "wvV", function (v) { return v + "s"; }],
-   ["df", "dfV", function (v) { return DFL[+v]; }]].forEach(function (p) {
+   ["df", "dfV", function (v) { return DFL[+v]; }],
+   ["trr", "trrV", function (v) { return "+1 every " + v + "s"; }]].forEach(function (p) {
     var i = document.getElementById(p[0]), o = document.getElementById(p[1]);
     i.addEventListener("input", function () { o.textContent = p[2](i.value); });
     i.addEventListener("change", function () { if (p[0] === "ps" && S) { S.poolMax = +i.value; reset(); } });
+  });
+
+  document.getElementById("tr").addEventListener("change", function () {
+    if (!S) return;
+    var c = cfg();
+    S.trickleAcc["1"] = 0; S.trickleAcc["-1"] = 0;
+    log(c.tr
+      ? "pool refill <b>on</b> — both sides trickle +1 every " + c.trr + "s, capped at " + S.poolMax + "."
+      : "pool refill <b>off</b> — back to drain-only.");
   });
 
   // ---- guided first run ----
