@@ -59,6 +59,16 @@ currently installed.
 
 ### Locked constraints — do not re-litigate without saying so explicitly
 
+> **Standing caveat, in the user's words (2026-07-29):** *"Just to confirm.
+> Everything that I say is always open to change. Let's make that clear."*
+> Filed here because this is where a future rebuild looks for what is fixed.
+> Nothing in this map is a lock unless it is explicitly marked as one — the
+> `[committed]` tags and this section are the marks. Everything else, including
+> everything tagged `[provisional]`, is open. This does **not** weaken the
+> append-only rule: a change is still a **reversal, flagged as one, in the
+> user's words** — the caveat says decisions may change, not that records may
+> vanish.
+
 - Real-time, **cooldown-based**. No turns. Cards accrue on a timer.
 - Three lanes on a **Dota-shaped** map — bending lanes, forest/jungle, terrain
   that matters — scaled for a phone. Explicitly *not* Clash Royale's bare tracks.
@@ -74,6 +84,13 @@ currently installed.
     fighting creeps produce — not a bar, meter or fill-percentage. The rejection
     is about the **abstraction**, never the word. A future rebuild reading that
     quote cold could easily mistake it for permission. It is not.
+  - **⚠ Second language trap, filed 2026-07-29.** The win condition is now a
+    **reinforcement pool** that drains as creeps die. **This is not the rejected
+    meter.** The rejected thing was a bar that *stands in for the front line*.
+    The pool counts **how many creeps are left to spawn**; the front line is
+    still produced by individual creeps fighting, and nothing about it is
+    abstracted. Two different objects that are both numbers. Not permission to
+    abstract the lane.
 - Core loop: accrue cards → **combine into a compound spell** → **select a
   target**. **Casting is selection, not performance.** `[committed]` **Reversed
   2026-07-26** from *"gesture to cast → aim into a lane"*; see the reversal log.
@@ -145,25 +162,56 @@ whether) execution skill returns is now an open question owned by 04 and 06.
 Both 2026-07-21 quotes are preserved verbatim in the reversal log below and in
 [03](issues/03-gesture-skill.md).
 
-### ⚠ Live challenge — "destroy their base" as the win condition (2026-07-26)
+### ✅ Resolved challenge — the protest on "destroy their base" is lifted and narrowed (2026-07-29)
 
-**The user does not want the win condition it currently has**, and said so while
-answering a different ticket:
+**The challenge filed 2026-07-26 is resolved by narrowing.** It was recorded as
+*the user does not want the win condition it currently has*. That was wider than
+the objection actually is. **This is a reversal of the recorded status and is
+flagged as one**, in the user's words:
+
+> *"So the issue that I have with the base dying being the win condition. It's
+> just that every game does it."*
+
+> *"while I want there to be a base because there needs to be logic like where
+> are the minions with the creeps coming from? I don't necessarily want - the
+> base can be the thing that dies. I guess that's fine. I just don't want it to
+> be the prototypical way of you push the minions through three towers through
+> like a barracks or something for powered up minions and then destroy more
+> towers to reach a core, right? Like that's how everyone's always done it."*
+
+- **Not rejected:** the base being the thing that dies. *"I guess that's fine."*
+- **Rejected** `[committed by explicit rejection]`: the **prototypical route** —
+  creeps through three towers → barracks for powered-up creeps → more towers →
+  core. *"that's how everyone's always done it."*
+
+**What this section said before, kept verbatim so the narrowing is diffable
+without leaving the map.** It read: *"**The user does not want the win condition
+it currently has**, and said so while answering a different ticket"* —
 
 > *"you can eventually, I guess, destroy their base. I don't really want it to be
 > 'destroy their base' so maybe there's something else that can be thought of
 > later on just because that's so prototypical."*
 
-**Status: dissatisfied, deferred, not decided.** Base destruction stands as the
-`[provisional]` answer because nothing has replaced it — but it is now explicitly
-**held under protest** rather than settled, and this is the second time the loss
-condition has moved (see the reversal log). The objection is *genre-fatigue*, not
-mechanics: it works, it's just the obvious thing.
+— *"**Status: dissatisfied, deferred, not decided.** Base destruction stands as
+the `[provisional]` answer because nothing has replaced it — but it is now
+explicitly **held under protest** rather than settled, and this is the second
+time the loss condition has moved (see the reversal log). The objection is
+*genre-fatigue*, not mechanics: it works, it's just the obvious thing. Filed here
+rather than quietly in 05 because the same design has now discarded hero-death
+*and* soured on base-destruction, which means the match's ending is one of the
+least settled things in the concept while reading like one of the most settled."*
 
-Filed here rather than quietly in 05 because the same design has now discarded
-hero-death *and* soured on base-destruction, which means the match's ending is
-one of the least settled things in the concept while reading like one of the most
-settled. **Owned by 05.**
+That filing judgement was right and is worth keeping: the ending has now moved
+**three** times. The full protest text also lives in
+[05](issues/05-match-shape-win-condition.md). It is not deleted, and it is not
+still live at its original width.
+
+**⚠ Do not extend this cascade.** The rejection reaches the **tower chain as a
+win path** and stops there. **Pseudo-towers are untouched** — they are on record
+as a stall/pacing device explicitly on the preventive side of the
+deliberate-losing rail, and a scaling gate that stops an early bulldoze is a
+different object from a link in a destruction sequence. The map already carries a
+"don't over-extend a cascade" gotcha, learned from a retraction. **Owned by 05.**
 
 ### Reversal log
 
@@ -189,6 +237,22 @@ silently re-adopted.
   player's avatar, so its death cannot be the player's defeat. The camera
   decision (01) determined the win condition — worth remembering as an example of
   how non-linear this design is.
+- **The protest on base destruction** (filed 2026-07-26, **narrowed and lifted
+  2026-07-29**). Was: *the win condition is held under protest; the user does not
+  want it.* Now: *base destruction as an ending is fine; the prototypical
+  tower-chain route to it is rejected.* **Why, in the user's words:** *"the base
+  can be the thing that dies. I guess that's fine. I just don't want it to be the
+  prototypical way of you push the minions through three towers through like a
+  barracks or something for powered up minions and then destroy more towers to
+  reach a core... that's how everyone's always done it."* This is the **third**
+  time the match's ending has moved. Scope: the win *path*, not pseudo-towers.
+- **Three win conditions → one win condition with three levers** (2026-07-29).
+  Was, in this map's reading: *terrain manipulation, hero power and
+  reinforcements are three separate candidate win conditions.* Now: **one
+  scoreboard — the reinforcement pool — with three levers on it.** *"I'm OK
+  currently with having those 3 levers on the one win condition."* Recorded as a
+  reversal of the map's reading rather than of a user decision, because the
+  three-separate framing was the map's, not his.
 - **Banking** (2026-07-21) — shelved, not rejected. See below.
 - **Recipes** (2026-07-21) — narrowed, not reversed. See 02's amendment.
 
@@ -267,6 +331,41 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
+- **The win condition is reinforcement exhaustion** `[provisional]` (2026-07-29)
+  — *"you have reinforcements and so like you only live as long as you have
+  reinforcements. And maybe it can be something like once you run out of
+  reinforcements, then your base doesn't spawn anymore minions or something, and
+  then all you have is your hero. I don't know."* Reference is a **World of
+  Warcraft battleground**, hedged (*"I can't remember where it was, maybe"*).
+  The user's hedges are part of the record: whether hero-only-after-exhaustion is
+  a **loss** or just an **endgame state** is explicitly unanswered. The base
+  survives — it is where creeps come from, and it may still be the thing that
+  dies. What died is the tower-chain route. See
+  [05](issues/05-match-shape-win-condition.md).
+- **One win condition, three levers on it** `[provisional]` (2026-07-29) — *"I'm
+  OK currently with having those 3 levers on the one win condition."* The levers:
+  **(1)** baseline drain as your own creeps die; **(2)** **terrain manipulation**
+  — a black-hole-class spell that eats their creeps in a lane and costs them
+  *extra* reinforcements; **(3)** **hero intervention** — a card that puts your
+  hero in the lane for **~10 seconds** to push it further, with farmed power-ups
+  making the push harder or more survivable. This **replaces the map's earlier
+  reading** that terrain, hero power and reinforcements were three *separate*
+  candidate win conditions. **Consequence for [18](issues/18-slice-sequencing.md):
+  one win condition is one thing to teach, not three.** It also gives
+  [10](issues/10-information-visibility.md)'s enemy-hero readouts a possible
+  *win-condition* reason to exist, beyond the card-decision one.
+- **The reinforcement pool is one per side** `[provisional]` (2026-07-29) —
+  *"reinforcements will be 1 pool per side as of right now."* **A pool per lane is
+  a live alternative and it is conditional**, not deferred: *"If we choose, or if
+  we end up deciding that you can more manually manipulate your hero's position,
+  then maybe a pool per lane would make sense."* That is a **dependency on an
+  open question** — hero control granularity, owned by [15](issues/15-heroes.md)
+  (currently coarse standing orders, *"you don't get to control your hero
+  directly"*) — **not a decision**. It also gives
+  [01](issues/01-battlefield-geometry.md)'s open target-*resolution* question a
+  stake it did not have: a per-lane pool makes lane identity load-bearing for the
+  win condition. Note the hero-intervention lever is a card effect with a timer,
+  **not** manual control, so it does not by itself meet the condition.
 - **Terrain manipulation is the leading objective candidate** `[provisional]`
   (2026-07-26) — players reshape the battlefield (*"create more water, create
   lava, or create holes in the ground"*) to impede enemy creeps and heroes. The
@@ -274,7 +373,11 @@ rather than performing certainty. Ticket 08 promotes or revises.
   objective," and it makes terrain mechanically live without needing skill shots.
   **⚠ It may also have handed [09](issues/09-banking-mechanic.md) the payoff that
   got banking shelved — unresolved, see below.** See
-  [05](issues/05-match-shape-win-condition.md).
+  [05](issues/05-match-shape-win-condition.md). **Updated 2026-07-29:** it is no
+  longer a candidate *objective* in its own right — it is **lever 2 on the one
+  win condition**, and the user's dangling 2026-07-26 hint (*"maybe that can
+  somehow affect what the overall win condition is"*) is answered: it drains the
+  enemy reinforcement pool faster than baseline attrition does.
 - **The player gives the hero standing orders** `[provisional]` (2026-07-26) —
   *"left lane, mid lane, right lane, farm this part of the jungle, farm that part
   of the jungle."* Cards influence the hero's **power**; standing orders
@@ -349,7 +452,7 @@ method; treat them as "this informs that," not as a build order.
 | 02 | What "combining cards" actually means | resolved + amended |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
-| 05 | Match shape & win condition | open, **substantially answered**; win condition itself still **⚠ held under protest** |
+| 05 | Match shape & win condition | open, **substantially answered**; **protest lifted and narrowed 2026-07-29** — win condition is reinforcement exhaustion with three levers; the forward structure is what's open |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
@@ -394,12 +497,47 @@ method; treat them as "this informs that," not as a build order.
   this is a live choice rather than a constraint. Owned by 01. **The earlier
   worry that lane-granular targeting reduces the board to three buttons is
   substantially answered** — panning, no fog, and enemy-hero targeting keep
-  spatial reading in the game regardless.
-- **What replaces "destroy their base."** See the live challenge above. 05.
+  spatial reading in the game regardless. **New stake, 2026-07-29:** if the
+  reinforcement pool ever goes per-lane, lane identity becomes load-bearing for
+  the *win condition*, not just for card effects. That does not answer this
+  question; it raises its price. See 05.
+- **How manually the hero's position can be manipulated.** Owned by
+  [15](issues/15-heroes.md) — currently coarse standing orders, *"you don't get
+  to control your hero directly."* **Promoted from detail to dependency
+  2026-07-29:** the per-lane reinforcement pool is explicitly conditional on this
+  loosening. A card that puts the hero in a lane for ~10 seconds exists as a
+  win-condition lever, but it is a card effect with a timer, **not** manual
+  control, and does not meet the condition.
+- ~~**What replaces "destroy their base."**~~ **Answered 2026-07-29** —
+  reinforcement exhaustion, one condition with three levers. The base was never
+  the problem; the tower-chain route was. See the resolved challenge above and
+  05.
+- **What the main base is for, if creeps spawn forward.** `[open]` 2026-07-29.
+  The base's stated job is *"where are the minions with the creeps coming
+  from?"* — creeps need a source. But the user also floated creeps spawning at
+  forward positions where the outer towers would be, *"and so no minions actually
+  flow through the lane."* **If they spawn forward, the main base has no stated
+  job left.** Recorded as an open question, not a defect — the forward-spawn
+  version is not chosen. 05.
+- **What the forward structure DOES.** `[open]` 2026-07-29, and this is now the
+  live question in 05. Both of the user's own candidates were **rejected by him
+  on the same grounds**: guards *"just makes it a tower"*, and vicinity buffs are
+  *"just a defensive tower structure, just a different kind. It just delays your
+  opponent from getting in the lane."* **The test that came out of it, and it
+  governs every future candidate** `[committed]`: *"I want to change how it makes
+  your units interact with the game, not simply just make it take your units
+  longer to get to the core."* Delay is not a mechanic; interaction change is.
+  Four firstmate-proposed candidates are recorded in 05 as **proposals awaiting
+  the user's reaction** — not his, not accepted, none of them live.
 - **Towers/structures.** Appeared for the first time on 2026-07-26 — the hero
   *"may defend towers."* Nothing else about them exists: whether they shoot,
   whether they gate lane progress, whether they are the thing that gets destroyed
-  instead of a base. Interacts hard with the win-condition challenge.
+  instead of a base. **Narrowed 2026-07-29:** the tower *chain* as a win path is
+  rejected, and the forward-structure question above is the live form of this.
+  Pseudo-towers as a pacing gate are untouched by that rejection.
+- **Whether the reinforcement pool refills, decays, or only drains** — not
+  raised. And **what a reinforcement count looks like on a phone**, which
+  competes for the same bottom 25% as everything else. 05, touches 01.
 - **⚠ Whether the accrual gate and banking are one system or two.** *"I did mean
   accrue"* — confirmed 2026-07-26. But its stated job is **gating the cost of
   powerful effects** (*"that shouldn't just be one card"*), whereas
@@ -412,11 +550,15 @@ method; treat them as "this informs that," not as a build order.
   the *job* is wanted and was **clarified 2026-07-26 to be pacing, not catch-up**:
   a **scaling gate** too strong to pass early, which stops an early bulldoze.
   Design brief: a lane obstacle with a power curve that doesn't read as a
-  building. Terrain manipulation may share machinery with it.
+  building. Terrain manipulation may share machinery with it. **Unchanged by the
+  2026-07-29 rejection of the tower chain** — the pacing job survives intact; see
+  the resolved challenge above. Related but distinct from the forward-structure
+  question, which is about what a *spawn point* does, not about a gate.
 - **What terrain damage is** beyond its existence: permanent or decaying,
-  repairable, counterable, and whether it hits your own units too. Plus the
+  repairable, counterable, and whether it hits your own units too. ~~Plus the
   user's own dangling *"maybe that can somehow affect what the overall win
-  condition is."*
+  condition is."*~~ **That half is answered 2026-07-29:** it is lever 2 — it
+  drains their reinforcements faster.
 - **What else fits in the bottom 25%.** It must hold the cards, readouts on both
   heroes, and — proposed for off-screen lane alerts — *"a notification or you'd
   have a mini map that would have a ping on it."* Three jobs, one quarter of a

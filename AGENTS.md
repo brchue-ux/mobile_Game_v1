@@ -59,7 +59,11 @@ and `/prototype` are.
 - **Closed by removal:** 03 (gesture) — the subject was cut, not answered.
 - **Shelved:** 09 (banking) — good shape, no payoff worth its cost. Not rejected;
   don't reintroduce unprompted. **⚠ See the open question below.**
-- **Substantially answered:** 01, 05, 10, 15.
+- **Substantially answered:** 01, 05 (**protest lifted and narrowed 2026-07-29**;
+  the win condition is answered, the forward structure is what's open), 10, 15.
+- **Standing caveat, in the user's words (2026-07-29):** *"Everything that I say
+  is always open to change."* Nothing is a lock unless explicitly marked. This
+  does not weaken the append-only rule — changes are reversals, flagged as such.
 
 ## Where the design stands
 
@@ -82,13 +86,21 @@ All `[provisional]` unless marked.
   sets **standing orders** (lane, jungle camp) but never steers directly. Cards
   influence power, orders influence priorities. Differentiation is **asymmetry,
   not power level**. Death costs nothing; 1–2 priced buybacks per match.
-- **Match:** base destruction ends it — **⚠ held under protest**, see below.
-  Concession/disconnect is a win by default. PvE and PvP share one shape.
+- **Match:** the win condition is **reinforcement exhaustion** — one pool per side
+  *"as of right now"*, and *"you only live as long as you have reinforcements."*
+  **One win condition with three levers on it:** your own creeps dying (baseline
+  drain), terrain manipulation (a black-hole-class spell that eats their creeps
+  for extra reinforcements), and hero intervention (a card putting your hero in
+  the lane ~10s, farmed power-ups making the push harder or more survivable).
+  The base survives as the creeps' source and may still be the thing that dies;
+  what is **rejected** is the prototypical route — towers → barracks → towers →
+  core. Concession/disconnect is a win by default. PvE and PvP share one shape.
 - **Jungle:** playable space for spells, **not a wall** (the hero must traverse
   it — this is now a pricing baseline, since blocking traversal is only worth a
   card because passage is the default). Lane creeps leash back on lost aggro.
-- **Terrain manipulation** is the leading objective candidate — water, lava,
-  holes impeding enemy traversal.
+- **Terrain manipulation** — water, lava, holes impeding enemy traversal. No
+  longer a candidate *objective* in its own right: it is lever 2 on the one win
+  condition.
 - **Cards:** ~100, bring ~20. All obtainable by every player, none
   purchase-exclusive. **All hero power variance is match-bound** `[committed]` —
   no persistent power, no purchased power, no gacha.
@@ -107,14 +119,27 @@ All `[provisional]` unless marked.
   Either 09 returns, or there are two accrual systems and 18 must know it. **A
   shelved ticket whose mechanic is in use under another name should not
   persist.**
-- **⚠ What replaces "destroy their base."** Wanted gone as *"so prototypical."*
-  Nothing has replaced it. Towers exist but are unspecified, and the turret is
-  rejected as MOBA copying — the brief is a **lane breakpoint with a power curve
-  that doesn't read as a building**.
+- **⚠ What the forward structure DOES.** If creeps spawn where the outer towers
+  would be rather than at the main base, **what is the main base for?** — open,
+  not a defect. And the structure itself is unspecified: the user rejected his own
+  two candidates (guards *"just makes it a tower"*; vicinity buffs are *"just a
+  defensive tower structure, just a different kind"*). **His test governs any
+  replacement:** it must *"change how it makes your units interact with the game,
+  not simply just make it take your units longer to get to the core."* Four
+  firstmate proposals are parked in 05 awaiting his reaction — none is live.
+  Separately, the turret is still rejected as MOBA copying and the pseudo-tower
+  brief stands: a **lane breakpoint with a power curve that doesn't read as a
+  building** (pacing, untouched by the tower-chain rejection).
 - **Where execution skill lives, or whether the design accepts having none.**
   Skill is now entirely cognitive. Is that the identity or a hole? Don't fill it
   reflexively — re-adding dexterity under another name would undo the removal.
-- **Target resolution within a class** — whole lane, or a point inside it?
+- **Is hero-only-after-exhaustion a loss, or just an endgame state?** *"then all
+  you have is your hero. I don't know."* Unanswered.
+- **Does the reinforcement pool go per-lane?** One per side *"as of right now"*;
+  per-lane is a live alternative **conditional** on hero position becoming more
+  manually manipulable (15). A dependency, not a decision.
+- **Target resolution within a class** — whole lane, or a point inside it? A
+  per-lane pool would raise the stakes on this.
 - **Whether any gesture survives anywhere.** Tap-only is live and unchosen.
 
 ## Prototype
