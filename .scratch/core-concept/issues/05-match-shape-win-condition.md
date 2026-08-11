@@ -9,6 +9,17 @@ exhaustion and its three levers (2026-07-29) are **not deleted** — see "Where
 reinforcement exhaustion now stands" for what did and did not change. The
 **protest on base destruction stays lifted and narrowed as of 2026-07-29**,
 unchanged by any of this.
+**Updated 2026-08-11:** **exhaustion is confirmed NOT a loss condition** — the
+pool is a resource whose floor costs you creep spawning and nothing else — and
+the ticket gains its **central strategic axis**: push the lanes for map control
+and gold, or farm the jungle for unique items, with the **forward structure
+wrapped into that axis** rather than sitting beside it. The telegraphed event
+gains a **~1-minute lead and a known type**, and **imbuing the structure with
+cards** is confirmed as a **second, distinct card use**. **Rare-unit summoning at
+structures is cut *"for now"*** — a rejection with his hedge preserved — which
+**reopens how forward creep spawning works**, though **forward creep spawning
+itself is not dead.** The **power threshold and its tuning are explicitly parked**
+at the user's instruction.
 Blocked by: —
 
 ## ⚠ The loss condition moves to a hero power threshold — 2026-08-09
@@ -33,6 +44,13 @@ framing*, not the reinforcement pool and not the three levers. The user did not
 say what becomes of exhaustion as a loss trigger. See "Where reinforcement
 exhaustion now stands — read this before assuming it died" in the 2026-08-09
 dump, which records that as **open**, not as answered either way.
+
+> **⚠ ANSWERED 2026-08-11, text above kept as written.** *"What becomes of
+> exhaustion as a loss trigger"* is no longer open: **exhaustion is not a loss
+> condition.** Reinforcements tick down, zero means you stop spawning creeps, and
+> **that is the whole consequence** — the price of a strategic choice, not a
+> defeat state. The pool, its three levers and the 2026-07-29 material survive as
+> a **resource system**. See the 2026-08-11 dump.
 
 **The user flagged the threshold itself as still wishy-washy on specifics.** That
 hedge is part of the record and must not be laundered into a settled mechanism.
@@ -776,6 +794,10 @@ hedge is part of the record.
 - **Not stated either way:** whether running out of reinforcements still ends a
   match at all, or whether the pool is now purely a resource feeding the power
   race. **Open. Do not resolve it by inference.**
+  - **ANSWERED 2026-08-11, original bullet kept as written.** Not by inference —
+    by the user. **Exhaustion is not a loss condition**; zero reinforcements
+    means you stop spawning creeps and nothing more. The pool is the resource
+    side of the reading above. See the 2026-08-11 dump.
 - **Still live as a system, on the evidence:** pool refill is *deliberately*
   undecided pending a feel prototype, and separate in-progress main-base upgrade
   work from the same period carries categories for **reinforcement maximum** and
@@ -802,32 +824,506 @@ dumps do to it:
   excluded.** That work is **its own subject, not this ticket's**, and is recorded
   here only because it bears on the base's job.
 
+> **⚠ Moved on 2026-08-11, text above kept as written.** Two things changed.
+> **(a)** The forward-spawn variant is **not dead** — *"I don't think it's dead.
+> Just need to figure out how that functions."* So the question this section
+> exists to hold is live again, at the mechanism level rather than the
+> is-it-alive level. **(b)** The main base picks up a job **inside ticket 05's
+> own material for the first time**: it is **where gold buys power-ups**, and the
+> same place **units are upgraded** — which is the upgrade-tree work above, now
+> load-bearing for this ticket's central axis rather than adjacent to it. See the
+> 2026-08-11 dump.
+
 ### Open questions after the 2026-08-09 dump
+
+**Bookkeeping updated 2026-08-11. Original text kept verbatim; status markers
+added in place, nothing deleted.** The live list is now
+"[Open questions after the 2026-08-11 dump](#open-questions-after-the-2026-08-11-dump)"
+at the end of this file.
 
 Everything from the 2026-07-29 list that is not marked answered or superseded
 above is still live. New and revised:
 
 - **The concrete list of event types**, beyond the user's two named examples
-  (large unique minion; structure-ability defence).
-- **Exact event timing offsets** within the assumed 15 minutes.
+  (large unique minion; structure-ability defence). — **DELEGATED 2026-08-11.**
+  The user asked for a brainstorm drawing on existing games plus novel ideas, to
+  be brought back to him. **Commissioned as separate work; not answered here and
+  not to be answered here.**
+- **Exact event timing offsets** within the assumed 15 minutes. — still open.
 - **The defend-bonus design** — a bonus for successfully defending, versus merely
-  avoiding the loss. Floated, undecided.
+  avoiding the loss. Floated, undecided. — **DEVELOPED 2026-08-11 and it grew a
+  problem.** He leans yes on a bonus, then spotted himself that tying rare-unit
+  summoning to the structure makes saving it compulsory — **the forced-tax
+  problem returning through a different door.** **Later the same session he cut
+  the rare units *"for now"***, which **removes the problem rather than solving
+  it** — and **removes the stated rationale for the bonus with it.** Whether a
+  defence bonus is still wanted is **unstated, not withdrawn.** See the 2026-08-11
+  dump.
 - **Hero strength affecting structure power** — floated, and in **live tension**
   with card-selected-only garrison abilities. Flagged as a **cut candidate**;
-  neither side chosen.
+  neither side chosen. — untouched 2026-08-11; still neither side chosen.
 - **What concretely defines crossing the power threshold** — a **hard gate** that
   flips the hero into a win-capable state, versus a **continuous power curve**
-  with no sharp line.
+  with no sharp line. — **LEANING, UNRESOLVED 2026-08-11:** *"I don't think it's
+  a hard gate. Maybe it is, I don't know."* A firm requirement did come out of it
+  — there must be a **resolution line** — and an undefined concept for it, the
+  **"exodia moment."** See the 2026-08-11 dump.
 - **How the threshold is tuned** against the assumed 15-minute match and
   ~5-minute event cadence, so games neither end in an early blowout nor drag past
-  the threshold with no resolution.
+  the threshold with no resolution. — **EXPLICITLY UNKNOWN 2026-08-11**, in his
+  words, and **parked by his own scope instruction.**
 - **What becomes of reinforcement exhaustion as a loss trigger**, now that the
   loss condition is the enemy hero's power threshold. Not addressed by the user.
+  — **ANSWERED 2026-08-11: it is not a loss trigger.** Zero reinforcements stops
+  your creep spawning; that is the entire consequence.
 - **Whether the forward-spawn variant of creep spawning is dead** or merely went
-  unmentioned.
+  unmentioned. — **ANSWERED 2026-08-11: not dead.** *"I don't think it's dead.
+  Just need to figure out how that functions."* **How it functions is unspecified
+  and is now the open part.**
 - **Multi-structure step-down defence lines** — deferred to playtesting, not
-  rejected. Revisit when match length and map size are known.
+  rejected. Revisit when match length and map size are known. — **still deferred,
+  and reinforced 2026-08-11**: the user re-raised structure count himself and
+  came back to **one, as the starting test**, for stated reasons. Not a "no".
 - **Pool refill** — deliberately undecided pending a feel prototype the user has
-  not yet reacted to.
+  not yet reacted to. — untouched 2026-08-11.
 - **Whether "prep with cards" is the existing help-your-lane target class** aimed
-  at a structure, or a new target class. Floated 2026-08-07, not claimed.
+  at a structure, or a new target class. Floated 2026-08-07, not claimed. —
+  **BEARS ON IT 2026-08-11, not recorded as answered.** He stated that **cards
+  that affect lane state and cards that imbue a forward structure are two
+  distinct uses**, which points at "separate", **but he framed it as two *uses*
+  and never used the *target class* vocabulary.** Not inferred here.
+
+## Dump — 2026-08-11
+
+> **⚠ Source note.** This dump was **captured verbatim-faithfully at the time,
+> before any rebuild** — better provenance than the 2026-08-07 / 2026-08-09
+> decision notes. **Quoted passages below are the user's own wording as
+> captured**; unquoted material is record-paraphrase of that same capture. The
+> distinction is real and this file's convention requires keeping it.
+
+**What this dump does.** It **answers the two questions** the previous rebuild
+left open (exhaustion's standing as a loss trigger; whether forward creep
+spawning is dead), it supplies the **payout on the pushing side** that the
+2026-08-09 power race was missing, and it names the **central strategic axis** —
+**push the lanes for map control, or farm the jungle for power** — with the
+**forward structure wrapped into that axis** rather than standing beside it. Later
+in the same session it gives the **telegraphed event a one-minute lead and a known
+type to counter-prep against**, splits card use into **lane-state cards versus
+structure-imbue cards**, and **cuts rare-unit summoning at structures *"for
+now"*** on the forced-tax reasoning. Several things it opened are **unfinished by
+the user's own account**, and they are kept in their own section below rather than
+blended in.
+
+**His scope instruction, and it binds this rebuild:** proceed with the
+**structure and axis** items now; **park the power-threshold and economy items**,
+because those *"require a lot of individual thought."*
+
+### ✅ Settled by this dump
+
+#### Reinforcement exhaustion is NOT a loss condition `[provisional]`
+
+**This closes the question 2026-08-09 recorded as "not stated either way."**
+Reinforcements tick down; hitting zero means **you no longer get to spawn any
+more creeps**, and **that is the whole consequence**. It is **the price of a
+strategic choice, not a defeat state.**
+
+**His reasoning, and it is the load-bearing part** — Warcraft 3 as the reference:
+a hero is generally significantly stronger than a standing army, and
+
+> *"a level 10 hero with good items can sometimes beat bigger armies by
+> themselves, because that's the nature of the game."*
+
+He expects this game to be similar: **the hero is the main thing that wins you
+the game or loses you the game.** So running dry is a sacrifice that bought hero
+power:
+
+> *"if you run out of reinforcements because you spent most of your time farming
+> in the jungle to get your hero stronger instead of bringing it to the lanes to
+> maintain map control, then perhaps the power that you've gained via that
+> sacrifice can allow you to somehow win with better strategy."*
+
+**The hedges are his and stay in the record:** *"perhaps"*, *"somehow."* The
+**principle** is stated; the **mechanism** by which accumulated hero power
+converts into a win with no creeps left is **not** — see "Explicitly unknown"
+below.
+
+**What this does and does not reach.** It settles exhaustion's *standing*. It
+does **not** delete the pool, the three levers, or any 2026-07-29 material —
+those survive as the **resource system** the axis is fought over. And it does
+**not** move the ending again: the loss condition remains the **enemy hero
+reaching their power threshold** (2026-08-09).
+
+#### Forward creep spawning is not dead
+
+> *"I don't think it's dead. Just need to figure out how that functions."*
+
+**Explicitly still live; mechanism unspecified.** The 2026-08-09 record — that
+nothing in either August dump had creeps spawning from the forward structure, and
+that whether the variant was dead *"is not stated"* — is now answered on the
+is-it-alive question and **reopened on the how question.**
+
+**⚠ And it stayed reopened.** Rare units at the forward structure briefly looked
+like the answer to *how*, and he **cut them later the same session** — so this
+statement survives intact while **its only candidate mechanism does not.**
+
+#### The lane resource is gold, earned on hero kills — and last-hitting is out
+
+**Gold, earned whenever the hero kills a minion.** A typical MOBA pays gold for
+**last-hitting**; **last-hitting will not work here**, so **any** minion the hero
+kills pays.
+
+**The two currencies, and how they differ** `[provisional]`:
+
+- **Lanes pay more gold than the jungle.**
+- **The jungle pays unique items and certain power-ups** from its monsters, **plus
+  a smaller gold drop.**
+- **Gold buys similar — not identical — power-ups at the main base**, which is
+  **the same place units are upgraded.**
+
+**His own statement of the choice this creates:**
+
+> *"Are you going to push for map control and earn gold via that and then use
+> that gold to increase your hero's power, or are you going to farm the jungle to
+> get the unique items that are in the from the monsters there and then supplement
+> with the gold that they drop... or a balance of the two."*
+
+**Why this is the central axis and not just an economy detail.** The 2026-08-09
+power race had no stated cost on the farming side and no stated payout on the
+pushing side, which made "farm forever" the un-opposed answer. This supplies
+both. Earlier the same session he set the requirement before naming the
+substance — **killing enemy creeps must provide a similar resource to farming,
+just different**:
+
+> *"So both can get you the win, but depending on your opponent's hero choice,
+> farm choice and cards, the decision could change each match."*
+
+Two consequences he stated, recorded because they are design constraints, not
+flavour:
+
+- The axis is **not a strict tradeoff** where one arm is the real path and the
+  other a tax. **Both arms pay, in comparable magnitude, in different currency.**
+- The optimum is **matchup-dependent, not fixed** — it moves with the opponent's
+  **hero choice**, **farm choice** and **cards**, so the push-or-farm decision is
+  **re-made each match rather than solved once.**
+
+Note this **wires the main base into the axis** as the place gold converts into
+power, which connects this ticket to the upgrade-tree work rather than leaving
+that work adjacent.
+
+#### What map control is, and what it is worth
+
+**How it changes hands:** by **losing your own forward structure, or destroying
+the opponent's.**
+
+**What it is worth**, by his analogy to a typical MOBA:
+
+> *"you can cause your opponent to be scared because of lack of information.
+> Therefore, they have to play significantly more cautious and they don't get to
+> scale as quickly as their opponent because of it."*
+
+**So map control's value is stated as information denial, and its effect is on
+the opponent's scaling rate** — which is what puts it on the same axis as farming
+rather than on a separate one. This develops 2026-08-09's *"losing a structure
+costs map control, not a direct penalty"* by saying what that control is actually
+worth.
+
+#### The axis itself, as he framed it
+
+> *How could choosing to put your hero in the lanes to push them to gain map
+> control be used as a strategic benefit over choosing to keep your hero in the
+> jungle to farm gold and items while giving up map control?*
+
+**The forward structure has to be wrapped into that axis.** That is the design
+constraint this dump imposes: **the structure is not a separate subsystem — it is
+the fulcrum of the push-for-control versus farm-for-power decision.**
+
+#### One forward structure, as the starting test `[provisional]`
+
+**He re-raised structure count himself** — *do we only have one forward
+structure, or are there multiple?* — which **deliberately reopens** the
+2026-08-09 simplification (recorded there as *deferred to playtesting*, not
+settled). He then answered it, and **the answer reinforces the existing line
+rather than replacing it**:
+
+**One, as the starting test.** His reasoning: he does not know how to approach
+multiples yet, because it depends on **how big the map actually is** and **how
+long minions take to reach each forward structure, the halfway point, or all the
+way across**. Given it is a **mobile game that needs to be short**, *"one is
+probably just the best way to start now as a test."*
+
+**Recorded as a provisional starting point pending map size and travel timing —
+not as a closed question**, and **multi-structure step-down defence lines remain
+deferred, not rejected.** He also left standing, unanswered, **how the count —
+one versus several — affects the push-or-farm choice** either way.
+
+#### Lane cards and structure-imbue cards are two distinct uses `[provisional]`
+
+**This answers the question he had asked back about** (question 7 of the list put
+to him, recorded earlier in this session as *not understood, needs restating*).
+**They are two different things, not one mechanic wearing two hats:**
+
+1. **Cards that affect lane state** — the existing class. His examples: **AoE
+   damage**, **a blocker that prevents creeps from moving up for a certain amount
+   of time**, **slows on their movement**, and similar.
+2. **Cards that imbue the forward structure ahead of a telegraphed event** — a
+   separate use, and **the one that makes prep a real decision.**
+
+**Bookkeeping, stated because the two threads are easy to conflate:** this
+confirms that the burden named in his **unfinished card-complexity sentence**
+(below) really is **two distinct combination-management jobs**, not one seen
+twice. **It does not state whether that is too much** — that sentence is still
+unfinished and is not resolved by this answer.
+
+#### The imbue loop — the telegraph gets a lead time and a type `[provisional]`
+
+**His words, and this is load-bearing:**
+
+> *"There is a timer. In one minute, the big monster is going to spawn and start
+> wrecking your forward structure. So, start thinking about what type of cards
+> you're going to use to imbue it."*
+
+**Three things that were not previously stated:**
+
+- **The telegraph has a concrete lead time: about one minute.** Enough to **plan
+  and commit cards**, not enough to fully re-plan. The 2026-08-09 event system had
+  simultaneous symmetric notice but no stated lead.
+- **Events have a nature or type, and it is known in advance.** His example:
+  *"this monster is going to be fire-based, so maybe you should save your ice
+  stuff for it."*
+- **Imbuing is therefore a counter-pick decision under a deadline**, played
+  against a **known event type** with a hand you have been accruing. **This is
+  what makes the telegraph informational rather than a mere countdown**, and it
+  gives the card system a **second, distinct job** — the one named directly
+  above.
+
+**Flagged for whoever specs it, not decided here:** this creates a
+**hold-versus-spend tension on the hand** — saving an ice card for a fire event
+means not spending it on the lane now. The capture calls this a close cousin of
+the **still-open hand-size / freeze-slot thinking**; **that thinking is not
+recorded anywhere in this map or these issues**, so it is noted as external
+context rather than cross-referenced.
+
+### ❌ Cut later the same session — rare units at forward structures
+
+**A rejection, carried forward as one per the append-only rule, with his hedge
+preserved.** In his words:
+
+> *"kill the ability for ad hoc rare units to be spawned at the structures for
+> now."*
+
+**The reason is his own, from earlier the same session:** a structure that summons
+special units is one you are **forced** to save, so garrisoning stops being a real
+choice and becomes a **tax** — the exact problem the **telegraphed-event system
+was built to remove**. See the defence-bonus section below for the full statement
+of the problem, which is **kept, not deleted**, because it is the reason for this
+cut and it returns the moment anything unique is re-attached to a structure.
+
+**Consequence — the forced-tax recursion is resolved by removal.** The structure
+is **concedable again**: losing it costs **map control**, not a unique power
+source.
+
+**⚠ The *"for now"* is his and must be preserved.** This is a **shelving with a
+stated reason, not a permanent no** — the same standing as banking (09), and it
+must not harden into a flat rejection in a later rebuild.
+
+**⚠ It also reopens a question this dump had partly filled.** Rare units were the
+candidate answer to **how forward creep spawning functions**; with them cut,
+**that question is open again**. Forward creep spawning itself is **still not
+dead** — the answer to *how* is what went away.
+
+### 🔧 Developed, but not finished
+
+#### Rare units as the forward structure's other job — ⚠ DEVELOPED, then CUT later the same session
+
+**Kept in full per the append-only rule. See "❌ Cut later the same session — rare
+units at forward structures" above for the rejection and its reason; do not build
+on this.**
+
+- **Ordinary minions probably do start at the base:** *"I think maybe the minions
+  do start at the bottom."*
+- **The forward structure spawns the RARE ones instead** — possibly *"one or so,
+  or one a lane, one a game, or something like that"*: a **scarce, powerful unit
+  rather than a stream**.
+- **Named candidate roles for that unit:** something that can have an **aura**, or
+  **assist you in casting spells.**
+- He frames this as *"another utilization for the forward structure."*
+
+**All of it is his, all of it hedged, and none of it was a chosen mechanism** even
+before it was cut. Note it does not by itself conflict with forward creep
+*spawning* being alive — rare units and the forward-spawn variant are different
+objects, and he did not reconcile them. **The "ordinary minions probably start at
+the base" line is not part of the cut** — what was cut is rare-unit summoning at
+the structure, not where ordinary minions come from.
+
+#### ⚠ The defence bonus, and the forced-tax problem returning through a different door
+
+**He leans yes on a bonus for successfully defending.** The reason is the rare
+units above: **lose the forward structure and you lose the ability to summon
+them**, so saving them should perhaps pay.
+
+**Then he identified the flaw himself, unprompted:**
+
+> *"If you can summon a special unit from it, then you kind of don't really get an
+> option of saving it or not. You're kind of forced to, otherwise you lose
+> power."*
+
+**This is the forced-tax problem coming back through a different door, and it must
+be recorded as live rather than smoothed over.** The **2026-08-09 telegraphed
+event system exists specifically to stop garrison defence from being a forced
+tax** — symmetric scheduled notice was what turned defending into a planned
+choice rather than a reaction to opponent whim. **Attaching rare-unit summoning to
+the structure re-creates the compulsion by another route**: the structure becomes
+too valuable to ever let go, so the choice stops being a choice again. The
+telegraph fixes *who picks the timing*; it does not fix *whether you can afford to
+decline*.
+
+**His conclusion at the time:**
+
+> *"I'm not sure if that's a decision that gets kept, how to reconcile that power
+> elsewhere."*
+
+**Unresolved and load-bearing at the point he said it.**
+
+> **✅ Resolved later the same session — by removal, and it is his removal.** He
+> **cut rare-unit summoning at structures** *"for now"* (see the cut below).
+> **That dissolves the recursion rather than balancing it:** with no unique power
+> source attached to the structure, **losing it costs map control and nothing
+> else**, so the structure is **concedable again** and defending it is a choice
+> rather than a tax. **The problem above is not deleted** — it is the reason for
+> the cut, and it returns the moment anything unique is re-attached to a
+> structure. **What he did not restate:** whether he still wants a **defence
+> bonus** now that its stated rationale (saving the rare units) is gone.
+> **Unstated, not withdrawn.**
+
+#### ⚠ An unfinished thought about card-combination complexity
+
+**Recorded incomplete because his sentence trailed off:**
+
+> *"I think having the card system plus everything else and then having to manage
+> combinations to increase map power and then also having to manage combinations
+> for forward structure power, I feel like..."*
+
+The concern reads as **stacking two separate combination-management burdens** on
+the player — one for lane/map effects, one for forward-structure power — but
+**the conclusion was never stated.** **Do not infer which way he was going.** It
+is filed here as an unfinished thought, not as a concern he raised and settled,
+and not as a cut.
+
+This sits next to the 2026-08-09 watch-item that the **card-based prep /
+customisation portion adds its own balance surface**; the two are related but they
+are not the same statement, and neither is decided.
+
+**⚠ What the later question-7 answer does to this, stated precisely.** It confirms
+the **two burdens are genuinely two distinct card uses** — lane-state cards and
+structure-imbue cards — and the **imbue loop gives the second one a concrete
+shape** (a one-minute counter-pick against a known event type). **That makes the
+concern more legible; it does not answer it.** He never finished the sentence, and
+**recording the answer to question 7 as if it also settled question 6 would be
+inventing his conclusion.** Still unfinished.
+
+#### Not a hard gate, probably — but there must be a resolution line
+
+> *"I don't think it's a hard gate. Maybe it is, I don't know."*
+
+**The lean is against a hard gate, and it is a lean, not a decision.**
+
+**The firm requirement underneath it is stated plainly and is the durable part:
+there must be a resolution line, because if both sides can defend, it cannot be
+a stalemate.** His concept for that line is an **"exodia moment"**:
+
+> *"if the hero reaches some sort of exodia moment, then they just win"*
+
+— **an accumulation that becomes unanswerable once complete.** **What it looks
+like concretely is not known**, and he said so.
+
+### ❓ Explicitly unknown — in his own words
+
+> *"I don't know how it tunes yet. And I don't know how hero power will convert
+> to a win yet. I don't know anything about the power thresholds just yet."*
+
+- **How the threshold tunes** — unknown.
+- **How hero power converts into a win** — unknown. This is the same gap the
+  exhaustion answer above leaves behind: if you can lose all your creeps and still
+  win on hero power, the conversion is exactly the missing piece.
+
+**Both are parked by his own scope instruction**, not merely unanswered. Do not
+close them here.
+
+### 📤 Delegated — commissioned, not open to this ticket
+
+**The concrete list of lane event types** is being brainstormed as **separate
+work**, at his explicit request: existing games plus novel ideas, brought back to
+him. **Recorded as commissioned. No event types are proposed here.**
+
+### Reach outside this ticket — recorded, not acted on
+
+- **[12](12-jungle-role.md) — the jungle.** It is now **explicitly one arm of the
+  central strategic choice**, not merely a playable space. 12 is **not rebuilt.**
+- **[17](17-gold-and-items.md) — gold and items.** Jungle farming is named as
+  **gold-and-items accumulation feeding hero power**, and **gold buys power-ups at
+  the main base**. That is where hero power is bought. 17 is **not rebuilt.**
+- **[10](10-information-visibility.md) — information.** **Map control's value is
+  framed as denying the opponent information**, which gives 10's board-open /
+  hand-hidden split a **strategic** consequence it did not have. 10 is **not
+  rebuilt.**
+
+### Relationship to prior recorded material
+
+- **Consistent with the 2026-08-09 power-threshold direction.** This dump supplies
+  the **opposing cost** that makes the power race a real choice rather than a pure
+  farming exercise.
+- **Consistent with** *"losing a structure costs map control, not a direct
+  penalty"* (2026-08-09) — it develops what that map control is **worth**.
+- **The reinforcement pool, its three levers, and the 2026-07-29 material are
+  untouched** by this dump, except that exhaustion's standing as a loss trigger is
+  now answered (it is not one).
+- **Every prior rejection on this ticket stands unchanged:** the tower-chain win
+  path, guards at the forward position, vicinity buffs, and the `[committed]` test
+  that a forward structure must **change how units interact with the game, not
+  simply make them take longer to arrive.** **He did not restate that test against
+  the axis or imbue material** — recorded as **unstated**, not as passed.
+- **One rejection is added by this dump:** **rare-unit summoning at forward
+  structures, cut *"for now"*** with the forced-tax reason attached. Carried
+  forward as a rejection with its hedge intact.
+
+### Open questions after the 2026-08-11 dump
+
+Everything from the 2026-08-09 list that is not marked answered or delegated
+above is still live. New and revised:
+
+- **⚠ How forward creep spawning actually functions** — alive, mechanism
+  unspecified (*"Just need to figure out how that functions."*), and what that
+  leaves the main base doing. **Reopened later the same session:** rare units were
+  the candidate answer, and they are **cut**, so this is back to having no
+  candidate.
+- **How the structure count — one versus several — affects the push-or-farm
+  choice**, positively or negatively. He asked it and did not answer it.
+- **What the real benefit of taking or losing a forward structure is**, stated
+  concretely enough to make lane pushing genuinely compete with jungle farming.
+  The currencies are now named; the **structure's** concrete stake is **narrower
+  after the cut** — map control, plus whatever the imbue loop is worth — and still
+  not stated concretely.
+- ~~**How to reconcile the rare-unit power elsewhere**, so the defence bonus does
+  not re-create the forced tax.~~ **RESOLVED BY REMOVAL later the same session** —
+  the rare units are cut, so there is no unique power to reconcile. **The problem
+  statement is kept** as the reason for the cut; it returns if anything unique is
+  re-attached to a structure. **What is left open in its place:** whether a
+  **defence bonus** is still wanted at all now that its stated rationale is gone.
+  **Unstated, not withdrawn.**
+- **Whether managing card combinations for both map power and forward-structure
+  power is too much** — **an unfinished sentence, not a position.** Needs
+  restating to him, not resolving. **Question 7's answer confirms the two uses are
+  distinct; it does not finish this sentence.**
+- **What the "exodia moment" concretely is** — the resolution line is required;
+  its shape is undefined. **Parked with the threshold work.**
+- **How the threshold tunes, and how hero power converts into a win** with no
+  creeps left. **Explicitly unknown; parked.**
+- ~~**Question 7 of the list put to him was not understood and is
+  unanswered.**~~ — **ANSWERED later the same session:** lane-state cards and
+  structure-imbue cards are **two distinct uses**. See the settled section above.
+- **The imbue loop's own unspecified parts** — the ~1-minute lead and known event
+  type are stated; **what imbuing concretely does to a structure**, and how the
+  **hold-versus-spend tension on the hand** is meant to resolve, are not.
+- **The concrete list of lane event types** — **delegated to separate brainstorm
+  work**, not open here. Note the imbue loop raises the price of that list: event
+  types now need a **stated nature to counter-prep against**, not just a name.
