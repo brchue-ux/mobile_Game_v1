@@ -246,6 +246,19 @@ silently re-adopted.
   barracks or something for powered up minions and then destroy more towers to
   reach a core... that's how everyone's always done it."* This is the **third**
   time the match's ending has moved. Scope: the win *path*, not pseudo-towers.
+- **Hero-only-after-exhaustion** (filed 2026-07-29 as an open question,
+  **disowned 2026-08-07**). Was: *"once you run out of reinforcements, then your
+  base doesn't spawn anymore minions or something, and then all you have is your
+  hero. I don't know"* — held open as "is that a loss, or an endgame state?"
+  Now: the user **no longer recalls or endorses that framing**, and the loss
+  condition is **the enemy hero reaching their goal** — sketched 2026-08-09 as a
+  **Warcraft 3-style power threshold**. **⚠ No verbatim quote survives from the
+  2026-08-07 session**: it was recorded as a decision note, and the phrasing
+  above is the note's, not his. Flagged that way rather than dressed up as a
+  quote. **Scope:** this disowns the *framing*, not the reinforcement pool and
+  not the three levers; whether exhaustion still ends a match is **unstated and
+  open**. The fourth time the match's ending has moved. See
+  [05](issues/05-match-shape-win-condition.md).
 - **Three win conditions → one win condition with three levers** (2026-07-29).
   Was, in this map's reading: *terrain manipulation, hero power and
   reinforcements are three separate candidate win conditions.* Now: **one
@@ -331,6 +344,52 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
+- **The loss condition is the enemy hero reaching a power threshold**
+  `[provisional]` (2026-08-09) — **the ending has now moved a fourth time.** You
+  lose when the **enemy hero reaches their goal**, and the goal is a **Warcraft
+  3-style hero power threshold**: units and structures matter, but nothing
+  compares to the hero once it is strong enough, and past the threshold it no
+  longer needs to farm and can go win outright. Power accrues through mechanics
+  already in the design — **defending forward-structure events**, **killing lane
+  creeps** when the hero is sent to a lane, and **jungle creeps/items**. His
+  framing, **verbatim and load-bearing**: *"the whole game is preventing your
+  opponent from maximizing that power journey while maximizing your own."*
+  **The user flagged the specifics himself as still wishy-washy** — whether the
+  threshold is a **hard gate** or a **continuous curve**, and how it is tuned
+  against the assumed 15-minute match, are **open**. **This reframes
+  [12](issues/12-jungle-role.md) and the forward-structure economy as the levers
+  of that race** rather than as separate systems; 12 is not rebuilt here.
+  **Relationship to reinforcement exhaustion, stated precisely because a cold
+  read will get it wrong:** what was disowned is the *hero-only-after-exhaustion
+  framing* (see the reversal log), **not** the pool or its three levers, and the
+  user **did not say** whether running out of reinforcements still ends a match.
+  That is **open**, not answered either way. See
+  [05](issues/05-match-shape-win-condition.md).
+- **Match length is assumed ~15 minutes, with a lane event roughly every 5
+  minutes** `[provisional]` (2026-08-09) — each event bounded to something quick
+  to resolve. The first answer 05's "match length" question has had.
+- **What the forward structure does — answered by the user's own candidate**
+  `[provisional]` (2026-08-07, extended 2026-08-09). Forward structures sit
+  **dormant** and **activate** on an interval (time, or reinforcement-pool), with
+  either a pre-set ability or a TFT-augment-style pick-1-of-N. The hero may
+  **enter one and garrison it**, at which point it stops acting as a normal hero
+  and operates a **different ability set**, contextual on lane, match time, and
+  **which cards were spent beforehand to prep the structure** — the user leaned
+  toward this bolstering the **structure**, not the hero. **The cost is that it
+  pulls the hero off the map.** His own flagged risk — that garrisoning becomes a
+  **forced tax** if the opponent picks the timing — is addressed on 2026-08-09 by
+  a **telegraphed event system**: both players get **simultaneous notice** of an
+  event in a specific lane and each **independently** chooses whether to defend,
+  because the trigger is a **shared schedule**, not opponent whim. **Losing a
+  structure costs map control, not a direct penalty** — enemy creeps push closer
+  to your base, cramping how far your hero can safely roam your own jungle.
+  **One structure per lane for now**; multi-structure **step-down defence lines
+  are deferred to playtesting, not rejected.** **Garrison abilities must stay
+  card-selected, never direct hero piloting** — that is the `[committed]`
+  commander framing. **The two rejected candidates (guards, vicinity buffs) and
+  the user's test stand untouched**; see "Not yet specified" below for what is
+  still open, including a **live cut candidate**. See
+  [05](issues/05-match-shape-win-condition.md).
 - **The win condition is reinforcement exhaustion** `[provisional]` (2026-07-29)
   — *"you have reinforcements and so like you only live as long as you have
   reinforcements. And maybe it can be something like once you run out of
@@ -342,6 +401,11 @@ rather than performing certainty. Ticket 08 promotes or revises.
   survives — it is where creeps come from, and it may still be the thing that
   dies. What died is the tower-chain route. See
   [05](issues/05-match-shape-win-condition.md).
+  - **⚠ Updated 2026-08-07/09, kept above rather than rewritten.** The
+    **hero-only-after-exhaustion framing is disowned** (reversal log above), and
+    the **loss trigger is now the enemy hero's power threshold** — see the entry
+    above this one. The **pool and its three levers are not deleted**; what the
+    user did **not** say is whether exhaustion still ends a match. Open.
 - **One win condition, three levers on it** `[provisional]` (2026-07-29) — *"I'm
   OK currently with having those 3 levers on the one win condition."* The levers:
   **(1)** baseline drain as your own creeps die; **(2)** **terrain manipulation**
@@ -452,14 +516,14 @@ method; treat them as "this informs that," not as a build order.
 | 02 | What "combining cards" actually means | resolved + amended |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
-| 05 | Match shape & win condition | open, **substantially answered**; **protest lifted and narrowed 2026-07-29** — win condition is reinforcement exhaustion with three levers; the forward structure is what's open |
+| 05 | Match shape & win condition | open, **substantially answered**; **the ending moved a fourth time 2026-08-09** — loss is the **enemy hero reaching a WC3-style power threshold**, specifics wishy-washy by his own account; **the forward structure's job is answered 2026-08-07/09** (dormant structures, telegraphed lane events, hero garrison) with its specifics open; reinforcement exhaustion and its three levers are **not deleted** but exhaustion's standing as a loss trigger is unstated; ~15-min match, ~5-min event cadence |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
 | 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
-| 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open |
+| 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open; **new 2026-08-07 (from 05): the command bar should centre on the enemy hero's status** — recorded, not rebuilt |
 | 11 | Card accrual economy | open |
-| 12 | The jungle — role and autonomy | open, updated — playable space, not a wall, aggro leash |
+| 12 | The jungle — role and autonomy | open, updated — playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new** |
 | 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26 |
@@ -519,25 +583,71 @@ method; treat them as "this informs that," not as a build order.
   flow through the lane."* **If they spawn forward, the main base has no stated
   job left.** Recorded as an open question, not a defect — the forward-spawn
   version is not chosen. 05.
-- **What the forward structure DOES.** `[open]` 2026-07-29, and this is now the
-  live question in 05. Both of the user's own candidates were **rejected by him
-  on the same grounds**: guards *"just makes it a tower"*, and vicinity buffs are
-  *"just a defensive tower structure, just a different kind. It just delays your
-  opponent from getting in the lane."* **The test that came out of it, and it
-  governs every future candidate** `[committed]`: *"I want to change how it makes
-  your units interact with the game, not simply just make it take your units
-  longer to get to the core."* Delay is not a mechanic; interaction change is.
-  Four firstmate-proposed candidates are recorded in 05 as **proposals awaiting
-  the user's reaction** — not his, not accepted, none of them live.
+  - **Partly answered 2026-08-09.** The forward structure turned out to be an
+    **event/garrison structure**, and nothing in either August dump has creeps
+    spawning from it — losing one lets **enemy creeps push closer to your base**,
+    which describes a lane they travel, not a spawn point that replaced the base.
+    **Whether the forward-spawn variant is dead or merely unmentioned is not
+    stated**, and is not inferred here. Separately, in-progress work outside this
+    map gives the base a **candidate second job — a global upgrade tech-tree**
+    (funding possibly a TFT-augment-style pick-1-of-N at fixed checkpoints, still
+    open; one sub-question settled: *"units"* there means **creeps only, hero
+    excluded**). That is its own subject, noted here only because it bears on the
+    base's job.
+- ~~**What the forward structure DOES.**~~ **Substantially answered 2026-08-07 /
+  2026-08-09** by the user's own candidate — dormant structures activated by a
+  telegraphed, symmetric, scheduled lane event, garrisonable by the hero with a
+  card-prepped ability set. See the decision entry above and
+  [05](issues/05-match-shape-win-condition.md). **The rejections and the test are
+  carried forward unchanged and still govern:** both of the user's own earlier
+  candidates were **rejected by him on the same grounds** — guards *"just makes
+  it a tower"*, and vicinity buffs are *"just a defensive tower structure, just a
+  different kind. It just delays your opponent from getting in the lane."* **The
+  test that came out of it** `[committed]`: *"I want to change how it makes your
+  units interact with the game, not simply just make it take your units longer to
+  get to the core."* Delay is not a mechanic; interaction change is. **He did not
+  restate that test against the new candidate** — recorded in 05 as unstated, not
+  as passed. The four firstmate-proposed candidates remain in 05 as **proposals
+  he never reacted to** — not his, not accepted, none of them live; a later
+  research report added eight more and likewise chose none.
+- **What is still open inside the forward structure.** `[open]` 2026-08-09 —
+  the **concrete list of event types** beyond his two named examples (killing a
+  large unique minion; a structure-ability defence), the **exact event timing
+  offsets** within the assumed 15 minutes, and the **defend-bonus design** (a
+  bonus for defending successfully, versus merely avoiding the loss — floated,
+  undecided). **Deferred, not rejected:** multi-structure **step-down defence
+  lines**, held until playtesting shows real match length and map size. 05.
+- **⚠ Live cut candidate — hero strength affecting structure power.** `[open]`
+  2026-08-09. It is **in tension** with **card-selected-only garrison
+  abilities**, and the user **agreed the concern is real** rather than dismissing
+  it. **Neither side is chosen; do not resolve this by picking one.** A second,
+  independent watch-item from the same session: the **card-based prep/customisation
+  portion adds its own balance surface** to design and test. 05.
+- **What crossing the hero power threshold concretely means.** `[open]`
+  2026-08-09 — a **hard gate** that flips the hero into a win-capable state, or a
+  **continuous power curve** with no sharp line; and **how it is tuned** against
+  the assumed 15-minute match and ~5-minute event cadence, so games neither end
+  in an early blowout nor drag on past the threshold with no resolution. **The
+  user called the specifics wishy-washy himself.** Also open: **what becomes of
+  reinforcement exhaustion as a loss trigger** now that the threshold is the loss
+  condition — unstated. 05.
 - **Towers/structures.** Appeared for the first time on 2026-07-26 — the hero
   *"may defend towers."* Nothing else about them exists: whether they shoot,
   whether they gate lane progress, whether they are the thing that gets destroyed
   instead of a base. **Narrowed 2026-07-29:** the tower *chain* as a win path is
   rejected, and the forward-structure question above is the live form of this.
-  Pseudo-towers as a pacing gate are untouched by that rejection.
-- **Whether the reinforcement pool refills, decays, or only drains** — not
-  raised. And **what a reinforcement count looks like on a phone**, which
-  competes for the same bottom 25% as everything else. 05, touches 01.
+  Pseudo-towers as a pacing gate are untouched by that rejection. **Updated
+  2026-08-09:** the forward structure now has a job (see the decision entry
+  above) — dormant, event-activated, garrisonable, one per lane for now. That
+  answers what a *forward structure* is, and says nothing about whether a
+  separate in-lane pacing gate exists; the two are still distinct objects.
+- **Whether the reinforcement pool refills, decays, or only drains** — ~~not
+  raised~~ **deliberately undecided as of 2026-08-09**: the user wants to *feel*
+  trickle-refill versus no-refill in a working prototype before deciding. That
+  prototype exists but its pull request is open and unmerged, so he has not
+  reacted to it. A **deferral to evidence, not a gap.** And **what a
+  reinforcement count looks like on a phone**, which competes for the same bottom
+  25% as everything else — still unraised. 05, touches 01.
 - **⚠ Whether the accrual gate and banking are one system or two.** *"I did mean
   accrue"* — confirmed 2026-07-26. But its stated job is **gating the cost of
   powerful effects** (*"that shouldn't just be one card"*), whereas
@@ -566,6 +676,15 @@ method; treat them as "this informs that," not as a build order.
   a **newer statement than the napkin sketch**, which put Hero Cams in two
   corners and cards as a semi-transparent overlay; the two are unreconciled and
   the sketch is not retired.
+  - **New constraint from 05's 2026-08-07 dump, recorded not rebuilt.** Reacting
+    to the vision sketch, the user wants the **command bar centred on a display
+    of the enemy hero's status** — *the thing you watch to make gameplay
+    choices* — rather than a paired readout beside your own, and likely the same
+    UI that would track progress toward the hero power threshold. **This tightens
+    the bottom-25% competition and touches
+    [01](issues/01-battlefield-geometry.md) and
+    [10](issues/10-information-visibility.md)**, neither of which is rebuilt in
+    this pass.
 - **Whether any gesture survives.** The "never drawn symbols" rejection still
   binds, but with casting reduced to selection it is unclear whether flicks and
   drags remain anywhere — combining cards together, steering the hero (15 asks
