@@ -20,6 +20,21 @@ structures is cut *"for now"*** — a rejection with his hedge preserved — whi
 **reopens how forward creep spawning works**, though **forward creep spawning
 itself is not dead.** The **power threshold and its tuning are explicitly parked**
 at the user's instruction.
+**⚠ Updated again by the backlog-answers dump (2026-08-11, after the leash
+decision).** **The shrinking home field is LOCKED IN** as the early-rush brake —
+*"let's lock that concept in"* — so the requirement below is **met at concept
+level** and the field is **no longer a floated candidate**. **Map control's worth
+is answered and reasoned:** he **rejected the peace-of-mind answer himself**
+(a minimap shows both heroes at all times), and landed on **economic denial** —
+pushing past their front line makes their farming dangerous, so **they earn less
+gold**. **Event lane placement is answered in principle** — *"some sort of
+combination of both"*, **influence without outright selection**; the mechanism is
+**commissioned and unchosen**. **The card system is reset** — hand size, freeze
+slot and deck size set aside in favour of a restated goal. **New and open:** how
+a **pushed-back player pushes the line back**, and **something that pushes the
+game toward an ending**. **The imbue has two live threads and neither is
+resolved.** **A hold-position order is neither ruled in nor out**, but is
+**constrained** if it exists.
 **⚠ Superseded in large part later the same day — read the leash decision
 first.** **The forward structure is CUT** and the hero's legal roam in a lane is
 now **bounded by that lane's front line** (*"i like your replacement, lets go
@@ -1142,6 +1157,14 @@ rather than on a separate one. This develops 2026-08-09's *"losing a structure
 costs map control, not a direct penalty"* by saying what that control is actually
 worth.
 
+> **⚠ REVERSED in the backlog-answers dump, text above kept as written.** **He
+> rejected the information-denial answer himself**, on the grounds that **a
+> minimap shows both heroes at all times** — so nobody is ever pushing blind, and
+> there is **no fog to fear.** **Map control's worth is ECONOMIC denial:**
+> pushing past their front line makes their farming dangerous, so **they earn less
+> gold.** **The effect on the opponent's scaling rate is unchanged** — what
+> changed is **why**. See the backlog-answers dump below.
+
 #### The axis itself, as he framed it
 
 > *How could choosing to put your hero in the lanes to push them to gain map
@@ -1806,6 +1829,14 @@ and **whether the opponent can see your choice before committing** — not
 addressed, and a natural companion question given he has already said **an imbue
 is visible.**
 
+> **✅ The first half is ANSWERED in the backlog-answers dump; the second is
+> still open.** *"some sort of combination of both"* — **the player influences
+> where it goes without outright selecting the lane.** **The mechanism is
+> commissioned and unchosen.** **His stated intent above is unchanged**, and the
+> commissioned report's central finding — that **the variable which must not be
+> fully controlled is the collision, not the lane** — is recorded there **as a
+> finding, not a decision.**
+
 ### ⚠ NEW REQUIREMENT — something must stop an early lane collapse
 
 **His words:**
@@ -1831,6 +1862,13 @@ change how it makes your units interact with the game, not simply just make it
 take your units longer to get to the core"* — so **a brake that merely adds delay
 is already rejected.**
 
+> **✅ ANSWERED in the backlog-answers dump — the requirement is met at concept
+> level.** **The shrinking home field is LOCKED IN** as the brake: *"let's lock
+> that concept in."* **The requirement text above is unchanged and still governs
+> any future proposal**, including the `[committed]` test that a brake which
+> merely adds delay is already rejected. **What is no longer true is the "unmet"
+> status.**
+
 **Worth checking rather than assuming:** the leash **may already supply part of
 this**. An early rush extends the attacker's legal roam into the defender's half,
 but the defender's own hero is bounded near its base — **exactly where the
@@ -1844,6 +1882,13 @@ analysed, and must not be assumed.**
 > This is a **candidate for the early-rush brake, awaiting his decision.** His own
 > framing: *"it's an interesting concept."* **It is not adopted, and the
 > requirement above stays unmet until he says otherwise.**
+>
+> **✅ SUPERSEDED by his decision in the backlog-answers dump — it is now
+> ADOPTED.** *"I think we are going to go with the force field, so let's lock that
+> concept in."* **The heading and the status note above are kept as written**, per
+> the append-only rule, so the float-then-lock sequence stays diffable. **Read the
+> shape below as live design, not as a candidate.** The **secondary questions at
+> the end of this section remain open and none of them has been put to him.**
 
 ### The concept, in his words
 
@@ -1936,6 +1981,217 @@ novel**, which is a strength given the `[committed]` accessibility-beats-novelty
 constraint. No survey was done; if the concept advances, a short one would
 sharpen it.
 
+## Dump — 2026-08-11 (backlog answers): the home field is locked in, and map control is economic
+
+> **⚠ Source note.** Answers given to an outstanding decision list covering this
+> ticket and others. **Quoted passages are his own wording as captured**;
+> unquoted material is record-paraphrase of that capture.
+
+### ✅ DECISION — the shrinking home field is LOCKED IN `[provisional]`
+
+**His words:**
+
+> *"I think we are going to go with the force field, so let's lock that concept
+> in."*
+
+**Adopted.** **It is the answer to the early-rush requirement** — something must
+stop a player blowing down a lane at minute one, **without being a tower.** **It
+is no longer a floated candidate**, and the requirement it answers is **no longer
+unmet at concept level.**
+
+**Its shape is already written in this file and is unchanged by the lock** — see
+"[Dump — 2026-08-11 (fourth of the day)](#dump--2026-08-11-fourth-of-the-day-the-shrinking-home-field--floated-not-adopted)":
+the base emits a field, **minions inside it are empowered**, and **the field
+retracts over the match**; it is a **hard defensive floor** that holds regardless
+of how badly a lane is going, and **the retraction is a schedule of legitimacy**
+that defines the game's phases.
+
+**⚠ What the lock does NOT do.** It does not answer the three secondary
+questions recorded under that section — **readability** of an indirect cause, the
+**interaction with the gold rule** (empowered home creeps kill without the hero,
+which may cut the defender's own income), and **whether it stacks with the leash
+or replaces part of it.** **None of them has been put to him.** It also does not
+retire the **firstmate objection he rejected**, which stays recorded as history.
+
+### ⚠ Map control's worth — ANSWERED and reasoned, and it REVERSES the recorded worth
+
+**This changes a recorded decision and is flagged as a reversal, in his own
+reasoning.** The 2026-08-11 record said map control's **stated worth is
+information denial**. **He reasoned it through and rejected that answer
+himself.**
+
+**Why he rejected it:** he had earlier specified a **minimap showing where both
+heroes are at all times**, so **an opponent is never pushing blind**, and there
+is **no fog to fear.** The peace-of-mind / scared-opponent framing has no
+substrate here.
+
+**Where he landed** `[provisional]` — map control limits the opponent's ability
+to **farm creeps and farm the jungle**:
+
+> *"Eventually you could potentially push beyond the frontline of their first
+> creeps and that makes them more dangerous for them to farm it, so they're going
+> to be earning less gold."*
+
+**So map control is ECONOMIC denial, not informational denial** — which is the
+right answer for a game with **no fog** and **full hero visibility**. It is
+consistent with the leash: **pushing shrinks their reachable ground, which
+shrinks their income.**
+
+**The earlier information-denial text is kept where it was written**, with an
+in-place marker; **it is superseded, not deleted.**
+
+#### 🆕 Open — how does a pushed-back player push the line back?
+
+**His words:**
+
+> *"I'm not really sure of what the mechanism is to help them push the line back
+> to be able to even the odds."*
+
+**An open structural question and a real one:** under the leash, being pushed
+back **shrinks your farm**, which **weakens you**, which **makes pushing back
+harder.** **He did not state it as a snowball concern**, but it is **the same
+shape as the leash's known snowball risk**, and **the `[committed]`
+deliberate-losing rail constrains any answer** — a device that pays out in
+proportion to how badly you are doing is what a thrower farms. **Recorded open;
+no candidate is proposed here.**
+
+#### 🆕 Open — something must push the game toward an ending
+
+**His words:**
+
+> *"The game also needs to end sometimes and it will end before the timer forces
+> it to end if there is like a sort of like a berserk timer, something like that.
+> Not literally a berserk timer, just some mechanism that pushes the game towards
+> an ending."*
+
+**Recorded as a requirement he stated, with no mechanism attached.** It sits
+alongside the existing **anti-stalemate requirement** — *there must be a
+resolution line, because if both sides can defend it cannot be a stalemate.*
+
+**⚠ Flagged, not assumed:** **the retracting home field may already be this**,
+since its retraction makes deep pushes **progressively legitimate**. **Whether
+that is sufficient on its own, or whether a separate end-forcing device is
+wanted, has not been asked.**
+
+### ✅ Event lane placement — ANSWERED in principle, mechanism commissioned `[provisional]`
+
+**His words:**
+
+> *"I think it should be some sort of combination of both. I think that the
+> player should be able to perhaps influence where it goes without being able to
+> just 100% outright select the lane."*
+
+**So: influence, not selection.** This answers the *player-chooses versus
+mechanism-determines* fork he had left with **both live and neither chosen** —
+**by taking a combination of the two.** **The mechanism itself is undecided**, and
+he asked for recommendations to be brainstormed.
+
+**📤 Commissioned work, cited not imported:**
+`firstmate/data/mg-event-placement-brainstorm/report.md`. **Nothing in it is
+chosen.**
+
+**One finding from that report is recorded here as a finding, not a decision,
+because it reframes the question:**
+
+> **The variable that must not be fully controlled is the collision, not the
+> lane.** **Determination** (how much of *my* event's lane I decide) and
+> **disclosure** (whether I can see *your* placement before mine is locked) are
+> **two separate dials.** A mechanism can give a player near-total control of
+> their own lane and **still** deliver emergent collision, provided neither side
+> sees the other's placement in time to guarantee or dodge a meeting — and a
+> mechanism can randomise the lane heavily and still produce **engineered**
+> collisions if it resolves early enough to chase.
+
+**Why that is worth recording:** his **words** are a determination statement
+(*"100% outright select"*) while his **stated reason** — *"so it's not always you
+will be forced to meet the other player in lane"* — is a **disclosure** problem.
+**They are not the same requirement, and which one he wants has not been put to
+him.**
+
+### 🔧 Where the imbue lives — two live threads, neither resolved
+
+**Both are recorded; neither is decided here.**
+
+**Thread 1 — a merge proposal, his.** **He read *"imbue"* as the buff the forward
+structure gave nearby creeps**, and proposed:
+
+> *"that could now be the fading force field type thing that's buffing the
+> minions."*
+
+**Recorded as a live merge proposal:** the **retracting home field absorbs what
+the structure did for nearby creeps.** **⚠ The trade is worth stating because the
+two are not identical in origin:** the structure's version was **player-prepared
+per event, with cards**; the field's is **automatic and positional.** **The merge
+would trade a decision for a constant.** **Not resolved.**
+
+**Thread 2 — he did not recognise his own talent-tree idea.** The reference was
+**his**, from earlier the same day: *"the way that your imbue is selected is by
+either hero choice or maybe like a variable you choose prior to starting the
+game. Like how in World of Warcraft you have a talent tree. So maybe like each
+hero has like two or three ways that they can affect it based on the type of hero
+that they are."* **He now asks whether it meant a hero aura buffing surrounding
+minions — it did not.** **It concerned where the *options* for an imbue come
+from**, not an aura.
+
+**Recorded as needing a plain restatement back to him, not a decision.** Also
+recorded, because it is the part most easily lost: **the underlying imbue loop
+was card-prep against a telegraphed, typed event** — hold ice for a fire monster
+— **and that is the thing that gave the telegraph its decision.**
+
+### 🔧 A hold-position order — conditional, and constrained
+
+> *"That's all going to depend on the type of control mechanism that we're giving
+> the player."*
+
+With a joystick he expects **typical MOBA behaviour** — a hero near an enemy
+would engage. **He raised a factual uncertainty about how MOBAs actually
+behave** — whether two heroes standing adjacent auto-attack, or whether an
+attack-move command is required — **and was unsure. Owed a plain answer.**
+
+**His conclusion, which is the recordable part:**
+
+> *"It's probably not difficult to just put one in somehow, but it needs to be,
+> if it is going in, be extremely easily accessible and cancellable."*
+
+**So: not ruled in or out, but constrained.** **If a hold order exists,
+accessibility and cancellability are requirements, not polish.**
+
+**Cross-reference, factual and not a resolution:** the control scheme has since
+been **decided as tapping the map** (see [12](12-jungle-role.md)), and the
+**move-versus-attack-move problem he named there is the same subject seen from
+the other side.** **Neither settles this question.**
+
+### 🔄 The card system — RESET, and commissioned
+
+> *"Yeah, I'm not really sure how to approach this one anymore."*
+
+**Hand size, the freeze slot and deck size are all set aside** in favour of
+restating the goal from scratch.
+
+**His stated goal, and it is the brief — quoted rather than summarised because
+the whole reset is this sentence:** a card or power-up or spell system that adds
+**flavour and customisation**, that feels like **one of only a few core parts of
+the game**, that is **simple enough to be easy to learn and fun**, but **complex
+enough to feel mentally rewarding and implementable at a high skill level, like
+real strategy.**
+
+**📤 Commissioned work, cited not imported:**
+`firstmate/data/mg-card-system-brainstorm/report.md`. **It puts five system
+shapes on the table and none is chosen. Do not adopt one.**
+
+**One finding from it is recorded here as a finding, not a decision:**
+
+> **Combining is currently unpriced.** [02](02-combining-mechanic.md) chose
+> payload + modifiers and deliberately left the cap, the reversibility and the
+> failure cases open; **nothing anywhere states what combining costs.** If adding
+> a modifier costs nothing but the modifier card, and cards arrive on a timer
+> regardless, **"combine everything you have, every time" is the dominant line**
+> — and **the mechanic 02 calls the keystone has no decision in it.**
+
+**Flagged as the report's read, not his.** It bears on
+[02](02-combining-mechanic.md), [11](11-accrual-economy.md) and
+[16](16-deckbuilding.md); **none is rebuilt here.**
+
 ## Reach outside this ticket — recorded after the leash decision, not acted on
 
 **None of these tickets is rebuilt in this pass.**
@@ -1992,8 +2248,13 @@ sharpen it.
 
 ## Open questions after the leash decision
 
-**This is the live list.** Everything from the earlier lists that is not marked
-answered, delegated or moot above is still live. New and revised:
+**Bookkeeping updated by the backlog-answers dump. Original text kept verbatim;
+status markers added in place, nothing deleted.** The live list is now
+"[Open questions after the backlog answers](#open-questions-after-the-backlog-answers)"
+at the end of this file.
+
+~~**This is the live list.**~~ Everything from the earlier lists that is not
+marked answered, delegated or moot above is still live. New and revised:
 
 - **⚠ THE UNMET REQUIREMENT — what stops an early lane collapse.** *"there needs
   to be some mechanism to prevent someone from just blowing down the mid lane or
@@ -2003,6 +2264,9 @@ answered, delegated or moot above is still live. New and revised:
   — and by the `[committed]` test, which **already rejects any brake that merely
   adds delay.** **One candidate exists and is unchosen: the shrinking home
   field.** **Whether the leash itself supplies part of the brake is unanalysed.**
+  - **✅ ANSWERED — the home field is locked in as the brake.** The requirement
+    and its constraints stand; only its **unmet** status changes. **Whether the
+    leash supplies part of it is still unanalysed.**
 - **⚠ The shrinking home field — floated, not adopted.** His concept, his
   framing: *"it's an interesting concept."* Shaped as a **hard defensive floor**
   with a **retraction schedule that defines the game's phases.** **Awaiting his
@@ -2010,16 +2274,33 @@ answered, delegated or moot above is still live. New and revised:
   **interaction with the gold rule** (empowered home creeps killing without the
   hero), and **whether it stacks with the leash or replaces part of it** — none of
   which has been put to him.
+  - **✅ ADOPTED — *"let's lock that concept in."*** **The three questions
+    beneath it are untouched and still open**, and **none has been put to him.**
 - **⚠ Where the imbue lives.** Homeless unless it moves onto the hero. The fork is
   his: hero talents **complement** the card-imbue loop, or **replace** it. **He
   did not say which.** Reaches 14 and 15.
+  - **🔧 DEVELOPED, not closed.** **A third thread is now on the table, his:**
+    the **retracting home field absorbing what the structure did for nearby
+    creeps** — which would **trade a per-event card decision for an automatic,
+    positional constant.** **And he did not recognise the talent-tree idea as his
+    own**, asking whether it meant a hero aura; **it did not — it was about where
+    the *options* for an imbue come from.** **Owed a plain restatement, not a
+    decision.**
 - **Whether telegraphed events are shared or mirrored** — one contested point, or
   two parallel ones. **Still the sharpest open question**, and now layered with
   **lane placement**.
 - **Whether the player chooses the event's lane, or a mechanism determines it.**
   **He offered both and picked neither.**
+  - **✅ ANSWERED in principle — *"some sort of combination of both"***: the
+    player **influences** placement **without outright selecting** the lane.
+    **The mechanism is commissioned and unchosen.**
 - **Whether the opponent can see your event lane choice before committing.** Not
   addressed; a natural companion to **the imbue being visible.**
+  - **STILL OPEN, and sharpened.** The commissioned report separates
+    **determination** from **disclosure** and finds that **the collision, not the
+    lane, is the variable that must not be fully controlled** — which makes this
+    the question his stated *reason* actually turns on. **A finding, not a
+    decision; and it has not been put to him.**
 - **⚠ The snowball risk of the leash.** Winning a lane compounds. **It passes the
   deliberate-losing rail** — a thrower gains nothing — **but it risks blowouts.**
   **An open risk, recorded, not solved.**
@@ -2043,3 +2324,42 @@ answered, delegated or moot above is still live. New and revised:
 - **The power threshold, its tuning, the "exodia moment", and how hero power
   converts into a win** — **explicitly unknown and parked by his own scope
   instruction.** Untouched by this decision.
+
+## Open questions after the backlog answers
+
+**This is the live list.** Everything from the earlier lists that is not marked
+answered, delegated or moot above is still live. New and revised:
+
+- **🆕 How a pushed-back player pushes the line back.** *"I'm not really sure of
+  what the mechanism is to help them push the line back to be able to even the
+  odds."* **No candidate.** Constrained by the `[committed]` deliberate-losing
+  rail, and it is **the same shape as the leash's known snowball risk** — though
+  **he did not frame it as one.**
+- **🆕 Something that pushes the game toward an ending** — *"Not literally a
+  berserk timer, just some mechanism that pushes the game towards an ending."*
+  **⚠ Flagged, not assumed: the retracting home field may already be this.**
+  **Whether it is sufficient alone, or whether a separate end-forcing device is
+  wanted, has not been asked.**
+- **⚠ Where the imbue lives — now three threads, none chosen.** (1) **hero
+  talents** complementing or replacing the card-imbue loop; (2) **the home field
+  absorbing the structure's creep buff**, which trades a **prepared per-event card
+  decision** for an **automatic positional constant**; (3) **staying in the
+  hand.** **He has chosen none, and he did not recognise thread (1) as his own** —
+  **owed a plain restatement.**
+- **The mechanism for event lane placement** — **influence, not selection**, is
+  settled; **how is commissioned and unchosen.** Its live sub-question is
+  **disclosure**: whether the opponent sees your placement before committing.
+- **Whether a hold-position order exists.** **Not ruled in or out.** **If it
+  does, easily accessible and cancellable are requirements.** Also **owed a plain
+  answer** on how MOBAs actually behave when two heroes stand adjacent.
+- **The card system, from the goal up.** Hand size, freeze slot and deck size are
+  **set aside**; the brief is his four-clause goal. **Five shapes are on the table
+  from commissioned work and none is chosen.** **The report's central finding —
+  combining is currently unpriced, so combine-everything dominates — is recorded
+  as a finding**, and bears on 02, 11 and 16.
+- **The home field's own open beneath-the-lock questions** — **readability** of
+  an indirect cause, the **interaction with the gold rule**, and **whether it
+  stacks with the leash or replaces part of it.** **None put to him.**
+- **Whether the leash itself supplies part of the early-rush brake** — still
+  **unanalysed**, and now a question about **overlap** rather than about
+  sufficiency, since the field is locked in.
