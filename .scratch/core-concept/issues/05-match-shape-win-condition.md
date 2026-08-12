@@ -20,7 +20,50 @@ structures is cut *"for now"*** — a rejection with his hedge preserved — whi
 **reopens how forward creep spawning works**, though **forward creep spawning
 itself is not dead.** The **power threshold and its tuning are explicitly parked**
 at the user's instruction.
+**⚠ Superseded in large part later the same day — read the leash decision
+first.** **The forward structure is CUT** and the hero's legal roam in a lane is
+now **bounded by that lane's front line** (*"i like your replacement, lets go
+with that (hero leash)"*). Everything above that depends on a **structure** —
+garrisoning, structure-imbue, defending a building, map control changing hands by
+taking one — is **retired or rehoused, and kept below as history with its
+reasons.** **Events survive the building**; **event lane placement becomes a
+variable**; and a **new unmet requirement** lands: something must stop an early
+lane collapse. See "🔴 DECISION — the front line is the leash" below.
 Blocked by: —
+
+## 🔴 The forward structure is cut, and the front line becomes the hero's leash — 2026-08-11
+
+**This is the largest structural change this ticket has taken, and it is a
+reversal of a recorded decision. It is flagged as one.** Full record in
+"[Decision — 2026-08-11: the front line is the leash](#-decision--2026-08-11-the-front-line-is-the-leash-and-the-forward-structure-is-cut)"
+below; this section exists so a cold read cannot build on the structure.
+
+**His words:**
+
+> *"i like your replacement, lets go with that (hero leash)."*
+
+- **Adopted** `[provisional]`: **the hero's legal roam in a lane extends as far
+  forward as that lane's front line.** Push the lane and your hero's world grows;
+  lose it and your world closes. **Not strict confinement, not free crossing.**
+- **Consequence, not a separate decision:** the candidate has **no object in the
+  lane at all**, so adopting it **cuts the forward structure.** Three sessions of
+  structure development (2026-08-07, 2026-08-09, and the first two dumps of
+  2026-08-11) are **retired by this.**
+- **Per the append-only rule, none of that material is deleted.** It is kept
+  where it was written, with **in-place markers** saying what each piece becomes:
+  **retired**, **rehoused**, or **still open**. See "[What the cut retires,
+  rehouses, or leaves open](#what-the-cut-retires-rehouses-or-leaves-open)".
+- **What survives the cut:** **events summoning large minions**, the **~5-minute
+  cadence**, and the **~1-minute telegraph**. *"Can still do events that summon
+  large minions that need to be dealt with."* **Only the defended building
+  died.**
+- **What is newly required and NOT solved:** *"there needs to be some mechanism
+  to prevent someone from just blowing down the mid lane or any lane at the
+  beginning of the game and having nothing to stop them."* **A constraint on all
+  future design, with no accepted answer.**
+- **Untouched by any of this:** the **loss condition** (the enemy hero reaching a
+  power threshold), **gold on hero minion kills**, the **jungle arm of the axis**,
+  and the **reinforcement pool and its three levers.**
 
 ## ⚠ The loss condition moves to a hero power threshold — 2026-08-09
 
@@ -33,6 +76,15 @@ it, the hero no longer needs to farm and can go win outright. Power is
 accumulated through mechanics already in the design: defending forward-structure
 events, killing lane creeps when the hero is sent to a lane, and jungle
 creeps/items.
+
+> **⚠ Partly retired 2026-08-11, text above kept as written.** The **loss
+> condition itself is untouched** by the leash decision. What changed is one of
+> the three power sources: **there is no forward structure to defend.** The
+> **events survive** the building (see the third dump of 2026-08-11), so
+> *defending an event* may still pay power — **he did not restate it either way,
+> and it is not inferred here.** The other two sources — lane creeps and
+> jungle creeps/items — are unaffected, and the leash changes **where** the hero
+> may collect the first of them.
 
 **The reversal** (2026-08-07): the **hero-only-after-exhaustion framing is
 disowned.** The 2026-07-29 open question *"Is hero-only-after-exhaustion a loss,
@@ -534,6 +586,16 @@ that only makes the opponent take longer to arrive is a defensive tower with new
 paint, and fails — that is precisely why both of the user's own candidates
 failed. Delay is not a mechanic here; interaction change is.
 
+> **⚠ Status after the 2026-08-11 leash decision. The subject is cut; the
+> rejections and the test are not.** There is **no forward structure** any more,
+> so the *question* this section was opened to answer is **moot**. But
+> **Candidate A (guards) and Candidate B (vicinity buffs) remain recorded
+> rejections** — they are what a future rebuild must not re-propose — and the
+> `[committed]` **test survives the object entirely.** It now bites hardest on
+> the **new early-rush requirement**, which asks for the *function* a tower
+> performs: any brake that merely makes units take longer to arrive is **already
+> rejected by this test.**
+
 ### Firstmate-proposed candidates — NOT the user's, and NOT accepted
 
 Offered in answer to the user's *"So if you have any ideas there."* **The user
@@ -579,6 +641,12 @@ interaction change.
 > activated by a telegraphed lane event, garrisonable by the hero) — see those
 > dumps. These four are **kept, not deleted**, and remain proposals awaiting a
 > reaction; none of them is live.
+>
+> **⚠ MOOT 2026-08-11 — kept, not deleted.** All four describe **what a forward
+> structure does**, and there is **no forward structure.** They are dead by loss
+> of subject, not by rejection: **he never reacted to any of them**, and that
+> stays true. **Do not re-propose them for the leash or for the early-rush
+> brake** — they were written to answer a question that no longer exists.
 
 ### Open questions this dump leaves explicitly open
 
@@ -639,6 +707,18 @@ at the end of this file.
 > and must not quote it back to him as such.
 
 ### Thread A — the forward structure: dormant structures that activate
+
+> **⚠ RETIRED 2026-08-11 by the leash decision, kept in full per the append-only
+> rule.** There is **no forward structure**, so **dormancy, activation, the
+> garrison / bunker reading, and the ability set contextual on lane, match time
+> and prepped cards all lose their object.** Read this section as **history and
+> as the reasons**, not as live design. **Two things in it do not die with the
+> building:** the `[committed]` **watch-item that the player never pilots the
+> hero directly** (that is the commander framing, not a structure rule), and the
+> **forced-tax risk he flagged here**, which is a general test any future
+> lane object or event reward must still pass. The **"prep with cards" /
+> help-your-lane target-class question** below is **left homeless** — see the
+> decision record.
 
 **New candidate from the user**, logged as context and **not chosen at the time**:
 forward structures sit **dormant**, then **activate** on an interval — either a
@@ -708,6 +788,22 @@ not rebuilt** — neither ticket is reworked in this pass.
 
 ### Thread A — a telegraphed event system, answering the forced-tax risk
 
+> **⚠ Split by the 2026-08-11 leash decision — part survives, part is retired.
+> Text below kept as written.** **Survives:** the **event system itself**
+> (*"Can still do events that summon large minions that need to be dealt with"*),
+> the **~5-minute cadence**, the **~1-minute lead**, the **large-unique-minion
+> event type**, the **15-minute match assumption**, and the **shared-schedule
+> principle** that stops timing being opponent-driven. **Retired with the
+> building:** the **structure-ability defence** event type, **defence happening
+> through the forward structure**, **losing a structure costs map control**, and
+> **one structure per lane**. **Changed:** *"cramps how far your own hero can
+> safely roam"* is now the mechanic itself rather than a side effect of losing a
+> building — under the leash, **the front line is what cramps the roam.**
+> **Newly a variable:** which lane an event appears in (third dump of
+> 2026-08-11). **Multi-structure step-down defence lines are moot** — there are
+> no structures to step down through — but they were **deferred, never
+> rejected**, and that record stands.
+
 **Answered** `[provisional]`, all of it the user's own sketch:
 
 - **A telegraphed event system.** Both players get **simultaneous notice** that
@@ -746,6 +842,17 @@ power**.
 > rather than dismissing it, and it is flagged as a **live cut candidate** —
 > **neither side has been chosen.** A future rebuild must not settle this by
 > picking one; it is the user's call.
+>
+> **⚠ Made conditional 2026-08-11, then left open by the cut.** Asked directly
+> about it, he said: *"I guess if we are cutting forward structures then it
+> doesn't make sense, but if we're keeping them then we should explore it."* The
+> structures **are** cut, so **on its face it dies with them** — but in the same
+> breath he floated two alternatives that do not need a structure: *"auras on
+> heroes is another way. Or the even the forward structure generating some sort
+> of aura."* **Whether hero strength expresses itself spatially at all is
+> therefore still open, and this rebuild does not close it.** Both alternatives
+> express hero strength **spatially rather than through direct control**, which
+> is compatible with the `[committed]` commander framing.
 
 **Second watch-item, independent of the tension above:** the **card-based
 customisation / prep portion** of the structure mechanic **itself adds review
@@ -1015,6 +1122,14 @@ that work adjacent.
 **How it changes hands:** by **losing your own forward structure, or destroying
 the opponent's.**
 
+> **⚠ Superseded later the same day, sentence kept as written.** With the
+> structure cut, **map control does not change hands by taking an object — it
+> *is* the front line.** Ground moves continuously as creeps fight, and what the
+> ground pays the hero is **reach**: how far forward it may legally roam, how
+> much jungle it can work, and how much of the enemy's is denied. **The stated
+> worth below — information denial, slowing the opponent's scaling — is
+> untouched by the cut**; only the mechanism by which control moves has changed.
+
 **What it is worth**, by his analogy to a typical MOBA:
 
 > *"you can cause your opponent to be scared because of lack of information.
@@ -1037,7 +1152,25 @@ worth.
 constraint this dump imposes: **the structure is not a separate subsystem — it is
 the fulcrum of the push-for-control versus farm-for-power decision.**
 
+> **⚠ The axis survives; its fulcrum moved, later the same day.** The question
+> quoted above is **unchanged and still the ticket's spine.** What changed is
+> what sits at the middle of it: **there is no structure to be the fulcrum, and
+> the leash takes that job** — pushing a lane literally buys the ground the hero
+> may farm, so the two arms stop being parallel currencies and become
+> **sequential** (push to open ground, then farm the ground you opened). That
+> reading is the report's, recorded here as **the reasoning behind his decision**,
+> not as a further decision of his.
+
 #### One forward structure, as the starting test `[provisional]`
+
+> **⚠ MOOT later the same day — kept, not deleted.** There are **no forward
+> structures**, so the count question and his answer to it lose their subject.
+> **Two things in it outlive the object and are worth carrying:** his stated
+> reason — **map size and minion travel time are unknown, and the game is mobile
+> and short** — which applies to anything that gets placed in a lane; and the
+> question he **asked and did not answer**, how the count affects the
+> push-or-farm choice, which under the leash becomes **how far apart the two
+> front lines sit**. Recorded as moot, not as answered.
 
 **He re-raised structure count himself** — *do we only have one forward
 structure, or are there multiple?* — which **deliberately reopens** the
@@ -1068,6 +1201,14 @@ to him, recorded earlier in this session as *not understood, needs restating*).
 2. **Cards that imbue the forward structure ahead of a telegraphed event** — a
    separate use, and **the one that makes prep a real decision.**
 
+> **⚠ Use (2) is left without a target later the same day, and use (1) is
+> untouched.** The structure is cut, so **there is nothing to imbue** unless the
+> imbue is rehoused — the decision record names **the hero** as the candidate
+> host, via his own talent-tree idea, and **he has not chosen.** **The finding
+> that the two uses are distinct is not withdrawn**; what is open is whether the
+> second one still comes from the hand at all. See the decision record and the
+> second dump of 2026-08-11.
+
 **Bookkeeping, stated because the two threads are easy to conflate:** this
 confirms that the burden named in his **unfinished card-complexity sentence**
 (below) really is **two distinct combination-management jobs**, not one seen
@@ -1095,6 +1236,14 @@ unfinished and is not resolved by this answer.
   what makes the telegraph informational rather than a mere countdown**, and it
   gives the card system a **second, distinct job** — the one named directly
   above.
+
+> **⚠ Split later the same day by the leash decision.** **The telegraph
+> survives** — the ~1-minute lead, the known event type, and the counter-prep
+> decision are all properties of the **event**, and *"can still do events that
+> summon large minions that need to be dealt with."* **What the imbue lands on
+> does not survive**: there is no structure. **Also answered earlier the same
+> day: an imbue *is* visible to the opponent** (*"I would say so"*), which makes
+> the counter-prep decision two-sided rather than hidden.
 
 **Flagged for whoever specs it, not decided here:** this creates a
 **hold-versus-spend tension on the hand** — saving an ice card for a fire event
@@ -1130,6 +1279,15 @@ must not harden into a flat rejection in a later rebuild.
 candidate answer to **how forward creep spawning functions**; with them cut,
 **that question is open again**. Forward creep spawning itself is **still not
 dead** — the answer to *how* is what went away.
+
+> **⚠ Overtaken later the same day, and the rejection still stands.** The
+> structure that would have summoned them is itself cut, so this rejection is now
+> **moot by loss of subject as well as by his own "for now"** — **both records
+> are kept.** **The reason is the part that outlives it:** anything that makes a
+> lane object **too valuable to concede** turns defending it into a **tax**, and
+> that test now applies to **events** and to any answer to the early-rush
+> requirement. **Forward creep spawning is untouched by the cut** — it was never
+> a property of the forward structure — and it still has **no mechanism**.
 
 ### 🔧 Developed, but not finished
 
@@ -1194,6 +1352,12 @@ decline*.
 > structure. **What he did not restate:** whether he still wants a **defence
 > bonus** now that its stated rationale (saving the rare units) is gone.
 > **Unstated, not withdrawn.**
+>
+> **⚠ And later the same day the thing being defended was cut too.** A **defence
+> bonus for holding a structure** is **moot** — there is no structure. **Whether
+> succeeding at an event pays a bonus is a live and separate question, and he has
+> not been asked it.** Do not carry the structure version forward as if it
+> answered the event version.
 
 #### ⚠ An unfinished thought about card-combination complexity
 
@@ -1288,6 +1452,13 @@ him. **Recorded as commissioned. No event types are proposed here.**
 
 ### Open questions after the 2026-08-11 dump
 
+**Bookkeeping updated later the same day, after the leash decision. Original text
+kept verbatim; status markers added in place, nothing deleted.** Several entries
+are **moot because their subject was cut, not because they were answered** — the
+distinction matters and is marked on each. The live list is now
+"[Open questions after the leash decision](#open-questions-after-the-leash-decision)"
+at the end of this file.
+
 Everything from the 2026-08-09 list that is not marked answered or delegated
 above is still live. New and revised:
 
@@ -1296,13 +1467,25 @@ above is still live. New and revised:
   leaves the main base doing. **Reopened later the same session:** rare units were
   the candidate answer, and they are **cut**, so this is back to having no
   candidate.
+  - **STILL LIVE after the leash decision, and untouched by it.** Where creeps
+    spawn was never a property of the forward structure. **No mechanism, no
+    candidate.**
 - **How the structure count — one versus several — affects the push-or-farm
   choice**, positively or negatively. He asked it and did not answer it.
+  - **MOOT — subject cut, not answered.** There are no structures to count. The
+    nearest surviving form of the question is **how far apart the two front lines
+    sit at the start**, which nobody has asked him.
 - **What the real benefit of taking or losing a forward structure is**, stated
   concretely enough to make lane pushing genuinely compete with jungle farming.
   The currencies are now named; the **structure's** concrete stake is **narrower
   after the cut** — map control, plus whatever the imbue loop is worth — and still
   not stated concretely.
+  - **MOOT as posed; the underlying question is answered in shape.** There is no
+    structure to take or lose. **What holding ground now pays is reach** — how
+    far forward the hero may legally roam, how much jungle it can work, and how
+    much of the opponent's it denies. **That is the leash's own answer**, and
+    whether it is *enough* to make pushing compete with farming is a **tuning
+    question the user has ruled out of scope at this stage.**
 - ~~**How to reconcile the rare-unit power elsewhere**, so the defence bonus does
   not re-create the forced tax.~~ **RESOLVED BY REMOVAL later the same session** —
   the rare units are cut, so there is no unique power to reconcile. **The problem
@@ -1310,10 +1493,18 @@ above is still live. New and revised:
   re-attached to a structure. **What is left open in its place:** whether a
   **defence bonus** is still wanted at all now that its stated rationale is gone.
   **Unstated, not withdrawn.**
+  - **MOOT in its structure form.** No structure, so no bonus for holding one.
+    **Whether an event pays a bonus for being dealt with is a live question that
+    has not been put to him.**
 - **Whether managing card combinations for both map power and forward-structure
   power is too much** — **an unfinished sentence, not a position.** Needs
   restating to him, not resolving. **Question 7's answer confirms the two uses are
   distinct; it does not finish this sentence.**
+  - **STILL LIVE, and its terms moved.** The second burden was
+    *forward-structure* power; there is no structure. **Whether the second burden
+    exists at all now depends on where the imbue lands** — the hand, the hero's
+    pre-match talents, or nowhere. **The sentence is still unfinished either
+    way.**
 - **What the "exodia moment" concretely is** — the resolution line is required;
   its shape is undefined. **Parked with the threshold work.**
 - **How the threshold tunes, and how hero power converts into a win** with no
@@ -1324,6 +1515,531 @@ above is still live. New and revised:
 - **The imbue loop's own unspecified parts** — the ~1-minute lead and known event
   type are stated; **what imbuing concretely does to a structure**, and how the
   **hold-versus-spend tension on the hand** is meant to resolve, are not.
+  - **STILL LIVE and it grew a prior question.** *What imbuing does to a
+    structure* is **moot** — no structure. **Where the imbue lives at all is now
+    the question**, and it is open: the hand, or the hero (his talent-tree idea),
+    or both. **He also answered one part: the imbue is visible to the opponent.**
 - **The concrete list of lane event types** — **delegated to separate brainstorm
   work**, not open here. Note the imbue loop raises the price of that list: event
   types now need a **stated nature to counter-prep against**, not just a name.
+  - **STILL DELEGATED, and the brief narrowed.** Events survive the cut, but
+    **no event type may assume a defended building** — the
+    *structure-ability defence* type dies with it. Event types must work as
+    **things in a lane that need dealing with.**
+
+## Dump — 2026-08-11 (second of the day): does the forward structure survive at all
+
+> **⚠ Source note.** Recorded before any action, per the standing preference.
+> **Quoted passages are his own wording as captured**; unquoted material is
+> record-paraphrase of that capture.
+
+**What this dump does.** After three dumps building **on** the forward structure,
+it **puts the structure itself in question.** It is a **doubt with a commissioned
+brainstorm, not a rejection** — nothing was cut here. It also **answers imbue
+visibility**, floats a **hero talent-tree** idea, and makes
+**hero-strength-boosts-structure** conditional on the structure surviving at all.
+
+### Thread A — the doubt, and the tension underneath it
+
+**Why he wanted a forward structure in the first place:**
+
+> *"My affinity to the forward structure is just it's me trying to deviate from
+> the typical MO whilst still maybe foolishly attempting to retain it."*
+
+**What a tower actually does, in his framing** — this line becomes load-bearing
+later, because it is the **function** he keeps after cutting the object:
+
+> *"They are typically seen as ways to slow the game down because you're not
+> strong enough to pass them without huge risk."*
+
+**The doubt:**
+
+> *"Without them there, is it really necessary? Because your hero won't really go
+> across the map. Or does it? I don't know."*
+
+**The tension he named, and it is the real subject:**
+
+- **Original intent:** *"my thought process was your hero would never cross your
+  own side of the map."*
+- **The problem that creates:** *"But then how does map pressure work? What's the
+  point of it then?"*
+- **What he wants anyway:** *"I would want the heroes to be able to clash even if
+  the way you control your hero is just by like simple input commands instead of
+  the actual like high APM micro that's required in a typical MOBA."*
+
+**So heroes confined to their own half and heroes clashing are in direct
+conflict, and he wants both.** He is aware of the drift: *"I have wandered from
+this point. I don't know."*
+
+**What he asked for**, explicitly options rather than a decision:
+
+> *"Help me brainstorm ways that we could remove it but still somehow have
+> something meaningful in the lane."*
+
+**Nothing is cut at this point in the record.** The cut happens in the decision
+below, and it happens for a stated reason.
+
+### Thread B — is an imbue visible to the opponent? ANSWERED, plus a new mechanic
+
+**Yes, visible** `[provisional]` — *"I would say so."* This is the first thing
+recorded about **what the opponent sees of your prep**, and it makes the imbue a
+**two-sided** counter-prep decision rather than a hidden one.
+
+**Larger than the question asked — imbue selection may not come from the hand at
+all:**
+
+> *"Maybe the way that your imbue is selected is by either hero choice or maybe
+> like a variable you choose prior to starting the game. Like how in World of
+> Warcraft you have a talent tree. So maybe like each hero has like two or three
+> ways that they can affect it based on the type of hero that they are."*
+
+**His own read:** *"that's more specifics to have to nail out but it seems like a
+good mechanic either way."*
+
+**⚠ Complement or replacement — he did not say which, and this rebuild does not
+decide.** Hero talents could **set which imbues are available** while cards still
+supply them, **or** could **move imbue selection out of the hand entirely.** The
+difference is load-bearing: the card-imbue loop is what gave the telegraph its
+counter-prep decision. **Recorded as an open fork.**
+
+**Reach:** this lands in **[14](14-pre-match-setup.md)** (pre-match setup) and
+**[15](15-heroes.md)** (heroes), because a hero-bound choice made before the
+match is both of those tickets' subject. **Neither is rebuilt here.**
+
+### Thread C — hero strength boosting structure power is conditional
+
+> *"I guess if we are cutting forward structures then it doesn't make sense, but
+> if we're keeping them then we should explore it."*
+
+**Two alternatives floated in the same breath:** *"auras on heroes is another way.
+Or the even the forward structure generating some sort of aura."* Both express
+hero strength **spatially rather than through direct control**, which fits the
+`[committed]` commander framing.
+
+### What removal would cost — listed at the time so the cost was visible
+
+Recorded **to price the removal, not to argue against it.** If the structure
+goes: the **telegraphed event system** and its ~1-minute lead, the **imbue loop**
+unless it moves, **map control as the lane payout** (then defined as gaining or
+losing a structure), the **garrison** reading, and the **defence-bonus** question
+plus the **event slate** just brainstormed.
+
+**Unaffected either way, stated at the time:** **gold on hero minion kills**, the
+**jungle items and power-ups** arm of the axis, and the **hero power threshold**
+as the loss condition. **That prediction held.**
+
+## ✅ DECISION — 2026-08-11: the front line is the leash, and the forward structure is cut
+
+**His words:**
+
+> *"i like your replacement, lets go with that (hero leash)."*
+
+**What was adopted** `[provisional]`: **R5, "the front line is the leash"**, from
+the investigation in `mg-lane-without-structure` — the report's crossing position
+**P3a**.
+
+- **The hero's legal roam in a lane extends as far forward as that lane's front
+  line.** Push the lane and your hero's world grows; lose it and your world
+  closes.
+- **Not strict confinement, and not free crossing.** Both were on the table as
+  distinct positions; he took neither.
+- **There is no object in the lane.** Nothing to build, defend, garrison or
+  destroy.
+
+> **⚠ Sequence note, recorded for accuracy.** He stated the adoption **and in the
+> same breath asked to be shown how it resolves the investigation's two
+> findings** — the confinement/gold contradiction, and the missing clash. **The
+> adoption is recorded as his decision.** If his reaction to that explanation
+> changes it, **that reversal must be recorded as a reversal**, in his words.
+
+### Why — the reasoning that produced the decision
+
+**This is the investigation's reasoning, recorded because it is why the decision
+was made.** It is **not** an additional decision of his.
+
+**The contradiction it dissolves.** Gold comes from **the hero killing minions,
+any minion, no last-hitting**. Now hold the hero inside its own half and trace a
+*successful* push: your creeps win the lane, the front line moves toward the
+enemy base, **the fighting — which is where minions die — is now in their half**,
+your hero cannot follow, and **your gold income from that lane goes to zero**
+while **their** hero farms your push on home ground. **Under strict confinement,
+winning a lane transfers your gold income to your opponent**, so the stable line
+is to **hold at your own border and farm arrivals** — which is turtling. The push
+arm of the axis was not merely unrewarded; it was **anti-rewarded.**
+
+**Why no object in the lane could have fixed it.** A forward structure at the
+border was **pinning the front line into hero range** — that is the tower's real
+job in his own words, *"a way to slow the game down because you're not strong
+enough to pass without huge risk."* But the contradiction is about **where the
+hero may be**, so **only a crossing rule repairs it.** That is the finding that
+turned his doubt about the structure into a decision about the leash.
+
+**How the leash dissolves it:** **pushing extends where the hero may farm.** The
+gold follows the fight instead of fleeing it, and the two arms of the axis stop
+being parallel currencies and become **sequential** — push to open ground, then
+farm the ground you opened.
+
+**What it does for the clash he wanted.** Contact happens **at the seam, where
+the two leashes meet — automatically, and only there.** It is self-balancing: a
+lane you are winning pushes the clash point onto **their** ground.
+
+**What it does for the creeps constraint.** Creeps acquire a new job: **they
+define where your hero may be.** The `[committed]` *"creeps are units, not a
+meter"* line stops being merely honoured and becomes **load-bearing**.
+
+### What the decision settles
+
+- **The crossing question — answered.** Position **P3a**, stated above.
+- **The forward structure is removed.** Not rejected on its merits: **the adopted
+  candidate has no object in the lane**, so the structure goes with it. **Three
+  sessions of structure development are superseded**, and per the append-only
+  rule **that material is carried forward as history with its reasons**, not
+  deleted.
+- **The confinement/gold contradiction is dissolved rather than patched.**
+
+### What the decision explicitly does NOT settle
+
+**Recorded as open. Do not close any of these by inference.**
+
+- **Where the imbue loop lands.** The leash leaves it **homeless unless the imbue
+  moves onto the hero** — which interacts directly with his own **talent-tree
+  idea** from earlier the same day. **He has not chosen.**
+- **Whether telegraphed events are shared or mirrored.** The leash produces
+  contact at the seam, but it **does not decide** whether an event is **one
+  contested point** or **two parallel ones**. Called out in the record as the
+  **sharpest open question** — and see the third dump, which introduces **lane
+  placement** as a further variable on top of it.
+- **The snowball risk.** **Winning a lane compounds**: more ground → more reach →
+  more income → more ground. It **passes the `[committed]` deliberate-losing
+  rail** — a thrower gains nothing from it — but **it risks blowouts**, which is
+  the *other* failure mode that rail's preventive/restorative split exists to
+  name. **An open risk, not a defect.**
+- **The new readout.** The player must see **at a glance where the hero may go**,
+  and that competes for the **bottom 25% of a portrait phone** with the cards,
+  the hero readouts and everything else already queued for that space.
+- **Rehousing the hero-in-lane card.** The ~10-second hero-in-lane card becomes a
+  **temporary leash extension** rather than being deleted. **A rehousing, not a
+  loss** — and the concrete form is unspecified.
+- **Whether hero strength boosting structure power survives at all.** It was
+  **conditional on keeping structures**, so on its face it dies with them — but
+  he floated **hero auras** and **structure auras** as alternatives and **neither
+  has been ruled on.**
+
+### What the cut retires, rehouses, or leaves open
+
+**Every item below is kept in place in this file with an in-place marker. Nothing
+is deleted.**
+
+| Structure material | What it becomes | Reason |
+|---|---|---|
+| **Dormant structures that activate on an interval** (2026-08-07) | **Retired** | No structure to be dormant |
+| **The garrison / bunker reading** — hero enters, different ability set, contextual on lane, time and prepped cards (2026-08-07) | **Retired** | Its object is gone |
+| **The hero being pulled off the map as the garrison's real cost** (2026-08-07) | **Retired with it** | Was the price of garrisoning |
+| **Card-selected-only garrison abilities, never direct piloting** (2026-08-07) | **Survives as a general rule** | It is the `[committed]` commander framing, not a structure rule |
+| **The forced-tax risk** — a thing too valuable to concede stops being a choice (2026-08-07, restated 2026-08-11) | **Survives as a test** | Now applies to events and to any early-rush brake |
+| **The telegraphed event system** (2026-08-09) | **Survives** | *"Can still do events that summon large minions that need to be dealt with"* |
+| **~5-minute cadence, ~1-minute lead, known event type, 15-minute match** | **Survives** | Properties of the event, not of the building |
+| **Simultaneous symmetric notice on a shared schedule** | **Survives** | It is what stops timing being opponent-driven |
+| **Event type: structure-ability defence** (2026-08-09) | **Retired** | Nothing to defend |
+| **Event type: large unique minion** (2026-08-09) | **Survives, and is now the named surviving example** | His own words in the third dump |
+| **Losing a structure costs map control** (2026-08-09) | **Retired as a mechanism; the effect is rehoused** | Map control is now **the front line itself**, moving continuously |
+| ***"Cramps how far your own hero can safely roam"*** (2026-08-09) | **Rehoused, and promoted** | It was a side effect of losing a building; it is now **the mechanic** |
+| **One structure per lane, as the starting test** (2026-08-09, 2026-08-11) | **Moot** | Nothing to count |
+| **Multi-structure step-down defence lines** (deferred 2026-08-09) | **Moot — but it was never a "no"** | Deferral stands as a record |
+| **Map control changes hands by taking or losing a structure** (2026-08-11) | **Superseded** | Control is the front line; **its stated worth — information denial — is untouched** |
+| **The structure as the fulcrum of the push-versus-farm axis** (2026-08-11) | **Rehoused** | **The leash is the fulcrum now**; the axis question is unchanged |
+| **Structure-imbue as the second card use** (2026-08-11) | **Left without a target — open** | Imbue may move to the hero; **he has not chosen** |
+| **The imbue's ~1-minute counter-prep decision** (2026-08-11) | **Survives as an event property** | The telegraph outlives the building |
+| **Rare units at structures, cut *"for now"*** (2026-08-11) | **Moot as well as cut — both records kept** | Its reason still governs anything unique attached to a lane object |
+| **The defence bonus for holding a structure** (2026-08-09, 2026-08-11) | **Moot in that form; the event version is unasked** | The thing being defended is gone |
+| **Hero strength boosting structure power** (2026-08-09, 2026-08-11) | **Open, not resolved** | Conditional on structures, but **hero auras and structure auras were floated and neither was ruled on** |
+| **Candidate A (guards), Candidate B (vicinity buffs)** — his own rejections | **Stand as rejections** | Append-only; do not re-propose |
+| **The `[committed]` test** — change how units interact, do not merely delay | **Stands, and now governs the early-rush brake** | It survives the object entirely |
+| **The four firstmate-proposed candidates** | **Moot by loss of subject** | He never reacted to them; that stays true |
+
+## Dump — 2026-08-11 (third of the day): events survive, and the early-rush requirement
+
+> **⚠ Source note.** Recorded before any action, following the leash decision.
+> **Quoted passages are his own wording as captured.**
+
+### Events survive the structure's removal `[provisional]`
+
+> *"Can still do events that summon large minions that need to be dealt with."*
+
+**The event system is not lost with the building.** The **~5-minute cadence**, the
+**~1-minute telegraph**, and the **large-unique-minion event type** all survive.
+**What died is only the structure that was being defended.**
+
+### Event lane placement — and a third answer to parallel-versus-contested
+
+**One event per side stays.** But **which lane it appears in becomes a
+variable**:
+
+> *"maybe the player gets to choose which lane they wanted to spawn in, or there
+> is some mechanism that determines which lane it spawns in."*
+
+**⚠ He offered both and picked neither.** Player choice and mechanism assignment
+are **both live**; **do not record either as chosen.**
+
+**His stated intent, and this is the design goal the variable exists to serve:**
+
+> *"so it's not always you will be forced to meet the other player in lane if you
+> both choose to defend."*
+
+**This answers the parallel-versus-contested question in a third way that neither
+option covered** — the question the decision record named as the sharpest open
+one:
+
+- **Not always parallel** — two players can end up in the same lane.
+- **Not always contested** — they can also end up in different lanes.
+- **Collision is emergent**, produced by lane placement rather than guaranteed or
+  excluded by the event's design.
+
+**What that adds to the existing decision:** each event becomes a **placement
+decision layered on the attend-or-farm decision** — not only *do I go*, but
+*where do I put mine, and where will theirs be*. **Under the leash this also
+decides where the fighting is**, which is the variable the whole gold economy
+hangs on.
+
+**Left open by him:** **whether the player chooses or a mechanism determines** it;
+and **whether the opponent can see your choice before committing** — not
+addressed, and a natural companion question given he has already said **an imbue
+is visible.**
+
+### ⚠ NEW REQUIREMENT — something must stop an early lane collapse
+
+**His words:**
+
+> *"As much as I don't want towers because it's prototypical, there needs to be
+> some mechanism to prevent someone from just blowing down the mid lane or any
+> lane at the beginning of the game and having nothing to stop them."*
+
+**This is a constraint, not a proposal.** It states **what any design must
+satisfy**; it says nothing about how. **It is unmet.**
+
+**Why it lands now:** the tower's real job in his own earlier framing was *"a way
+to slow the game down because you're not strong enough to pass without huge
+risk."* **Removing the structure removed that brake**, and he has now named the
+brake **as a requirement in its own right, independent of the object that used to
+supply it.**
+
+**⚠ The tension he is holding deliberately, and it is not a defect:** he **does
+not want towers, because they are prototypical**, **and** he **requires the
+function towers perform.** Any proposal must deliver the second without being the
+first. **His own standing `[committed]` test narrows it further** — *"I want to
+change how it makes your units interact with the game, not simply just make it
+take your units longer to get to the core"* — so **a brake that merely adds delay
+is already rejected.**
+
+**Worth checking rather than assuming:** the leash **may already supply part of
+this**. An early rush extends the attacker's legal roam into the defender's half,
+but the defender's own hero is bounded near its base — **exactly where the
+attacker now is** — so the rusher meets a defender fighting on home ground.
+**Whether that is a sufficient brake, a partial one, or none at all has not been
+analysed, and must not be assumed.**
+
+## Dump — 2026-08-11 (fourth of the day): the shrinking home field — FLOATED, NOT ADOPTED
+
+> **⚠ Status, stated first because it is the thing most likely to be misread.**
+> This is a **candidate for the early-rush brake, awaiting his decision.** His own
+> framing: *"it's an interesting concept."* **It is not adopted, and the
+> requirement above stays unmet until he says otherwise.**
+
+### The concept, in his words
+
+Each player's **home base emits a force field**. **Minions inside that field are
+empowered.** As the match goes on, **the field retracts**, covering less distance
+so fewer creeps fall inside it.
+
+**The effect he is aiming for:**
+
+> *"if someone chooses to just push too far down the middle lane, then they end up
+> facing slightly stronger creeps, which slows their progress."*
+
+**His own read of how it relates to what he rejected:** *"It's not exactly the
+same as towers, but it's an interesting concept."*
+
+### What shape it is, in his own correction — a floor, not a decaying advantage
+
+**This is his framing and it governs how the concept is read.** It does not
+matter if your lane is being destroyed two minutes in: the only part of your lane
+the attacker can destroy is **the part the aura is not buffing, plus perhaps a
+little way into it.** Push further and —
+
+> *"eventually, you will take too much damage and your own creeps will be killed
+> by the empowered ones... you're going to be forced to retreat and that line
+> will be defended."*
+
+**So the field is a hard defensive floor that holds regardless of how badly a
+lane is being lost.** A losing player is **always** protected out to the current
+aura radius; the protection does not scale with how well you are doing.
+
+**And the retraction is a schedule of legitimacy — that is its whole purpose.**
+The aura starts *"very far out, technically midpoint"* and pulls back over time,
+so **by the time an attacker can push to a given depth, the match is no longer
+early enough for that push to count as too soon.** **The retraction schedule
+defines the game's phases** rather than merely weakening a defence.
+
+### Why it fits the constraints it was built for
+
+- **It is a gradient, not a wall.** No object to destroy, no chokepoint, nothing
+  to concede — **it does not re-introduce the structure by another name.**
+- **It plausibly passes the standing `[committed]` rejected-tower test.** That
+  test bars a mechanism whose *only* effect is making units take longer to
+  arrive. This one **changes what units are** while they are home — stronger
+  creeps fight differently, trades resolve differently — and the slowdown is a
+  **consequence** of that changed interaction rather than the mechanism itself.
+  **Stated as a genuine pass, with the caveat** that if the only thing a player
+  ever feels is *"my push took longer"*, it drifts back toward the rejected
+  shape.
+- **It is symmetric, needs no new object**, and **costs nothing in the card
+  system or the hand.**
+- **The retraction is a match clock with no timer UI** — early game the field is
+  wide and home defence is strong, so a first-minute rush runs into empowered
+  creeps; late game the field is small and decisive pushes become possible.
+
+### ⚠ A firstmate objection he rejected — kept as history, not as his concern
+
+**Recorded per the append-only rule, and marked clearly as superseded by his
+correction above.** The objection was that the retraction **runs the same
+direction as the leash's snowball risk and the two compound late**: the leash
+compounds a lead, and a shrinking field was read as **removing the losing
+player's safety net over time**, precisely when they are furthest behind — a
+player losing at minute twelve having both a short leash and a small home field.
+It was paired with the counter-argument that **a decaying home advantage is
+exactly how a design forces resolution**, which his own anti-stalemate
+requirement asks for.
+
+**Where it went wrong, recorded so the mistake is not repeated:** it treated the
+field as a **scaling advantage** and asked what happens to the player who is
+behind. **Under his floor reading, being behind does not reduce the protection at
+all.** Whether the empowered creeps are actually strong enough to enforce the
+floor against a snowballed attacker is a **tuning question, which he has ruled
+out of scope at this stage** — so **the objection was a balance objection wearing
+structural clothes.** **This is a firstmate reading he rejected; it is not a
+concern of his.**
+
+### Secondary questions, recorded not raised — none of these has been put to him
+
+- **Readability.** The player must understand **why a push stalled**. A retracting
+  radius is drawable on a no-fog pannable board, but the causation is **indirect**,
+  which the lane investigation flagged as a severe risk on a small screen.
+- **Interaction with the gold rule.** Gold comes from **the hero** killing
+  minions. **Empowered home creeps kill enemy creeps without the hero**, which may
+  quietly reduce the **defender's own income at home.** **Unexamined.**
+- **Whether it stacks with the leash or replaces part of it.** Both are
+  territory-shaped defender's advantages with a time arc; **whether both are
+  needed has not been asked.**
+
+**Precedent:** defender's-advantage-by-territory is **well precedented rather than
+novel**, which is a strength given the `[committed]` accessibility-beats-novelty
+constraint. No survey was done; if the concept advances, a short one would
+sharpen it.
+
+## Reach outside this ticket — recorded after the leash decision, not acted on
+
+**None of these tickets is rebuilt in this pass.**
+
+- **[12](12-jungle-role.md) — the jungle.** Its **reachability is now a function
+  of the front line**: how much jungle your hero can work is set by how far
+  forward the lane has been pushed, and conceding ground **closes your own jungle
+  toward your base.** The jungle's role as one arm of the central axis is
+  unchanged; **what changed is that the other arm now gates access to it.**
+- **[01](01-battlefield-geometry.md) — geometry and the phone.** Two things.
+  **(a)** The leash **requires a new readout**: where the hero may legally go,
+  competing for the **bottom 25%** already claimed by cards, hero readouts and a
+  possible minimap. **(b)** The **midline gains meaning it did not have** — the
+  seam between the two leashes is where heroes meet, and it moves.
+- **[10](10-information-visibility.md) — information.** **An imbue is visible to
+  the opponent** (*"I would say so"*), which extends the board-open / hand-hidden
+  split to **prep**. **Map control's value as information denial is unchanged by
+  the cut**, but its mechanism is now the front line.
+- **[14](14-pre-match-setup.md) — pre-match setup.** The **talent-tree idea**
+  would put a **pre-match pick** in the design — *"a variable you choose prior to
+  starting the game"* — which is 14's subject.
+- **[15](15-heroes.md) — heroes.** Two reaches. The **talent-tree idea** gives
+  each hero *"two or three ways that they can affect it based on the type of hero
+  that they are"*, which is hero differentiation. And the leash **bounds where a
+  hero may roam** — **it does not change how the hero is steered**, which is
+  still coarse standing orders. **Whether that counts as hero position becoming
+  "more manually manipulable" — the condition the per-lane reinforcement pool
+  hangs on — is not stated, and is not inferred here.**
+
+## Relationship to prior recorded material — after the leash decision
+
+- **The loss condition is untouched.** It is still **the enemy hero reaching a
+  power threshold** (2026-08-09). **The ending has not moved a fifth time.**
+- **The reinforcement pool, its three levers, and the 2026-07-29 material are
+  untouched**, including that **exhaustion is not a loss condition.** One lever
+  changes shape only in *where* it applies: **hero intervention** is the card that
+  now needs rehousing as a **temporary leash extension.**
+- **The central axis is untouched as a question** — push for map control, or farm
+  for power — and **gold on any hero minion kill, no last-hitting**, is
+  unaffected. **What changed is the fulcrum.**
+- **Every prior rejection stands unchanged:** the **tower-chain win path**,
+  **guards at the forward position**, **vicinity buffs**, **rare units at
+  structures *"for now"***, and the `[committed]` **test** that a lane mechanism
+  must change how units interact with the game rather than merely delay them.
+  **He did not restate that test against the leash** — recorded as **unstated**,
+  not as passed.
+- **No new rejection is added by this decision.** The forward structure is **cut
+  as a consequence of adopting R5**, not rejected on its merits — and **his
+  reasons for wanting one** (*"trying to deviate from the typical MO"*) and **the
+  function he wanted from it** (a brake on early pushes) both **survive it**: the
+  second is now the **early-rush requirement**.
+- **The 2026-08-11 prediction held**: gold on hero minion kills, the jungle arm,
+  and the power threshold were listed as unaffected by a removal, and they are.
+
+## Open questions after the leash decision
+
+**This is the live list.** Everything from the earlier lists that is not marked
+answered, delegated or moot above is still live. New and revised:
+
+- **⚠ THE UNMET REQUIREMENT — what stops an early lane collapse.** *"there needs
+  to be some mechanism to prevent someone from just blowing down the mid lane or
+  any lane at the beginning of the game and having nothing to stop them."* **A
+  constraint on all future design with no accepted answer.** Bound by the tension
+  he is holding deliberately — **not a tower, but the function a tower performs**
+  — and by the `[committed]` test, which **already rejects any brake that merely
+  adds delay.** **One candidate exists and is unchosen: the shrinking home
+  field.** **Whether the leash itself supplies part of the brake is unanalysed.**
+- **⚠ The shrinking home field — floated, not adopted.** His concept, his
+  framing: *"it's an interesting concept."* Shaped as a **hard defensive floor**
+  with a **retraction schedule that defines the game's phases.** **Awaiting his
+  decision.** Open beneath it: **readability** of an indirect cause, the
+  **interaction with the gold rule** (empowered home creeps killing without the
+  hero), and **whether it stacks with the leash or replaces part of it** — none of
+  which has been put to him.
+- **⚠ Where the imbue lives.** Homeless unless it moves onto the hero. The fork is
+  his: hero talents **complement** the card-imbue loop, or **replace** it. **He
+  did not say which.** Reaches 14 and 15.
+- **Whether telegraphed events are shared or mirrored** — one contested point, or
+  two parallel ones. **Still the sharpest open question**, and now layered with
+  **lane placement**.
+- **Whether the player chooses the event's lane, or a mechanism determines it.**
+  **He offered both and picked neither.**
+- **Whether the opponent can see your event lane choice before committing.** Not
+  addressed; a natural companion to **the imbue being visible.**
+- **⚠ The snowball risk of the leash.** Winning a lane compounds. **It passes the
+  deliberate-losing rail** — a thrower gains nothing — **but it risks blowouts.**
+  **An open risk, recorded, not solved.**
+- **⚠ The leash readout.** The player must see **at a glance where the hero may
+  go**, on a portrait phone whose bottom 25% is already contested. Touches
+  **[01](01-battlefield-geometry.md)**.
+- **Rehousing the hero-in-lane card** as a **temporary leash extension** — a
+  rehousing, not a loss, and its concrete form is unspecified.
+- **Whether hero strength expresses itself spatially at all.** Boosting structure
+  power was conditional on structures and they are gone; **hero auras** and
+  **structure auras** were floated and **neither was ruled on.**
+- **Whether an event pays a bonus for being dealt with.** The structure-defence
+  version of this question is moot; **the event version has not been put to
+  him.**
+- **How far apart the two front lines start** — the surviving form of the
+  structure-count question. **Not asked.**
+- **How forward creep spawning functions** — untouched by the cut, **still no
+  mechanism.**
+- **The concrete list of lane event types** — **still delegated**, with the brief
+  narrowed: **no type may assume a defended building.**
+- **The power threshold, its tuning, the "exodia moment", and how hero power
+  converts into a win** — **explicitly unknown and parked by his own scope
+  instruction.** Untouched by this decision.
