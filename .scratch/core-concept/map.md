@@ -402,6 +402,45 @@ rather than performing certainty. Ticket 08 promotes or revises.
   only positive signal `[provisional]`. "Unintuitive" was **confounded** by no
   tutorial + crushing AI + crude mock and says nothing about combining — the
   earlier contrary claim is retracted.
+- **The command bar is three panels, and the middle one is the win condition's
+  scoreboard** `[provisional]` (2026-08-11) — **the first concrete layout the
+  bottom 25% has had.** **Left: the cards. Middle, wider than either side
+  individually: a screen showing your hero and the enemy hero with their progress
+  and power. Right: undecided** — his own framing, *"something tactical that
+  controls one of the game's other levers?"* **Why the middle is load-bearing:**
+  the loss condition is **the enemy hero reaching a power threshold** and his
+  framing of the whole game is **preventing your opponent from maximising that
+  power journey while maximising your own**, so a central readout of both heroes'
+  progress is **the scoreboard of the win condition, not a status readout** — and
+  **it arrives before the threshold's own specifics, which stay parked.**
+  **Candidates for the right panel, none chosen:** the **jungle pre-commitment
+  readout** (~six camps — difficulty, time, damage and mana cost, expected gold,
+  possible items), the **event panel** (telegraph countdown, event type, imbue
+  commitment, placement influence), the **gold conversion site** at the main
+  base, and a **minimap** — **which is information rather than a lever.**
+  - **Panel swapping is ACCEPTED** — *"If another lever is required, but no
+    space, need an option to toggle/swap it visible when needed."* **The bar is
+    not required to be three fixed panels**, and a lever may be brought up on
+    demand. **A general principle for the command bar, NOT a decision about which
+    lever holds the fixed slot.** It bears on the standing bottom-25%
+    competition, because that competition no longer has to be settled by
+    permanent allocation.
+  - **⚠ The centre screen's direction is DELEGATED, not open.** *"Based on what
+    the agent feels works better, have them choose the direction for the centre
+    screen. I remember my rationale for both, but things have diverged since."*
+    **He has handed the choice to whoever builds it** — **do not file it as a
+    captain decision and do not bring it back to him** — and **whoever chooses
+    must record the choice and its reason** in 01. **Both framings are his and
+    both are preserved:** 2026-08-07, *the bar centred on the **enemy** hero's
+    status, not a paired readout beside your own*; 2026-08-11, **both heroes** in
+    the middle. **The tension is stated and deliberately unresolved, and is NOT
+    flagged as a reversal, because he has not called it one.** **What diverged,
+    recorded as material for the chooser and not as a steer:** the loss condition
+    became a **race**, which has two runners; map control became **economic**
+    rather than informational; the **leash** arrived and may want a readout in
+    the same bar; and a **minimap showing both heroes at all times** is already
+    on record, which may leave the centre screen's job as **progress** rather
+    than **position**. See [01](issues/01-battlefield-geometry.md).
 - **The front line is the hero's leash, and the forward structure is cut**
   `[provisional]` (2026-08-11) — **the largest structural change so far.** *"i
   like your replacement, lets go with that (hero leash)."* **The hero's legal
@@ -902,7 +941,7 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt** |
+| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt**; **⚠ 2026-08-11 — REBUILT in part: the command bar's layout is written in.** **Three panels — left the cards; middle, wider than either side individually, a screen showing both heroes' progress and power; right undecided** (*"something tactical that controls one of the game's other levers?"*). **The middle is the scoreboard of the win condition**, because the loss condition is the enemy hero's power threshold and the game is *"preventing your opponent from maximizing that power journey while maximizing your own"* — **it arrives before the threshold's specifics, which stay parked.** **Right-panel candidates recorded, none chosen** (jungle pre-commitment readout, event panel, gold conversion site, minimap — the last being information, not a lever). **Panel swapping ACCEPTED as a general principle** — the bar need not be three fixed panels — **which loosens the bottom-25% competition without settling it.** **⚠ The centre screen's direction is DELEGATED to whoever builds it, not open** — both his framings (2026-08-07 **enemy-centred**; 2026-08-11 **both heroes**) are preserved, **the tension is stated and unresolved and is not a reversal**, and **whoever chooses must record the choice and its reason** |
 | 02 | What "combining cards" actually means | resolved + amended; **⚠ 2026-08-11 (from 05): a finding from commissioned card-system work, recorded as a finding and not as his — *combining is currently unpriced*.** 02 chose payload + modifiers and left the cap, reversibility and failure cases open, and nothing states **what combining costs**, so *combine everything, every time* is the dominant line and **the keystone mechanic has no decision in it.** Recorded, **not rebuilt** |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
@@ -911,7 +950,7 @@ method; treat them as "this informs that," not as a build order.
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
 | 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
-| 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open; **new 2026-08-07 (from 05): the command bar should centre on the enemy hero's status** — recorded, not rebuilt; **2026-08-11 (from 05): map control's value is framed as denying the opponent information**, which gives board-open/hand-hidden a strategic consequence — recorded, not rebuilt; **2026-08-11 later the same day (from 05): an imbue IS visible to the opponent** (*"I would say so"*), extending board-open/hand-hidden to **prep**, and **map control's mechanism is now the front line** though its worth is unchanged — recorded, not rebuilt; **⚠ 2026-08-11, backlog answers (from 05): map control's worth is REVERSED — it is ECONOMIC denial, not informational.** He rejected the information answer himself because **a minimap shows both heroes at all times**, so nobody pushes blind and there is no fog to fear; pushing past their front line **makes their farming dangerous, so they earn less gold.** The **effect** on their scaling is unchanged; the **mechanism of the harm** is not. Also **still unanswered: whether the opponent can see your event lane placement before committing**, the natural companion to the imbue being visible. Recorded, **not rebuilt** |
+| 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open; **new 2026-08-07 (from 05): the command bar should centre on the enemy hero's status** — recorded, not rebuilt; **2026-08-11 (from 05): map control's value is framed as denying the opponent information**, which gives board-open/hand-hidden a strategic consequence — recorded, not rebuilt; **2026-08-11 later the same day (from 05): an imbue IS visible to the opponent** (*"I would say so"*), extending board-open/hand-hidden to **prep**, and **map control's mechanism is now the front line** though its worth is unchanged — recorded, not rebuilt; **⚠ 2026-08-11, backlog answers (from 05): map control's worth is REVERSED — it is ECONOMIC denial, not informational.** He rejected the information answer himself because **a minimap shows both heroes at all times**, so nobody pushes blind and there is no fog to fear; pushing past their front line **makes their farming dangerous, so they earn less gold.** The **effect** on their scaling is unchanged; the **mechanism of the harm** is not. Also **still unanswered: whether the opponent can see your event lane placement before committing**, the natural companion to the imbue being visible. Recorded, **not rebuilt**; **⚠ 2026-08-11 (from 01): the 2026-08-07 enemy-centred command bar constraint recorded here is now one of two live framings** — he has since described **both heroes** in the middle panel — and **the choice between them is DELEGATED to whoever builds it, not a captain question.** **The tension is preserved and unresolved; it is not a reversal.** Recorded, **not rebuilt** |
 | 11 | Card accrual economy | open; **⚠ 2026-08-11 (from 05): the card system is RESET** — hand size, freeze slot and deck size **set aside** in favour of his restated four-clause goal, and **five commissioned shapes are on the table with none chosen.** The **unpriced-combining** finding bears directly on accrual. Recorded, **not rebuilt** |
 | 12 | The jungle — role and autonomy | open, **substantially answered — REBUILT 2026-08-11 from two dumps of its own**. **Where the jungle sits: answered** (typical MOBA layout, bases top and bottom, three lanes, jungle between all of it, **nothing really traversable on the outsides**; his Heroes of Newerth remark is a **reference, explicitly not a request**). **Jungle *control*: dissolved, not answered** — no ganks, no teammates, no vision needed, so the MOBA concept has no substrate here; **what remains is jungle access**, governed by the leash and the retracting home field. **Trees are destructible walls** separating chambers and lanes, so **jungle geometry is mutable mid-match** and aggro-pull reach changes with it — **its relation to terrain manipulation is unasked**. **Autonomy answered rung by rung:** **rung 2 adopted** (a **pre-commitment readout** — difficulty, time, damage, mana, expected gold and possible items, ~six camps a side), **rung 3 adopted but narrowed from game state to match TIME**, **rung 4 open with a shape** (timer/cadence, not continuous; unclaimed neutrals unresolved), **rung 4a adopted** with the principle *"you're not getting power from the jungle, but you are claiming something of the jungle that then benefits you"*, **rung 5 rejected** (chaotic, **and it interferes with the player's own pathing**). **The chasm is cut *"for now"*** on the retracting field and the leash, **and for scope** — *"there's a lot that has to be done already"* — so **the two halves connect by ordinary traversal**. **The home field does not gate jungle access.** **⚠ The hero-autonomy record is amended** — *"A hero is not fully autonomous"*, **control is tapping the map** — and **move-versus-attack-move through one tap is open prototype work**. **Still open:** jungle contents (**commissioned**), **symmetry** (direction given, tension unresolved), **whether invading the enemy jungle is possible at all** (reduced gold, no items, time-boxed, measure unchosen; **an anti-stomp device by his own statement**). Earlier: playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt** |
 | 13 | Prototype — sixty seconds of a match | resolved |
@@ -1284,6 +1323,15 @@ method; treat them as "this informs that," not as a build order.
     **at a glance where the hero may legally go**. **A stated cost of the leash
     decision, recorded as an open risk** — four jobs now compete for one quarter
     of a phone. 05, touches 01.
+  - **🔧 Partly structured 2026-08-11 — the bar now has a layout, and swapping is
+    accepted.** **Three panels: cards left, both heroes' progress and power in a
+    wider middle, right undecided** — see the decision entry in "Decisions so
+    far" and [01](issues/01-battlefield-geometry.md). **The competition is
+    loosened, not settled:** *"If another lever is required, but no space, need
+    an option to toggle/swap it visible when needed"* means **the bar need not
+    allocate a permanent slot per job.** **Which lever holds the fixed right slot
+    is undecided**, with four candidates recorded and none chosen, and **the
+    minimap and the leash readout are still claimants.** 01.
 - **Whether any gesture survives.** The "never drawn symbols" rejection still
   binds, but with casting reduced to selection it is unclear whether flicks and
   drags remain anywhere — combining cards together, steering the hero (15 asks

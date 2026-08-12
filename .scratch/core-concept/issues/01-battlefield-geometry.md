@@ -239,6 +239,114 @@ creep movement, pathing, sightlines and combat. The card change touched player
 targeting only. The "blocks/redirects spells" question survives for hero and
 creep abilities, not for card targeting.
 
+## The command bar's layout — answered 2026-08-11
+
+**The bottom quarter is divided into three panels.** `[provisional]` This is the
+first concrete layout this ticket has carried for the bottom 25%, and it arrives
+against a bottom quarter that already had four claimants competing for it.
+
+- **Left: the cards.**
+- **Middle, wider than either side individually: a "screen" showing your hero
+  and the enemy hero, displaying their progress and power.**
+- **Right: undecided.** His own framing: *"something tactical that controls one
+  of the game's other levers?"*
+
+### Why the middle panel is load-bearing
+
+The loss condition is **the enemy hero reaching a power threshold**, and his
+framing of the whole game is **preventing your opponent from maximising that
+power journey while maximising your own**. A central readout of both heroes'
+progress is therefore **the scoreboard of the actual win condition** — not a
+status readout, and not a HUD. It is the UI the power threshold has needed since
+it was proposed, and **it arrives before the threshold's own specifics**, which
+remain parked by his own scope instruction (see
+[05](05-match-shape-win-condition.md)).
+
+This is the same job the 2026-07-26 acceptance test already set for the bottom
+bar — the bar exists to make decisions **informed** — now pointed at the win
+condition rather than only at card choice.
+
+### The right panel — candidates, none chosen
+
+Recorded as candidates drawn from the design's other levers. **None is chosen,
+and the list is not a shortlist.**
+
+- **The jungle pre-commitment readout** from 12's second dump — roughly **six
+  camps**, each showing **difficulty, how long it would take, damage and mana
+  cost, expected gold and possible items**. See
+  [12](12-jungle-role.md).
+- **The event panel** — the telegraph countdown, the event's known type, the
+  imbue commitment, and whatever placement influence turns out to be.
+- **The gold conversion site** — spending gold on power-ups at the main base,
+  where the push arm turns into hero power.
+- **A minimap**, which is on record as showing both heroes at all times —
+  **though this is information rather than a lever**, and so does not answer the
+  question as he framed it.
+
+**A firstmate observation, offered and not decided:** the two arms of the central
+axis are pushing lanes and farming the jungle; cards are the lane arm, so a
+jungle readout on the right would make the bar **lane arm, the race between
+them, jungle arm**. **Not his, not adopted.**
+
+### Panel swapping — accepted
+
+> *"If another lever is required, but no space, need an option to toggle/swap it
+> visible when needed."*
+
+**The bar is not required to be three fixed panels.** When a lever needs a
+surface and the bar has no room, **a toggle or swap that brings it up on demand
+is the accepted mechanism.** `[provisional]`
+
+Recorded as a **general principle for the command bar**, **not** a decision about
+which lever holds the fixed right slot — that remains undecided above. It bears
+directly on the standing bottom-25% competition (the cards, both heroes, the
+leash readout, off-screen lane alerts, a reinforcement count), because it means
+the competition does not have to be settled by permanent allocation.
+
+### The centre screen's direction — DELEGATED, not open
+
+> *"Based on what the agent feels works better, have them choose the direction
+> for the centre screen. I remember my rationale for both, but things have
+> diverged since."*
+
+**He has explicitly handed this decision to whoever builds it**, on the grounds
+that his own reasoning for each option predates changes that may have
+invalidated it. **This is a delegation, not an unresolved captain decision** — it
+should not be filed as one or brought back to him.
+
+**Whoever chooses must record the choice and the reason** here, so the design
+keeps a rationale rather than a fait accompli.
+
+**The two framings, both his, both preserved:**
+
+- **2026-08-07** — the command bar should be **centred on a display of the enemy
+  hero's status, not a paired readout beside your own**. Its reason: it is *the
+  thing you watch to make gameplay choices*, and likely the same UI that tracks
+  progress toward the goal. Recorded in [05](05-match-shape-win-condition.md).
+- **2026-08-11** — the middle panel shows **your hero and the enemy hero**, their
+  progress and power.
+
+**⚠ The tension is stated and deliberately not resolved.** It may be a refinement
+rather than a reversal — the 2026-08-07 objection was to a paired readout
+**beside your own**, and a single central screen carrying both is a different
+arrangement — **but it is close enough to the rejected shape that it is not
+smoothed over here.** It is **not** flagged as a reversal, because he has not
+said it is one.
+
+**What has diverged since 2026-08-07 — material for the chooser, explicitly not
+a steer:**
+
+- The loss condition became **the enemy hero reaching a power threshold**, and
+  his framing of the whole game became a **race** between two power journeys.
+  **A race has two runners.**
+- **Map control became economic rather than informational**, so the panel's job
+  is less about watching for danger and more about reading the race.
+- **The leash arrived**, which ties reachable ground to lane state and **may
+  itself want a readout in the same bar.**
+- **A minimap showing both heroes at all times is already on record**, which
+  already covers *where is the enemy hero* and **may leave the centre screen's
+  job as progress rather than position.**
+
 ### Standing cautions — set aside for this pass
 
 The user, explicitly: *"your standing cautions, no let's just ignore those for
