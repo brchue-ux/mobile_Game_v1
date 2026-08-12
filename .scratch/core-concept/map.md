@@ -431,6 +431,73 @@ rather than performing certainty. Ticket 08 promotes or revises.
     gains meaning as the moving seam), **[15](issues/15-heroes.md)** (roam is
     bounded — **steering is unchanged**, still coarse standing orders; whether
     that meets the per-lane-pool condition is **not stated**).
+- **Hero control is tapping the map** `[provisional]` (2026-08-11) — *"I think
+  player control will need to be done via tapping on the map."* **A joystick and
+  preset move-to-area buttons were the two other candidates and are not chosen.**
+  It follows the amendment *"A hero is not fully autonomous"*, which **amends the
+  `[provisional]` never-steers-directly line** (see the standing-orders entry
+  below and its in-place amendment). **Consistent with casting-as-selection** —
+  the player selects a destination, they do not pilot. **⚠ Open and recorded as
+  prototype work, not solved:** how **move** and **attack-move** are both
+  expressed through one tap — being locked into the wrong intent *"will feel
+  really bad."* See [12](issues/12-jungle-role.md), and note
+  [15](issues/15-heroes.md) and `AGENTS.md` still carry the superseded phrasing.
+- **The jungle is a set of destructible-walled chambers, and jungle *control*
+  does not exist here** `[provisional]` (2026-08-11) — **12's first dump.**
+  **Trees are walls** separating jungle areas from each other and from the lanes,
+  **they can be destroyed**, and destroying them **changes where lane creeps can
+  be aggro-pulled** — so **jungle geometry is mutable mid-match** and aggro is a
+  function of current geometry. **⚠ Its relationship to terrain manipulation has
+  not been asked; do not assume they are one system.** Separately, *"There isn't
+  really jungle control like a typical MOBA"* — **no ganks to fear, no teammates
+  to make an opening, no vision to need**, so the MOBA idea has **no substrate in
+  a 1v1 with no fog and no allies.** **The question is dissolved, not answered:**
+  what remains is jungle **access**, governed by **the leash** and **the
+  retracting home field.** **Where the jungle sits is answered** — a typical MOBA
+  layout, bases top and bottom, three lanes, jungle between all of it, **nothing
+  really traversable on the outsides.** His **Heroes of Newerth** remark is a
+  **reference describing a shape, explicitly not a request** (*"I don't know that
+  that's necessarily something I want to implement"*). **Confirmed unchanged:**
+  playable space the hero must traverse, gold plus items and power-ups, and
+  **screen budget is no longer a constraint** (*"That's correct"*). See
+  [12](issues/12-jungle-role.md).
+- **The jungle's autonomy, answered rung by rung** `[provisional]` (2026-08-11) —
+  **12's second dump**, reacting to a commissioned brainstorm whose ladder
+  supplied the vocabulary. **Rung 2 adopted**, with content: roughly **six camps a
+  side**, each showing **difficulty, how long it would take, damage and mana
+  cost, expected gold and possible items** — a **pre-commitment readout** that
+  makes farming comparable to pushing **before you commit**. *"Tons more decisions
+  stemming from that, but those are later"* — **do not open them.** **Rung 3
+  adopted but NARROWED**, and the narrowing is his: the ladder's rung 3 responded
+  to **game state**; **he redefined it as responding to match TIME** — earlier is
+  easier with weaker drops, later is harder with better and more. A time curve is
+  **symmetric and predictable**, so it **raises no deliberate-losing concern**;
+  tuning is his and is parked. **Rung 4 open, with a shape** — if things leave the
+  jungle for a lane it is **on a timer or cadence, not continuous**; whether an
+  **unclaimed neutral** can do so is unresolved, *"I don't know what that one."*
+  **Rung 5 rejected**, both reasons his: it **reads as chaotic**, **and it
+  interferes with the player's own pathing** — the sharper objection, and specific
+  to a design where **route planning is the player's main spatial act.** **Rung 4a
+  adopted with an attribution principle:** the Heroes of the Storm pattern (clear
+  a camp, it marches your lane) is **the player acting, not the jungle** — *"you're
+  not getting power from the jungle, but you are claiming something of the jungle
+  that then benefits you."* **The jungle is a place you claim things out of, not a
+  dispenser you receive from** — a reusable test. See
+  [12](issues/12-jungle-role.md).
+- **The chasm is CUT *"for now"*, and the two jungle halves connect by ordinary
+  traversal** `[provisional]` (2026-08-11) — **its origin is his:** it came from a
+  *"you don't ever pass your own side"* assumption and was *"my way of like
+  preventing you from pushing early game."* **Why it goes:** that job now belongs
+  to **the retracting home field**, and the crossing rule it assumed was
+  **replaced by the leash.** He **rejected river and elevation variants as
+  typical.** *"Maybe just crossing over is fine. There's a lot that has to be done
+  already. Maybe just take out the chasm for now. We'll just consider it typical
+  traversal."* **⚠ The *"for now"* is his** — a shelving with a reason, the same
+  standing as banking. **⚠ The scope reasoning is a first:** *"there's a lot that
+  has to be done already"* is **the first thing cut to limit scope rather than on
+  merit.** **Consequence:** the long-standing **how-do-the-jungle-halves-connect**
+  question is **closed** — ordinary traversal. **Also answered: the home field does
+  NOT gate jungle access — no.** See [12](issues/12-jungle-role.md).
 - **Events survive the structure; event lane placement becomes a variable**
   `[provisional]` (2026-08-11) — *"Can still do events that summon large minions
   that need to be dealt with."* The **~5-minute cadence**, the **~1-minute
@@ -700,6 +767,21 @@ rather than performing certainty. Ticket 08 promotes or revises.
   influence its **priorities**. Not a reversal of *"you don't get to control your
   hero directly"* — an order is a destination, not steering. See
   [15](issues/15-heroes.md).
+  - **⚠ AMENDED 2026-08-11, text above kept as written.** *"A hero is not fully
+    autonomous."* **This amends `[provisional]` material; it is not a reversal of
+    a `[committed]` one** — what is `[committed]` is the *other* axis, casting as
+    selection rather than performance, **which a hero movement control does not by
+    itself violate.** **Decided: control is by tapping the map** — *"I think
+    player control will need to be done via tapping on the map."* **The joystick
+    and preset move-to-area buttons were the other two candidates and are not
+    chosen.** The player still **selects a destination rather than piloting**, so
+    the commander framing survives; what does **not** survive is *"never steers
+    directly."* **⚠ That superseded phrasing is still carried by
+    [15](issues/15-heroes.md) (stated twice) and by `AGENTS.md` — neither is
+    edited by this rebuild; both must be read against this amendment.**
+    **Firstmate error recorded:** several briefs asserted *"the player never
+    drives the hero directly"* as **committed**. It was provisional. See
+    [12](issues/12-jungle-role.md).
 - **PvE and PvP share one match shape** `[provisional]` (2026-07-26) — *"the same
   thing, just human versus AI."*
 - **Hero death costs nothing; buybacks are limited** `[provisional]`
@@ -764,7 +846,7 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt** |
+| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt** |
 | 02 | What "combining cards" actually means | resolved + amended |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
@@ -775,10 +857,10 @@ method; treat them as "this informs that," not as a build order.
 | 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
 | 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open; **new 2026-08-07 (from 05): the command bar should centre on the enemy hero's status** — recorded, not rebuilt; **2026-08-11 (from 05): map control's value is framed as denying the opponent information**, which gives board-open/hand-hidden a strategic consequence — recorded, not rebuilt; **2026-08-11 later the same day (from 05): an imbue IS visible to the opponent** (*"I would say so"*), extending board-open/hand-hidden to **prep**, and **map control's mechanism is now the front line** though its worth is unchanged — recorded, not rebuilt |
 | 11 | Card accrual economy | open |
-| 12 | The jungle — role and autonomy | open, updated — playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt** |
+| 12 | The jungle — role and autonomy | open, **substantially answered — REBUILT 2026-08-11 from two dumps of its own**. **Where the jungle sits: answered** (typical MOBA layout, bases top and bottom, three lanes, jungle between all of it, **nothing really traversable on the outsides**; his Heroes of Newerth remark is a **reference, explicitly not a request**). **Jungle *control*: dissolved, not answered** — no ganks, no teammates, no vision needed, so the MOBA concept has no substrate here; **what remains is jungle access**, governed by the leash and the retracting home field. **Trees are destructible walls** separating chambers and lanes, so **jungle geometry is mutable mid-match** and aggro-pull reach changes with it — **its relation to terrain manipulation is unasked**. **Autonomy answered rung by rung:** **rung 2 adopted** (a **pre-commitment readout** — difficulty, time, damage, mana, expected gold and possible items, ~six camps a side), **rung 3 adopted but narrowed from game state to match TIME**, **rung 4 open with a shape** (timer/cadence, not continuous; unclaimed neutrals unresolved), **rung 4a adopted** with the principle *"you're not getting power from the jungle, but you are claiming something of the jungle that then benefits you"*, **rung 5 rejected** (chaotic, **and it interferes with the player's own pathing**). **The chasm is cut *"for now"*** on the retracting field and the leash, **and for scope** — *"there's a lot that has to be done already"* — so **the two halves connect by ordinary traversal**. **The home field does not gate jungle access.** **⚠ The hero-autonomy record is amended** — *"A hero is not fully autonomous"*, **control is tapping the map** — and **move-versus-attack-move through one tap is open prototype work**. **Still open:** jungle contents (**commissioned**), **symmetry** (direction given, tension unresolved), **whether invading the enemy jungle is possible at all** (reduced gold, no items, time-boxed, measure unchosen; **an anti-stomp device by his own statement**). Earlier: playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt** |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new**; **2026-08-11 (from 05): the hero talent-tree idea would put a pre-match pick in the design** — *"a variable you choose prior to starting the game"*, two or three imbue options per hero. **Floated, unchosen** — recorded, not rebuilt |
-| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26; **2026-08-11 (from 05): the leash bounds where a hero may roam — it does NOT change how the hero is steered** (still coarse standing orders), and **whether that meets the per-lane-pool condition is not stated**; separately the **talent-tree idea** gives each hero *"two or three ways that they can affect it"* — recorded, not rebuilt |
+| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26; **2026-08-11 (from 05): the leash bounds where a hero may roam — it does NOT change how the hero is steered** (still coarse standing orders), and **whether that meets the per-lane-pool condition is not stated**; separately the **talent-tree idea** gives each hero *"two or three ways that they can affect it"* — recorded, not rebuilt; **⚠ 2026-08-11 (from 12): the hero-autonomy line is AMENDED — *"A hero is not fully autonomous"*, and control is DECIDED as tapping the map** (joystick and preset buttons not chosen). **This ticket still carries the superseded *"you don't get to control your hero directly"* phrasing, stated twice, and is NOT rebuilt** — read it against the amendment. **Whether tap-to-move meets the per-lane-pool condition is not stated by him.** **Newly open: move versus attack-move through one tap — prototype work** |
 | 16 | Deckbuilding — 100 cards, bring 20 | open |
 | 17 | Gold and items — the in-match economy | open, **flat-vs-tiered fork**; **2026-08-11 (from 05): gold is earned whenever the hero kills a minion (last-hitting explicitly will not work), lanes pay more gold than the jungle, the jungle pays unique items and power-ups plus a smaller gold drop, and gold buys similar-but-not-identical power-ups at the main base** — this is where hero power is bought. Recorded, **not rebuilt**; the economy items are **parked by his own scope instruction** |
 | 18 | Slice sequencing — what ships | open, **new**, standing gate |
@@ -885,6 +967,15 @@ method; treat them as "this informs that," not as a build order.
     the table, is not stated by him and is not inferred here.** Separately, the
     **hero-in-lane card is to be rehoused as a temporary leash extension**, which
     remains a card effect with a timer. 05, 15.
+  - **⚠ AMENDED 2026-08-11 by 12's dumps — the "steering is unchanged" reading
+    above is superseded.** *"A hero is not fully autonomous"*, and **control is
+    decided: tapping the map** (the joystick and the preset move-to-area buttons
+    are **not** chosen). **What that does to the per-lane-pool condition is NOT
+    stated by him and is not inferred here** — whether tap-to-move counts as
+    position becoming *"more manually manipulable"* is his call, not this map's.
+    **Newly open in its place:** how **move** and **attack-move** are both
+    expressed through **one tap** — recorded as **prototype work**, his concern
+    being that a locked-in wrong intent *"will feel really bad."* 12, 15.
 - ~~**What replaces "destroy their base."**~~ **Answered 2026-07-29** —
   reinforcement exhaustion, one condition with three levers. The base was never
   the problem; the tower-chain route was. See the resolved challenge above and
@@ -1082,6 +1173,43 @@ method; treat them as "this informs that," not as a build order.
   drags remain anywhere — combining cards together, steering the hero (15 asks
   this), or nowhere at all. Tap-only is now a live possibility that nobody has
   chosen.
+  - **One of the three is answered 2026-08-11: steering the hero is a tap on the
+    map.** **Combining** is still unstated, and **tap-only overall is still
+    unchosen** — do not read the control decision as settling the rest. 12.
+- **⚠ Whether invading the opponent's jungle is possible at all.** `[open]`
+  2026-08-11 — his own conditional, *"if we give that the ability to do that."*
+  **If it is:** invasion **pays reduced gold and no items** rather than being
+  forbidden, and **the penalty is time-boxed with the measure undecided** — he
+  offered **five minutes**, **3%** and **50%** and **chose none**. **⚠ His stated
+  purpose is preserved exactly: it is an anti-stomp device aimed at stronger
+  players rolling new ones** (*"to prevent like smurfs from just like rolling new
+  players"*), **not a lever between equals** — a player-experience decision whose
+  numbers happen to be tuning. **Whether the leash, the home field and this are
+  all needed to bound early aggression has not been put to him.** 12.
+- **⚠ Jungle symmetry — direction given, tension unresolved.** `[open]`
+  2026-08-11. **He wants it not totally symmetrical**, for variety: *"I would like
+  it to not be totally symmetrical, so that way depending on what side you end up
+  getting for that map, maybe there's a difference."* **The tension is his and is
+  not resolved:** *"I'm not sure how to weigh the repetitiveness of symmetry
+  versus the potential benefits you get from being on a certain side versus ones
+  you don't."* His **League** and **Heroes of the Storm** remarks are
+  **references describing shapes, not requests.** **Do not resolve it.** 12.
+- **What the jungle actually contains.** `[open]` 2026-08-11 — **commissioned as
+  its own session** at his instruction: *"this is going to have to be its own
+  giant dump."* A brainstorm report exists outside this repo and is **cited, not
+  adopted**; **no contents are proposed in this map or in 12.** 12.
+- **Whether anything leaves the jungle for a lane (ladder rung 4).** `[open]`
+  2026-08-11 — **the shape is settled if it happens** (a **timer or cadence, not
+  continuous**); **whether an unclaimed neutral can do it on its own is
+  unresolved**, *"I don't know what that one."* Note **rung 4a is adopted** and is
+  a different object — a **claimed** camp marching your lane is **the player
+  acting.** 12.
+- **How trees, terrain manipulation and jungle geometry relate.** `[open]`
+  2026-08-11 — **not asked.** Trees are destructible walls that change where lane
+  creeps can be aggro-pulled; terrain manipulation already blocks hero passage
+  with a tree root. **His instruction was to keep them live and not collapse
+  them into one system or split them into three by inference.** The **chasm** was
+  the third member and is **cut *"for now"***. 12.
 - **What "RPG elements" concretely means.** Stated as wanted, never defined.
   Heroes and items now cover part of it. Does any of it touch power?
 - **Meta-progression outside the match.** Partly owned by 06 and 11; the broader
