@@ -153,6 +153,11 @@ cd .scratch/core-concept/prototypes && python3 -m http.server 8931
 `index.html` symlinks the current version, so edits show on reload. Open it from
 a phone over LAN or Tailscale — it is a touch game and does not read on desktop.
 
+The current one is the **whole-as-envisioned** build. Read that directory's
+`README.md` first — it lists what to react to and what is deliberately crude,
+and it points at the commitment card, the delegated centre-screen decision, and
+the finish-gate findings that sit beside it.
+
 ## Hard-won gotchas
 
 - **Creeps are units, not a meter.** A tug-of-war / fill-bar abstraction has been
