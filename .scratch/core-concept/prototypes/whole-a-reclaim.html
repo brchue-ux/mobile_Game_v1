@@ -225,6 +225,10 @@ var P = {
   SCAR_S: 18,
   FIELD_R0: 0.66,               // home field radius at 0:00, x half-length
   FIELD_R1: 0.14,               // ...at 15:00
+  FIELD_LINGER: 6,              // PROVISIONAL AND CRUDE. Seconds a minion keeps
+                                // the home-field buff after walking out of it
+                                // (round 2, his new mechanic). Tunable on the
+                                // panel because the whole point is to feel it.
   LANE_REACH: 250,              // how far forward the LEASH RULE reaches off a lane
   SEAM: 0.072,                  // half-width of the contested band, in lane-t
   POOL: 520,                    // ~58 waves: running dry is reachable, not automatic
@@ -251,14 +255,38 @@ var TINT_R = 64;                // surveyed shoulder: order ends here, wild begi
 var TINT_C = 26;                // ...full-strength within this
 var TREAD_S = 34;               // a trodden path fades in this many seconds
 
-var CELL = 14, TS = 0.5;
+/* TS is the terrain buffer's resolution in px per world unit. It was 0.5 while
+   the camera sat at s~0.49; at round 2's s~1.2 that buffer was being upscaled
+   2.4x and the ground went to mush exactly when he asked to see its texture.
+   1.0 is the affordable answer -- see the Bill in FINDINGS for the measured
+   cost and for why REBUILD_SLICES moved with it. */
+var CELL = 14, TS = 1.0;
 var GW, GH, claim, shown, scar, laneT, laneD, veg, minD, corr, tread;
 
 /* ---- irregular, unmirrored value noise (F3: no mirror term) ------- */
+/* FIXED 2026-08-13 (round 2), and it was a real bug with real consequences.
+   The old body did `(n ^ (n >> 13)) * 1274126177` with plain `*`, which lands
+   above 2^53, so the double drops its low bits and the last mix is fed a
+   number whose bottom byte is zero. Measured over the whole 82 x 143 grid, for
+   every stride pattern this file uses: **h2 never once returned a value above
+   0.5.** Mean 0.250, fraction above a half 0.000.
+
+   Everything downstream had been quietly running on half its range:
+     - crown mottle only ever reached the dark half of the growth palette,
+     - `to > 0.82`, the bright #46804f tip, could NEVER fire,
+     - crown jitter and creep spacing used half their intended spread,
+     - fbm returned [0, 0.5], so the growth threshold was biased low and there
+       was systematically more canopy than the number asked for.
+
+   The previous pass diagnosed the symptom honestly -- "the whole canopy
+   palette lives inside twelve points of L*" -- and treated it as a palette
+   problem. It was this. Math.imul keeps every step inside int32, so the
+   avalanche is real and the range is [0, 1). Verified: mean 0.503, fraction
+   above a half 0.509. */
 function h2(x, y) {
-  var n = (x | 0) * 374761393 + (y | 0) * 668265263;
-  n = (n ^ (n >> 13)) * 1274126177;
-  return ((n ^ (n >> 16)) >>> 0) / 4294967295;
+  var n = (Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263)) | 0;
+  n = Math.imul(n ^ (n >>> 13), 1274126177);
+  return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
 }
 function vn(x, y) {
   var xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
@@ -272,55 +300,142 @@ function fbm(x, y) {
 }
 
 /* ---- geometry, in a 1000x2000 reference frame ---------------------
-   THE RECORDED LAYOUT, and it is not spokes. Bases top and bottom. The side
-   lanes leave the base sideways, run OUT to the left and right edges and then
-   down them; mid runs down the centre. Nothing traversable outside the side
-   lanes. What that leaves -- the two regions BETWEEN mid and each side lane --
-   is the jungle, and it is a region rather than a strip because the lanes
-   bound the board instead of filling it.
-   Left and right are deliberately NOT mirrors of each other.           */
+   ROTATIONAL SYMMETRY, NOT MIRROR SYMMETRY. This is the round-2 correction and
+   the distinction is the whole of it.
+
+     "I'm not crazy about the layout. It's very symmetrical... their maps don't
+      look so NASCAR track with a line in the middle."
+
+   What keeps a 1v1 with no draft FAIR is that the map lands on itself when
+   turned 180 degrees about its centre. What produced the NASCAR read is a
+   different symmetry entirely -- a mirror across a vertical axis, with the
+   bases ON that axis and mid ruled straight down it. Real MOBA maps are
+   rotationally symmetric and almost never mirror-symmetric.
+
+   So: ONE half is authored, and rot() generates the other. Nothing here is
+   reflected anywhere. Three consequences, all deliberate:
+
+     1. THE BASES ARE OFF THE CENTRE LINE. Mine sits west of centre, theirs
+        east of it, and rot maps one onto the other. There is no axis for a
+        mirror to run down, so the ruled-line read is gone at the root.
+     2. MID RUNS DIAGONALLY. Portrait forbids a true corner-to-corner mid, but
+        mid can leave my base heading EAST, swing out to x=596, cross the
+        centre on the diagonal and come back WEST to enter their base from the
+        other side. It is an S, not a rule.
+     3. THE TWO JUNGLE REGIONS ARE DIFFERENT SHAPES. Because mid leans east on
+        my half, the east region is pinched to a neck at y~1500 and the west
+        region opens out; on their half it is the other way round. Same total
+        ground per side, different ground.
+
+   Fairness is checkable rather than asserted: rot(lane west) IS lane east,
+   rot(mid) IS mid reversed, and every path, tree, clearing and camp below is
+   authored once and rotated once.                                       */
+function rot(p) { return [1000 - p[0], 2000 - p[1]]; }
+function rotAll(list) { return list.map(rot); }
+function rotRev(list) { return list.map(rot).reverse(); }
+
+var REF_BASE_MINE = [392, 1876];              /* west of centre, deliberately */
+var REF_BASE_THRS = rot(REF_BASE_MINE);       /* = [608, 124] */
+
+/* the west lane: out of my base, up the west edge, into their base from the
+   north-west. Authored, irregular, and not a mirror of anything. */
+var REF_LANE_W = [
+  [392,1876],[272,1848],[178,1782],[122,1662],[104,1508],[118,1352],[100,1180],
+  [92,1000],[104,832],[88,660],[126,494],[196,336],[320,214],[470,146],[608,124]
+];
+/* mid: self-symmetric under rot, which is what makes it fair, and shaped as a
+   crossing diagonal, which is what stops it reading as the line in the middle.
+   The second half is literally rot() of the first, so this cannot drift. */
+var REF_MID_HALF = [
+  [392,1876],[436,1744],[516,1636],[578,1512],[596,1372],[556,1240],[524,1112],[508,1032]
+];
 var REF_LANES = [
-  /* left: out of the base to the west edge, up it, then in to their base */
-  [[500,1880],[356,1858],[224,1790],[148,1664],[122,1490],[114,1200],[118,900],
-   [136,586],[204,372],[344,180],[500,120]],
-  /* mid: down the centre, leaning -- a surveyed road, not a ruled line */
-  [[500,1880],[486,1592],[512,1296],[494,1000],[516,704],[490,408],[500,120]],
-  /* right: leaves later and hugs tighter. Not a mirror of the left. */
-  [[500,1880],[672,1852],[812,1772],[880,1630],[892,1444],[886,1130],[880,826],
-   [860,516],[788,318],[646,168],[500,120]]
+  REF_LANE_W,
+  REF_MID_HALF.concat(rotRev(REF_MID_HALF)),
+  rotRev(REF_LANE_W)                          /* east = the west lane, turned */
 ];
-/* THE JUNGLE IS SEMI-OPEN (his amendment): not open ground, not a sealed
-   thicket -- "a forested area with clear openings and paths to traverse and
-   little pockets where the creeps will hang out." These are the paths. The
-   growth is thinned along them, so passage is the DEFAULT state and the trees
-   below separate rather than seal. Left has three, right has four. */
-var REF_PATHS = [
-  [[292,1786],[276,1580],[306,1372],[288,1152],[314,936],[292,720],[276,470],[300,300]],
-  [[176,1452],[268,1408],[372,1438],[440,1490]],
-  [[188,842],[286,880],[386,846],[452,796]],
-  [[704,1802],[722,1596],[698,1382],[716,1164],[690,948],[714,706],[698,452],[712,286]],
-  [[566,1666],[664,1712],[772,1678],[836,1616]],
-  [[604,1290],[700,1250],[792,1300]],
-  [[578,1046],[678,1006],[784,1044],[848,1108]]
+
+/* THE JUNGLE IS SEMI-OPEN (his amendment), and round 2 asks for more than
+   that: "the jungle literally is just two vertical lines with pockets. There's
+   no angles" / "the ability to traverse the jungle needs to be made a much
+   better experience."
+
+   What replaces the two corridors is a ROUTE NETWORK. Every path below is a
+   bent polyline, never a straight run, and the segments meet at junctions that
+   open into clearings. The two regions have deliberately different topology:
+
+     WEST region  -- two closed loops (w2-w4-w3 and w4-w6-w5-w3). Between any
+                     two of its clearings there is more than one way to go, so
+                     routing is a choice rather than a corridor.
+     EAST region  -- one NECK at (742,1502) joining a south chamber to a north
+                     chamber, and a loop only in the north. It is the
+                     constrained region, and the pinch is where mid leans east.
+
+   Both are authored on my half; their half is rot() of it, so the choice each
+   player faces is the same choice turned around.                         */
+var REF_PATHS_HALF = [
+  /* --- west region: loops --- */
+  [[452,1716],[392,1668],[322,1608]],           /* mid-side mouth -> w2       */
+  [[322,1608],[264,1512],[238,1394]],           /* w2 -> w3 (the long way)    */
+  [[322,1608],[368,1544],[392,1470]],           /* w2 -> w4                   */
+  [[392,1470],[318,1416],[238,1394]],           /* w4 -> w3  (closes loop 1)  */
+  [[392,1470],[434,1382],[452,1274]],           /* w4 -> w6                   */
+  [[238,1394],[256,1284],[300,1176]],           /* w3 -> w5                   */
+  [[452,1274],[376,1206],[300,1176]],           /* w6 -> w5  (closes loop 2)  */
+  [[168,1652],[244,1636],[322,1608]],           /* lane-W mouth -> w2         */
+  [[128,1128],[204,1148],[300,1176]],           /* lane-W mouth -> w5         */
+  [[300,1176],[352,1074],[400,960]],            /* w5 -> the centre band      */
+  [[452,1716],[420,1798]],                      /* w1 -> my base apron        */
+  /* --- east region: a neck, and one loop beyond it --- */
+  [[664,1782],[730,1732],[786,1652]],           /* base-side mouth -> e2      */
+  [[786,1652],[736,1580],[742,1502]],           /* e2 -> THE NECK             */
+  [[742,1502],[798,1438],[812,1352]],           /* neck -> e4                 */
+  [[812,1352],[758,1272],[688,1214]],           /* e4 -> e5                   */
+  [[812,1352],[856,1250],[852,1140]],           /* e4 -> e6                   */
+  [[688,1214],[774,1160],[852,1140]],           /* e5 -> e6  (closes loop 3)  */
+  [[688,1214],[642,1128],[600,1040]],           /* e5 -> the centre band      */
+  [[868,1580],[828,1616],[786,1652]],           /* lane-E mouth -> e2         */
+  [[852,1140],[898,1096]],                      /* e6 -> lane E               */
+  [[664,1782],[600,1826]]                       /* e1 -> toward my base       */
 ];
-/* trees sit BETWEEN the paths and beside them, and two of them pinch a path
-   without closing it. Still destructible, still separating -- but you route
-   around them, you are not walled in by them. */
-var REF_TREES = [
-  [170,1712,224,1748],[364,1552,398,1614],[196,1216,238,1168],[366,1096,404,1046],
-  [206,742,244,684],[362,646,400,700],[216,336,268,306],
-  [786,1786,832,1746],[624,1548,660,1490],[798,1288,832,1240],[630,1004,668,956],
-  [806,872,840,824],[640,538,678,590],[770,332,814,368]
+/* CLEARINGS: the paths do not just thin the growth, they OPEN. Every junction
+   is a clearing you arrive in, which is what makes a route legible as a route
+   -- you can see where the ways part. Radius is world-ish reference units. */
+var REF_CLEARINGS_HALF = [
+  [322,1608,34],[238,1394,30],[392,1470,24],[300,1176,36],
+  [786,1652,32],[742,1502,22],[812,1352,34],[688,1214,30]
 ];
-/* camps live in pockets OFF the paths -- close enough that a pocket's clearing
-   opens onto a path, far enough that you leave the path to take one. */
-var REF_CAMPS = [
-  [232,1636,1],[352,1266,2],[248,1064,3],      /* yours, left region  */
-  [768,1730,1],[646,1462,2],[774,1150,3],      /* yours, right region */
-  [346,858,1],[228,612,2],[326,398,3],         /* theirs -- not a mirror of yours */
-  [656,880,1],[780,668,2],[672,392,3]
+/* TREES AT ANGLES, and that is the point of them now. They sit between the
+   routes and inside the loops, so the thing you route around is a diagonal
+   mass rather than a wall parallel to your direction of travel. Two of them
+   pinch the east neck from either side without closing it. Still destructible,
+   still separating. */
+var REF_TREES_HALF = [
+  [286,1712,352,1664],[196,1560,252,1500],[356,1590,404,1538],[300,1452,346,1400],
+  [188,1330,232,1290],[346,1246,398,1200],[246,1064,296,1020],
+  [706,1706,752,1748],[800,1548,842,1506],[686,1520,724,1560],[746,1392,700,1352],
+  [800,1210,846,1250],[730,1096,776,1060],[636,1300,676,1256]
 ];
-var LANES, LSEG, TREES, CAMP_POS, BASE_MINE, BASE_THEIRS, PSEG;
+/* camps live in pockets OFF the routes -- 70 to 100 units off, so a pocket's
+   clearing opens toward a path but you leave the path to take one. Six on my
+   half; theirs is rot() of mine, so difficulty is placed identically and
+   shaped differently. */
+var REF_CAMPS_HALF = [
+  [222,1710,1],[368,1352,2],[206,1230,3],      /* west region  */
+  [676,1638,1],[700,1420,2],[790,1082,3]       /* east region  */
+];
+var REF_PATHS     = REF_PATHS_HALF.concat(REF_PATHS_HALF.map(rotAll));
+var REF_TREES     = REF_TREES_HALF.concat(REF_TREES_HALF.map(function (t) {
+  var a = rot([t[0], t[1]]), b = rot([t[2], t[3]]);
+  return [a[0], a[1], b[0], b[1]];
+}));
+var REF_CLEARINGS = REF_CLEARINGS_HALF.concat(REF_CLEARINGS_HALF.map(function (c) {
+  var a = rot([c[0], c[1]]); return [a[0], a[1], c[2]];
+}));
+var REF_CAMPS     = REF_CAMPS_HALF.concat(REF_CAMPS_HALF.map(function (c) {
+  var a = rot([c[0], c[1]]); return [a[0], a[1], c[2]];
+}));
+var LANES, LSEG, TREES, CAMP_POS, BASE_MINE, BASE_THEIRS, PSEG, CLEAR;
 var LANE_REF_LEN = 1900;        /* creep speed is normalised to this, so a long
                                    side lane does not move its creeps faster */
 
@@ -346,8 +461,11 @@ function buildGeometry() {
     return {x1: t[0]*kx, y1: t[1]*ky, x2: t[2]*kx, y2: t[3]*ky, hp: 100, alive: true};
   });
   CAMP_POS = REF_CAMPS.map(function (c) { return {x: c[0]*kx, y: c[1]*ky, tier: c[2]}; });
-  BASE_MINE = {x: 500*kx, y: 1880*ky};
-  BASE_THEIRS = {x: 500*kx, y: 120*ky};
+  CLEAR = REF_CLEARINGS.map(function (c) {
+    return {x: c[0]*kx, y: c[1]*ky, r: c[2] * (kx + ky) / 2};
+  });
+  BASE_MINE = {x: REF_BASE_MINE[0]*kx, y: REF_BASE_MINE[1]*ky};
+  BASE_THEIRS = {x: REF_BASE_THRS[0]*kx, y: REF_BASE_THRS[1]*ky};
 }
 function pathDist(px, py) {
   var best = 1e9, pi, i;
@@ -431,9 +549,20 @@ function buildGrid() {
 
       /* SEMI-OPEN, his amendment: clear openings and paths to traverse... */
       var pd = pathDist(x, y);
-      var pv = (pd - 20) / 30;
+      var pv = (pd - 18) / 24;
       pv = pv < 0 ? 0 : pv > 1 ? 1 : pv;
       v *= pv * pv * (3 - 2 * pv);
+
+      /* ...OPENING INTO CLEARINGS at every junction (round 2). A route reads as
+         a route only if you can see where the ways part, and that needs ground
+         wide enough to stand in, not a slot. */
+      var cl = 0, ki;
+      for (ki = 0; ki < CLEAR.length; ki++) {
+        var q = CLEAR[ki];
+        var kk = 1 - (Math.hypot(x - q.x, y - q.y) - q.r) / 18;
+        if (kk > cl) cl = kk;
+      }
+      if (cl > 0) { if (cl > 1) cl = 1; v *= 1 - cl * cl * (3 - 2 * cl); }
 
       /* ...and little pockets where the creeps hang out. Each camp sits in an
          opening that reaches back to a path, so nothing is sealed. */
@@ -442,7 +571,7 @@ function buildGrid() {
         var dd = Math.hypot(x - CAMP_POS[ci].x, y - CAMP_POS[ci].y);
         if (dd < cd) cd = dd;
       }
-      var pk = (cd - 30) / 24;
+      var pk = (cd - 34) / 24;
       pk = pk < 0 ? 0 : pk > 1 ? 1 : pk;
       v *= pk * pk * (3 - 2 * pk);
 
@@ -468,7 +597,7 @@ var CARDS = [
 var S, cam = {x: 0, y: 0}, view = {w: 0, h: 0, s: 1};
 var terrain = document.createElement("canvas");
 var tctx;
-var rebuildRow = 0, REBUILD_SLICES = 10;
+var rebuildRow = 0, REBUILD_SLICES = 28;
 
 function campStat(c, t) {
   var k = 1 + (t / P.MATCH_S) * 1.35;
@@ -516,9 +645,11 @@ function fresh() {
 function newHero(side) {
   /* the hero starts out of the base, not in it: the payoff is at the seam and
      the opening frame has to contain both */
-  var b = side === 1 ? BASE_MINE : BASE_THEIRS;
+  /* on the mid lane rather than on a bearing off the base, because with the
+     bases off the centre line a fixed offset no longer lands on anything */
+  var sp = lanePos(1, side === 1 ? 0.17 : 0.83);
   return {
-    side: side, x: b.x, y: b.y - side * 380 * (P.MAP_H / 2000), vx: 0, vy: 0,
+    side: side, x: sp.x, y: sp.y, vx: 0, vy: 0,
     hp: 320, mhp: 320, mp: 120, mmp: 120,
     gold: 0, items: 0, camps: 0, order: null, atk: 0, buff: 0, slow: 0, dead: 0, think: 0
   };
@@ -591,14 +722,19 @@ function claimAt(x, y) {
   }
   return (g(x0,y0)*(1-tx) + g(x0+1,y0)*tx) * (1-ty) + (g(x0,y0+1)*(1-tx) + g(x0+1,y0+1)*tx) * ty;
 }
-/* The home field: a gradient, not a wall. Full strength close in, falling to
-   nothing at the edge — which is why growth survives most of your own half. */
-function apron(x, y, side) {
-  var b = side === 1 ? BASE_MINE : BASE_THEIRS, R = fieldR();
-  var d = Math.hypot(x - b.x, y - b.y);
-  if (d > R) return 0;
-  var k = (R - d) / (R * 0.55);
-  return k > 1 ? 1 : k;
+/* THE HOME FIELD IS A BOUNDARY, NOT A VOLUME (round 2, his words):
+   "not a literal force field, just some sort of visual indicator maybe in the
+    lane that tells you the line in the sand of where minions will be buffed
+    versus where they won't be."
+   So the field stops being a wash across a disc and becomes a THRESHOLD marked
+   across each lane, drawn by drawFieldMarks() in vector rather than in the
+   terrain grid. The rule is now exactly one comparison, and the mark is drawn
+   at exactly the radius that comparison uses -- the old wash faded out over a
+   band and empowered creeps out to 0.879R, so the picture and the rule
+   disagreed by 12%. They cannot now. */
+function inField(x, y, side) {
+  var b = side === 1 ? BASE_MINE : BASE_THEIRS;
+  return Math.hypot(x - b.x, y - b.y) <= fieldR();
 }
 /* The field has three readable layers, all one mechanism: the cultivated CORE
    it keeps clear, the EDGE where its reach ends, and the creeps it empowers in
@@ -653,7 +789,15 @@ var C_WILD_1  = [30,64,40],    C_WILD_0  = [12,26,18];
    Four value tiers now carry the whole board -- canopy L*9, opening L*17,
    their bone L*55, your bone L*85 -- so the frame reads at a glance. */
 var C_FLOOR   = [13,26,18];    /* under canopy: nobody's, and it says so */
-var C_DUFF    = [38,44,30];    /* an opening: trodden ground, walkable, still wild */
+var C_DUFF    = [47,53,36];    /* an opening: trodden ground, walkable, still wild.
+                                  Raised L* 17.5 -> 20.6 in round 2. Measured, not
+                                  guessed: canopy and opening had converged to 14.4
+                                  against 17.5 -- three points apart -- which is
+                                  under half of what the four-tier value budget
+                                  claims, and at the closer camera it is the
+                                  difference between "a path" and "a slightly
+                                  different dark". Canopy went down, opening went
+                                  up, and the two tiers are ~8 apart again. */
 function mix3(a, b, k) {
   k = k < 0 ? 0 : k > 1 ? 1 : k;
   return [a[0] + (b[0]-a[0])*k, a[1] + (b[1]-a[1])*k, a[2] + (b[2]-a[2])*k];
@@ -663,7 +807,14 @@ function drawTerrainSlice() {
   var y0 = Math.floor(rebuildRow * GH / REBUILD_SLICES);
   var y1 = Math.floor((rebuildRow + 1) * GH / REBUILD_SLICES);
   rebuildRow = (rebuildRow + 1) % REBUILD_SLICES;
-  var cs = CELL * TS, gx, gy;
+  /* GRAIN PITCH. The camera came in ~2.4x for round 2, so everything that used
+     to be a per-cell hairline is now ~100 device px apart and has stopped
+     reading as a material. Every ruling below is drawn three-to-a-cell instead
+     of one-every-three-cells, which puts the pitch back where it was on screen
+     -- roughly 11 device px -- at the new distance. GK scales the growth marks
+     with the terrain buffer so the canopy keeps the grain the gate measured. */
+  var cs = CELL * TS, gx, gy, sub = cs / 3, GK = cs / 7;
+  var RW = Math.max(0.8, cs / 16);
   for (gy = y0; gy < y1; gy++) {
     var y = gy * CELL + CELL / 2, py = gy * CELL * TS;
     for (gx = 0; gx < GW; gx++) {
@@ -683,6 +834,12 @@ function drawTerrainSlice() {
          nobody's and looks it, which leaves the home field alone in the
          territorial channel instead of collapsed into a second field. */
       var floor = mix3(C_FLOOR, C_DUFF, 1 - veg[idx]);
+      /* SHADE UNDER THE CANOPY. The ground a thick crown stands on is not the
+         same value as the ground in an opening, and this is where the wild's
+         dark end comes from -- without it the whole canopy, floor included,
+         sits inside five points of L* and the finish gate calls it dead. */
+      if (veg[idx] > 0.4) { var sh = 1 - 0.52 * (veg[idx] - 0.4) / 0.6;
+        floor = [floor[0] * sh, floor[1] * sh, floor[2] * sh]; }
       if (cw > 0.002) {
         var held = sv > 0 ? mix3(C_MINE_LO, C_MINE_HI, sv * 1.25)
                           : mix3(C_THRS_LO, C_THRS_HI, -sv * 1.25);
@@ -694,25 +851,40 @@ function drawTerrainSlice() {
       }
       tctx.fillStyle = "rgb(" + (floor[0]|0) + "," + (floor[1]|0) + "," + (floor[2]|0) + ")";
       tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
-
-      /* the cultivated apron — drawn regardless of who currently holds it,
-         because the home field is positional. Its edge is the retraction. It
-         now has the territorial channel to itself, and it is CROSS-hatched
-         where the lanes are ruled one way only, so the two cannot be confused. */
-      var ap1 = apron(x, y, 1), ap2 = apron(x, y, -1), ap = ap1 > ap2 ? ap1 : ap2;
-      if (ap > 0) {
-        tctx.fillStyle = ap1 > ap2
-          ? "rgba(232,222,196," + (ap * 0.26).toFixed(3) + ")"
-          : "rgba(150,166,182," + (ap * 0.26).toFixed(3) + ")";
-        tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
-        if (ap > 0.2) {                            /* cultivation: hatched BOTH ways */
-          tctx.fillStyle = ap1 > ap2 ? "rgba(196,184,150,.30)" : "rgba(120,138,158,.30)";
-          if (gx % 3 === 0) tctx.fillRect(px, py, 0.9, cs + 0.6);
-          if (gy % 3 === 0) tctx.fillRect(px, py, cs + 0.6, 0.9);
-        }
-        if (ap < 0.055) {            /* the field's own edge — this is what retracts */
-          tctx.fillStyle = ap1 > ap2 ? "rgba(158,146,110,.75)" : "rgba(96,112,130,.75)";
-          tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
+      /* AGGREGATE. Material, not tint -- and SUB-CELL, which is the whole
+         point. A per-cell value grain was tried first and it was a mistake:
+         at 17 px a cell it painted a visible chequerboard across the whole
+         board. These are four marks a quarter of a cell across, placed from
+         two independent hashes over a range that overspills the cell, so the
+         grain has no lattice to give away. Value only, no hue drift, so the
+         four-tier value budget is untouched. */
+      for (var a = 0; a < 2; a++) {
+        var ax = h2(gx * (31 + a * 13) + a * 7 + 1, gy * (23 + a * 5) + 3);
+        var ay = h2(gy * (29 + a * 11) + a * 3 + 5, gx * (19 + a * 7) + 9);
+        var av2 = h2(gx * (41 + a * 3) + 2, gy * (37 + a * 9) + 6) - 0.5;
+        /* the light and dark marks are NOT weighted equally, and the reason is
+           measured: L* is a cube root, so a dark mark moves the mean far more
+           than a light one of the same alpha. Symmetric weights pulled every
+           value tier down about 10 L* -- a real drift, since the card's Floor
+           puts the whole design's legibility on value. These weights hold the
+           four tiers where the last gate measured them. */
+        tctx.fillStyle = (av2 > 0 ? "rgba(255,248,230," : "rgba(0,0,0,")
+                       + (Math.abs(av2) * (av2 > 0 ? 1.30 : 0.78)).toFixed(3) + ")";
+        tctx.fillRect(px + (ax * 1.16 - 0.08) * cs, py + (ay * 1.16 - 0.08) * cs,
+                      cs * 0.42, cs * 0.38);
+      }
+      /* LITTER, in the jungle's openings only. An opening is the one surface
+         with neither ruling nor crowns on it, so it was the last flat thing
+         left in the frame -- every dead block that survived the canopy fix was
+         opening ground. Leaf litter is what that ground is made of. */
+      if (cw < 0.35 && veg[idx] < 0.42) {
+        for (var b2 = 0; b2 < 2; b2++) {
+          var bx2 = h2(gx * (53 + b2 * 17) + 4, gy * (43 + b2 * 9) + 2);
+          var by2 = h2(gy * (47 + b2 * 13) + 8, gx * (59 + b2 * 3) + 6);
+          var bv = h2(gx * (61 + b2 * 7) + 1, gy * (67 + b2 * 5) + 3);
+          tctx.fillStyle = bv > 0.5 ? "rgba(150,146,104," + ((bv - 0.5) * 1.1).toFixed(3) + ")"
+                                    : "rgba(8,16,10," + ((0.5 - bv) * 1.2).toFixed(3) + ")";
+          tctx.fillRect(px + bx2 * cs * 0.8, py + by2 * cs * 0.8, cs * 0.26, cs * 0.20);
         }
       }
 
@@ -724,19 +896,26 @@ function drawTerrainSlice() {
         var road = (1 - md / ROAD_W) * av;
         tctx.fillStyle = (sv > 0 ? "rgba(246,238,216," : "rgba(160,174,190,") + (road * 0.5).toFixed(3) + ")";
         tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
-        if (gy % 3 === 0) {                        /* sleepers, across the road */
-          tctx.fillStyle = (sv > 0 ? "rgba(96,88,68," : "rgba(38,44,52,") + (road * 0.5).toFixed(3) + ")";
-          tctx.fillRect(px, py, cs + 0.6, 0.9);
-        }
+        /* sleepers across the road, three to a cell -- see the GRAIN PITCH note */
+        tctx.fillStyle = (sv > 0 ? "rgba(96,88,68," : "rgba(38,44,52,") + (road * 0.5).toFixed(3) + ")";
+        tctx.fillRect(px, py, cs + 0.6, RW);
+        tctx.fillRect(px, py + sub, cs + 0.6, RW);
+        tctx.fillRect(px, py + sub * 2, cs + 0.6, RW);
       }
 
       /* ruling: along the lane for your ground, across it for theirs. Only on
          surveyed ground -- the jungle is not ruled by anybody. */
       if (cw > 0.35) {
         if (sv > 0) {
-          if (gx % 3 === 0) { tctx.fillStyle = "rgba(80,74,58,.32)"; tctx.fillRect(px, py, 0.8, cs + 0.6); }
+          tctx.fillStyle = "rgba(80,74,58,.32)";
+          tctx.fillRect(px, py, RW, cs + 0.6);
+          tctx.fillRect(px + sub, py, RW, cs + 0.6);
+          tctx.fillRect(px + sub * 2, py, RW, cs + 0.6);
         } else {
-          if (gy % 3 === 0) { tctx.fillStyle = "rgba(24,30,38,.45)"; tctx.fillRect(px, py, cs + 0.6, 0.8); }
+          tctx.fillStyle = "rgba(24,30,38,.45)";
+          tctx.fillRect(px, py, cs + 0.6, RW);
+          tctx.fillRect(px, py + sub, cs + 0.6, RW);
+          tctx.fillRect(px, py + sub * 2, cs + 0.6, RW);
         }
       }
 
@@ -770,29 +949,74 @@ function drawTerrainSlice() {
       }
       if (g > 0) {
         if (g > 1) g = 1;
-        var jx = (h2(gx, gy) - 0.5) * cs * 0.9, jy = (h2(gy, gx * 3 + 1) - 0.5) * cs * 0.9;
-        /* CROWNS ARE MOTTLED, NOT FLAT. On the old bright ground a dark blob had
-           all the contrast it needed; on the jungle floor it had none, and the
-           gate measured the result as dead ground. The crown's value now varies
-           per cell instead of tracking depth, so a thick canopy is a textured
-           mass rather than a void. */
-        var mo = h2(gx * 11 + 3, gy * 7 + 5);
-        tctx.fillStyle = mix(C_WILD_0, C_WILD_1, mo);
-        tctx.beginPath();
-        /* crowns, not a paint layer: sized so the floor still shows between
-           them, which is where the wild gets its contrast from */
-        tctx.ellipse(px + cs / 2 + jx, py + cs / 2 + jy, 1.5 + 2.2 * g, 1.3 + 2.0 * g,
-                     h2(gx * 5, gy * 7) * 3.14, 0, 6.2832);
-        tctx.fill();
-        /* LIVE TIPS at the card's own #305e38 and at a size that survives the
-           downscale. On bright ground the crowns carried the second grain
-           scale by themselves; on the jungle floor they cannot, because the
-           whole canopy palette lives inside twelve points of L*. The tips are
-           what puts real range back into the wild. */
-        var to = h2(gx * 3 + 7, gy * 5 + 2);
-        if (to > 0.40) {
-          tctx.fillStyle = to > 0.82 ? "#46804f" : "#305e38";
-          tctx.fillRect(px + cs / 2 + jx * 1.4, py + cs / 2 + jy * 1.3, 2.3, 2.1);
+        /* THE CANOPY IS THREE CROWNS TO A CELL, NOT ONE, AND THE REASON IS
+           MEASURED. At the old camera one mottled blob per 7 px cell had all
+           the range it needed. At round 2's camera a cell is 17 px on screen,
+           a gate block covers about nine of them, and one value per cell put
+           HALF THE FRAME under the dead-block threshold -- 41 blocks of 84,
+           against 24 for the build being corrected, measured the same way in
+           the same session (see FINDINGS). The fix is not a colour: it is
+           RANGE, drawn at a scale a block can see.
+
+             floor showing through   ~36% of the canopy at L* 9
+             crown mass              ~54%, each crown its own value, L* 9-22
+             live tips               ~10% at #305e38 / #46804f, L* 33-46
+
+           All three values are the card's own Materials line. Nothing here is
+           lighter than the card licensed; there is simply more of the light
+           end and it is drawn where a block can resolve it. */
+        var CR = cs * 0.30 * (0.55 + 0.45 * g);
+        var TX = [0, 0, 0], TY = [0, 0, 0], TC = [0, 0, 0];
+        for (var q = 0; q < 3; q++) {
+          /* placed from two independent hashes over a range that OVERSPILLS
+             the cell, so crowns interleave across cell boundaries and the
+             canopy has no lattice. A fixed sub-cell lattice was tried first
+             and read as a grid of dots. */
+          var hj = h2(gx * (13 + q * 7) + 3, gy * (11 + q * 5) + 5);
+          var hk = h2(gy * (17 + q * 3) + 2, gx * (7 + q * 11) + 9);
+          var qx = px + (hj * 1.3 - 0.15) * cs, qy = py + (hk * 1.3 - 0.15) * cs;
+          var mo = h2(gx * (5 + q * 19), gy * (3 + q * 23));
+          tctx.fillStyle = mix(C_WILD_0, C_WILD_1, mo * mo);   /* biased dark: the
+                             canopy's MEAN has to stay below the jungle
+                             opening's or the two tiers merge */
+          tctx.beginPath();
+          tctx.ellipse(qx, qy, CR * (0.8 + 0.5 * hk), CR * (0.75 + 0.5 * hj), hj * 3.14, 0, 6.2832);
+          tctx.fill();
+          TX[q] = qx; TY[q] = qy; TC[q] = hj;
+        }
+        /* LIVE TIPS, AND THEY ARE DRAWN AFTER EVERY CROWN IN THE CELL. Drawn
+           inside the crown loop they were painted over by the next crown and
+           by the neighbour's overspill, and the measurement said so: the tips
+           held 0.4% of the canopy's pixels when they were meant to hold
+           ~12%, which is why the canopy sat inside five points of L* and half
+           the frame measured dead. These are the card's own #305e38 and the
+           #46804f the last pass added, and they are the ONLY light in the
+           wild. */
+        for (var w2 = 0; w2 < 3; w2++) {
+          tctx.fillStyle = TC[w2] > 0.66 ? "#46804f" : "#305e38";
+          tctx.fillRect(TX[w2] - cs * 0.10, TY[w2] - cs * 0.09, cs * 0.20, cs * 0.18);
+        }
+      } else if (cw < 0.35) {
+        /* SCRUB. An opening is THINNED wild, not bare ground -- the growth is
+           low there, not absent -- and this is the round-2 correction's last
+           dead surface. A clearing had neither ruling nor crowns on it, so it
+           was the one thing left in the frame with no structure at any scale,
+           and every dead block that survived the canopy fix was clearing
+           ground. A low-frequency value wash was tried first and made it worse
+           on both counts (mean down 5 L*, variance down): the project's own
+           record is that STRUCTURE fixes this and colour does not, and it was
+           right again. */
+        for (var s2 = 0; s2 < 2; s2++) {
+          var sxh = h2(gx * (71 + s2 * 11) + 2, gy * (73 + s2 * 7) + 5);
+          if (sxh < 0.42) continue;                /* scattered, not a lattice */
+          var syh = h2(gy * (79 + s2 * 5) + 9, gx * (83 + s2 * 13) + 1);
+          var ux = px + sxh * cs * 0.78, uy = py + syh * cs * 0.78;
+          tctx.fillStyle = mix(C_WILD_0, C_WILD_1, syh * syh);
+          tctx.beginPath();
+          tctx.ellipse(ux, uy, cs * 0.20, cs * 0.17, sxh * 3.14, 0, 6.2832);
+          tctx.fill();
+          tctx.fillStyle = syh > 0.6 ? "#46804f" : "#305e38";
+          tctx.fillRect(ux - cs * 0.12, uy - cs * 0.11, cs * 0.24, cs * 0.22);
         }
       }
     }
@@ -811,7 +1035,7 @@ function spawnWave() {
         S.creeps.push({
           lane: L, side: side, t: side === 1 ? 0.03 : 0.97,
           hp: 62, off: (i - 1) * 9 + (h2(i, L) - 0.5) * 6,
-          stall: 0, buff: 0, hit: 0, emp: false
+          stall: 0, buff: 0, hit: 0, emp: false, empT: 0
         });
       }
     }
@@ -833,7 +1057,20 @@ function stepCreeps(dt) {
     for (i = 0; i < arr.length; i++) {
       c = arr[i];
       var p = creepXY(c);
-      c.emp = apron(p.x, p.y, c.side) > 0.22;       /* HOME FIELD: empowerment */
+      /* THE LINGERING BUFF -- round 2, and this is new design rather than
+         presentation. His words: "as minions leave the force field, as they're
+         pathing through their lane and walking out of the force field, there is
+         a timer that it is still up before it dissipates", and the reason:
+         "so they can't just sit at the line of the force field and then wait
+         for them to come out and farm minions". Without it the threshold is a
+         camping spot -- an attacker parks a metre outside it and harvests the
+         wave the instant it loses cover. With it, the floor extends past the
+         field's own radius by however far a creep walks in FIELD_LINGER
+         seconds, and the defender gets, in his words, "a little bit of
+         breathing room". FIELD_LINGER is provisional and crude. */
+      if (inField(p.x, p.y, c.side)) c.empT = P.FIELD_LINGER;
+      else if (c.empT > 0) { c.empT -= dt; if (c.empT < 0) c.empT = 0; }
+      c.emp = c.empT > 0;
       if (c.buff > 0) c.buff -= dt;
       if (c.hit > 0) c.hit -= dt;
       if (c.stall > 0) { c.stall -= dt; continue; }
@@ -943,8 +1180,8 @@ function stepHero(h, dt) {
   if (h.dead > 0) {
     h.dead -= dt;
     if (h.dead <= 0) {
-      var b = h.side === 1 ? BASE_MINE : BASE_THEIRS;
-      h.x = b.x; h.y = b.y - h.side * 380 * (P.MAP_H / 2000);
+      var rp = lanePos(1, h.side === 1 ? 0.17 : 0.83);
+      h.x = rp.x; h.y = rp.y;
       h.hp = h.mhp; h.vx = h.vy = 0; h.order = null;
     }
     return;
@@ -1149,12 +1386,27 @@ function resize() {
   DPR = Math.min(window.devicePixelRatio || 1, 2);
   view.w = b.clientWidth; view.h = b.clientHeight;
   cv.width = Math.round(view.w * DPR); cv.height = Math.round(view.h * DPR);
-  /* the map must exceed the screen (a locked property of the camera) AND the
-     vertical span must stay bounded, or a short screen loses the seam */
-  /* the zoom is chosen so the CREEP stays the 4px atom the lane width was
-     derived from, and so a screen still holds mid, both jungle regions and the
-     seam at once. The side lanes are off-screen and that is what panning is for. */
-  view.s = Math.max(view.w / (P.MAP_W * 0.80), view.h / (P.MAP_H * 0.615));
+  /* CAMERA, round 2. His note: "right now it's a little too top down far away",
+     and his target: "closer to the max zoom out of typical MOBAs, but maybe
+     slightly more just because it's a mobile game."
+
+     A MOBA at maximum zoom-out holds roughly a quarter to a third of its map's
+     width. This holds 33% of the width or 25% of the length, whichever is
+     tighter -- a MOBA's far end, allowed the little extra a phone wants. On a
+     390-wide board that is s ~ 1.2 against the old 0.49, so:
+
+       hero      26 world units -> ~31 px   (was 13)
+       creep      8.4           -> ~10 px   (was  4)
+       road      54             -> ~65 px   (was 26)
+       one grid cell 14         -> ~17 px   (was  7)
+
+     That last line is the consequence that is not a camera value: at 17 px a
+     cell the ground, the units and the growth all need a SURFACE, because a
+     flat fill now reads as a flat fill. See TS, the GRAIN PITCH note in
+     drawTerrainSlice, and the Bill in FINDINGS. The map still vastly exceeds
+     the screen -- ~6% of it is visible -- so the cost is navigation, which is
+     what the pan momentum and the tappable minimap below are paying. */
+  view.s = Math.max(view.w / (P.MAP_W * 0.33), view.h / (P.MAP_H * 0.25));
   clampCam();
   var rp = rcv.parentNode;
   rcv.width = Math.max(1, Math.round(rp.clientWidth * DPR));
@@ -1173,7 +1425,18 @@ function draw() {
   ctx.save();
   ctx.scale(view.s, view.s);
   ctx.translate(-cam.x, -cam.y);
-  ctx.drawImage(terrain, 0, 0, P.MAP_W, P.MAP_H);
+  /* blit only the visible slab of the terrain buffer. At round 2's camera the
+     screen holds ~6% of the map, and pushing the whole 1150x2000 buffer through
+     the rasteriser every frame to have it clipped was the single largest item
+     in `draw` once TS doubled. */
+  var bx0 = Math.max(0, cam.x - 2), by0 = Math.max(0, cam.y - 2);
+  var bx1 = Math.min(P.MAP_W, cam.x + view.w / view.s + 2);
+  var by1 = Math.min(P.MAP_H, cam.y + view.h / view.s + 2);
+  if (bx1 > bx0 && by1 > by0) {
+    ctx.drawImage(terrain, bx0 * TS, by0 * TS, (bx1 - bx0) * TS, (by1 - by0) * TS,
+                  bx0, by0, bx1 - bx0, by1 - by0);
+  }
+  drawFieldMarks();
 
   /* bases — the order's origin */
   [[BASE_MINE, "#8d8468"], [BASE_THEIRS, "#77828e"]].forEach(function (b) {
@@ -1186,10 +1449,15 @@ function draw() {
   });
 
   /* trees: thickets that SEPARATE, not walls that seal. You route around them;
-     cutting one opens a shortcut. Drawn as mass with a lit crown edge. */
+     cutting one opens a shortcut. Drawn as mass with a lit crown edge.
+     Culled to the visible slab: the tree count doubled with the rotational
+     rebuild and the camera now holds ~7% of the map, so drawing all of them
+     was 56 strokes a frame to have 50 of them clipped. */
   ctx.lineCap = "round";
   TREES.forEach(function (t) {
     if (!t.alive) return;
+    if (Math.max(t.x1, t.x2) < bx0 - 20 || Math.min(t.x1, t.x2) > bx1 + 20 ||
+        Math.max(t.y1, t.y2) < by0 - 20 || Math.min(t.y1, t.y2) > by1 + 20) return;
     ctx.strokeStyle = "#081408"; ctx.lineWidth = 15;
     ctx.beginPath(); ctx.moveTo(t.x1, t.y1); ctx.lineTo(t.x2, t.y2); ctx.stroke();
     ctx.strokeStyle = "#255030"; ctx.lineWidth = 6;
@@ -1200,6 +1468,7 @@ function draw() {
   /* camps — units, and they hold a plausible state at rest */
   ctx.font = "8px ui-monospace,monospace"; ctx.textAlign = "center";
   S.camps.forEach(function (c, i) {
+    if (c.x < bx0 - 30 || c.x > bx1 + 30 || c.y < by0 - 30 || c.y > by1 + 30) return;
     if (!c.alive) {
       ctx.fillStyle = "rgba(122,134,112,.34)";
       ctx.fillRect(c.x - 7, c.y - 1, 14, 2); ctx.fillRect(c.x - 1, c.y - 7, 2, 14);
@@ -1218,11 +1487,19 @@ function draw() {
   /* creeps: units, never a meter. Dark ring + light body + dark core, so a unit
      reads on bone, on growth and on slate — it crosses all three. */
   S.creeps.forEach(function (c) {
-    var p = creepXY(c), sz = c.emp ? 5.6 : 4.2;
+    /* THE LINGERING BUFF IS VISIBLE ON THE UNIT, and it wears off rather than
+       switching off -- the creep shrinks back to its base size over the last
+       two seconds of FIELD_LINGER. No strobe, no bar over the unit (F5): the
+       unit's state reads from the unit's own mass. */
+    var e = c.empT > 0 ? Math.min(1, c.empT / 2) : 0;
+    var p = creepXY(c), sz = 4.2 + 1.4 * e;
     ctx.fillStyle = "#191712";
     ctx.fillRect(p.x - sz - 1, p.y - sz - 1, sz * 2 + 2, sz * 2 + 2);
-    ctx.fillStyle = c.side === 1 ? (c.emp ? "#fff6de" : "#d6cbaf") : (c.emp ? "#f0f7ff" : "#aebdcc");
+    ctx.fillStyle = c.side === 1 ? (e > 0.5 ? "#fff6de" : "#d6cbaf") : (e > 0.5 ? "#f0f7ff" : "#aebdcc");
     ctx.fillRect(p.x - sz, p.y - sz, sz * 2, sz * 2);
+    /* a lit top edge: at this camera distance a flat chip is a flat chip */
+    ctx.fillStyle = c.side === 1 ? "#fffaee" : "#e6f0fa";
+    ctx.fillRect(p.x - sz, p.y - sz, sz * 2, sz * 0.34);
     ctx.fillStyle = c.hit > 0 ? "#ffffff" : "#191712";
     ctx.fillRect(p.x - sz * 0.42, p.y - sz * 0.42, sz * 0.84, sz * 0.84);
   });
@@ -1243,7 +1520,19 @@ function draw() {
     ctx.beginPath(); ctx.ellipse(h.x + 3, h.y + 7, 12, 5, 0, 0, 6.2832); ctx.fill();
     ctx.fillStyle = "#14120d"; ctx.fillRect(h.x - 10, h.y - 13, 20, 26);
     ctx.fillStyle = h.side === 1 ? "#f8f1de" : "#dde8f2"; ctx.fillRect(h.x - 7.5, h.y - 10.5, 15, 21);
+    /* at ~31 px the hero is big enough that flat is a defect: a lit upper plane,
+       a darker lower one, and a facing notch on the leading edge. Drawn
+       occlusion only -- no glow, no blur (F4). */
+    ctx.fillStyle = h.side === 1 ? "#fffbf0" : "#f2f8ff";
+    ctx.fillRect(h.x - 7.5, h.y - 10.5, 15, 5);
+    ctx.fillStyle = "rgba(20,18,13,.30)";
+    ctx.fillRect(h.x - 7.5, h.y + 4.5, 15, 6);
     ctx.fillStyle = "#14120d"; ctx.fillRect(h.x - 3, h.y - 5, 6, 10);
+    var hv = Math.hypot(h.vx, h.vy);
+    if (hv > 12) {
+      ctx.fillStyle = h.side === 1 ? "#f8f1de" : "#dde8f2";
+      ctx.fillRect(h.x + (h.vx / hv) * 9 - 1.6, h.y + (h.vy / hv) * 12 - 1.6, 3.2, 3.2);
+    }
     if (h.atk > 0) { ctx.fillStyle = "#ffffff"; ctx.fillRect(h.x - 12, h.y - 16, 24, 3); }
     if (h.buff > 0) { ctx.fillStyle = "#e8dcc0"; ctx.fillRect(h.x - 12, h.y + 14, 24, 2); }
     if (h.slow > 0) { ctx.fillStyle = "#6c7885"; ctx.fillRect(h.x - 12, h.y + 14, 24, 2); }
@@ -1256,7 +1545,13 @@ function draw() {
     if (o.kind === "travel" || o.kind === "press") {
       ctx.beginPath(); ctx.moveTo(S.hero.x, S.hero.y); ctx.lineTo(o.x, o.y); ctx.stroke();
     }
-    if (o.kind === "travel") ctx.fillRect(o.x - 3.5, o.y - 3.5, 7, 7);
+    if (o.kind === "travel") {
+      ctx.fillRect(o.x - 3.5, o.y - 3.5, 7, 7);
+      /* THE RUN IS VISIBLE WHILE IT IS LATCHED. Without this the player has no
+         way to know the next tap will be read as flight rather than as attack,
+         and the resolution above would be invisible machinery. */
+      if (S.t < runUntil) ctx.strokeRect(o.x - 7.5, o.y - 7.5, 15, 15);
+    }
     else if (o.kind === "press") {
       var a = Math.atan2(o.y - S.hero.y, o.x - S.hero.x);
       ctx.beginPath();
@@ -1304,6 +1599,64 @@ function draw() {
   ctx.restore();
   drawMinimap();
 }
+/* ---- THE LINE IN THE SAND ----------------------------------------
+   His round-2 note, verbatim: "not a literal force field, just some sort of
+   visual indicator maybe in the lane that tells you the line in the sand of
+   where minions will be buffed versus where they won't be."
+
+   So the home field is no longer a wash over a disc. It is drawn ONLY where its
+   radius crosses a lane -- which is the only place it decides anything, because
+   creeps only ever walk lanes -- as a survey threshold laid across the road.
+   The mark walks back down the lane toward the base as the field retracts, so
+   the retraction schedule is legible as movement rather than as a shrinking
+   circle.
+
+   Vector, not grid: at CELL 14 the terrain buffer cannot draw a 3-unit line, and
+   this has to stay a hairline threshold rather than a band -- a band would read
+   as a second front line, which is exactly the confusion A2 was written to end.
+   Six marks (3 lanes x 2 sides); one is re-solved per frame, round robin,
+   because fieldR() moves at 0.58 world units per second. */
+var fieldMark = [null, null, null, null, null, null], fmTurn = 0;
+function solveFieldMark(k) {
+  var side = k < 3 ? 1 : -1, L = k % 3;
+  var b = side === 1 ? BASE_MINE : BASE_THEIRS, R = fieldR();
+  var n = 96, prev = null, hit = null, i;
+  for (i = 0; i <= n; i++) {
+    var t = side === 1 ? i / n : 1 - i / n;
+    var p = lanePos(L, t), d = Math.hypot(p.x - b.x, p.y - b.y);
+    if (prev && (prev.d - R) * (d - R) <= 0) { hit = {x: p.x, y: p.y, t: t}; break; }
+    prev = {d: d};
+  }
+  if (!hit) { fieldMark[k] = null; return; }
+  var t2 = Math.max(0, Math.min(1, hit.t + 0.006 * side));
+  var q = lanePos(L, t2);
+  var ax = q.x - hit.x, ay = q.y - hit.y, aL = Math.hypot(ax, ay) || 1;
+  fieldMark[k] = {x: hit.x, y: hit.y, nx: -ay / aL, ny: ax / aL, mine: side === 1};
+}
+function drawFieldMarks() {
+  solveFieldMark(fmTurn); fmTurn = (fmTurn + 1) % 6;
+  for (var k = 0; k < 6; k++) {
+    var m = fieldMark[k];
+    if (!m) continue;
+    var W = ROAD_W + 9, tx = -m.ny, ty = m.nx;   /* along the lane */
+    ctx.strokeStyle = m.mine ? "rgba(240,228,188,.82)" : "rgba(176,196,214,.82)";
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(m.x - m.nx * W, m.y - m.ny * W);
+    ctx.lineTo(m.x + m.nx * W, m.y + m.ny * W);
+    ctx.stroke();
+    /* two posts, set back along the lane, so the mark reads as a surveyed
+       threshold rather than as a stripe painted on the road */
+    ctx.lineWidth = 2.4;
+    for (var s = -1; s <= 1; s += 2) {
+      var ex = m.x + m.nx * W * s, ey = m.y + m.ny * W * s;
+      ctx.beginPath();
+      ctx.moveTo(ex - tx * 5, ey - ty * 5);
+      ctx.lineTo(ex + tx * 5, ey + ty * 5);
+      ctx.stroke();
+    }
+  }
+}
 function bracket(x, y, r) {
   var k = r * 0.42;
   ctx.beginPath();
@@ -1314,8 +1667,12 @@ function bracket(x, y, r) {
   ctx.stroke();
 }
 /* minimap: on record — shows both heroes at all times. Strictly ordered. */
+var mm = null;
 function drawMinimap() {
-  var w = 58, h = Math.round(58 * (P.MAP_H / P.MAP_W)), x = view.w - w - 6, y = 58;
+  /* bigger than it was, because at the round-2 camera it is the only view of
+     the whole map and it is now a tap target */
+  var w = 74, h = Math.round(74 * (P.MAP_H / P.MAP_W)), x = view.w - w - 6, y = 58;
+  mm = {x: x, y: y, w: w, h: h};
   ctx.fillStyle = "rgba(7,13,9,.86)"; ctx.fillRect(x, y, w, h);
   ctx.strokeStyle = "#2c3a29"; ctx.lineWidth = 1; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1);
   var sx = w / P.MAP_W, sy = h / P.MAP_H, L, i;
@@ -1462,37 +1819,113 @@ function drawPhase(w, y0, y1) {
    The first tap commits attack-move IN THE SAME FRAME; the second upgrades it
    to travel. Nothing waits on a double-tap timer.
    ================================================================== */
-var down = null, panned = false;
+/* PANNING IS NOW LOAD-BEARING. A closer camera costs navigation rather than
+   information (the board pans; nothing is hidden), so the drag has to be worth
+   doing: it carries momentum out of a flick and decays over ~0.19 s, and the
+   minimap is a tap target that puts the camera where you tapped instead of
+   ordering the hero there. */
+var down = null, panned = false, panV = {x: 0, y: 0}, panPrev = null;
 cv.addEventListener("pointerdown", function (e) {
   down = {x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y};
-  panned = false;
+  panned = false; panV.x = panV.y = 0;
+  panPrev = {x: e.clientX, y: e.clientY, t: performance.now()};
   try { cv.setPointerCapture(e.pointerId); } catch (err) {}
 });
 cv.addEventListener("pointermove", function (e) {
   if (!down) return;
   var dx = e.clientX - down.x, dy = e.clientY - down.y;
   if (!panned && Math.hypot(dx, dy) > 9) panned = true;
-  if (panned) { cam.x = down.cx - dx / view.s; cam.y = down.cy - dy / view.s; clampCam(); }
+  if (!panned) return;
+  cam.x = down.cx - dx / view.s; cam.y = down.cy - dy / view.s; clampCam();
+  var now = performance.now(), ms = now - panPrev.t;
+  if (ms > 6) {                                   /* velocity in world units/s */
+    var k = Math.min(1, ms / 70);
+    panV.x += ((panPrev.x - e.clientX) / view.s / (ms / 1000) - panV.x) * k;
+    panV.y += ((panPrev.y - e.clientY) / view.s / (ms / 1000) - panV.y) * k;
+    panPrev = {x: e.clientX, y: e.clientY, t: now};
+  }
 });
 cv.addEventListener("pointerup", function (e) {
   if (!down) return;
   var wasPan = panned;
   down = null;
   if (wasPan) { coachHit("pan"); return; }
-  var r = cv.getBoundingClientRect();
-  var p = s2w(e.clientX - r.left, e.clientY - r.top);
+  panV.x = panV.y = 0;
+  var r = cv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
+  /* the minimap is a NAVIGATION control, not a piece of the board. Tapping it
+     used to issue a hero order at whatever world point sat under it, which was
+     wrong at any zoom and unusable at this one. */
+  if (mm && sx >= mm.x - 4 && sx <= mm.x + mm.w + 4 && sy >= mm.y - 4 && sy <= mm.y + mm.h + 4) {
+    var wx = (sx - mm.x) / mm.w * P.MAP_W, wy = (sy - mm.y) / mm.h * P.MAP_H;
+    cam.x = wx - view.w / view.s / 2; cam.y = wy - view.h / view.s / 2;
+    clampCam(); coachHit("pan"); return;
+  }
+  var p = s2w(sx, sy);
   tap(p.x, p.y);
 });
 cv.addEventListener("pointercancel", function () { down = null; });
+/* momentum, applied on the frame clock rather than the event clock */
+function stepPan(dt) {
+  if (down && panned) return;
+  if (Math.abs(panV.x) < 6 && Math.abs(panV.y) < 6) { panV.x = panV.y = 0; return; }
+  cam.x += panV.x * dt; cam.y += panV.y * dt;
+  var k = Math.exp(-dt / 0.19);
+  panV.x *= k; panV.y *= k;
+  var bx = cam.x, by = cam.y;
+  clampCam();
+  if (cam.x !== bx) panV.x = 0;                    /* stop dead at the edge */
+  if (cam.y !== by) panV.y = 0;
+}
 
-var lastTap = null;
+/* ---- THE HARD PROBLEM, AND WHAT THIS BUILD DOES ABOUT IT -----------
+   He confirmed the assignment independently and with a better reason than the
+   build had -- "if a player chooses to spam to run away, it's always run away
+   versus choosing to attack is deliberate" -- and then named the failure it
+   implies:
+
+     "How do you spam tap to force your hero to move without attacking really
+      quickly, but then somehow swap on a dime to the last tap being taken as a
+      single tap?"
+
+   The naive reading of tap-count intent is genuinely broken: every lone tap has
+   to wait out the double-tap window to learn whether a second is coming, so
+   either attack-move is late by that window on every single use, or a fast run
+   of intended moves is chopped into alternating attacks and moves. Both are
+   unacceptable and neither is papered over here.
+
+   THE RESOLUTION, and it costs no latency anywhere:
+
+     - Nothing ever waits. The first tap issues ATTACK-MOVE in the same frame.
+       A second tap within 0.36 s UPGRADES that order to TRAVEL -- it does not
+       replace a decision that was deferred, it revises one already made. This
+       was already true and it is what makes the rest possible.
+     - A RUN LATCH carries the intent forward. Once a double tap has said
+       "travel", the next 0.5 s of taps are travel WHEREVER THEY LAND. That is
+       what fixes the spam case: fleeing means tapping ahead of yourself along a
+       route, so every tap lands somewhere new, and distance-gated double-tap
+       detection would have read each one as a fresh single tap. Each tap
+       refreshes the window, so a sustained spam stays a sustained run.
+     - AN AIMED TAP BREAKS THE LATCH IMMEDIATELY. Tapping a camp, a tree or
+       anything the build can name is unambiguous -- nobody flees INTO a camp --
+       so it drops out of the run and engages in the same frame, with no pause.
+       That is the "swap on a dime" case, answered exactly.
+
+   WHAT IT COSTS, stated rather than buried: for 0.5 s after a flee tap you
+   cannot issue an attack-move onto EMPTY GROUND. Aimed attacks are unaffected
+   and instant; attack-move after a beat is unaffected and instant. The only
+   unreachable input is "stop running and attack-move at nothing in particular,
+   within half a second". You break the run by pausing, not by waiting on a
+   timer, and nothing you do is ever delayed while you find out what you meant.
+
+   RUN_W is provisional like every other number here and sits on the tuner. */
+var lastTap = null, runUntil = -1, RUN_W = 0.5;
 function tap(x, y) {
   S.tapAck = {x: x, y: y, a: 1};                 /* acknowledged in the same frame */
   if (S.sel) { castAt(x, y); return; }
 
   var h = S.hero, i;
   if (Math.hypot(x - h.x, y - h.y) < 26) {
-    h.order = {kind: "hold", x: h.x, y: h.y}; lastTap = null;
+    h.order = {kind: "hold", x: h.x, y: h.y}; lastTap = null; runUntil = -1;
     note("hold — tap anywhere to release"); return;
   }
 
@@ -1503,12 +1936,13 @@ function tap(x, y) {
   if (dbl) {                                     /* second tap upgrades to TRAVEL */
     S.selCamp = null;
     h.order = {kind: "travel", x: x, y: y};
-    note("travel — ignoring everything on the way");
+    runUntil = S.t + RUN_W;
+    note("travel — keep tapping to keep running");
     coachHit("travel"); barDirty = true; return;
   }
 
-  /* ONE TAP = ATTACK-MOVE. The input is accepted wherever it lands; stepHero
-     clips it to the limit and settles there if it is out of reach. */
+  /* AIMED TAPS ARE ALWAYS DELIBERATE, and they are resolved before the run
+     latch precisely so that breaking out of a run costs nothing. */
   var best = null, bd = 40;
   for (i = 0; i < S.camps.length; i++) {
     var c = S.camps[i];
@@ -1524,9 +1958,18 @@ function tap(x, y) {
   }
   if (best) {
     S.selCamp = best.camp != null ? best.camp : null;
+    runUntil = -1;                               /* an aimed tap ends the run */
     h.order = best; barDirty = true; coachHit("camp"); return;
   }
+
   S.selCamp = null;
+  if (S.t < runUntil) {                          /* still running: spam is flight */
+    runUntil = S.t + RUN_W;
+    h.order = {kind: "travel", x: x, y: y};
+    barDirty = true; return;
+  }
+  /* ONE TAP = ATTACK-MOVE. The input is accepted wherever it lands; stepHero
+     clips it to the limit and settles there if it is out of reach. */
   h.order = {kind: "press", x: x, y: y};
   coachHit("press");
   barDirty = true;
@@ -1769,9 +2212,9 @@ function updateBar() {
 
 /* ================= guided first run =============================== */
 var COACH = [
-  ["pan",    "Drag the board. The map is bigger than the screen — you are an observer, not an avatar. Lanes run down the two edges and the centre; the rest is jungle."],
+  ["pan",    "Drag the board — it has weight and it carries. The map is far bigger than the screen; you are an observer, not an avatar. The minimap top right is a tap target: tap it to jump the camera. Lanes run out to the two edges and diagonally through the middle; everything else is jungle."],
   ["press",  "ONE TAP sends your hero there and it fights what it meets. Try it — tap the ground ahead of your hero."],
-  ["travel", "TWO TAPS on the same spot is TRAVEL: it goes there and ignores everything. Same gesture, twice. Double-tap somewhere now."],
+  ["travel", "TWO TAPS on the same spot is TRAVEL: it goes there and ignores everything. Then keep tapping — while the mark is boxed, every tap keeps running, so spamming to flee never turns back into attacking. Tap a camp or a tree to break out of it instantly. Double-tap somewhere now."],
   ["settle", "Now tap far past your front line, deep into their half. The tap is never refused — your hero walks as far as it may and stops there. Your reach ends where your lane's front line is, and pushing the lane moves it."],
   ["camp",   "Tap a camp out in the jungle. What it costs you and what it pays sit on the right BEFORE you commit — that is the other arm: farm, or push."],
   ["cast",   "Cards: tap one, then tap a lane or a hero. Casting is selection; there is nothing to aim."]
@@ -1803,6 +2246,7 @@ var TUNE = [
   ["LANE_REACH","Leash reach off a lane",15,  120,  380, 0],
   ["FIELD_R0",  "Home field 0:00",     0.05,  0.20, 1.00, 0],
   ["FIELD_R1",  "Home field 15:00",    0.05,  0.00, 0.60, 0],
+  ["FIELD_LINGER","Buff lingers after", 1,    0,    20,  0],
   ["WAVE_S",    "Creep wave every",       1,  4,    24,  0],
   ["HERO_SPD",  "Hero speed",            10,  60,   300, 0],
   ["AI",        "Opponent",               1,  0,    3,   0]
@@ -1858,7 +2302,7 @@ function restartWorld() {
   tctx = terrain.getContext("2d");
   S = fresh();
   S.camps.forEach(function (c) { campFill(c, 0); });
-  lastPanel = ""; lastTap = null;
+  lastPanel = ""; lastTap = null; runUntil = -1; panV.x = panV.y = 0;
   resize();
   frameHero();
   for (var w = 0; w < REBUILD_SLICES * 3; w++) { updateClaim(0.4); drawTerrainSlice(); }
@@ -1873,6 +2317,7 @@ function frame(now) {
   last = now;
   var t0 = performance.now();
   step(dt);
+  stepPan(dt);
   var t1 = performance.now();
   drawTerrainSlice();
   var t2 = performance.now();
@@ -1912,8 +2357,14 @@ window.__proto = {
   geom: function () {
     return {MAP_W: P.MAP_W, MAP_H: P.MAP_H, CELL: CELL, GW: GW, GH: GH,
             ROAD_W: ROAD_W, TINT_R: TINT_R, LANES: LANES, TREES: TREES,
-            CAMPS: CAMP_POS, s: view.s};
+            CAMPS: CAMP_POS, CLEAR: CLEAR, PSEG: PSEG, TS: TS,
+            BASE_MINE: BASE_MINE, BASE_THEIRS: BASE_THEIRS,
+            s: view.s, cam: cam, view: view};
   },
+  inField: inField, fieldR: fieldR, pathDist: pathDist,
+  terrain: function () { return terrain; }, board: function () { return cv; },
+  runUntil: function () { return runUntil; },
+  cam: function () { return {x: cam.x, y: cam.y, s: view.s}; },
   fields: function () { return {veg: veg, corr: corr, minD: minD, shown: shown, tread: tread}; },
   tap: tap,
   /* gate apparatus only: nothing in the running build calls this */

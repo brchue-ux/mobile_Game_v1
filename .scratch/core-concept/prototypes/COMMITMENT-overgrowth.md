@@ -4,10 +4,11 @@ Written **before** anything was made, per `/verve` step 4. Not reverse-engineere
 Audited against the artifact at the finish gate — findings in
 [`FINDINGS-overgrowth.md`](FINDINGS-overgrowth.md).
 
-**The card is live and the direction is unchanged.** Two amendments have been
-made to it since it was written, both deliberate and both recorded below rather
-than absorbed: the Materials amendment of the original pass, and the **Lever 1 /
-F2 amendment of the 2026-08-13 correction pass**. See
+**The card is live and the direction is unchanged.** Four amendments have been
+made to it since it was written, all deliberate and all recorded below rather
+than absorbed: the Materials amendment of the original pass, the **Lever 1 / F2
+amendment of the 2026-08-13 correction pass**, and **F3 and Budget from the
+second correction pass of the same day**. See
 [`## Amendments`](#amendments) at the foot of this file. Nothing else has moved.
 
 ---
@@ -104,6 +105,9 @@ Budget:     Currency: milliseconds per frame. Ceiling 16.7ms at 60fps on a
                 canvas, redrawn incrementally,
               - per-frame animation only on the seam band (typically <600 cells).
             Same growth, far fewer samples. Expected spend ≤6ms/frame at DPR 2.
+            [AMENDED 2026-08-13 round 2, see A4: the ≤6ms expectation is
+            EXCEEDED and the target of ≤8ms is at its edge. Measured, with
+            the shipped build measured beside it in the same session.]
 
 Signature:  THE ROAD OPENING. When your creeps break the enemy line, the growth
             peels back off the lane ahead of the hero in a wave that outruns the
@@ -144,8 +148,13 @@ Forbidden:  Six refusals the obvious version would have leaned on. Each has the
                 `grep -n 'jungleRegion\|JUNGLE_POLY\|terrainPath'` empty.
             F3. Nothing is symmetrical in the growth. The two halves are not
                 mirrored.
+                [AMENDED 2026-08-13 round 2, see A3: MIRROR symmetry is what is
+                banned. ROTATIONAL symmetry of the map's geometry is now
+                required, because it is what makes a 1v1 with no draft fair.
+                The growth itself is neither.]
                 check: noise seeding has no mirror term (`grep -n 'H - y\|mirror'`
-                in the noise/growth path); confirmed by eye at the gate.
+                in the noise/growth path); confirmed by eye at the gate, and
+                now by a numeric probe of the drawn terrain — see A3.
             F4. No glow, drop shadow or blur standing in for light or depth. The
                 hero's shadow is a drawn occlusion ellipse, not a blur.
                 check: `grep -n 'shadowBlur\|box-shadow\|filter:.*blur'` returns
@@ -234,6 +243,90 @@ neighbouring lane's front line and extrapolated. He accepted exactly that trade
 — *"I guess that's just up to the player to pay attention to"* — and the build
 pays for it on the other side, by never refusing the input and never grinding at
 the edge. See F1 below, which is unchanged and still holds.
+
+### A3 — F3: mirror symmetry is banned, rotational symmetry is required (2026-08-13, round 2)
+
+**Changed.** F3 read *"Nothing is symmetrical in the growth. The two halves
+are not mirrored."* The first sentence is now too broad and the second is the
+one that was always doing the work.
+
+F3 now reads: **mirror symmetry is banned; rotational symmetry of the map's
+geometry is required; the growth is neither.**
+
+**What forced it.** *"I'm not crazy about the layout. It's very symmetrical...
+when I picture other games, their maps don't look so NASCAR track with a line
+in the middle."* Two different symmetries were sitting under one word:
+
+- **Rotational** — the map lands on itself turned 180° about its centre. This
+  is what makes a 1v1 with no draft **fair**, and it is close to mandatory. It
+  was not what he was objecting to, and the corrected board now has it
+  **exactly**, by construction: one half is authored and `rot()` generates the
+  other. Measured at the gate: west lane rotates onto east lane with max error
+  **0.0000**, mid rotates onto itself **0.0000**, bases **0.0000**, all twelve
+  camps **0.0000**, and the two side lanes are the same length to a tenth of a
+  unit (2293.2 each).
+- **Mirror** — a perimeter with a ruled axis down the middle and the bases
+  sitting on it. **That** is the NASCAR read, and it is gone at the root: the
+  bases are 124 world units off the centre line, mid swings 248 units across
+  it on a diagonal, and there is no axis for a reflection to run down.
+
+**What did NOT change with it.** The *growth* is still unmirrored and now
+also un-rotated — the noise seeding has no mirror term and no rotation term,
+so what is drawn is irregular even where what is measured is exact. The
+numeric probe on the drawn terrain, 42,075 samples of L\*:
+
+| transform | mean abs ΔL\* | reading |
+|---|---|---|
+| 180° rotation | **14.6** | geometry exact, rendering irregular |
+| mirror, vertical axis | **21.2** | 1.45× the rotational figure |
+| mirror, horizontal axis | **22.9** | 1.57× the rotational figure |
+
+Reproducible to a tenth across repeat runs at the same match time. The absolute
+figures move with the claim field as a match runs; the ordering does not.
+
+**This also closes a tension he had left open** in ticket 12 — he wanted the
+map *"not totally symmetrical"* for variety and worried about handing one side
+an advantage. Those were never in conflict; they are different symmetries.
+Rotational keeps it fair, irregular internal geometry makes it interesting.
+
+### A4 — Budget: the ≤6ms expectation is exceeded, and the ≤8ms target is at its edge (2026-08-13, round 2)
+
+**Changed.** The Budget line's own arithmetic ended *"Expected spend ≤6ms/frame
+at DPR 2"*, under a stated target of **≤8ms** and a ceiling of **16.7ms**. The
+corrected build does not hold ≤6ms.
+
+**What forced it.** The camera. *"Right now it's a little too top down far
+away"*, with the target *"closer to the max zoom out of typical MOBAs, but
+maybe slightly more just because it's a mobile game"* — which took the zoom
+from s≈0.47 to s≈1.15, a 2.4× approach. That is not only a camera value: a
+grid cell went from 7 px to 16 px on screen, and at 16 px **a flat fill reads
+as a flat fill**. The ground, the units and the canopy all had to acquire a
+surface, and surface costs fills. The terrain buffer also had to double
+(`TS` 0.5 → 1.0) or the ground would have been upscaled 2.4× into mush at
+exactly the moment he asked to see its texture.
+
+**Measured, with the build being corrected measured beside it in the same
+session on the same box** — full numbers and the load caveat in
+[`FINDINGS-overgrowth.md`](FINDINGS-overgrowth.md#the-bill-round-2):
+
+| | shipped build | corrected build | delta |
+|---|---|---|---|
+| median frame, 390×844 | 6.14 / 7.59 ms | 7.68 / 8.74 ms | **+1.2 to +1.5 ms** |
+| zoom | 0.467 | 1.148 | 2.4× |
+| terrain buffer | 575×1000 | 1150×2000 | 4× the pixels |
+
+**What was paid to keep it this close**, rather than letting it run: the
+terrain blit is clipped to the visible slab instead of pushing the whole
+1150×2000 buffer through the rasteriser every frame; trees and camps are
+culled to the same slab; and `REBUILD_SLICES` went **10 → 28**, which spreads
+a full terrain repaint over ~470 ms.
+
+**What is NOT claimed.** That this is fine on a phone. The honest caveat from
+the last gate is unchanged and now matters more: this is a 12-thread desktop,
+it was carrying a load average of 7–12 while these numbers were taken, and a
+mid-range phone's single-thread JS is commonly 3–5× slower. `REBUILD_SLICES`,
+`TS` and `CELL` are all still cheap levers. **Not measured on a phone —
+unverified, not "fine".**
 
 ## What is NOT mine to decide, and is not decided here
 

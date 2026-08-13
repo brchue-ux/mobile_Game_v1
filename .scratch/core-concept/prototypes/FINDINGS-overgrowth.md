@@ -671,3 +671,471 @@ are still visible at every size.
 
 **Nothing else in the 174 deleted lines was live content** — every other
 deletion is a line whose corrected replacement sits beside it in the diff.
+
+---
+
+# Second correction pass — 2026-08-13
+
+His verdict on the first corrections: *"this is an improvement to your points
+for the lane and the boards."* Then four substantial notes and one new
+mechanic. **Same artifact, same commitment card, same direction. Five
+corrections, not a redesign, and no second version.** Two card lines were
+amended deliberately and on the record — **F3** and **Budget**, both in
+[`COMMITMENT-overgrowth.md` § Amendments](COMMITMENT-overgrowth.md#amendments).
+
+## 1. The layout — rotational symmetry kept, mirror symmetry deleted
+
+*"I'm not crazy about the layout. It's very symmetrical... their maps don't
+look so NASCAR track with a line in the middle."*
+
+The distinction that carries the whole correction is in
+[A3](COMMITMENT-overgrowth.md#a3--f3-mirror-symmetry-is-banned-rotational-symmetry-is-required-2026-08-13-round-2)
+and is not repeated here. What was built:
+
+- **One half is authored; `rot()` generates the other.** `rot(p) = (1000-x,
+  2000-y)` in the reference frame. The east lane **is** the west lane rotated
+  and reversed. Mid's second half **is** `rot()` of its first half. Every
+  path, tree, clearing and camp is authored once and rotated once. Fairness
+  cannot drift, because there is nothing to keep in sync.
+- **The bases came off the centre line.** Mine at reference (392, 1876),
+  theirs at (608, 124) — 124 world units either side of centre. There is now
+  no axis for a mirror to run down, which is the NASCAR read killed at the
+  root rather than disguised.
+- **Mid runs diagonally.** It leaves my base heading east, swings out to
+  x = 596, crosses the centre on the diagonal, comes back west to x = 404 and
+  enters their base from the other side. Excursion **248 units** of a
+  1000-unit reference width. Portrait forbids a true corner-to-corner mid;
+  this is the shape that is available and it is an S, not a rule.
+- **The two jungle regions are different shapes.** Because mid leans east on
+  my half, the east region pinches to a neck at y ≈ 1500 while the west region
+  opens out — and on their half it is the other way round. Same ground per
+  side, different ground.
+
+Measured at the gate:
+
+| check | result |
+|---|---|
+| west lane rotates onto east lane, max vertex error | **0.0000** |
+| mid rotates onto itself, max vertex error | **0.0000** |
+| bases rotate onto each other | **0.0000** |
+| all 12 camps rotate onto each other, max error | **0.0000** |
+| side lane lengths | **2293.2 / 2293.2** (mid 1912.3) |
+| base offset from the centre line | **124.2** world units |
+
+And the drawn board is *not* symmetric under anything, because the growth is
+seeded independently of the geometry — the numeric probe is in A3.
+
+## 2. Jungle traversal — a route network instead of two corridors
+
+*"The jungle literally is just two vertical lines with pockets. There's no
+angles."* / *"the ability to traverse the jungle needs to be made a much better
+experience."*
+
+The ask is explicitly **not** vision denial — he noted himself that with no fog
+and both heroes always on the minimap, sightline cutoffs matter less. It is
+that moving through the jungle should present routes and choices.
+
+- **21 path polylines per half, 42 in all, and every one of them bends.** No
+  straight runs.
+- **Two closed loops in the west region** (w2–w4–w3, and w4–w6–w5–w3), so
+  between any two of its clearings there is more than one way to go.
+- **One neck in the east region** at (742, 1502) joining a south chamber to a
+  north chamber, with a loop only beyond it. The two regions have deliberately
+  different topology: one is a choice of routes, the other is a chokepoint.
+- **16 clearings**, at the junctions, so a route is legible as a route — you
+  arrive somewhere and can see where the ways part.
+- **28 tree thickets at angles**, sitting between the routes and inside the
+  loops, two of them pinching the east neck from either side without closing
+  it.
+- **12 camps in pockets 70–100 units off the routes** — the pocket's clearing
+  opens toward a path, but you leave the path to take one.
+
+Measured on the walkable grid at 5-unit resolution, bounds and thickets only
+(claim excluded, because claim is the leash and it is *supposed* to gate you):
+
+| check | result |
+|---|---|
+| walkable cells | 76,420 |
+| reached from my base | **76,420** |
+| sealed cells | **0** |
+| every camp reachable | **yes** |
+| every clearing reachable | **yes** |
+| enclosed obstacles (thickets you can pass either side of) | **28 of 28** |
+
+**Every thicket on the board is something you route around rather than
+something that walls you in**, which is the semi-open character stated as a
+number instead of asserted. Obstacle sizes come in identical pairs, which is
+the rotational symmetry showing up in a test that was not looking for it.
+
+A separate run of the same flood fill **with** claim applied reports camps 6,
+8, 9 and 10 unreachable at 0:00 and a 288-cell pocket behind the enemy line.
+That is the **leash working**, not a seal — those are on their half, behind
+their front line — and it is recorded here so a future reading of the same
+number does not mistake it for a defect.
+
+## 3. The camera — in by 2.4×, and the texture that costs
+
+*"Right now it's a little too top down far away"*, wanting a good view of the
+hero, the spells, the creeps *"and a good view of the actual textures of the
+game."* Target: *"closer to the max zoom out of typical MOBAs, but maybe
+slightly more just because it's a mobile game."*
+
+The board now holds **33% of the map's width or 25% of its length, whichever
+is tighter** — a MOBA's far end, allowed the little extra a phone wants. On a
+390-wide board that is s = 1.148 against the shipped build's 0.467:
+
+| | shipped | corrected |
+|---|---|---|
+| hero | 12.6 px | **29.8 px** |
+| creep | 4.0 px | **9.6 px** |
+| road width | 26 px | **62 px** |
+| one grid cell | 6.9 px | **16.1 px** |
+| map width on screen | 78% | **29.5%** |
+| map area on screen | 47% | **7.4%** |
+
+**The last row of the first table is the consequence that is not a camera
+value.** At 16 px a cell, a flat fill reads as a flat fill, and this is the
+first request in the whole design for material to be legible. What that
+actually cost is section 6.
+
+**Panning had to become good, because a closer camera spends navigation
+rather than information** — the board pans and nothing is hidden, so the whole
+cost is getting there:
+
+- **The drag carries.** Velocity is tracked on the frame clock and decays over
+  ~0.19 s after release, and it stops dead at the map edge rather than
+  bouncing. Verified with real pointer events: a flick carried **206 world
+  units** after the finger left the glass.
+- **The minimap is a tap target** and is larger for it (58 → 74 px). Tapping
+  it centres the camera there. It used to issue a **hero order** at whatever
+  world point sat under it — wrong at any zoom, unusable at this one.
+  Verified: tapping it moves the camera and leaves `hero.order` null.
+
+## 4. The home field — a boundary in the lane, and a buff that lingers
+
+**Rendering**, his words: *"not a literal force field, just some sort of
+visual indicator maybe in the lane that tells you the line in the sand of
+where minions will be buffed versus where they won't be."*
+
+The disc wash, its cross-hatch and its edge ring are **gone**. What replaces
+them is a survey threshold drawn across each lane at the field's radius, in
+vector rather than in the terrain grid — six marks, three lanes by two sides,
+one re-solved per frame round-robin because the radius moves at 0.58 world
+units per second. It walks back down the lane as the field retracts, so the
+retraction schedule reads as **movement** rather than as a shrinking circle.
+
+Vector because it has to stay a hairline: at `CELL` 14 the terrain buffer
+cannot draw a 3-unit line, and a band would read as a second front line —
+exactly the confusion [A2](COMMITMENT-overgrowth.md#amendments) was written to
+end.
+
+**The rule and the picture now agree, and they did not before.** The old
+`apron()` returned a gradient and creeps were empowered at `apron > 0.22`,
+which put the real buff boundary at **0.879 R** while nothing was drawn at
+either radius. `inField()` is one comparison and the mark is drawn at exactly
+that radius.
+
+**The lingering buff is new design, not presentation**, and needs routing into
+ticket 05 — it is not written into the concept doc by this pass. His words:
+*"as minions leave the force field, as they're pathing through their lane and
+walking out of the force field, there is a timer that it is still up before it
+dissipates"*, because otherwise *"they can't just sit at the line of the force
+field and then wait for them to come out and farm minions"*, and what it buys
+the defender is *"a little bit of breathing room."*
+
+Built as `P.FIELD_LINGER`, **provisional and crude like every other number
+here**, defaulting to 6 s and on the tuning panel so it can be felt. The
+empowerment is visible on the unit and **wears off rather than switching off**
+— the creep shrinks back to its base size over the last two seconds. No
+strobe, and no bar over the unit (F5 holds).
+
+Verified by driving the sim: a creep left the field at t = 19.5 s and held the
+buff until t = 25.5 s — **6.0 s exactly**.
+
+**Not asked and not answered:** this extends the defensive floor past the
+field's own radius, which interacts with the retraction schedule — as the
+field pulls back, the lingering buff is what stops the retraction being a hard
+cliff. Whether that is intended is his to say.
+
+## 5. Tap intent — confirmed, and the hard problem answered
+
+He arrived at the build's assignment independently and with a better reason
+than the build had: *"maybe attack is one and then just move is two. So if a
+player chooses to spam to run away, it's always run away versus choosing to
+attack is deliberate."* **One tap = attack-move, two taps = travel. Unchanged.**
+
+Then he named the failure the assignment implies, and it is the sharpest input
+question in the design:
+
+> *"How do you spam tap to force your hero to move without attacking really
+> quickly, but then somehow swap on a dime to the last tap being taken as a
+> single tap?"*
+
+The naive reading really is broken. Every lone tap must wait out the
+double-tap window to learn whether a second is coming, so either **attack-move
+is late by that window on every single use**, or **a fast run of intended
+moves is chopped into alternating attacks and moves.**
+
+**The resolution, and it adds latency to nothing:**
+
+1. **Nothing waits.** The first tap issues attack-move in the same frame; a
+   second within 0.36 s **upgrades** that order to travel. It does not resolve
+   a deferred decision, it revises one already made. This was already true and
+   it is what makes the rest possible.
+2. **A run latch carries the intent forward.** Once a double tap has said
+   travel, the next 0.5 s of taps are travel **wherever they land**, and each
+   tap refreshes the window. This is what fixes the spam case: fleeing means
+   tapping ahead of yourself along a route, so every tap lands somewhere new,
+   and distance-gated double-tap detection would have read each one as a fresh
+   single tap — the chopping failure, exactly.
+3. **An aimed tap breaks the latch immediately.** A tap on a camp or a thicket
+   is unambiguous — nobody flees *into* a camp — so it drops out of the run and
+   engages in the same frame with no pause. That is *"swap on a dime"*,
+   answered.
+4. **The run is visible while latched** — the travel mark gets a second box
+   around it — so the player can see which way the next tap will be read.
+
+**What it costs, stated rather than buried.** For 0.5 s after a flee tap you
+cannot issue an attack-move onto **empty ground**. Aimed attacks are
+unaffected and instant. Attack-move after a beat is unaffected and instant.
+The one unreachable input is *"stop running and attack-move at nothing in
+particular, within half a second"*, and you leave the run by pausing rather
+than by waiting on a timer. **`/hone` should have this**: no latency was added
+anywhere, which is worth more than the rest of this pass, but the 0.5 s window
+is a feel number and 0.5 is a guess.
+
+Verified by driving `tap()` with the sim clock advanced between calls:
+
+| input | result |
+|---|---|
+| single tap, empty ground | `press` (attack-move), same call |
+| second tap, same spot | `travel`, latch on |
+| six taps at six **different** points, 0.12 s apart | **all `travel`** — not chopped |
+| tap on a camp while running | `engage`, same call, latch cleared |
+| empty ground 0.7 s after the last flee tap | `press` |
+| **empty ground 0.2 s after a flee tap** | **`travel` — the documented cost** |
+
+## 6. What the camera cost, and a real bug it exposed
+
+### The dead-block regression, and how far it went
+
+The first draft of the closer camera measured **41 dead blocks of 84 (48.8%)**
+against a 14.3% threshold — a hard fail, and nearly three times the shipped
+build's own reading. **The shipped build was re-measured beside it in the same
+session with the same code**, because a fixed 7 × 12 block grid at a 2.4×
+closer camera is not measuring the same thing, and the comparison is the only
+honest reading:
+
+| build | dead blocks | threshold |
+|---|---|---|
+| shipped (`whole-a-reclaim` at HEAD) | 24 / 84 = **28.6%** | 14.3% |
+| corrected, first draft | 41 / 84 = **48.8%** | fail |
+| **corrected, shipped here** | **2 / 84 = 2.4%** | pass |
+
+*(Method, stated because it is a reconstruction rather than the original
+gate's code: 7 × 12 blocks over the live board canvas, a block is dead if the
+standard deviation of its CIE L\* is below 6. The absolute counts are not
+comparable to the last pass's table; the two rows measured in this session
+are comparable to each other, which is the point.)*
+
+Three things were tried. **Two of them made it worse and are recorded because
+that is the useful part:**
+
+1. **A per-cell value grain.** At 16 px a cell it painted a visible
+   **chequerboard** across the entire board. Reverted; replaced with sub-cell
+   aggregate placed from two independent hashes over a range that overspills
+   the cell, so the grain has no lattice to give away.
+2. **A low-frequency value wash on the jungle floor.** It moved the opening
+   tier's mean **down 5 L\*** and its variance **down**, collapsing the
+   canopy/opening separation. Reverted. The project's own record — *"what
+   worked was structure, not colour"* — was right again, for the third
+   consecutive pass.
+3. **Structure at a scale a block can resolve**, which is what worked: three
+   crowns to a cell instead of one, each with its own value; live tips drawn
+   **after** every crown in the cell rather than between them; shade under
+   thick canopy; scrub in the openings; aggregate on every surface; sleepers
+   and ruling three-to-a-cell instead of one-every-three-cells.
+
+### The bug underneath it, and it was load-bearing
+
+Chasing the tips down to **0.4% of the canopy's pixels when they were meant to
+hold ~12%** found this in `h2`, the hash the whole board's texture runs on:
+
+```js
+n = (n ^ (n >> 13)) * 1274126177;     // lands above 2^53
+```
+
+The double drops its low bits, so the final mix is fed a number with a zeroed
+bottom byte. Measured over the whole 82 × 143 grid, for **every** stride
+pattern the file uses:
+
+> **`h2` never once returned a value above 0.5.** Mean 0.250, fraction above a
+> half **0.000**.
+
+Everything downstream had been running on half its range: crown mottle only
+ever reached the dark half of the growth palette, the bright `#46804f` tip
+could **never** fire (`to > 0.82` was unreachable), crown jitter and creep
+spacing used half their spread, and `fbm` returned [0, 0.5] so the growth
+threshold was biased low and there was systematically more canopy than the
+number asked for.
+
+**The previous pass diagnosed the symptom honestly and treated it as a palette
+problem** — *"the whole canopy palette lives inside twelve points of L\*"*, and
+the two fixes it shipped were real improvements. But the cause was this. Fixed
+with `Math.imul`, which keeps every step inside int32: mean 0.503, fraction
+above a half 0.509.
+
+The fix alone took the frame from **9 dead blocks to 2**, and it is why the
+value tiers below land where the card said they should rather than where the
+last pass could get them.
+
+### The value-tier budget, re-measured
+
+The project's recorded rule is that board legibility is a **value-tier budget,
+not a palette**. Measured on the drawn terrain, classified by the sim's own
+fields:
+
+| tier | shipped | corrected | recorded target |
+|---|---|---|---|
+| canopy | 11.9 (sd 6.8) | **9.9 (sd 10.7)** | 9 |
+| jungle opening | 24.2 (sd 9.4) | **24.4 (sd 10.3)** | 17 |
+| their bone | 58.3 (sd 7.0) | **53.2 (sd 9.6)** | 55 |
+| your bone | 83.9 (sd 7.1) | **79.2 (sd 7.2)** | 85 |
+
+**Four separated tiers, all within a few points of where they were, and every
+one of them now carrying real internal variance instead of near-none.** That
+second column is the whole of what "texture and material" means as a
+measurement.
+
+### The Frame, at four sizes
+
+| size | dead blocks (of 84) | fraction | quadrant mean sd | verdict |
+|---|---|---|---|---|
+| 390 × 844 | **2** | 2.4% | 12.2 / 13.7 / 14.0 / 14.8 | pass |
+| 412 × 915 | **2** | 2.4% | 12.1 / 13.8 / 14.2 / 15.2 | pass |
+| 360 × 640 | **1** | 1.2% | 12.4 / 15.7 / 14.2 / 14.7 | pass |
+| 320 × 568 | **1** | 1.2% | 12.4 / 14.9 / 14.4 / 14.9 | pass |
+
+The one or two survivors at every size are the **bright road** (L\* 80–81,
+sd 5.4–5.9). **Adjudicated rather than relitigated**, on the same footing the
+last pass used for unbroken canopy: the road is the *order*, it is surveyed,
+and a surveyed road being uniform is the direction working. At 2.4% against a
+14.3% threshold it is not the failure the test exists to catch.
+
+## The Bill, round 2
+
+Budget line: milliseconds per frame, ceiling 16.7, target ≤ 8, and the card's
+own arithmetic expected ≤ 6. See
+[A4](COMMITMENT-overgrowth.md#a4--budget-the-6ms-expectation-is-exceeded-and-the-8ms-target-is-at-its-edge-2026-08-13-round-2)
+— **the ≤6 ms expectation is exceeded and this is not shipped quietly.**
+
+**The box was under load while these were taken** — a 12-thread desktop
+carrying a load average of 7 to 12, shared with other work — so single
+readings are worthless and absolute numbers are contaminated. What is reported
+is the **median of 20 samples**, and the shipped build measured **immediately
+before and after** each run so the comparison carries the same contention:
+
+| | shipped | corrected | delta |
+|---|---|---|---|
+| run A, median | 6.14 ms | **7.68 ms** | +1.54 |
+| run B, median | 7.59 ms | **8.74 ms** | +1.15 |
+| corrected, min observed | — | 6.77 ms | |
+| corrected, terrain / draw (median) | 3.3 / 2.6 | 3.7–4.1 / 3.7–4.3 | |
+
+**The delta is what this pass controls and it is +1.2 to +1.5 ms**, for a 2.4×
+closer camera and a terrain buffer with 4× the pixels. Against the last gate's
+uncontended 6.94 ms for the shipped build, that projects to roughly **8.1–8.4
+ms unloaded — over the ≤8 target, well under the 16.7 ceiling.**
+
+What was paid to keep it that close:
+
+1. **The terrain blit is clipped to the visible slab.** The screen holds 7% of
+   the map; the whole 1150 × 2000 buffer was being pushed through the
+   rasteriser every frame to be clipped.
+2. **Trees and camps are culled to the same slab.** The thicket count doubled
+   with the rotational rebuild — 56 strokes a frame to have 50 of them
+   clipped.
+3. **`REBUILD_SLICES` 10 → 28**, spreading a full terrain repaint over ~470 ms.
+4. **Aggregate marks 4 → 2**, at a larger size, for the same coverage at half
+   the call count.
+
+**The identified next lever, not taken here:** the floor, aggregate, litter
+and scrub are entirely static — they depend on vegetation and lane distance,
+never on claim — so they could be baked once into a second buffer and blitted
+per slice, leaving only the claim-dependent layers to redraw. That is a real
+refactor with real regression risk and this pass is a correction pass, so it
+is recorded rather than attempted.
+
+**Unchanged and still true: not measured on a phone.** `/hone`'s note that it
+needs real S26 numbers is untouched, and is now more pressing than it was.
+
+## Card audit, round 2
+
+| refusal | check | result |
+|---|---|---|
+| F1 no fence/ring/dash/arrow marks the leash | `grep -c setLineDash` / `leashRing\|drawFence` / `ctx.arc(` | 0, 0, 0 — **pass** |
+| F2 no static painted terrain *(amended, A2)* | `grep -cE 'jungleRegion\|JUNGLE_POLY\|terrainPath'` | 0 — **pass** |
+| F3 mirror banned, rotation required *(amended, A3)* | numeric probe of drawn L\*, 42,075 samples | rot 14.6, mirror 21.2 / 22.9 — **pass** |
+| F4 no glow, drop shadow or blur | `grep -cE 'shadowBlur\|box-shadow\|filter:.*blur\|createRadialGradient\|createLinearGradient'` | 0 — **pass** |
+| F5 no health bar over any unit | bar geometry in the unit draw path | 0 — **pass** |
+| F6 nothing in the command bar is irregular | `border-radius` above 0 anywhere | 0 — **pass** |
+
+**Two judgements, stated rather than waved through:**
+
+- **F1 and the home-field mark.** The threshold drawn across each lane is a
+  line on the board that was not there before, and F1 bans exactly that *for
+  the leash*. It is not the leash: it marks the **home field**, whose boundary
+  is a positional rule that has nothing to do with how far the hero may go,
+  and the leash still has no rendering of its own. The two cannot be confused
+  by construction — the leash's boundary is the front line, a **dark band**
+  that moves with the creeps; this is a **bright hairline with posts** that
+  crawls slowly toward a base. **F1 holds**, and this is recorded because a
+  cold read could take it for a violation.
+- **F3 and the vegetation field.** Because paths, clearings, camps and lanes
+  are now exactly rotationally symmetric, the vegetation field derived from
+  them is too. The *growth* is not — the threshold is noise-modulated with no
+  rotation term — and the probe measures the drawn result at 14.6 mean absolute
+  ΔL\* under rotation, against 21.2 and 22.9 for the two mirrors. This is the substance of A3 and it is required for
+  fairness, not a slip.
+
+Materials, Rhythm and Signature against the render:
+
+- **Materials** — bone / slate / growth as specified, plus the duff tone whose
+  value moved (L\* 17.5 → 20.6) so the canopy and opening tiers stopped
+  converging, and the aggregate / litter / scrub / shade that the closer camera
+  required. Every green in the wild is still the card's own `#0b1811`,
+  `#16301f`, `#305e38` or the `#46804f` the last pass added — and `#46804f`
+  can now actually appear, which it could not before.
+- **Rhythm** — scar 18 s, wave 11 s, camp respawn 50 s, retraction 46%→8%,
+  telegraph 60 s, `SEAM` 0.072: all unchanged. `FIELD_LINGER` 6 s is new and
+  is a mechanic's number, not a ratio.
+- **Signature** — *the road opening* is unchanged and reads harder at the new
+  distance, because the road now has a surface for the growth to peel off.
+- **Banned defaults** — none present.
+
+## Verified still true after the second corrections
+
+- **The opponent is passive by default.** 130 s of no input leaves the lanes at
+  **0.48 / 0.49 / 0.47**, the hero at **320/320**, and `foe.order` null. This is
+  a mandatory property and the project has already had to retract one finding
+  for losing it.
+- **The guided first run advances through real gestures** — driven with real
+  pointer events it reached step 4 through pan → tap → double-tap, and every
+  step still also advances on a timeout, so it cannot wedge.
+- **Panning issues no order**, and neither does tapping the minimap.
+- **No runtime errors** in the console across every run above.
+
+## What the deletion diff caught this time
+
+The standing rule is *"after every rebuild, diff the deletions, never trust the
+insertion count."* Applied to this pass it caught one thing worth recording:
+the old `apron()` gradient was deleted wholesale when the field became a
+boundary, and it was carrying a **rule** as well as a rendering — the
+`apron > 0.22` empowerment test. Deleting the drawing without noticing would
+have deleted the home field's entire mechanical effect. It was replaced by
+`inField()`, which is the same rule stated once, and the 12% disagreement
+between the old test and the old drawing is section 4.
+
+`apronCore()` was **kept**, unchanged: it is what cuts the wild back around a
+base, it is a separate job from the boundary, and nothing in the round-2
+feedback touched it.
