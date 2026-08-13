@@ -390,6 +390,40 @@ rather than performing certainty. Ticket 08 promotes or revises.
 
 ## Decisions so far
 
+- **The camera comes IN, and texture must be legible** `[provisional]`
+  (2026-08-13, from his play-test) — *"Right now it's a little too top down far
+  away."* His target, with his own hedge: *"closer to the max zoom out of typical
+  MOBAs, but maybe slightly more just because it's a mobile game. I'm not totally
+  sure there."* **The pannable observer camera is unchanged** — the map still
+  exceeds the screen — **what changes is how much a screenful holds.** **The
+  substantive consequence is a first for this design:** he wants a good view of
+  the hero, of spells, of creeps and of *"the actual textures of the game"*, so
+  **ground, units and canopy all now need a SURFACE rather than a fill.** Every
+  prior board statement was about shape; **this is the first requirement anywhere
+  for texture and material to read.** **It is not free** — the prototype's own
+  frame budget was **exceeded** by it and its commitment card was **amended with
+  measurements rather than allowed to drift** (see
+  `prototypes/COMMITMENT-overgrowth.md` `## Amendments`, **A4**, and
+  `prototypes/FINDINGS-overgrowth.md`; **cited, not restated, not a concept
+  decision**) — and **it is still not measured on a phone.** See
+  [01](issues/01-battlefield-geometry.md).
+- **The command bar gets the fixed real estate, and it must not be a numeric
+  HUD** `[provisional]` (2026-08-12/13) — he asked for **bigger with no number**:
+  *"I feel like the bottom screen needs to be a little bigger... I have an S26
+  Ultra and it feels a tad small."* **The principle recorded, because it will
+  outlive the number: the bar gets the fixed real estate and the board absorbs
+  the variation, because the board pans and the bar cannot.** Everything in the
+  bar sits **where a thumb must reach**; the board can answer a smaller screen
+  with a little more panning. **⚠ No proportion is recorded as his** — the
+  corrected build derived roughly a third of screen height from its contents and
+  **he has not reacted to it**; the recorded ~75/25 split stays `[provisional]`.
+  **Separately:** *"there was way too much information and it was all about
+  numbers and moving numbers. It needs to be a lot more intuitive."* **Recorded
+  as the EXISTING constraint being enforced, not as a new preference** — the
+  design already says the bottom bar is the **decision substrate, not a HUD**.
+  **Cost and worth should be carried by size, weight, shape, fill and position**,
+  and **the power track's *gap* is the model** — a distance rather than two
+  figures. See [01](issues/01-battlefield-geometry.md).
 - **The leash is a LIMIT, not a barrier, and it gets no rendering of its own**
   `[provisional]` (2026-08-12/13, from his play-test) — **tapping past the front
   line is always accepted**: *"I think you should always be able to tap past the
@@ -1023,7 +1057,7 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt**; **⚠ 2026-08-11 — REBUILT in part: the command bar's layout is written in.** **Three panels — left the cards; middle, wider than either side individually, a screen showing both heroes' progress and power; right undecided** (*"something tactical that controls one of the game's other levers?"*). **The middle is the scoreboard of the win condition**, because the loss condition is the enemy hero's power threshold and the game is *"preventing your opponent from maximizing that power journey while maximizing your own"* — **it arrives before the threshold's specifics, which stay parked.** **Right-panel candidates recorded, none chosen** (jungle pre-commitment readout, event panel, gold conversion site, minimap — the last being information, not a lever). **Panel swapping ACCEPTED as a general principle** — the bar need not be three fixed panels — **which loosens the bottom-25% competition without settling it.** **⚠ The centre screen's direction is DELEGATED to whoever builds it, not open** — both his framings (2026-08-07 **enemy-centred**; 2026-08-11 **both heroes**) are preserved, **the tension is stated and unresolved and is not a reversal**, and **whoever chooses must record the choice and its reason** |
+| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt**; **⚠ 2026-08-11 — REBUILT in part: the command bar's layout is written in.** **Three panels — left the cards; middle, wider than either side individually, a screen showing both heroes' progress and power; right undecided** (*"something tactical that controls one of the game's other levers?"*). **The middle is the scoreboard of the win condition**, because the loss condition is the enemy hero's power threshold and the game is *"preventing your opponent from maximizing that power journey while maximizing your own"* — **it arrives before the threshold's specifics, which stay parked.** **Right-panel candidates recorded, none chosen** (jungle pre-commitment readout, event panel, gold conversion site, minimap — the last being information, not a lever). **Panel swapping ACCEPTED as a general principle** — the bar need not be three fixed panels — **which loosens the bottom-25% competition without settling it.** **⚠ The centre screen's direction is DELEGATED to whoever builds it, not open** — both his framings (2026-08-07 **enemy-centred**; 2026-08-11 **both heroes**) are preserved, **the tension is stated and unresolved and is not a reversal**, and **whoever chooses must record the choice and its reason**; **⚠ 2026-08-12/13 — REBUILT AGAIN from his play-test.** **The camera comes IN** (*"a little too top down far away"*; target *"closer to the max zoom out of typical MOBAs, but maybe slightly more just because it's a mobile game"*, his hedge intact), which carries **the design's first requirement that texture and material be legible** — ground, units and canopy need a **surface**, not a fill — at a **frame cost the prototype's own budget line did not hold** (its card amended with measurements; **cited, not restated**, and **still not measured on a phone**). **The command bar is larger, principle over number: the bar gets the fixed real estate and the board absorbs the variation, because the board pans and the bar cannot** — **he gave no proportion**, so none is recorded as his. **The bar must not be a numeric HUD** — **the existing decision-substrate constraint being ENFORCED**, with cost and worth carried by **size, weight, shape, fill and position**, the power track's **gap** as the model |
 | 02 | What "combining cards" actually means | resolved + amended; **⚠ 2026-08-11 (from 05): a finding from commissioned card-system work, recorded as a finding and not as his — *combining is currently unpriced*.** 02 chose payload + modifiers and left the cap, reversibility and failure cases open, and nothing states **what combining costs**, so *combine everything, every time* is the dominant line and **the keystone mechanic has no decision in it.** Recorded, **not rebuilt** |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
@@ -1241,6 +1275,19 @@ method; treat them as "this informs that," not as a build order.
   delayed or a fast run of moves is chopped into alternating intents.**
   **Unresolved.** The prototype carries an implementation and its cost;
   **cited, not adopted, and he has not reacted to it.** 12, 15.
+- **🆕 The camera's actual zoom level, and what texture costs on a phone.**
+  `[open]` 2026-08-13. The **direction** is his — *"closer to the max zoom out of
+  typical MOBAs, but maybe slightly more"* — **with his hedge attached**, and
+  **no level is chosen.** Under it sits the new requirement that **texture and
+  material be legible**, whose frame cost **exceeded the prototype's own budget
+  line** and is **still measured only in a desktop browser, never on a phone.**
+  The standing rule that **prototypes must be observed running** applies. 01.
+- **🆕 The command bar's proportion.** `[open]` 2026-08-12 — he asked for
+  **bigger and gave no number.** **The sizing principle is settled** (the bar is
+  fixed, the board absorbs variation); **the split is not**, and the recorded
+  ~75/25 stays `[provisional]`. Its companion: **how the bar carries cost and
+  worth without numbers**, hardest for **the jungle pre-commitment readout**,
+  which is numeric by construction and **is his own request.** 01, touches 12.
 - **🆕 What makes jungle traversal interesting.** `[open]` 2026-08-13 — *"the
   ability to traverse the jungle needs to be made a much better experience"*:
   **routes, angles and choices about which way to go, not corridors with
@@ -1449,6 +1496,16 @@ method; treat them as "this informs that," not as a build order.
     allocate a permanent slot per job.** **Which lever holds the fixed right slot
     is undecided**, with four candidates recorded and none chosen, and **the
     minimap and the leash readout are still claimants.** 01.
+  - **🔧 2026-08-12/13, from his play-test — a sizing principle and a hard
+    constraint, still no allocation.** **The bar gets the fixed real estate and
+    the board absorbs the variation, because the board pans and the bar cannot**
+    — he asked for **bigger with no number**, so **no proportion is recorded as
+    his.** And **the bar must not be a numeric HUD** (*"way too much information
+    and it was all about numbers and moving numbers"*) — **the existing
+    decision-substrate constraint being enforced.** **⚠ The leash readout remains
+    a claimant**: the 2026-08-13 answer that **the leash needs no rendering on
+    the board** says nothing about whether the **bar** wants one. **Do not extend
+    that cascade.** 01, 05.
 - **Whether any gesture survives.** The "never drawn symbols" rejection still
   binds, but with casting reduced to selection it is unclear whether flicks and
   drags remain anywhere — combining cards together, steering the hero (15 asks

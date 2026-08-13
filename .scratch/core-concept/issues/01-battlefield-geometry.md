@@ -1,7 +1,16 @@
 # Battlefield geometry & phone readability
 
 Type: prototype
-Status: open
+Status: open — **⚠ updated 2026-08-12/13 by his play-test of the prototype.**
+**The camera comes IN** — *"a little more zoomed in"*, targeting *"closer to the
+max zoom out of typical MOBAs, but maybe slightly more just because it's a mobile
+game"* — which brings with it **the design's first requirement that texture and
+material be legible**. **The command bar is larger**, with the principle recorded
+rather than a number: **the bar gets the fixed real estate and the board absorbs
+the variation, because the board pans and the bar cannot.** **The bar must not be
+a numeric HUD** — *"way too much information and it was all about numbers"* —
+which is **the existing decision-substrate constraint being enforced, not a new
+preference.**
 Blocked by: —
 
 ## Question
@@ -353,3 +362,144 @@ The user, explicitly: *"your standing cautions, no let's just ignore those for
 now."* The napkin-sketch caution and the prototype-at-real-dimensions rule were
 waived for this round of thinking. **Waived, not repealed** — both still apply
 before anything here is promoted to `[committed]`.
+
+## Play-test — 2026-08-12 / 2026-08-13: the camera comes in, the bar grows, and the bar stops being numeric
+
+> **⚠ Source note.** His reactions to the playable prototype in
+> `.scratch/core-concept/prototypes/` — the **shipped build** on 2026-08-12 and
+> the **corrected build** on 2026-08-13, both played on an S26 Ultra. **Quoted
+> passages are his own wording as captured**; unquoted material is
+> record-paraphrase. The prototype's own artifacts —
+> [`COMMITMENT-overgrowth.md`](../prototypes/COMMITMENT-overgrowth.md) and its
+> `## Amendments`, and
+> [`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md) — are
+> **cited, never imported.**
+
+### ✅ The camera comes IN `[provisional]`
+
+> *"The space where you're viewing the map needs to be a little more zoomed in.
+> So that way when you're getting to watch your hero, you actually get a good
+> view of it, and a good view with spells, and a good view with the creeps, and a
+> good view of the actual textures of the game. Right now it's a little too top
+> down far away."*
+
+**His target, in his own words, with his own hedge attached:**
+
+> *"closer to the max zoom out of typical MOBAs, but maybe slightly more just
+> because it's a mobile game. I'm not totally sure there."*
+
+**So: roughly a MOBA's maximum zoom-out, permitted to be a little wider for a
+phone.** This does not disturb the pannable-observer camera (2026-07-26) — **the
+map still exceeds the screen and you still drag around it.** What changes is how
+much of it a screenful holds.
+
+### 🆕 The consequence — TEXTURE AND MATERIAL MUST BE LEGIBLE
+
+**This is the substantive part of the zoom change, and it is a first for this
+design.** Every prior statement about the board has been about **shape** — lane
+routing, jungle placement, what fits. His list of what he wants a good view of
+ends with *"the actual textures of the game"*, which is **the first requirement
+anywhere in the design for texture and material to read.**
+
+**What it obliges:** **the ground, the units and the canopy all need a surface
+rather than a fill.** At a closer camera a flat fill reads as a flat fill, so
+material becomes something the board has to render rather than something it can
+imply.
+
+**⚠ It is not free, and the prototype paid for it deliberately.** The build's own
+frame budget was **exceeded** by this change and its commitment card was
+**amended with measurements rather than allowed to drift** — see
+[`COMMITMENT-overgrowth.md`](../prototypes/COMMITMENT-overgrowth.md)'s
+`## Amendments`, **A4 (Budget)**, and the measurements in
+[`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md). **Cited, not
+restated here, and not a concept decision** — but recorded because **a
+legibility requirement that costs frame time is a real constraint on this
+ticket**, and because the number a phone actually produces is **still not
+measured on a phone.**
+
+### ✅ The command bar is LARGER — and the principle outlives the number
+
+**He asked for bigger without giving a number**, on 2026-08-12:
+
+> *"I feel like the bottom screen needs to be a little bigger... I have an S26
+> Ultra and it feels a tad small."*
+
+**The principle, which is what this ticket should carry forward** `[provisional]`:
+
+> **The bar gets the fixed real estate and the board absorbs the variation,
+> because the board pans and the bar cannot.**
+
+**Why:** the board has a **pannable camera**, so it absorbs any change in screen
+size for free — a shorter board just means a little more panning. **The bar has
+no such slack.** Everything in it sits at a **fixed position a thumb has to
+reach**: card targets, the shared readouts, whatever holds the right panel. **So
+the bar is sized from its contents and the board takes what is left** — the
+opposite of the usual instinct, which is to protect the board and squeeze the
+bar.
+
+**⚠ No proportion is recorded here as his.** He gave none. The corrected build
+**derived roughly a third of screen height from its contents** and he has not
+reacted to it; **that is the build's derivation, cited and not adopted.** The
+recorded **~75 / ~25 split (2026-07-26) is `[provisional]`** and is **the thing
+his "a tad small" bears on** — **no new split is decided here.**
+
+### ⚠ The bar must NOT be a numeric HUD — an existing constraint being ENFORCED
+
+> *"While the lower panel with all the information was good, there was way too
+> much information and it was all about numbers and moving numbers. It needs to
+> be a lot more intuitive."*
+
+**Recorded as the existing constraint being enforced, not as a new preference.**
+This ticket already states — since 2026-07-26 — that the bottom bar is the
+**decision substrate, not a HUD**, and that cards must be **judgeable against
+visible battle state**. **A panel of moving counters is a HUD.** The acceptance
+test written here in July is the same test this feedback failed.
+
+**What it asks for, and it is a design constraint rather than a styling one:**
+**cost and worth should be carried by size, weight, shape, fill and position** —
+read at a glance rather than computed. **The power track's *gap* is the model**:
+it shows a **distance between two things** rather than two figures, so the state
+is felt.
+
+**A firstmate observation, offered and not decided:** the **densest numeric
+object in the design is one he asked for himself** — the jungle **pre-commitment
+readout** from [12](12-jungle-role.md), carrying difficulty, time, damage, mana,
+gold and possible items **per camp** across roughly six camps. **That is dozens
+of numbers by construction.** The fix implied is **not to drop the information
+but to express it**, which raises the price of that readout without changing what
+he asked for. **Not his, not adopted.**
+
+### Recorded here because they land on this ticket's surfaces
+
+- **The leash needs no rendering of its own on the board** (2026-08-13, from
+  [05](05-match-shape-win-condition.md)) — its boundary **is** the lane's front
+  line, which is visible by definition, and a second drawn territorial system is
+  what made the leash and the home field indistinguishable. **⚠ This does NOT
+  retire the leash readout as a claimant on the bottom 25%**, which is this
+  ticket's question and is **untouched**. **Do not extend that cascade.**
+- **The home field is expressed as a boundary marked in the lane**, not a drawn
+  volume — *"just some sort of visual indicator maybe in the lane that tells you
+  the line in the sand"*. **A second territorial mark on this ticket's board**,
+  and the only one now drawn.
+- **Hero control is a tap on the map, validated by play** (*"the tap to move is
+  actually really good"*), and **intent is one tap attack-move / two taps move
+  only** (2026-08-13, from [12](12-jungle-role.md)). **The viewport this ticket
+  owns is now an input surface with two intents on it**, and **how a spam
+  sequence resolves is open** — see 12.
+
+### Open after the play-test
+
+- **The camera's actual zoom level.** *"Closer to the max zoom out of typical
+  MOBAs, but maybe slightly more"*, with his own hedge — *"I'm not totally sure
+  there"* — attached. **A direction, not a figure.**
+- **The command bar's proportion.** He asked for **bigger with no number.** The
+  **sizing principle is recorded**; **the split is not decided**, and the
+  recorded ~75/25 is `[provisional]`.
+- **How the bar carries cost and worth without numbers**, especially for the
+  **jungle pre-commitment readout**, which is numeric by construction and is
+  **his own request.**
+- **What "texture and material legible" costs on a phone** — **still not measured
+  on a phone**, only in a desktop browser. The standing rule that **prototypes
+  must be observed running** and the finish gate's own note both bear on this.
+- **The leash readout in the bottom 25%** — **still live.** The board needs no
+  drawn leash; **the bar's claimant is a separate question and is untouched.**
