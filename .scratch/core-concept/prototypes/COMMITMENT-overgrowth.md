@@ -4,6 +4,12 @@ Written **before** anything was made, per `/verve` step 4. Not reverse-engineere
 Audited against the artifact at the finish gate — findings in
 [`FINDINGS-overgrowth.md`](FINDINGS-overgrowth.md).
 
+**The card is live and the direction is unchanged.** Two amendments have been
+made to it since it was written, both deliberate and both recorded below rather
+than absorbed: the Materials amendment of the original pass, and the **Lever 1 /
+F2 amendment of the 2026-08-13 correction pass**. See
+[`## Amendments`](#amendments) at the foot of this file. Nothing else has moved.
+
 ---
 
 ```
@@ -27,6 +33,9 @@ Medium:     A real-time touch board in a portrait phone browser. Canvas board in
               1. Territory as a visible field — value across the ground says
                  whose ground this is. The ground, not the units, is the
                  primary information carrier.
+                 [AMENDED 2026-08-13, see A2: drawn only inside the lane's
+                 surveyed shoulder. The rule still spans the board; the
+                 rendering does not.]
               2. Weight and feedback at the fingertip — what a tap does inside
                  one frame; hero acceleration; the acknowledgement.
               3. Motion and timing of the seam — the front line's continuous
@@ -127,6 +136,10 @@ Forbidden:  Six refusals the obvious version would have leaned on. Each has the
             F2. No static painted terrain. Every order/growth boundary is
                 computed from live claim. The jungle is not a polygon; it is
                 where nobody's claim reaches.
+                [AMENDED 2026-08-13, see A2: the jungle is where no LANE
+                reaches — a continuous function of distance to a lane, still
+                not a polygon. Inside the shoulder, boundaries are still
+                computed from live claim. The check below is unchanged.]
                 check: no literal region path/polygon arrays for terrain;
                 `grep -n 'jungleRegion\|JUNGLE_POLY\|terrainPath'` empty.
             F3. Nothing is symmetrical in the growth. The two halves are not
@@ -164,6 +177,63 @@ Forbidden:  Six refusals the obvious version would have leaned on. Each has the
 - **Nobody excluded:** order-vs-wild carried by value (L\* 82 against L\* 8), side
   carried by the blue–yellow axis plus ruling direction, no strobing, no
   information in hue alone.
+
+## Amendments
+
+Amending a commitment card is a deliberate act, not a drift. Each amendment
+below states what changed, what forced it, and what was **not** allowed to
+change with it.
+
+### A1 — Materials: their ground darkened to slate (original pass)
+
+Their ground was specified as *cool bone* at the same value as yours. At phone
+scale warm-vs-cool at equal value was not readable, so their ground was darkened
+to slate (L\* ~55 against bone's ~82). The blue–yellow separation and the
+ruling-direction cue both survive; **value was added, nothing was removed.**
+
+### A2 — Lever 1 and F2: the order is drawn only where the order reaches (2026-08-13)
+
+**Changed.** Lever 1 read *"Territory as a visible field — value across the
+ground says whose ground this is."* F2's prose read *"The jungle is not a
+polygon; it is where nobody's claim reaches."*
+
+Both now read: **territory is drawn only inside the lane's surveyed shoulder.**
+The claim field is unchanged and still spans the whole board — it is the leash
+rule, and it still governs where a hero may go in the jungle — but outside the
+shoulder it is **not rendered**. The jungle is where the **lanes** do not reach,
+a continuous function of distance to a lane, and the ground there is nobody's
+and looks it.
+
+**What forced it.** The captain could not tell the two territorial systems
+apart: *"the way that you did the force field was no. I'm not even sure what it
+is... I see like these lines. Is that the leash? I don't know."* Two territorial
+systems rendered on one board collapsed into one unreadable layer. The agreed
+resolution is that **the leash gets no rendering of its own** — its boundary is
+the lane's front line, which is visible by definition — which leaves the home
+field alone in the territorial channel. The broad claim wash **was** the second
+system, and it was also what made the lanes read as too wide.
+
+**What did NOT change with it.**
+
+- **The claim field itself.** `legal()` still reads it across the whole board.
+  The leash still gates jungle access, and conceding still closes your own
+  jungle toward your base. This is a rendering amendment, not a rule change.
+- **F2's runnable check**, which still passes: no region path or polygon array
+  exists for terrain; the boundary is computed, not painted.
+- **The Direction**, which this arguably serves harder than the original
+  reading did — the card already said *"the lanes are the order — surveyed,
+  ruled, held open by fighting. The jungle is the wild."* Surveyed ground
+  stopping where the survey stops is that sentence taken literally.
+- **The unit of payoff.** The moment your world grows or closes is still
+  carried, and it now has far more ground to act on: the jungle went from a
+  thin strip to 61% of the board.
+
+**What it costs, stated rather than hidden.** In the jungle, the ground no
+longer says whose it is. Where your reach ends out there has to be read off the
+neighbouring lane's front line and extrapolated. He accepted exactly that trade
+— *"I guess that's just up to the player to pay attention to"* — and the build
+pays for it on the other side, by never refusing the input and never grinding at
+the edge. See F1 below, which is unchanged and still holds.
 
 ## What is NOT mine to decide, and is not decided here
 

@@ -19,6 +19,37 @@ three lanes, bases top and bottom, jungle between all of it, creeps as units,
 the front line as the hero's leash, the retracting home field, the
 push-versus-farm economy, tap-to-move, telegraphed events, and the command bar.
 
+**Corrected 2026-08-13 against his play-test.** Same artifact, same commitment
+card, same direction — six corrections, not a redesign. His verdict on the thing
+being corrected was *"honestly, for a verve, that's pretty decent"* and *"this
+is better than I thought."* **What changed, and what to look at first:**
+
+- **The board is re-routed to the recorded layout.** Side lanes run out to the
+  left and right edges and down them, mid runs down the centre, nothing
+  traversable outside them. The lanes no longer read as a chicken foot and they
+  no longer eat the middle: **the jungle is now 61% of the board** and lane
+  width is **derived from the creep** rather than picked.
+- **The jungle is semi-open**, per his amendment — paths and clearings by
+  default, camps in pockets off them. Measured: the whole map is one connected
+  region, nothing is sealed, and no tree has to be cut to reach anything.
+- **The leash has no rendering.** Its boundary is the lane's front line, which
+  is now a dark band cut across a bright road. The home field keeps the
+  territorial channel to itself and is cross-hatched so it cannot be confused
+  with a lane.
+- **The leash is a limit, not a barrier.** Tapping past the front line is always
+  accepted; the hero goes as far as it may and settles. It never grinds and it
+  takes **zero** damage doing it.
+- **The command bar is bigger (32%, floored at 226px) and far less numeric** —
+  from ~37 visible figures down to 3.
+- **One tap is attack-move, two taps is travel.** His proposal, no new control.
+  The choice of which way round was the build's to make and the reason is
+  recorded on the file and in the findings.
+
+**One line of the commitment card was amended**, deliberately and on the record:
+Lever 1 / F2, because deleting the second territorial system is what he asked
+for and the card's original wording ruled it out. See
+[`COMMITMENT-overgrowth.md` § Amendments](COMMITMENT-overgrowth.md#amendments).
+
 Design decisions and the reasoning behind them:
 
 - [`COMMITMENT-overgrowth.md`](COMMITMENT-overgrowth.md) — the commitment card,
@@ -30,18 +61,26 @@ Design decisions and the reasoning behind them:
 
 **React to:**
 
-- **The leash.** Tap ahead of your hero into the growth. Your reach ends where
-  your lane's front line does — push and the road opens, concede and it closes
-  over. Does that read as a decision, or as a fence?
-- **Move versus attack-move through one tap.** The two intents are separated
-  **in space, by what you tap**, not by a mode: pale ground you hold = travel
-  and ignore everything; the growth at the front = press to the edge and hold
-  it; a camp, a tree or a unit = go and fight that; your own hero = stop. Does
+- **The board.** Does it read as lanes and jungle now, and is there enough
+  jungle that farming is a real alternative to pushing rather than the obvious
+  second choice?
+- **The jungle's character.** Paths, clearings, pockets, thickets you route
+  around. Is that the semi-open forest you described, or is it too open?
+- **The leash.** Tap deep into their half, past your front line. Your hero goes
+  as far as it may and stops. Does the front line tell you where that is, or do
+  you still not know where your reach ends?
+- **Move versus attack-move by tap count.** **One tap = attack-move** (go there
+  and fight what you meet). **Two taps = travel** (go there, ignore everything).
+  This build picked that way round; the other way is one line of code. Does
   being locked into the wrong intent still feel bad?
+- **The command bar.** It is bigger, and almost nothing in it is a number any
+  more — cost and worth are length, weight, count and fill. Can you still tell
+  whether a camp is worth taking? Is anything now harder to read than it was?
 - **Push or farm.** Lanes pay gold on any hero kill of a minion, no
-  last-hitting. The jungle pays less gold plus items, and every camp shows its
-  difficulty, time, damage, mana, gold and item chance **before** you commit.
-  Does the choice feel live, or is one arm obviously right?
+  last-hitting. The jungle pays less gold plus items, and every camp still shows
+  its difficulty, time, damage, mana, gold and item chance **before** you commit
+  — the information is all there, it is just not carried by figures. Does the
+  choice feel live, or is one arm obviously right?
 - **The home field.** Its cultivated core, its reach, and its edge all retract
   over the match. Can you tell **why** a push stalled? (The phase strip under
   the race track draws the schedule.)
@@ -60,8 +99,9 @@ Design decisions and the reasoning behind them:
   deliberate, and the race track has no finish line for the same reason.
 - **Event lane placement is randomised and says so** — the principle is
   "influence, not selection" but the mechanism is commissioned and unchosen.
-- The opponent is **passive by default** (Tuning → Opponent). Verified: 130 s of
-  no input leaves the lanes at 0.49 / 0.44 / 0.47 and your hero untouched.
+- The opponent is **passive by default** (Tuning → Opponent). Re-verified after
+  the corrections: 130 s of no input leaves the lanes at 0.47 / 0.50 / 0.45 and
+  your hero at full health, untouched.
 - Mana is shown only because the camp readout specifies a mana cost; whether
   mana exists at all is open.
 - Provisional numbers are measurement apparatus, not balance decisions. The

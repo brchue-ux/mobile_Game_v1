@@ -47,47 +47,94 @@
   #recentre{position:absolute;right:6px;top:33px;font-size:10px;color:#cfc7b4;background:rgba(7,13,9,.8);
     border:1px solid #2c3a29;padding:3px 6px;letter-spacing:.04em;font-family:inherit;border-radius:0}
 
-  /* ---- command bar: strict order, nothing irregular ---------------- */
-  #bar{flex:0 0 auto;height:27%;min-height:168px;max-height:240px;background:var(--bar);border-top:1px solid var(--rule);
-    display:grid;grid-template-columns:27fr 38fr 35fr;grid-template-rows:auto 1fr;overflow:hidden;position:relative}
+  /* ---- command bar: strict order, nothing irregular ----------------
+     SIZED FROM ITS CONTENTS, not from a fraction. The floor is what the bar
+     actually needs: three thumb-sized card targets (3 x 44 + gaps), enough
+     vertical run for the power track's GAP to read (>= 96px) and its phase
+     strip (>= 42), and six camp rows at 22px with a header and a legend. That
+     comes to ~226px of content under a ~30px state strip. The board takes the
+     remainder and absorbs the loss by panning; the bar cannot pan, and every
+     target in it sits where a thumb has to reach. */
+  #bar{flex:0 0 auto;height:32%;min-height:226px;max-height:312px;background:var(--bar);border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:29fr 33fr 38fr;grid-template-rows:auto 1fr;overflow:hidden;position:relative}
   #strip{grid-column:1/4;display:flex;border-bottom:1px solid var(--rule);background:var(--bar-2)}
-  #strip>div{flex:1 1 0;min-width:0;padding:3px 5px;border-right:1px solid var(--rule);
-    font-size:8.5px;letter-spacing:.07em;color:var(--ink-dim);white-space:nowrap;overflow:hidden}
+  #strip>div{flex:1 1 0;min-width:0;padding:3px 5px 4px;border-right:1px solid var(--rule);
+    font-size:8px;letter-spacing:.07em;color:var(--ink-dim);white-space:nowrap;overflow:hidden}
   #strip>div:last-child{border-right:0}
-  #strip b{display:block;font-size:12px;color:var(--ink);font-weight:400;letter-spacing:0;
-    overflow:hidden;text-overflow:ellipsis}
+  #strip u{display:block;text-decoration:none;font-size:7.5px;letter-spacing:.09em;color:#7d7767;margin-bottom:2px}
   #tuneBtn{background:none;border:0;color:#cbbd8d;font:inherit;font-size:12px;padding:0;
     text-decoration:underline;border-radius:0}
+
+  /* ---- glanceable gauges: length, count, fill and position. No moving
+     numbers. The bar is the decision substrate, not a HUD. ---- */
+  .gtrk{position:relative;height:5px;background:#221f18;border:1px solid #302c22;margin-bottom:2px;overflow:hidden}
+  .gtrk.thin{height:3px}
+  .gfill{position:absolute;left:0;top:0;bottom:0;width:0}
+  .gfill.me{background:#d9cfba} .gfill.them{background:#8f9caa}
+  .gfill.hp{background:#c2a86a} .gfill.mp{background:#5f7c93}
+  .gfill.warn{background:#9c5a34}
+  .pips{display:flex;gap:1.5px;flex-wrap:wrap;height:6px;overflow:hidden}
+  .pips b{display:block;width:4px;height:4px;background:#c9b071;font-size:0}
+  .pips b.off{background:#332f26}
+  .pips.item b{background:#8ea277} .pips.item b.off{background:#2b2a20}
+
   .panel{min-width:0;overflow:hidden;border-right:1px solid var(--rule);display:flex;flex-direction:column}
   .panel:last-child{border-right:0}
   .ptitle{font-size:7.5px;letter-spacing:.09em;color:#7d7767;padding:3px 5px 2px;border-bottom:1px solid #262319;
     white-space:nowrap;overflow:hidden}
   .pbody{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:3px 4px}
 
-  .card{display:block;width:100%;text-align:left;background:#1e1b14;border:1px solid var(--rule);
-    color:#ded7c4;padding:1px 4px;margin-bottom:2px;font:inherit;font-size:9px;line-height:1.18;border-radius:0}
-  .card .cn{display:flex;justify-content:space-between;gap:3px;font-size:9.5px;color:#efe8d6;
+  /* thumb-sized card targets: 44px is the floor and the bar is sized around it */
+  .card{display:block;width:100%;min-height:44px;text-align:left;background:#1e1b14;border:1px solid var(--rule);
+    color:#ded7c4;padding:4px 5px;margin-bottom:3px;font:inherit;font-size:9px;line-height:1.2;border-radius:0}
+  .card .cn{display:flex;justify-content:space-between;gap:3px;font-size:11px;color:#efe8d6;
     white-space:nowrap;overflow:hidden}
-  .card .cn i{font-style:normal;color:#9b957f;font-size:7.5px;flex:0 0 auto}
-  .card .cd{display:block;font-size:7.5px;color:#9b957f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card .cn i{font-style:normal;color:#9b957f;font-size:8px;flex:0 0 auto}
+  .card .cd{display:block;font-size:8.5px;color:#9b957f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .card.sel{background:#3d3520;border-color:#a8945c;color:#fff}
   .card.mod{background:#2c2718;border-color:#7d7043}
   .card.empty{background:#16140f;border-style:dotted;border-color:#332f26;color:#5d584c}
   .card.empty .cn span,.card.empty .cd{color:#5d584c}
-  .cnote{font-size:8px;color:#6f6a5b;letter-spacing:.04em;margin-top:2px;line-height:1.35}
+  .cnote{font-size:7.5px;color:#6f6a5b;letter-spacing:.04em;margin-top:2px;line-height:1.3}
+  /* the accrual track: the next card arrives as a DISTANCE closing, and the
+     combine cost is the extra distance hatched onto the end of it */
+  #accrual{position:relative;height:6px;background:#221f18;border:1px solid #302c22;margin:1px 0 2px;overflow:hidden}
+  #accFill{position:absolute;left:0;top:0;bottom:0;width:0;background:#8a7a48}
+  #accCost{position:absolute;top:0;bottom:0;right:0;width:0;
+    background:repeating-linear-gradient(90deg,#5a4f2e 0 2px,#221f18 2px 4px)}
 
   #race{position:relative;height:100%;min-height:0}
   #raceCv{width:100%;height:100%;display:block}
 
-  .camp{display:grid;grid-template-columns:16px 1fr;gap:2px;font-size:7.2px;color:#b3ac97;
-    padding:0.5px 0;border-bottom:1px solid #201e16;line-height:1.3;white-space:nowrap;overflow:hidden}
-  .camp i{font-style:normal;color:#8b8471}
-  .chdr{font-size:7px;letter-spacing:.05em;color:#665f52;padding-bottom:1px;white-space:nowrap}
-  .camp.gone{opacity:.34}
-  .camp.sel{color:#f2ead6;background:#2a2618}
+  /* ---- the camp readout: same information, carried by length, count and fill.
+     Nothing in a row is a figure. ---- */
+  .camp{display:grid;grid-template-columns:15px 1fr 1fr;gap:4px;align-items:center;
+    height:18px;padding:0 1px;border-bottom:1px solid #201e16}
+  .camp .ctier{display:flex;gap:1.5px}
+  .camp .ctier b{display:block;width:3.5px;height:8px;background:#c9b071;font-size:0}
+  .camp .ctier b.off{background:#2e2a20}
+  .camp .cz{min-width:0}
+  .camp.gone{opacity:.42}
+  .camp.sel{background:#2a2618}
+  .camp.sel .ctier b{background:#f2ead6}
+  .chdr{display:grid;grid-template-columns:15px 1fr 1fr;gap:4px;font-size:6.5px;letter-spacing:.08em;
+    color:#665f52;padding-bottom:2px;white-space:nowrap}
+  /* the key to the glyphs is what makes them learnable, so it is pinned as a
+     footer and never scrolls away — the last gate caught this exact class of
+     failure at 320 wide */
+  .pfoot{flex:0 0 auto;border-top:1px solid #262319;padding:2px 4px 2px;
+    font-size:6.8px;color:#5f5a4d;letter-spacing:.02em;line-height:1.25}
+  .pfoot em{font-style:normal;color:#9c5a34} .pfoot s{text-decoration:none;color:#5f7c93}
+  .pfoot span{display:block;color:#4e4a3f;margin-top:1px;font-size:6.2px;line-height:1.25}
   #evtBox{font-size:10px;color:#ded7c4;line-height:1.4}
   #evtBox u{display:block;text-decoration:none;font-size:8px;letter-spacing:.1em;color:#8f8874;margin-top:4px;
     white-space:normal}
+  /* the event's lane is a POSITION in three cells, not a lane number */
+  .lanes3{display:flex;gap:3px;margin-top:3px}
+  .lanes3 b{flex:1 1 0;height:9px;background:#221f18;border:1px solid #302c22;font-size:0}
+  .lanes3 b.me{background:#d9cfba;border-color:#d9cfba}
+  .lanes3 b.them{background:#8f9caa;border-color:#8f9caa}
+  .lanes3 b.both{background:#9c5a34;border-color:#9c5a34}
 
   #tuner{position:absolute;inset:0;background:#0d0c08;border:1px solid #4a4433;padding:9px;
     overflow:auto;display:none;z-index:5}
@@ -114,10 +161,18 @@
 
   <div id="bar">
     <div id="strip">
-      <div>GOLD<b id="sGold">0</b></div>
-      <div>REINF<b id="sPool">— / —</b></div>
-      <div>HERO<b id="sHero">—</b></div>
-      <div>NUMBERS<b><button id="tuneBtn">tuning</button></b></div>
+      <div><u>PURSE · ITEMS</u>
+        <div class="pips" id="sGold"></div>
+        <div class="gtrk thin" style="margin-top:3px"><div class="gfill hp" id="sGoldFill"></div></div>
+        <div class="pips item" id="sItems" style="margin-top:3px"></div></div>
+      <div><u>REINFORCEMENTS</u>
+        <div class="gtrk"><div class="gfill me" id="sPoolMe"></div></div>
+        <div class="gtrk"><div class="gfill them" id="sPoolThem"></div></div></div>
+      <div><u>HEROES · CONDITION</u>
+        <div class="gtrk"><div class="gfill hp" id="sHpMe"></div></div>
+        <div class="gtrk thin"><div class="gfill mp" id="sMpMe"></div></div>
+        <div class="gtrk"><div class="gfill them" id="sHpThem"></div></div></div>
+      <div><u>NUMBERS</u><button id="tuneBtn">tuning</button></div>
     </div>
 
     <div class="panel">
@@ -126,13 +181,14 @@
     </div>
 
     <div class="panel">
-      <div class="ptitle">THE RACE · BOTH HEROES</div>
+      <div class="ptitle">THE RACE · BOTH</div>
       <div class="pbody" style="padding:0"><div id="race"><canvas id="raceCv"></canvas></div></div>
     </div>
 
     <div class="panel">
       <div class="ptitle" id="rTitle">JUNGLE · PRE-COMMIT</div>
       <div class="pbody" id="rBody"></div>
+      <div class="pfoot" id="rFoot"></div>
     </div>
 
     <div id="tuner">
@@ -160,7 +216,7 @@
    Everything else is chosen so it can be felt and revised.
    ================================================================== */
 var P = {
-  MAP_W: 1000, MAP_H: 2000,
+  MAP_W: 1150, MAP_H: 2000,
   MATCH_S: 900,                 // fixed anchor: ~15 minutes
   EVENT_AT: [300, 600],         // fixed anchor: ~5 minute cadence
   TELEGRAPH: 60,                // ~1 minute lead
@@ -169,14 +225,34 @@ var P = {
   SCAR_S: 18,
   FIELD_R0: 0.66,               // home field radius at 0:00, x half-length
   FIELD_R1: 0.14,               // ...at 15:00
-  LANE_REACH: 190,              // how far a lane's claim spreads sideways
-  SEAM: 0.055,                  // half-width of the contested band, in lane-t
+  LANE_REACH: 250,              // how far forward the LEASH RULE reaches off a lane
+  SEAM: 0.072,                  // half-width of the contested band, in lane-t
   POOL: 520,                    // ~58 waves: running dry is reachable, not automatic
   HERO_SPD: 132,
   AI: 0                         // 0 = passive by default (mandatory)
 };
-var CELL = 16, TS = 0.5;
-var GW, GH, claim, shown, scar, laneT, laneD, veg, minD;
+
+/* ---- LANE WIDTH IS DERIVED, NOT PICKED ----------------------------------
+   The creep is the atom. A creep body is 8.4 world units across and a wave is
+   three abreast at a 9-unit offset, so a wave spans ~26 units and two waves in
+   contact make a band of about that depth. A lane must carry that band with
+   room either side for a hero (20 units) to pass it, which is five creeps wide:
+
+     5 x 8.4 = 42, rounded up to a 54-unit road (ROAD_W half-width 27).
+
+   At the composed zoom (s ~ 0.48 on a 390-wide phone) that is a 26px road, a
+   4px creep and a 12px front-line band -- the band still reads as a band.
+   Everything wider than the road's surveyed shoulder is jungle by subtraction:
+   TINT_R is where the order stops, and it is the ONLY thing that decides how
+   wide a lane looks. Widen a lane here and the jungle shrinks by exactly that
+   much, which is the property the previous build did not have.              */
+var ROAD_W = 27;                // visible road half-width, world units
+var TINT_R = 64;                // surveyed shoulder: order ends here, wild begins
+var TINT_C = 26;                // ...full-strength within this
+var TREAD_S = 34;               // a trodden path fades in this many seconds
+
+var CELL = 14, TS = 0.5;
+var GW, GH, claim, shown, scar, laneT, laneD, veg, minD, corr, tread;
 
 /* ---- irregular, unmirrored value noise (F3: no mirror term) ------- */
 function h2(x, y) {
@@ -196,38 +272,75 @@ function fbm(x, y) {
 }
 
 /* ---- geometry, in a 1000x2000 reference frame ---------------------
-   Bases top and bottom, three bending lanes, jungle between all of it,
-   nothing traversable on the outsides. Left and right are deliberately
-   NOT mirrors of each other.                                          */
+   THE RECORDED LAYOUT, and it is not spokes. Bases top and bottom. The side
+   lanes leave the base sideways, run OUT to the left and right edges and then
+   down them; mid runs down the centre. Nothing traversable outside the side
+   lanes. What that leaves -- the two regions BETWEEN mid and each side lane --
+   is the jungle, and it is a region rather than a strip because the lanes
+   bound the board instead of filling it.
+   Left and right are deliberately NOT mirrors of each other.           */
 var REF_LANES = [
-  [[500,1880],[300,1700],[185,1400],[150,1050],[175,700],[300,380],[500,120]],
-  [[500,1880],[522,1560],[468,1250],[524,950],[470,640],[500,320],[500,120]],
-  [[500,1880],[700,1720],[830,1430],[862,1080],[835,720],[718,400],[500,120]]
+  /* left: out of the base to the west edge, up it, then in to their base */
+  [[500,1880],[356,1858],[224,1790],[148,1664],[122,1490],[114,1200],[118,900],
+   [136,586],[204,372],[344,180],[500,120]],
+  /* mid: down the centre, leaning -- a surveyed road, not a ruled line */
+  [[500,1880],[486,1592],[512,1296],[494,1000],[516,704],[490,408],[500,120]],
+  /* right: leaves later and hugs tighter. Not a mirror of the left. */
+  [[500,1880],[672,1852],[812,1772],[880,1630],[892,1444],[886,1130],[880,826],
+   [860,516],[788,318],[646,168],[500,120]]
 ];
+/* THE JUNGLE IS SEMI-OPEN (his amendment): not open ground, not a sealed
+   thicket -- "a forested area with clear openings and paths to traverse and
+   little pockets where the creeps will hang out." These are the paths. The
+   growth is thinned along them, so passage is the DEFAULT state and the trees
+   below separate rather than seal. Left has three, right has four. */
+var REF_PATHS = [
+  [[292,1786],[276,1580],[306,1372],[288,1152],[314,936],[292,720],[276,470],[300,300]],
+  [[176,1452],[268,1408],[372,1438],[440,1490]],
+  [[188,842],[286,880],[386,846],[452,796]],
+  [[704,1802],[722,1596],[698,1382],[716,1164],[690,948],[714,706],[698,452],[712,286]],
+  [[566,1666],[664,1712],[772,1678],[836,1616]],
+  [[604,1290],[700,1250],[792,1300]],
+  [[578,1046],[678,1006],[784,1044],[848,1108]]
+];
+/* trees sit BETWEEN the paths and beside them, and two of them pinch a path
+   without closing it. Still destructible, still separating -- but you route
+   around them, you are not walled in by them. */
 var REF_TREES = [
-  [255,1560,400,1500],[270,1300,250,1160],[600,1620,700,1520],[690,1300,770,1230],
-  [300,980,390,900],[640,1000,700,920],[262,700,360,640],[660,760,735,690],
-  [300,470,380,520],[640,480,706,540]
+  [170,1712,224,1748],[364,1552,398,1614],[196,1216,238,1168],[366,1096,404,1046],
+  [206,742,244,684],[362,646,400,700],[216,336,268,306],
+  [786,1786,832,1746],[624,1548,660,1490],[798,1288,832,1240],[630,1004,668,956],
+  [806,872,840,824],[640,538,678,590],[770,332,814,368]
 ];
+/* camps live in pockets OFF the paths -- close enough that a pocket's clearing
+   opens onto a path, far enough that you leave the path to take one. */
 var REF_CAMPS = [
-  [300,1600,1],[706,1622,1],[250,1252,2],[762,1186,2],[392,1418,3],[618,1344,3],
-  [322,400,1],[690,378,1],[268,764,2],[744,822,2],[402,572,3],[612,640,3]
+  [232,1636,1],[352,1266,2],[248,1064,3],      /* yours, left region  */
+  [768,1730,1],[646,1462,2],[774,1150,3],      /* yours, right region */
+  [346,858,1],[228,612,2],[326,398,3],         /* theirs -- not a mirror of yours */
+  [656,880,1],[780,668,2],[672,392,3]
 ];
-var LANES, LSEG, TREES, CAMP_POS, BASE_MINE, BASE_THEIRS;
+var LANES, LSEG, TREES, CAMP_POS, BASE_MINE, BASE_THEIRS, PSEG;
+var LANE_REF_LEN = 1900;        /* creep speed is normalised to this, so a long
+                                   side lane does not move its creeps faster */
 
+function polySegs(pts) {
+  var segs = [], total = 0, i;
+  for (i = 0; i < pts.length - 1; i++) {
+    var dx = pts[i+1][0]-pts[i][0], dy = pts[i+1][1]-pts[i][1], L = Math.hypot(dx, dy);
+    segs.push({x: pts[i][0], y: pts[i][1], dx: dx, dy: dy, L: L, at: total});
+    total += L;
+  }
+  return {segs: segs, total: total};
+}
 function buildGeometry() {
   var kx = P.MAP_W / 1000, ky = P.MAP_H / 2000;
   LANES = REF_LANES.map(function (pts) {
     return pts.map(function (p) { return [p[0] * kx, p[1] * ky]; });
   });
-  LSEG = LANES.map(function (pts) {
-    var segs = [], total = 0, i;
-    for (i = 0; i < pts.length - 1; i++) {
-      var dx = pts[i+1][0]-pts[i][0], dy = pts[i+1][1]-pts[i][1], L = Math.hypot(dx, dy);
-      segs.push({x: pts[i][0], y: pts[i][1], dx: dx, dy: dy, L: L, at: total});
-      total += L;
-    }
-    return {segs: segs, total: total};
+  LSEG = LANES.map(polySegs);
+  PSEG = REF_PATHS.map(function (pts) {
+    return polySegs(pts.map(function (p) { return [p[0] * kx, p[1] * ky]; }));
   });
   TREES = REF_TREES.map(function (t) {
     return {x1: t[0]*kx, y1: t[1]*ky, x2: t[2]*kx, y2: t[3]*ky, hp: 100, alive: true};
@@ -235,6 +348,20 @@ function buildGeometry() {
   CAMP_POS = REF_CAMPS.map(function (c) { return {x: c[0]*kx, y: c[1]*ky, tier: c[2]}; });
   BASE_MINE = {x: 500*kx, y: 1880*ky};
   BASE_THEIRS = {x: 500*kx, y: 120*ky};
+}
+function pathDist(px, py) {
+  var best = 1e9, pi, i;
+  for (pi = 0; pi < PSEG.length; pi++) {
+    var segs = PSEG[pi].segs;
+    for (i = 0; i < segs.length; i++) {
+      var s = segs[i], L2 = s.dx * s.dx + s.dy * s.dy;
+      var k = L2 ? ((px - s.x) * s.dx + (py - s.y) * s.dy) / L2 : 0;
+      k = Math.max(0, Math.min(1, k));
+      var d = Math.hypot(px - (s.x + s.dx * k), py - (s.y + s.dy * k));
+      if (d < best) best = d;
+    }
+  }
+  return best;
 }
 function lanePos(li, t) {
   var lane = LSEG[li], d = Math.max(0, Math.min(1, t)) * lane.total, s, i;
@@ -273,6 +400,7 @@ function buildGrid() {
   var n = GW * GH;
   claim = new Float32Array(n); shown = new Float32Array(n); scar = new Float32Array(n);
   veg = new Float32Array(n); minD = new Float32Array(n);
+  corr = new Float32Array(n); tread = new Float32Array(n);
   laneT = [new Float32Array(n), new Float32Array(n), new Float32Array(n)];
   laneD = [new Float32Array(n), new Float32Array(n), new Float32Array(n)];
   for (var gy = 0; gy < GH; gy++) {
@@ -284,15 +412,40 @@ function buildGrid() {
         if (r.d < md) md = r.d;
       }
       minD[i] = md;
+      /* THE SURVEYED SHOULDER. Order stops at TINT_R and the wild starts. This
+         is the one number that sets how wide a lane LOOKS, and every unit of it
+         is a unit taken off the jungle -- see the derivation at the top. */
+      var cw = (TINT_R - md) / (TINT_R - TINT_C);
+      cw = cw < 0 ? 0 : cw > 1 ? 1 : cw;
+      corr[i] = cw * cw * (3 - 2 * cw);
+
       /* VEGETATION: a property of the ground, independent of who holds it.
-         Thin on the roads, thick in the chambers between them, cut back at
-         the bases. This is what stops "wild" collapsing into "theirs". */
-      var v = (md - 30) / 150;
+         Thin on the roads, thick in the regions between them, cut at the bases.
+         This is what stops "wild" collapsing into "theirs". */
+      var v = (md - 26) / 56;
       v = v < 0 ? 0 : v > 1 ? 1 : v;
       v = v * v * (3 - 2 * v);
       var db = Math.min(Math.hypot(x - BASE_MINE.x, y - BASE_MINE.y),
                         Math.hypot(x - BASE_THEIRS.x, y - BASE_THEIRS.y));
-      if (db < 150) v *= Math.max(0, (db - 60) / 90);
+      if (db < 170) v *= Math.max(0, (db - 70) / 100);
+
+      /* SEMI-OPEN, his amendment: clear openings and paths to traverse... */
+      var pd = pathDist(x, y);
+      var pv = (pd - 20) / 30;
+      pv = pv < 0 ? 0 : pv > 1 ? 1 : pv;
+      v *= pv * pv * (3 - 2 * pv);
+
+      /* ...and little pockets where the creeps hang out. Each camp sits in an
+         opening that reaches back to a path, so nothing is sealed. */
+      var cd = 1e9, ci;
+      for (ci = 0; ci < CAMP_POS.length; ci++) {
+        var dd = Math.hypot(x - CAMP_POS[ci].x, y - CAMP_POS[ci].y);
+        if (dd < cd) cd = dd;
+      }
+      var pk = (cd - 30) / 24;
+      pk = pk < 0 ? 0 : pk > 1 ? 1 : pk;
+      v *= pk * pk * (3 - 2 * pk);
+
       veg[i] = v;
     }
   }
@@ -315,7 +468,7 @@ var CARDS = [
 var S, cam = {x: 0, y: 0}, view = {w: 0, h: 0, s: 1};
 var terrain = document.createElement("canvas");
 var tctx;
-var rebuildRow = 0, REBUILD_SLICES = 6;
+var rebuildRow = 0, REBUILD_SLICES = 10;
 
 function campStat(c, t) {
   var k = 1 + (t / P.MATCH_S) * 1.35;
@@ -354,7 +507,7 @@ function fresh() {
     hand: [], nextCard: 4, sel: null, mod: null, accrualPenalty: 0,
     events: [], evtIdx: 0,
     coach: 0, coachDone: false, coachWait: 0,
-    selCamp: null, flash: null, tapAck: null, castTarget: null,
+    selCamp: null, flash: null, tapAck: null, castTarget: null, settleAck: null,
     log: "", logT: 0
   };
   s.camps.forEach(function (c) { c.hp = 0; });
@@ -407,8 +560,10 @@ function updateClaim(dt) {
   var f0 = S.front[0], f1 = S.front[1], f2 = S.front[2], R = P.LANE_REACH, SM = P.SEAM;
   var t0 = laneT[0], t1 = laneT[1], t2 = laneT[2];
   var d0 = laneD[0], d1 = laneD[1], d2 = laneD[2];
-  var n = GW * GH, i, acc, u, s, prev, sv, sc, ds = dt / P.SCAR_S;
+  var n = GW * GH, i, acc, u, s, prev, sv, sc, ds = dt / P.SCAR_S, dtr = dt / TREAD_S, tr;
   for (i = 0; i < n; i++) {
+    tr = tread[i];
+    if (tr > 0) tread[i] = tr > dtr ? tr - dtr : 0;
     acc = 0;
     if (d0[i] < R) { u = 1 - d0[i] / R; u = u * u * (3 - 2 * u);
       s = (f0 - t0[i]) / SM; acc += u * (s > 1 ? 1 : s < -1 ? -1 : s); }
@@ -455,7 +610,9 @@ function apronCore(x, y, side) {
   return k > 1 ? 1 : k < 0 ? 0 : k;
 }
 function inBounds(x, y) {
-  return x > P.MAP_W * 0.058 && x < P.MAP_W * 0.942 && y > 42 && y < P.MAP_H - 42;
+  /* nothing traversable outside the side lanes: the boundary sits just past the
+     outer edge of their roads, so the side lane IS the perimeter */
+  return x > P.MAP_W * 0.052 && x < P.MAP_W * 0.948 && y > 42 && y < P.MAP_H - 42;
 }
 function burnAt(x, y) {
   for (var i = 0; i < S.burns.length; i++) {
@@ -490,7 +647,17 @@ function mix(a, b, k) {
    glance. Bright bone = yours. Dark slate = theirs. Growth between them. */
 var C_MINE_LO = [132,128,113], C_MINE_HI = [222,212,190];
 var C_THRS_LO = [64,72,82],    C_THRS_HI = [126,139,153];
-var C_WILD_1  = [22,48,31],    C_WILD_0  = [11,24,17];
+var C_WILD_1  = [30,64,40],    C_WILD_0  = [12,26,18];
+/* the jungle floor is TWO tones, and the difference is what makes a path a
+   path: under canopy it is nearly black, and in an opening it is bare duff.
+   Four value tiers now carry the whole board -- canopy L*9, opening L*17,
+   their bone L*55, your bone L*85 -- so the frame reads at a glance. */
+var C_FLOOR   = [13,26,18];    /* under canopy: nobody's, and it says so */
+var C_DUFF    = [38,44,30];    /* an opening: trodden ground, walkable, still wild */
+function mix3(a, b, k) {
+  k = k < 0 ? 0 : k > 1 ? 1 : k;
+  return [a[0] + (b[0]-a[0])*k, a[1] + (b[1]-a[1])*k, a[2] + (b[2]-a[2])*k];
+}
 
 function drawTerrainSlice() {
   var y0 = Math.floor(rebuildRow * GH / REBUILD_SLICES);
@@ -504,19 +671,45 @@ function drawTerrainSlice() {
       var x = gx * CELL + CELL / 2, px = gx * CELL * TS;
       if (!inBounds(x, y)) { tctx.fillStyle = "#050a07"; tctx.fillRect(px, py, cs + 0.6, cs + 0.6); continue; }
 
-      /* held ground */
-      if (sv > 0) tctx.fillStyle = mix(C_MINE_LO, C_MINE_HI, sv * 1.25);
-      else        tctx.fillStyle = mix(C_THRS_LO, C_THRS_HI, -sv * 1.25);
+      var md = minD[idx], cw = corr[idx];
+      var av = sv < 0 ? -sv : sv;
+
+      /* HELD GROUND, AND ONLY WHERE THE ORDER REACHES.
+         The claim field still runs across the whole board -- it is the leash
+         rule -- but it is only DRAWN inside the lane's surveyed shoulder. That
+         is the correction: the leash gets no rendering of its own, because its
+         boundary IS the lane's front line and the front line is a band of
+         fighting creeps you can already see. Outside the shoulder the ground is
+         nobody's and looks it, which leaves the home field alone in the
+         territorial channel instead of collapsed into a second field. */
+      var floor = mix3(C_FLOOR, C_DUFF, 1 - veg[idx]);
+      if (cw > 0.002) {
+        var held = sv > 0 ? mix3(C_MINE_LO, C_MINE_HI, sv * 1.25)
+                          : mix3(C_THRS_LO, C_THRS_HI, -sv * 1.25);
+        /* held ground fades back to bare ground as the claim on it goes to
+           zero, so the seam is a DARK BAND cut across a bright road rather
+           than a soft change of tint. That band is the front line, and the
+           front line is the only thing that has to carry the leash. */
+        floor = mix3(floor, held, cw * Math.min(1, 0.22 + av * 2.6));
+      }
+      tctx.fillStyle = "rgb(" + (floor[0]|0) + "," + (floor[1]|0) + "," + (floor[2]|0) + ")";
       tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
 
       /* the cultivated apron — drawn regardless of who currently holds it,
-         because the home field is positional. Its edge is the retraction. */
+         because the home field is positional. Its edge is the retraction. It
+         now has the territorial channel to itself, and it is CROSS-hatched
+         where the lanes are ruled one way only, so the two cannot be confused. */
       var ap1 = apron(x, y, 1), ap2 = apron(x, y, -1), ap = ap1 > ap2 ? ap1 : ap2;
       if (ap > 0) {
         tctx.fillStyle = ap1 > ap2
-          ? "rgba(232,222,196," + (ap * 0.24).toFixed(3) + ")"
-          : "rgba(150,166,182," + (ap * 0.24).toFixed(3) + ")";
+          ? "rgba(232,222,196," + (ap * 0.26).toFixed(3) + ")"
+          : "rgba(150,166,182," + (ap * 0.26).toFixed(3) + ")";
         tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
+        if (ap > 0.2) {                            /* cultivation: hatched BOTH ways */
+          tctx.fillStyle = ap1 > ap2 ? "rgba(196,184,150,.30)" : "rgba(120,138,158,.30)";
+          if (gx % 3 === 0) tctx.fillRect(px, py, 0.9, cs + 0.6);
+          if (gy % 3 === 0) tctx.fillRect(px, py, cs + 0.6, 0.9);
+        }
         if (ap < 0.055) {            /* the field's own edge — this is what retracts */
           tctx.fillStyle = ap1 > ap2 ? "rgba(158,146,110,.75)" : "rgba(96,112,130,.75)";
           tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
@@ -525,12 +718,11 @@ function drawTerrainSlice() {
 
       /* the road: order that only exists where somebody holds it. Its brightness
          is |claim|, so the road fades out under the growth at the seam and
-         writes itself back in when ground is retaken. */
-      var md = minD[idx];
-      var av = sv < 0 ? -sv : sv;
-      if (md < 46) {
-        var road = (1 - md / 46) * av;
-        tctx.fillStyle = (sv > 0 ? "rgba(246,238,216," : "rgba(160,174,190,") + (road * 0.46).toFixed(3) + ")";
+         writes itself back in when ground is retaken. ROAD_W is derived from the
+         creep, not chosen -- see the note at the top of the file. */
+      if (md < ROAD_W) {
+        var road = (1 - md / ROAD_W) * av;
+        tctx.fillStyle = (sv > 0 ? "rgba(246,238,216," : "rgba(160,174,190,") + (road * 0.5).toFixed(3) + ")";
         tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
         if (gy % 3 === 0) {                        /* sleepers, across the road */
           tctx.fillStyle = (sv > 0 ? "rgba(96,88,68," : "rgba(38,44,52,") + (road * 0.5).toFixed(3) + ")";
@@ -538,16 +730,18 @@ function drawTerrainSlice() {
         }
       }
 
-      /* ruling: along the lane for your ground, across it for theirs */
-      var every = ap > 0.2 ? 2 : 3;
-      if (sv > 0) {
-        if (gx % every === 0) { tctx.fillStyle = "rgba(80,74,58,.32)"; tctx.fillRect(px, py, 0.8, cs + 0.6); }
-      } else {
-        if (gy % every === 0) { tctx.fillStyle = "rgba(24,30,38,.45)"; tctx.fillRect(px, py, cs + 0.6, 0.8); }
+      /* ruling: along the lane for your ground, across it for theirs. Only on
+         surveyed ground -- the jungle is not ruled by anybody. */
+      if (cw > 0.35) {
+        if (sv > 0) {
+          if (gx % 3 === 0) { tctx.fillStyle = "rgba(80,74,58,.32)"; tctx.fillRect(px, py, 0.8, cs + 0.6); }
+        } else {
+          if (gy % 3 === 0) { tctx.fillStyle = "rgba(24,30,38,.45)"; tctx.fillRect(px, py, cs + 0.6, 0.8); }
+        }
       }
 
       /* scar: ground that changed hands, fading over SCAR_S */
-      var sk = scar[idx];
+      var sk = scar[idx] * cw;
       if (sk > 0.01) {
         tctx.fillStyle = "rgba(232,220,192," + (sk * 0.44).toFixed(3) + ")";
         tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
@@ -556,28 +750,49 @@ function drawTerrainSlice() {
       /* THE WILD — two independent facts, combined:
          (1) vegetation, which is a property of the ground, and
          (2) contest, because the wild wins wherever nobody's claim does.
-         So the jungle stays jungle even on ground you hold, and the growth
-         still closes over the road at the seam. */
+         Both claim-driven terms are weighted by the shoulder, so the contest
+         shows in the LANES and the jungle stays the jungle whoever is winning. */
       var contest = 1 - av / 0.34; if (contest < 0) contest = 0;
-      var w = veg[idx] * (1 - 0.38 * av) + contest * 0.62;
+      var w = veg[idx] * (1 - 0.38 * av * cw) + contest * 0.62 * cw;
       var thr = 0.34 + (fbm(gx * 0.17, gy * 0.17) - 0.5) * 0.42;
       /* only the field's CORE is cultivated clear; further out the field is
          present but shows itself through the creeps, not by cutting the wild */
       var core = apronCore(x, y, 1); var c2 = apronCore(x, y, -1);
       if (c2 > core) core = c2;
-      var g = (w - thr) / 0.34 - core * 2.6;
+      var tr = tread[idx];
+      var g = (w - thr) / 0.34 - core * 2.6 - tr * 1.5;
       if (g > 0 && burnAt(x, y)) g -= 1.4;
+      /* EVIDENCE OF TIME (kept from version B): where a hero has walked, the
+         growth is trodden down and takes TREAD_S to close again. */
+      if (tr > 0.06 && veg[idx] > 0.15) {
+        tctx.fillStyle = "rgba(126,124,96," + (tr * 0.20).toFixed(3) + ")";
+        tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
+      }
       if (g > 0) {
         if (g > 1) g = 1;
         var jx = (h2(gx, gy) - 0.5) * cs * 0.9, jy = (h2(gy, gx * 3 + 1) - 0.5) * cs * 0.9;
-        tctx.fillStyle = mix(C_WILD_1, C_WILD_0, g);
+        /* CROWNS ARE MOTTLED, NOT FLAT. On the old bright ground a dark blob had
+           all the contrast it needed; on the jungle floor it had none, and the
+           gate measured the result as dead ground. The crown's value now varies
+           per cell instead of tracking depth, so a thick canopy is a textured
+           mass rather than a void. */
+        var mo = h2(gx * 11 + 3, gy * 7 + 5);
+        tctx.fillStyle = mix(C_WILD_0, C_WILD_1, mo);
         tctx.beginPath();
-        tctx.ellipse(px + cs / 2 + jx, py + cs / 2 + jy, 2.3 + 3.4 * g, 2.0 + 3.1 * g,
+        /* crowns, not a paint layer: sized so the floor still shows between
+           them, which is where the wild gets its contrast from */
+        tctx.ellipse(px + cs / 2 + jx, py + cs / 2 + jy, 1.5 + 2.2 * g, 1.3 + 2.0 * g,
                      h2(gx * 5, gy * 7) * 3.14, 0, 6.2832);
         tctx.fill();
-        if (g < 0.5) {                                    /* the second grain scale */
-          tctx.fillStyle = "#305e38";
-          tctx.fillRect(px + cs / 2 + jx * 1.5, py + cs / 2 + jy * 1.4, 1.2, 1.2);
+        /* LIVE TIPS at the card's own #305e38 and at a size that survives the
+           downscale. On bright ground the crowns carried the second grain
+           scale by themselves; on the jungle floor they cannot, because the
+           whole canopy palette lives inside twelve points of L*. The tips are
+           what puts real range back into the wild. */
+        var to = h2(gx * 3 + 7, gy * 5 + 2);
+        if (to > 0.40) {
+          tctx.fillStyle = to > 0.82 ? "#46804f" : "#305e38";
+          tctx.fillRect(px + cs / 2 + jx * 1.4, py + cs / 2 + jy * 1.3, 2.3, 2.1);
         }
       }
     }
@@ -639,7 +854,10 @@ function stepCreeps(dt) {
       } else if (hd < 30) {
         hv.hp -= (c.emp ? 20 : 12) * dt; c.hit = 0.18;
       } else {
-        var spd = (c.emp ? 0.020 : 0.017) * dt;
+        /* normalised by lane length: the side lanes are the longer way round,
+           so a creep on one must not cover more GROUND per second than one in
+           mid. Without this the outer lanes resolve first, every match. */
+        var spd = (c.emp ? 0.020 : 0.017) * dt * (LANE_REF_LEN / LSEG[L].total);
         c.t += c.side === 1 ? spd : -spd;
         if (c.t > 0.995 || c.t < 0.005) c.hp = -1;
       }
@@ -706,12 +924,28 @@ function workCamp(h, c, i, dt) {
     if (S.selCamp === i) S.selCamp = null;
   }
 }
+/* THE LEASH IS A LIMIT, NOT A BARRIER.
+   Tapping past the front line is always accepted. The hero travels as far as it
+   legally can, and then it SETTLES: an order aimed past the limit defaults to a
+   move to the furthest reachable point and then ENDS, so the hero never stands
+   grinding at an invisible edge taking damage in a loop. Some of this is the
+   player's to watch, by his own word -- what the build owes him is that the
+   input is never refused and the attempt never repeats. */
+function settle(h, why) {
+  h.order = null; h.vx *= 0.2; h.vy *= 0.2;
+  if (h === S.hero) {
+    S.settleAck = {x: h.x, y: h.y, a: 1};
+    note(why);
+    coachHit("settle");
+  }
+}
 function stepHero(h, dt) {
   if (h.dead > 0) {
     h.dead -= dt;
     if (h.dead <= 0) {
       var b = h.side === 1 ? BASE_MINE : BASE_THEIRS;
-      h.x = b.x; h.y = b.y - h.side * 380; h.hp = h.mhp; h.vx = h.vy = 0; h.order = null;
+      h.x = b.x; h.y = b.y - h.side * 380 * (P.MAP_H / 2000);
+      h.hp = h.mhp; h.vx = h.vy = 0; h.order = null;
     }
     return;
   }
@@ -722,8 +956,16 @@ function stepHero(h, dt) {
   if (h.slow > 0) h.slow -= dt;
   if (h.atk > 0) h.atk -= dt;
 
+  /* the line can fall back THROUGH a standing hero. It withdraws with its own
+     ground rather than being stranded on ground it may not be on. */
+  var stranded = !legal(h, h.x, h.y);
+  var base = h.side === 1 ? BASE_MINE : BASE_THEIRS;
+
   var tx = h.x, ty = h.y, o = h.order, c, t;
-  if (o) {
+  if (stranded) {
+    if (o) { h.order = o = null; if (h === S.hero) note("your line fell back — withdrawing"); }
+    tx = base.x; ty = base.y;
+  } else if (o) {
     if (o.kind === "engage") {
       if (o.camp != null) {
         c = S.camps[o.camp];
@@ -733,7 +975,18 @@ function stepHero(h, dt) {
         if (!t.alive) { h.order = o = null; } else { tx = (t.x1 + t.x2) / 2; ty = (t.y1 + t.y2) / 2; }
       }
     } else { tx = o.x; ty = o.y; }
+
+    /* HIS OWN SKETCH: an order aimed past the limit becomes a MOVE to the
+       boundary. It stops pursuing rather than pressing on into it, and it stops
+       a standoff short of contact so settling never means standing in a fight
+       the player did not ask for. Re-checked every tick, because the limit moves. */
+    if (o && !legal(h, tx, ty)) {
+      var q = nearestLegal(h, tx, ty, 24);
+      if (o.kind === "engage") { o.kind = "press"; o.camp = null; o.tree = null; }
+      o.clipped = true; o.x = tx = q.x; o.y = ty = q.y;
+    }
   }
+
   var dx = tx - h.x, dy = ty - h.y, dist = Math.hypot(dx, dy);
   var maxv = P.HERO_SPD * (h.slow > 0 ? 0.55 : 1);
   var want = dist > 3 ? Math.min(maxv, dist * 3.2) : 0;    /* decelerate into rest */
@@ -743,10 +996,33 @@ function stepHero(h, dt) {
   h.vy += (uy * want - h.vy) * kA;
 
   var nx = h.x + h.vx * dt, ny = h.y + h.vy * dt;
-  if (legal(h, nx, ny)) { h.x = nx; h.y = ny; }
+  if (stranded) { h.x = nx; h.y = ny; }                    /* walking back onto legal ground */
+  else if (legal(h, nx, ny)) { h.x = nx; h.y = ny; }
   else if (legal(h, nx, h.y)) { h.x = nx; h.vy *= 0.25; }  /* slide along the edge */
   else if (legal(h, h.x, ny)) { h.y = ny; h.vx *= 0.25; }
   else { h.vx *= 0.12; h.vy *= 0.12; }
+
+  /* the trodden path: pure evidence of time, and it does not touch the rule */
+  var tgx = (h.x / CELL) | 0, tgy = (h.y / CELL) | 0;
+  if (tgx >= 0 && tgy >= 0 && tgx < GW && tgy < GH) {
+    var ti = tgy * GW + tgx;
+    tread[ti] = 1;
+    if (tgx > 0) tread[ti - 1] = Math.max(tread[ti - 1], 0.7);
+    if (tgx < GW - 1) tread[ti + 1] = Math.max(tread[ti + 1], 0.7);
+  }
+
+  /* NEVER GRIND. If the hero is still under an order but has stopped getting
+     anywhere -- the limit, a tree, a corner -- it settles and the order ends. */
+  if (h.order && dist > 9) {
+    if (Math.hypot(h.vx, h.vy) < 14) {
+      h.balk = (h.balk || 0) + dt;
+      if (h.balk > 0.4) {
+        h.balk = 0;
+        settle(h, h.order.clipped ? "as far as your line reaches — holding here"
+                                  : "blocked — holding here");
+      }
+    } else h.balk = 0;
+  } else h.balk = 0;
 
   if (o && o.kind === "engage" && o.tree != null) {
     var tr = TREES[o.tree];
@@ -755,7 +1031,12 @@ function stepHero(h, dt) {
       if (tr.hp <= 0) { tr.alive = false; h.order = null; if (h === S.hero) note("tree wall cut — chamber opened"); }
     }
   }
-  if (o && o.kind === "travel" && dist < 6) h.order = null;
+  /* arrival ends the order — including a clipped one, which is the whole point:
+     the hero reaches the limit and then just stands there, done, not pushing */
+  if (o && (o.kind === "travel" || o.kind === "press") && dist < 6) {
+    if (o.clipped && h === S.hero) settle(h, "as far as your line reaches — holding here");
+    else h.order = null;
+  }
 }
 /* passive-by-default opponent (mandatory) */
 function stepFoe(dt) {
@@ -808,7 +1089,7 @@ function stepEvents(dt) {
       var c = S.creeps[m], cp = creepXY(c);
       if (c.side !== b.side && Math.hypot(cp.x - p.x, cp.y - p.y) < 34) { c.hp -= 70 * dt; b.hp -= 6 * dt; }
     }
-    b.t += (b.side === 1 ? 1 : -1) * 0.009 * dt;
+    b.t += (b.side === 1 ? 1 : -1) * 0.009 * dt * (LANE_REF_LEN / LSEG[b.lane].total);
     if (b.hp <= 0) {
       var kh = b.side === 1 ? S.foe : S.hero;
       kh.gold += 55; kh.items++;
@@ -850,12 +1131,12 @@ function step(dt) {
   if (S.flash) { S.flash.a -= dt / 1.1; if (S.flash.a <= 0) S.flash = null; }
   if (S.tapAck) { S.tapAck.a -= dt * 3.6; if (S.tapAck.a <= 0) S.tapAck = null; }
   if (S.castTarget) { S.castTarget.a -= dt * 2.2; if (S.castTarget.a <= 0) S.castTarget = null; }
+  if (S.settleAck) { S.settleAck.a -= dt * 1.3; if (S.settleAck.a <= 0) S.settleAck = null; }
   /* the guided run must never wedge: each step also advances on a timeout, so a
      player who does something else first is not stuck reading step 1 */
   if (!S.coachDone) {
     S.coachWait += dt;
-    var lim = COACH[S.coach][0] === "wait" ? 9 : 26;
-    if (S.coachWait > lim) coachHit(COACH[S.coach][0]);
+    if (S.coachWait > 26) coachHit(COACH[S.coach][0]);
   }
 }
 
@@ -870,7 +1151,10 @@ function resize() {
   cv.width = Math.round(view.w * DPR); cv.height = Math.round(view.h * DPR);
   /* the map must exceed the screen (a locked property of the camera) AND the
      vertical span must stay bounded, or a short screen loses the seam */
-  view.s = Math.max(view.w / (P.MAP_W * 0.78), view.h / (P.MAP_H * 0.60));
+  /* the zoom is chosen so the CREEP stays the 4px atom the lane width was
+     derived from, and so a screen still holds mid, both jungle regions and the
+     seam at once. The side lanes are off-screen and that is what panning is for. */
+  view.s = Math.max(view.w / (P.MAP_W * 0.80), view.h / (P.MAP_H * 0.615));
   clampCam();
   var rp = rcv.parentNode;
   rcv.width = Math.max(1, Math.round(rp.clientWidth * DPR));
@@ -901,15 +1185,17 @@ function draw() {
     ctx.fillRect(b[0].x - 22, b[0].y - 8, 44, 16);
   });
 
-  /* trees: the wild's walls */
-  ctx.lineCap = "butt";
+  /* trees: thickets that SEPARATE, not walls that seal. You route around them;
+     cutting one opens a shortcut. Drawn as mass with a lit crown edge. */
+  ctx.lineCap = "round";
   TREES.forEach(function (t) {
     if (!t.alive) return;
-    ctx.strokeStyle = "#0d2115"; ctx.lineWidth = 17;
+    ctx.strokeStyle = "#081408"; ctx.lineWidth = 15;
     ctx.beginPath(); ctx.moveTo(t.x1, t.y1); ctx.lineTo(t.x2, t.y2); ctx.stroke();
-    ctx.strokeStyle = "#28512f"; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(t.x1, t.y1); ctx.lineTo(t.x2, t.y2); ctx.stroke();
+    ctx.strokeStyle = "#255030"; ctx.lineWidth = 6;
+    ctx.beginPath(); ctx.moveTo(t.x1 + 2, t.y1 - 4); ctx.lineTo(t.x2 + 2, t.y2 - 4); ctx.stroke();
   });
+  ctx.lineCap = "butt";
 
   /* camps — units, and they hold a plausible state at rest */
   ctx.font = "8px ui-monospace,monospace"; ctx.textAlign = "center";
@@ -923,8 +1209,10 @@ function draw() {
       ctx.fillStyle = "#3b2f1c"; ctx.fillRect(u.x - 3.5, u.y - 3.5, 7, 7);
       ctx.fillStyle = "#a98b4a"; ctx.fillRect(u.x - 2, u.y - 2, 4, 4);
     });
+    /* difficulty as a count of marks, matching the readout in the bar — the
+       board and the panel say the same thing in the same alphabet */
     ctx.fillStyle = "#c9b071";
-    ctx.fillText(["I","II","III"][c.tier - 1], c.x, c.y - 14);
+    for (var q = 0; q < c.tier; q++) ctx.fillRect(c.x - 5 + q * 4, c.y - 17, 2.4, 6);
   });
 
   /* creeps: units, never a meter. Dark ring + light body + dark core, so a unit
@@ -990,6 +1278,17 @@ function draw() {
     ctx.lineWidth = 1.5;
     var r0 = 5 + (1 - S.tapAck.a) * 14;
     ctx.strokeRect(S.tapAck.x - r0, S.tapAck.y - r0, r0 * 2, r0 * 2);
+  }
+  /* SETTLED. Feedback at the hero, in the same vocabulary as the tap
+     acknowledgement above and just as transient — it says "this is as far as
+     you got", it does not draw the boundary. Nothing marks the leash. */
+  if (S.settleAck) {
+    var sa = Math.max(0, S.settleAck.a);
+    ctx.fillStyle = "rgba(239,230,205," + (sa * 0.85).toFixed(2) + ")";
+    var sr = 13 + (1 - sa) * 5;
+    ctx.fillRect(S.settleAck.x - sr, S.settleAck.y + 12, sr * 2, 1.6);
+    ctx.fillRect(S.settleAck.x - sr, S.settleAck.y + 12, 1.6, -5);
+    ctx.fillRect(S.settleAck.x + sr - 1.6, S.settleAck.y + 12, 1.6, -5);
   }
   if (S.castTarget) {
     ctx.strokeStyle = "rgba(232,220,192," + Math.max(0, S.castTarget.a).toFixed(2) + ")";
@@ -1087,15 +1386,25 @@ function drawTrack(w, H) {
   rctx.fillStyle = "#f8f1de"; rctx.fillRect(xm - 15, ym - 3, 30, 6);
   rctx.fillStyle = "#dde8f2"; rctx.fillRect(xt - 15, yt - 3, 30, 6);
 
+  /* NO FIGURES. The gap already is the reading, and the two absolutes were
+     subordinate by the centre-screen decision's own reasoning. What replaces
+     the "+8" is a WEDGE on the leader's side whose depth is the lead — the
+     same quantity, carried by size instead of by a moving number. */
+  var lead = mine - theirs, ahead = lead >= 0;
+  var wx = ahead ? xm : xt, wy = ahead ? ym : yt;
+  var wd = Math.min(11, Math.abs(lead) / Math.max(1, span) * (bot - top) * 0.5);
+  if (wd > 0.8) {
+    rctx.fillStyle = ahead ? "#e8dcc0" : "#c3cdd6";
+    rctx.beginPath();
+    rctx.moveTo(wx - 15, wy - 3); rctx.lineTo(wx + 15, wy - 3);
+    rctx.lineTo(wx, wy - 3 - wd); rctx.closePath(); rctx.fill();
+  }
+
   rctx.font = "8px ui-monospace,monospace"; rctx.textAlign = "center"; rctx.fillStyle = "#8e8875";
-  rctx.fillText("YOU " + mine.toFixed(0), xm, bot + 10);
-  rctx.fillText("THEM " + theirs.toFixed(0), xt, bot + 10);
+  rctx.fillText("YOU", xm, bot + 10);
+  rctx.fillText("THEM", xt, bot + 10);
   rctx.textAlign = "left"; rctx.fillStyle = "#6f6a5b"; rctx.font = "7.5px ui-monospace,monospace";
   rctx.fillText("no finish line", pad, 8);
-  var lead = mine - theirs;
-  rctx.textAlign = "right"; rctx.font = "10px ui-monospace,monospace";
-  rctx.fillStyle = lead >= 0 ? "#e8dcc0" : "#c3cdd6";
-  rctx.fillText((lead >= 0 ? "+" : "") + lead.toFixed(0), w - pad, 9);
 }
 /* the schedule of legitimacy, drawn: the home field's retraction over the match,
    with the event marks on it. Answers "why did my push stall?" */
@@ -1129,15 +1438,29 @@ function drawPhase(w, y0, y1) {
   var nx = x0 + (x1 - x0) * Math.min(1, S.t / P.MATCH_S);
   rctx.fillStyle = "#f8f1de"; rctx.fillRect(nx - 1, y0 + 2, 2, base - y0 - 1);
   rctx.font = "7px ui-monospace,monospace"; rctx.textAlign = "left"; rctx.fillStyle = "#6f6a5b";
-  rctx.fillText("HOME FIELD RETRACTION · ■ EVENTS · 0–15:00 · threshold parked", x0, y1 - 1);
+  rctx.fillText("HOME FIELD RETRACTING · ■ EVENTS · threshold parked", x0, y1 - 1);
 }
 
 /* ================= input ==========================================
-   ONE gesture, two intents, separated IN SPACE by what you tap.
-     a thing            -> engage it
-     your own ground    -> travel (ignore everything)
-     the growth / seam  -> press to the edge and hold it  (attack-move)
-     your own hero      -> stop where you are
+   ONE gesture, two intents, separated BY TAP COUNT -- his own proposal, and
+   "maybe we don't need another verb", so no control is added to carry it.
+
+     ONE tap    -> ATTACK-MOVE. Go there; fight what you meet and what is
+                   there. Tapping a camp or a tree is the same intent aimed at
+                   a thing.
+     TWO taps   -> TRAVEL. Go there and ignore everything.
+     your hero  -> stop where you are.
+
+   WHICH WAY ROUND, and why -- recorded because he did not choose:
+   the single tap gets ATTACK-MOVE because it is the common intent in a lane
+   and because it is the responsive one. Getting attack-move when you wanted
+   travel costs you a fight you can walk out of; getting travel when you wanted
+   attack-move is the failure he named -- a hero walking through enemies
+   unresponsive -- and that one must not be the accident. Travel is the
+   deliberate refusal to engage, so it asks for the deliberate gesture.
+
+   The first tap commits attack-move IN THE SAME FRAME; the second upgrades it
+   to travel. Nothing waits on a double-tap timer.
    ================================================================== */
 var down = null, panned = false;
 cv.addEventListener("pointerdown", function (e) {
@@ -1162,44 +1485,66 @@ cv.addEventListener("pointerup", function (e) {
 });
 cv.addEventListener("pointercancel", function () { down = null; });
 
+var lastTap = null;
 function tap(x, y) {
   S.tapAck = {x: x, y: y, a: 1};                 /* acknowledged in the same frame */
   if (S.sel) { castAt(x, y); return; }
 
   var h = S.hero, i;
   if (Math.hypot(x - h.x, y - h.y) < 26) {
-    h.order = {kind: "hold", x: h.x, y: h.y};
+    h.order = {kind: "hold", x: h.x, y: h.y}; lastTap = null;
     note("hold — tap anywhere to release"); return;
   }
+
+  var dbl = lastTap && (S.t - lastTap.t) < 0.36
+            && Math.hypot(x - lastTap.x, y - lastTap.y) < 34 / view.s;
+  lastTap = {x: x, y: y, t: S.t};
+
+  if (dbl) {                                     /* second tap upgrades to TRAVEL */
+    S.selCamp = null;
+    h.order = {kind: "travel", x: x, y: y};
+    note("travel — ignoring everything on the way");
+    coachHit("travel"); barDirty = true; return;
+  }
+
+  /* ONE TAP = ATTACK-MOVE. The input is accepted wherever it lands; stepHero
+     clips it to the limit and settles there if it is out of reach. */
   var best = null, bd = 40;
   for (i = 0; i < S.camps.length; i++) {
     var c = S.camps[i];
     if (!c.alive) continue;
     var d = Math.hypot(x - c.x, y - c.y);
-    if (d < bd) { bd = d; best = {kind: "engage", camp: i}; }
+    if (d < bd) { bd = d; best = {kind: "engage", camp: i, x: c.x, y: c.y}; }
   }
   for (i = 0; i < TREES.length; i++) {
-    if (TREES[i].alive && segDist(x, y, TREES[i]) < 18) { best = {kind: "engage", tree: i}; break; }
+    if (TREES[i].alive && segDist(x, y, TREES[i]) < 18) {
+      best = {kind: "engage", tree: i, x: (TREES[i].x1+TREES[i].x2)/2, y: (TREES[i].y1+TREES[i].y2)/2};
+      break;
+    }
   }
   if (best) {
     S.selCamp = best.camp != null ? best.camp : null;
     h.order = best; barDirty = true; coachHit("camp"); return;
   }
   S.selCamp = null;
-  if (claimAt(x, y) > 0.14 && legal(h, x, y)) {
-    h.order = {kind: "travel", x: x, y: y}; coachHit("travel");
-  } else {
-    var p = nearestLegal(h, x, y);
-    h.order = {kind: "press", x: p.x, y: p.y}; coachHit("press");
-  }
+  h.order = {kind: "press", x: x, y: y};
+  coachHit("press");
   barDirty = true;
 }
-function nearestLegal(h, x, y) {
+/* the furthest legal point on the straight line from the hero to the target,
+   pulled back by `standoff` so settling at the limit is not settling INTO a fight */
+function nearestLegal(h, x, y, standoff) {
   if (legal(h, x, y)) return {x: x, y: y};
-  var dx = x - h.x, dy = y - h.y;
-  for (var k = 1; k <= 26; k++) {
-    var f = 1 - k / 27, px = h.x + dx * f, py = h.y + dy * f;
-    if (legal(h, px, py)) return {x: px, y: py};
+  var dx = x - h.x, dy = y - h.y, L = Math.hypot(dx, dy) || 1;
+  var back = (standoff || 0) / L;
+  for (var k = 1; k <= 30; k++) {
+    var f = 1 - k / 31;
+    var px = h.x + dx * f, py = h.y + dy * f;
+    if (legal(h, px, py)) {
+      var g = Math.max(0, f - back);
+      var qx = h.x + dx * g, qy = h.y + dy * g;
+      return legal(h, qx, qy) ? {x: qx, y: qy} : {x: px, y: py};
+    }
   }
   return {x: h.x, y: h.y};
 }
@@ -1244,7 +1589,7 @@ function castAt(x, y) {
    so the panel holds a plausible state at rest and never reads as unfinished.
    The five cards are NOT all listed: a visible library would imply a deck, and
    deck construction is one of the things the placeholder must not answer. */
-var barDirty = true, slotEls = [], lastPanel = "", lastHandKey = "";
+var barDirty = true, slotEls = [], lastPanel = "", lastHandKey = "", campEls = [];
 function buildHand() {
   var host = document.getElementById("hand");
   host.innerHTML = "";
@@ -1257,9 +1602,65 @@ function buildHand() {
     host.appendChild(b);
     slotEls.push(b);
   }
+  /* the next card is a distance closing, not a countdown */
+  var a = document.createElement("div");
+  a.id = "accrual";
+  a.innerHTML = '<div id="accFill"></div><div id="accCost"></div>';
+  host.appendChild(a);
   var n = document.createElement("div");
   n.className = "cnote"; n.id = "cnote";
   host.appendChild(n);
+}
+/* THE DENSEST NUMERIC OBJECT IN THE BUILD, RE-CARRIED.
+   Six camps x difficulty, time, damage, mana, gold and item chance is dozens of
+   figures by construction. None of it is deleted; all of it changes carrier:
+     difficulty -> a count of pips
+     time       -> the LENGTH of the cost bar
+     damage     -> a slice of that bar, measured against your CURRENT health
+     mana       -> a second slice, against your current mana
+     gold       -> a count of blocks
+     item       -> a fill across five pips
+   Damage and mana read against your own state, so a camp's worth is situational
+   and felt rather than computed -- which is what "judgeable against visible
+   battle state" asks for. Built ONCE; only widths and classes change after. */
+function buildCamps() {
+  var rb = document.getElementById("rBody");
+  rb.innerHTML = "";
+  campEls = [];
+  for (var i = 0; i < 6; i++) {
+    var row = document.createElement("div");
+    row.className = "camp";
+    row.innerHTML =
+      '<div class="ctier"><b></b><b></b><b></b></div>' +
+      '<div class="cz"><div class="gtrk"><div class="gfill hp"></div></div>' +
+                      '<div class="gtrk thin"><div class="gfill warn"></div>' +
+                      '<div class="gfill mp" style="left:auto;right:0"></div></div></div>' +
+      '<div class="cz"><div class="pips gold"></div>' +
+                      '<div class="pips item" style="margin-top:3px"></div></div>';
+    rb.appendChild(row);
+    campEls.push({
+      row: row,
+      tier: row.querySelectorAll(".ctier b"),
+      time: row.querySelector(".gfill.hp"),
+      dmg:  row.querySelector(".gfill.warn"),
+      mana: row.querySelector(".gfill.mp"),
+      gold: row.querySelector(".pips.gold"),
+      item: row.querySelector(".pips.item")
+    });
+  }
+  document.getElementById("rFoot").innerHTML =
+    "difficulty &middot; length = time &middot; <em>red</em> health &middot; <s>blue</s> mana " +
+    "&middot; blocks = gold &middot; pips = item" +
+    /* the crude-labelling the card's Floor requires, kept ON SCREEN and cut to
+       the irreducible facts so it still fits at 320 wide */
+    "<span>ripen on the clock &middot; nothing patrols &middot; mana existence open</span>";
+}
+function setPips(host, n, total, cls) {
+  while (host.children.length < total) {
+    var b = document.createElement("b"); host.appendChild(b);
+  }
+  while (host.children.length > total) host.removeChild(host.lastChild);
+  for (var i = 0; i < total; i++) host.children[i].className = i < n ? (cls || "") : "off";
 }
 function pickSlot(k) {
   if (k >= S.hand.length) { note("slot empty — cards accrue on a timer"); return; }
@@ -1272,13 +1673,23 @@ function pickCard(id) {
   else { S.sel = id; S.mod = null; }
   barDirty = true;
 }
+function pc(v) { return (Math.max(0, Math.min(1, v)) * 100).toFixed(1) + "%"; }
 function updateBar() {
-  document.getElementById("sGold").textContent =
-    Math.round(S.hero.gold) + (S.hero.items ? " · " + S.hero.items + "i" : "");
-  document.getElementById("sPool").textContent = S.pool[0] + " / " + S.pool[1];
-  document.getElementById("sHero").textContent = S.hero.dead > 0
-    ? "down " + S.hero.dead.toFixed(0) + "s"
-    : Math.round(S.hero.hp) + "hp · " + Math.round(S.hero.mp) + "mp";
+  var H = S.hero, F = S.foe;
+  /* purse: hundreds as blocks, the part-hundred as a fill. Magnitude by count
+     and by length -- the accrual is visible as motion without a moving figure. */
+  setPips(document.getElementById("sGold"), Math.min(14, (H.gold / 100) | 0), Math.max(6, Math.min(14, ((H.gold / 100) | 0) + 1)));
+  document.getElementById("sGoldFill").style.width = pc((H.gold % 100) / 100);
+  setPips(document.getElementById("sItems"), H.items, Math.max(4, H.items));
+
+  document.getElementById("sPoolMe").style.width = pc(S.pool[0] / P.POOL);
+  document.getElementById("sPoolThem").style.width = pc(S.pool[1] / P.POOL);
+
+  document.getElementById("sHpMe").style.width = H.dead > 0 ? pc(1 - H.dead / 9) : pc(H.hp / H.mhp);
+  document.getElementById("sHpMe").className = "gfill " + (H.dead > 0 ? "warn" : "hp");
+  document.getElementById("sMpMe").style.width = pc(H.mp / H.mmp);
+  document.getElementById("sHpThem").style.width = F.dead > 0 ? "0%" : pc(F.hp / F.mhp);
+
   var key = S.hand.join(",") + "|" + S.sel + "|" + S.mod;
   if (key !== lastHandKey) {
     lastHandKey = key;
@@ -1298,46 +1709,71 @@ function updateBar() {
       }
     }
   }
+  /* the accrual cost, as a distance rather than "+20s" */
+  var full = 12 + S.accrualPenalty;
+  document.getElementById("accFill").style.width = pc(1 - Math.max(0, S.nextCard) / full);
+  document.getElementById("accCost").style.width = pc(S.accrualPenalty / full);
   document.getElementById("cnote").textContent =
-    "hand 3, arbitrary · next " + Math.max(0, S.nextCard).toFixed(0) + "s · " +
+    (S.hand.length >= 3 ? "hand full · " : "next card arriving · ") +
     (S.sel ? (S.mod ? "tap a target" : "tap a 2nd card to combine, or tap a target")
            : "tap a card, then a target on the board") + (S.log ? " — " + S.log : "");
 
   var e = S.events[S.evtIdx], rb = document.getElementById("rBody");
   if (e && !e.spawned) {
     document.getElementById("rTitle").textContent = "EVENT — TELEGRAPHED";
-    if (lastPanel !== "event") { rb.innerHTML = '<div id="evtBox"></div>'; lastPanel = "event"; }
-    document.getElementById("evtBox").innerHTML =
-      "<b>" + Math.max(0, Math.ceil(e.at - S.t)) + "s</b> — large minion, type <b>" + e.type + "</b>" +
-      "<u>YOURS: LANE " + (e.mine + 1) + " · THEIRS: LANE " + (e.theirs + 1) + "</u>" +
-      "<u style='color:#6f6a5b'>placement is influence-not-selection; the mechanism is unchosen, so this build randomises it</u>";
+    if (lastPanel !== "event") {
+      rb.innerHTML = '<div id="evtBox">large minion, type <b id="evtType"></b>' +
+        '<div class="gtrk" style="height:7px;margin-top:5px"><div class="gfill warn" id="evtBar"></div></div>' +
+        '<u>WHICH LANE IT LANDS IN</u><div class="lanes3" id="evtLanes"><b></b><b></b><b></b></div>' +
+        '<u style="color:#6f6a5b">placement is influence-not-selection; the mechanism is unchosen, so this build randomises it</u></div>';
+      lastPanel = "event";
+      document.getElementById("rFoot").innerHTML =
+        "bar = telegraph running down &middot; cells = which lane";
+    }
+    document.getElementById("evtType").textContent = e.type;
+    /* the telegraph closes as a bar, not as a countdown */
+    document.getElementById("evtBar").style.width = pc(1 - (e.at - S.t) / P.TELEGRAPH);
+    var lc = document.getElementById("evtLanes").children;
+    for (var li = 0; li < 3; li++) {
+      lc[li].className = e.mine === li && e.theirs === li ? "both"
+                       : e.mine === li ? "me" : e.theirs === li ? "them" : "";
+    }
   } else {
     document.getElementById("rTitle").textContent = "JUNGLE · PRE-COMMIT";
-    if (lastPanel !== "jungle") { rb.innerHTML = ""; lastPanel = "jungle"; }
-    var rows = '<div class="chdr">tier&nbsp; time&nbsp; hp/mp&nbsp; gold&nbsp; item</div>';
+    if (lastPanel !== "jungle") { buildCamps(); lastPanel = "jungle"; }
+    var ri = 0;
     S.camps.forEach(function (c, i) {
-      if (!c.mine) return;
-      var st = campStat(c, S.t);
-      rows += '<div class="camp' + (c.alive ? "" : " gone") + (S.selCamp === i ? " sel" : "") + '">' +
-        "<i>" + ["I","II","III"][c.tier - 1] + "</i><span>" +
-        (c.alive
-          ? Math.round(st.secs) + "s " + st.dmg + "/" + st.mana + " " + st.gold + "g " +
-            (st.item ? Math.round(st.item * 100) + "%" : "&mdash;")
-          : "respawn " + Math.ceil(c.respawn) + "s") + "</span></div>";
+      if (!c.mine || ri >= 6) return;
+      var el = campEls[ri++], st = campStat(c, S.t), k;
+      el.row.className = "camp" + (c.alive ? "" : " gone") + (S.selCamp === i ? " sel" : "");
+      for (k = 0; k < 3; k++) el.tier[k].className = k < c.tier ? "" : "off";
+      if (c.alive) {
+        /* the cost figures are the ones the sim actually charges, not a label */
+        var willCost = c.tier * 2.6 * st.secs, willDrain = c.tier * 1.6 * st.secs;
+        el.time.className = "gfill hp";
+        el.time.style.width = pc(st.secs / 35);          /* length IS the time */
+        el.dmg.style.width  = pc(willCost / Math.max(1, S.hero.hp));
+        el.mana.style.width = pc(willDrain / Math.max(1, S.hero.mp));
+        setPips(el.gold, Math.min(8, Math.round(st.gold * 0.55 / 8)), 8);
+        setPips(el.item, Math.round(st.item * 5), 5);
+      } else {
+        el.time.className = "gfill mp";                  /* respawning: same bar, other read */
+        el.time.style.width = pc(1 - c.respawn / P.CAMP_RESPAWN);
+        el.dmg.style.width = "0%"; el.mana.style.width = "0%";
+        setPips(el.gold, 0, 8); setPips(el.item, 0, 5);
+      }
     });
-    rb.innerHTML = rows +
-      '<div class="cnote">scale with match TIME &middot; nothing patrols &middot; mana is shown because the readout specifies it — whether mana exists is open</div>';
   }
   barDirty = false;
 }
 
 /* ================= guided first run =============================== */
 var COACH = [
-  ["pan",    "Drag the board. The map is bigger than the screen — you are an observer, not an avatar."],
-  ["travel", "Tap the pale ground behind your line. Your hero TRAVELS there and will not stop to fight."],
-  ["press",  "Now tap into the dark growth ahead. That is the front. Your hero PRESSES to the edge and holds it. Same gesture, different intent — because of what you tapped."],
-  ["wait",   "Your hero cannot enter their ground. The growth IS the leash: your reach ends where your lane's front line does. Push the lane and the road opens."],
-  ["camp",   "Tap a camp out in the growth. Its cost and payout sit on the right BEFORE you commit — that is the other arm: farm, or push."],
+  ["pan",    "Drag the board. The map is bigger than the screen — you are an observer, not an avatar. Lanes run down the two edges and the centre; the rest is jungle."],
+  ["press",  "ONE TAP sends your hero there and it fights what it meets. Try it — tap the ground ahead of your hero."],
+  ["travel", "TWO TAPS on the same spot is TRAVEL: it goes there and ignores everything. Same gesture, twice. Double-tap somewhere now."],
+  ["settle", "Now tap far past your front line, deep into their half. The tap is never refused — your hero walks as far as it may and stops there. Your reach ends where your lane's front line is, and pushing the lane moves it."],
+  ["camp",   "Tap a camp out in the jungle. What it costs you and what it pays sit on the right BEFORE you commit — that is the other arm: farm, or push."],
   ["cast",   "Cards: tap one, then tap a lane or a hero. Casting is selection; there is nothing to aim."]
 ];
 function coachHit(k) {
@@ -1363,8 +1799,8 @@ document.getElementById("cSkip").addEventListener("click", function (e) {
 /* ================= tuning ========================================= */
 var TUNE = [
   ["MAP_H",     "Map length (travel)",  200,  1200, 3200, 1],
-  ["MAP_W",     "Map width",            100,  600,  1400, 1],
-  ["LANE_REACH","Lane claim reach",      15,  90,   320, 0],
+  ["MAP_W",     "Map width",             50,  800,  1600, 1],
+  ["LANE_REACH","Leash reach off a lane",15,  120,  380, 0],
   ["FIELD_R0",  "Home field 0:00",     0.05,  0.20, 1.00, 0],
   ["FIELD_R1",  "Home field 15:00",    0.05,  0.00, 0.60, 0],
   ["WAVE_S",    "Creep wave every",       1,  4,    24,  0],
@@ -1422,7 +1858,7 @@ function restartWorld() {
   tctx = terrain.getContext("2d");
   S = fresh();
   S.camps.forEach(function (c) { campFill(c, 0); });
-  lastPanel = "";
+  lastPanel = ""; lastTap = null;
   resize();
   frameHero();
   for (var w = 0; w < REBUILD_SLICES * 3; w++) { updateClaim(0.4); drawTerrainSlice(); }
@@ -1471,7 +1907,17 @@ window.__proto = {
   S: function () { return S; }, P: P,
   perf: function () { return perfMs; },
   perfSplit: function () { return {sim: pSplit[0], terrain: pSplit[1], draw: pSplit[2]}; },
-  claimAt: claimAt, legal: legal, power: power
+  claimAt: claimAt, legal: legal, power: power,
+  /* exposed so the finish gate can measure rather than eyeball */
+  geom: function () {
+    return {MAP_W: P.MAP_W, MAP_H: P.MAP_H, CELL: CELL, GW: GW, GH: GH,
+            ROAD_W: ROAD_W, TINT_R: TINT_R, LANES: LANES, TREES: TREES,
+            CAMPS: CAMP_POS, s: view.s};
+  },
+  fields: function () { return {veg: veg, corr: corr, minD: minD, shown: shown, tread: tread}; },
+  tap: tap,
+  /* gate apparatus only: nothing in the running build calls this */
+  advance: function (secs) { for (var k = 0; k < secs / 0.05; k++) step(0.05); barDirty = true; }
 };
 requestAnimationFrame(function (t) { last = t; requestAnimationFrame(frame); });
 })();
