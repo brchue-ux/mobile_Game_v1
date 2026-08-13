@@ -23,6 +23,20 @@ single vertical scale, a marker for each hero, and the distance between the two
 markers filled with hatching. There is deliberately **no finish line**, because
 the power threshold is parked by his own scope instruction — the scale has no top.
 
+**Amended 2026-08-13 by the correction pass, and it follows this document's own
+reasoning rather than cutting across it.** He asked for a bar that is far less
+numeric: *"there was way too much information and it was all about numbers and
+moving numbers."* The track's two absolute figures (`YOU 47` / `THEM 39`) and
+its `+8` lead readout are **removed**. The reason is written above — *"the two
+absolute numbers are subordinate"*, and the gap already is the reading. What
+replaces the `+8` is a **wedge on the leader's marker whose depth is the lead**:
+the same quantity, carried by size instead of by a moving number. The words
+`YOU`, `THEM` and `no finish line` stay, because they are labels, not readouts.
+
+**What this does not change:** the instrument is still one shared measure with
+two markers and the gap as its object, and when the threshold is decided the top
+of the scale is still where it goes.
+
 ## Why, against the material recorded for the chooser
 
 **1. A race is a relative quantity, and only a shared measure shows it.**

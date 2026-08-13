@@ -153,10 +153,12 @@ cd .scratch/core-concept/prototypes && python3 -m http.server 8931
 `index.html` symlinks the current version, so edits show on reload. Open it from
 a phone over LAN or Tailscale — it is a touch game and does not read on desktop.
 
-The current one is the **whole-as-envisioned** build. Read that directory's
-`README.md` first — it lists what to react to and what is deliberately crude,
-and it points at the commitment card, the delegated centre-screen decision, and
-the finish-gate findings that sit beside it.
+The current one is the **whole-as-envisioned** build, **corrected 2026-08-13**
+against his play-test. Read that directory's `README.md` first — it lists what to
+react to and what is deliberately crude, and it points at the commitment card,
+the delegated centre-screen decision, and the finish-gate findings that sit
+beside it. `/hone` is the next pass on it and was deliberately held until the
+corrections landed: *"I don't want to hone an incorrect verve."*
 
 ## Hard-won gotchas
 
@@ -177,6 +179,17 @@ the finish-gate findings that sit beside it.
 - **Don't rebuild DOM inside the animation loop.** v1 rebuilt the hand every
   frame, restarting CSS animations 60×/sec — cards flickered, taps missed, and
   the prototype was unusable. Board rendering belongs on canvas.
+- **A dark board breaks the finish gate's dead-block test, and re-tinting it
+  won't fix that.** When the jungle stopped being claim-tinted, its whole palette
+  sat inside ~12 points of L\*, so no colour change inside that band could raise
+  the luminance variance the gate measures — one attempt made it strictly worse
+  (9.5% → 26.2% dead, a hard fail). What worked was **structure, not colour**:
+  size the growth so the floor shows between crowns, and draw the second grain
+  scale big enough to survive the downscale. Measure the block, don't eyeball it.
+- **Board legibility is a value-tier budget, not a palette.** The corrected build
+  reads because it has four separated tiers — canopy L\* 9, jungle opening 17,
+  their bone 55, your bone 85. Adding a fifth territorial wash is what made the
+  shipped build unreadable to him.
 - **A syntax check is not a test.** Both prototype bugs were runtime-only. Say
   "unverified" when no browser is available.
 - **Prototypes need a guided first run and a passive-by-default AI.** Without
