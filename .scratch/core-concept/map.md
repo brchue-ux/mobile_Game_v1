@@ -390,6 +390,122 @@ rather than performing certainty. Ticket 08 promotes or revises.
 
 ## Decisions so far
 
+- **The camera comes IN, and texture must be legible** `[provisional]`
+  (2026-08-13, from his play-test) — *"Right now it's a little too top down far
+  away."* His target, with his own hedge: *"closer to the max zoom out of typical
+  MOBAs, but maybe slightly more just because it's a mobile game. I'm not totally
+  sure there."* **The pannable observer camera is unchanged** — the map still
+  exceeds the screen — **what changes is how much a screenful holds.** **The
+  substantive consequence is a first for this design:** he wants a good view of
+  the hero, of spells, of creeps and of *"the actual textures of the game"*, so
+  **ground, units and canopy all now need a SURFACE rather than a fill.** Every
+  prior board statement was about shape; **this is the first requirement anywhere
+  for texture and material to read.** **It is not free** — the prototype's own
+  frame budget was **exceeded** by it and its commitment card was **amended with
+  measurements rather than allowed to drift** (see
+  `prototypes/COMMITMENT-overgrowth.md` `## Amendments`, **A4**, and
+  `prototypes/FINDINGS-overgrowth.md`; **cited, not restated, not a concept
+  decision**) — and **it is still not measured on a phone.** See
+  [01](issues/01-battlefield-geometry.md).
+- **The command bar gets the fixed real estate, and it must not be a numeric
+  HUD** `[provisional]` (2026-08-12/13) — he asked for **bigger with no number**:
+  *"I feel like the bottom screen needs to be a little bigger... I have an S26
+  Ultra and it feels a tad small."* **The principle recorded, because it will
+  outlive the number: the bar gets the fixed real estate and the board absorbs
+  the variation, because the board pans and the bar cannot.** Everything in the
+  bar sits **where a thumb must reach**; the board can answer a smaller screen
+  with a little more panning. **⚠ No proportion is recorded as his** — the
+  corrected build derived roughly a third of screen height from its contents and
+  **he has not reacted to it**; the recorded ~75/25 split stays `[provisional]`.
+  **Separately:** *"there was way too much information and it was all about
+  numbers and moving numbers. It needs to be a lot more intuitive."* **Recorded
+  as the EXISTING constraint being enforced, not as a new preference** — the
+  design already says the bottom bar is the **decision substrate, not a HUD**.
+  **Cost and worth should be carried by size, weight, shape, fill and position**,
+  and **the power track's *gap* is the model** — a distance rather than two
+  figures. See [01](issues/01-battlefield-geometry.md).
+- **The leash is a LIMIT, not a barrier, and it gets no rendering of its own**
+  `[provisional]` (2026-08-12/13, from his play-test) — **tapping past the front
+  line is always accepted**: *"I think you should always be able to tap past the
+  frontline to have your hero run in that direction."* **His requirement:**
+  *"there needs to be some sort of mechanism where it doesn't just constantly
+  attempt to run through an invisible barrier taking damage."* **His own
+  resolution:** a tap aimed past the limit **defaults to a move on arrival**
+  rather than continuing to pursue — the hero **travels as far as it legally can
+  and then settles**. **Never rejects input, never grinds at the edge**, and he
+  is content that some of it is the player's job: *"I guess that's just up to the
+  player to pay attention to."* **Separately, the leash needs no drawn boundary**
+  — he agreed it is already visible through **the creeps forming the front
+  line**, and the previously drawn version made the leash and the home field
+  indistinguishable: *"I'm not even sure what it is... I see like these lines. Is
+  that the leash? I don't know."* **⚠ Scope: this answers what is drawn on the
+  board. It does NOT retire the leash readout as a claimant on the bottom 25%** —
+  that is 01's question and is untouched. **Do not extend the cascade.** See
+  [05](issues/05-match-shape-win-condition.md).
+- **The home field is expressed as a BOUNDARY, and the buff LINGERS**
+  `[provisional]` (2026-08-13) — **on expression:** *"not a literal force field,
+  just some sort of visual indicator maybe in the lane that tells you the line in
+  the sand of where minions will be buffed versus where they won't be."* **A line
+  in the lane, not a drawn volume**; the field's shape and its job as the
+  locked-in early-rush brake are **unchanged**. **NEW MECHANIC, his:** *"as
+  minions leave the force field, as they're pathing through their lane and
+  walking out of the force field, there is a timer that it is still up before it
+  dissipates."* **The buff persists for a period after a minion leaves the
+  field.** **Its purpose in his words:** *"so they can't just sit at the line of
+  the force field and then wait for them to come out and farm minions"* —
+  **without it the boundary is a camping spot** — and it buys the defender *"a
+  little bit of breathing room."* **⚠ The duration is NOT a decision** — the
+  prototype carries a provisional tuner value, cited and not adopted. **⚠ Open
+  and never put to him:** the lingering buff also **turns the field's retraction
+  from a hard cliff into a gradient in time**, and **whether that softening is
+  intended is unasked** — surfaced independently by firstmate and the prototype
+  worker, which is why it is recorded rather than assumed. See
+  [05](issues/05-match-shape-win-condition.md).
+- **The jungle is SEMI-OPEN, and traversal must be interesting** `[provisional]`
+  (2026-08-13, from his play-test of the prototype) — *"The jungle is not an open
+  forested area, neither is it a completely dense forested area. It is a forested
+  area with clear openings and paths to traverse and little pockets where the
+  creeps will hang out."* And: *"The hero does walk through the jungle. It is
+  accepted."* **Paths and clearings by default, camps in pockets off them,
+  passage the default state.** **⚠ This is a CLARIFICATION of what the jungle
+  physically is, NOT a reversal:** **destructible trees stand**, **aggro-pull
+  geometry as a function of current geometry stands**, and it is **consistent
+  with the traversal-by-default pricing baseline** — blocking passage is only
+  worth a card because passage is the default. What it amends in place is this
+  map's own phrasing *"a set of chambers, not one open field"*, **which was the
+  map's reading of his aggro condition, not his words.** **A requirement arrives
+  with it:** *"the ability to traverse the jungle needs to be made a much better
+  experience"* — **routes, angles and choices, not corridors with alcoves** —
+  and **he ruled out sightline denial himself** as the reason, since there is no
+  fog and a minimap shows both heroes. See [12](issues/12-jungle-role.md).
+- **Jungle symmetry — the tension is DISSOLVED by a distinction** `[provisional]`
+  (2026-08-13) — his objection to the corrected prototype was *"I'm not crazy
+  about the layout. It's very symmetrical... their maps don't look so NASCAR
+  track with a line in the middle."* **Rotational symmetry stays** — it is what
+  keeps a **1v1 with no draft** fair, there being no pick order to absorb a side
+  advantage — **while mirror symmetry with a ruled straight axis goes**, that
+  being what produces the NASCAR read. **Irregular internal geometry supplies the
+  variety he asked for without handing either side an advantage**, so **his
+  2026-08-11 tension — *"I'm not sure how to weigh the repetitiveness of symmetry
+  versus the potential benefits you get from being on a certain side"* — was
+  never a real conflict.** His direction (*"not totally symmetrical"*) is
+  **satisfied, not overridden**. **⚠ The objection is his; the distinction is a
+  firstmate reading offered to be overruled, and his reaction to the built result
+  is not yet recorded.** See [12](issues/12-jungle-role.md).
+- **Hero intent: one tap is attack-move, two taps is move only** `[provisional]`
+  (2026-08-13) — *"maybe attack is one and then just move is two. So if a player
+  chooses to spam to run away, it's always run away versus choosing to attack is
+  deliberate."* **His rationale outlives the mechanism: panic is spammy, so spam
+  must resolve to fleeing**, and attacking is the deliberate act. He had offered
+  the pairing on 2026-08-12 **without choosing which way round**, under the
+  constraint *"maybe we don't need another verb"* — **both intents on one
+  gesture, no extra control, no screen space.** **This answers the *assignment*
+  half of 12's move-versus-attack-move problem and not the other half** — see
+  "Not yet specified". **Separately, tap-to-move is VALIDATED BY PLAY** — *"the
+  tap to move is actually really good"* — which closes the
+  joystick-versus-minimap-versus-buttons question **by evidence rather than by
+  argument.** See [12](issues/12-jungle-role.md), reaches
+  [15](issues/15-heroes.md).
 - [What "combining cards" actually means](issues/02-combining-mechanic.md) —
   at-cast combining is **payload + modifiers** `[provisional]`; accessibility
   beats novelty `[committed]`; shape-composition dead once gestures were ruled to
@@ -941,21 +1057,21 @@ method; treat them as "this informs that," not as a build order.
 
 | # | Ticket | Status |
 |---|---|---|
-| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt**; **⚠ 2026-08-11 — REBUILT in part: the command bar's layout is written in.** **Three panels — left the cards; middle, wider than either side individually, a screen showing both heroes' progress and power; right undecided** (*"something tactical that controls one of the game's other levers?"*). **The middle is the scoreboard of the win condition**, because the loss condition is the enemy hero's power threshold and the game is *"preventing your opponent from maximizing that power journey while maximizing your own"* — **it arrives before the threshold's specifics, which stay parked.** **Right-panel candidates recorded, none chosen** (jungle pre-commitment readout, event panel, gold conversion site, minimap — the last being information, not a lever). **Panel swapping ACCEPTED as a general principle** — the bar need not be three fixed panels — **which loosens the bottom-25% competition without settling it.** **⚠ The centre screen's direction is DELEGATED to whoever builds it, not open** — both his framings (2026-08-07 **enemy-centred**; 2026-08-11 **both heroes**) are preserved, **the tension is stated and unresolved and is not a reversal**, and **whoever chooses must record the choice and its reason** |
+| 01 | Battlefield geometry & phone readability | open, **substantially answered** — pannable observer camera, no fog, screen split; **2026-08-11 (from 05): the hero leash needs a new readout** — the player must see at a glance **where the hero may go**, competing for the same bottom 25% — **and the midline gains meaning**, as the moving seam where the two leashes meet. Recorded, **not rebuilt**; **2026-08-11 (from 12): where the jungle sits is answered** — typical MOBA layout, **nothing really traversable on the outsides**, jungle as **destructible-walled chambers** — and **screen budget is confirmed no longer a constraint** (*"That's correct"*); **hero control is a tap on the map**, which puts a **new input surface** on the viewport this ticket owns. Recorded, **not rebuilt**; **⚠ 2026-08-11 — REBUILT in part: the command bar's layout is written in.** **Three panels — left the cards; middle, wider than either side individually, a screen showing both heroes' progress and power; right undecided** (*"something tactical that controls one of the game's other levers?"*). **The middle is the scoreboard of the win condition**, because the loss condition is the enemy hero's power threshold and the game is *"preventing your opponent from maximizing that power journey while maximizing your own"* — **it arrives before the threshold's specifics, which stay parked.** **Right-panel candidates recorded, none chosen** (jungle pre-commitment readout, event panel, gold conversion site, minimap — the last being information, not a lever). **Panel swapping ACCEPTED as a general principle** — the bar need not be three fixed panels — **which loosens the bottom-25% competition without settling it.** **⚠ The centre screen's direction is DELEGATED to whoever builds it, not open** — both his framings (2026-08-07 **enemy-centred**; 2026-08-11 **both heroes**) are preserved, **the tension is stated and unresolved and is not a reversal**, and **whoever chooses must record the choice and its reason**; **⚠ 2026-08-12/13 — REBUILT AGAIN from his play-test.** **The camera comes IN** (*"a little too top down far away"*; target *"closer to the max zoom out of typical MOBAs, but maybe slightly more just because it's a mobile game"*, his hedge intact), which carries **the design's first requirement that texture and material be legible** — ground, units and canopy need a **surface**, not a fill — at a **frame cost the prototype's own budget line did not hold** (its card amended with measurements; **cited, not restated**, and **still not measured on a phone**). **The command bar is larger, principle over number: the bar gets the fixed real estate and the board absorbs the variation, because the board pans and the bar cannot** — **he gave no proportion**, so none is recorded as his. **The bar must not be a numeric HUD** — **the existing decision-substrate constraint being ENFORCED**, with cost and worth carried by **size, weight, shape, fill and position**, the power track's **gap** as the model |
 | 02 | What "combining cards" actually means | resolved + amended; **⚠ 2026-08-11 (from 05): a finding from commissioned card-system work, recorded as a finding and not as his — *combining is currently unpriced*.** 02 chose payload + modifiers and left the cap, reversibility and failure cases open, and nothing states **what combining costs**, so *combine everything, every time* is the dominant line and **the keystone mechanic has no decision in it.** Recorded, **not rebuilt** |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
-| 05 | Match shape & win condition | open, **substantially answered**; **the ending moved a fourth time 2026-08-09** — loss is the **enemy hero reaching a WC3-style power threshold**, specifics wishy-washy by his own account; **the forward structure's job is answered 2026-08-07/09** (dormant structures, telegraphed lane events, hero garrison) with its specifics open; ~15-min match, ~5-min event cadence. **2026-08-11: exhaustion is NOT a loss condition** — the pool survives as a **resource**, its three levers untouched — and the ticket gains its **central axis with a stated payout on the pushing side**: **lanes pay gold on any hero minion kill (no last-hitting), jungle pays unique items plus less gold, gold buys power-ups at the main base**. **Cards split into lane-state and structure-imbue uses**; the telegraph gains a **~1-min lead and a known event type**. **Rare units at structures cut *"for now"***; **forward creep spawning is not dead but has no mechanism**; **threshold, tuning and power-to-win conversion parked by his instruction**. **⚠ 2026-08-11, later the same day — the largest structural change so far: the forward structure is CUT and the front line is the hero's leash** (*"i like your replacement, lets go with that (hero leash)"*). The hero's legal roam in a lane reaches **as far forward as that lane's front line** — not confinement, not free crossing — which **dissolves the contradiction that a winning push handed your gold income to your opponent**. **Everything structure-dependent is retired, rehoused or open, kept as history**; **events survive the building** (~5-min cadence, ~1-min telegraph, large-minion type) and **event lane placement becomes a variable** (player-chooses or mechanism — **he picked neither**), making collision **emergent**. **New unmet requirement: something must stop an early lane collapse.** **The shrinking home field is a floated, unchosen candidate for it.** **Imbue confirmed visible to the opponent**; **where the imbue lives is now open**. **⚠ 2026-08-11, backlog answers — AMENDED AGAIN: the shrinking home field is LOCKED IN** as the early-rush brake (*"let's lock that concept in"*), so that requirement is **met at concept level** while everything beneath it stays open. **Map control's worth is REVERSED to ECONOMIC denial** — he rejected the information answer himself because a minimap shows both heroes at all times — which opened two new questions: **how a pushed-back player pushes the line back**, and **something that pushes the game toward an ending** (*"not literally a berserk timer"*; the retracting field **may** already be it, flagged not assumed). **Event lane placement is answered in principle — influence, not selection** — with the **mechanism commissioned and unchosen**. **The imbue now has three threads and none is chosen**, including his own proposal that **the home field absorb the structure's creep buff** — an automatic positional constant in place of a prepared per-event card decision. **A hold-position order is neither ruled in nor out, but must be easily accessible and cancellable if it exists.** **The card system is RESET** to his restated goal, with five commissioned shapes and **none chosen** |
+| 05 | Match shape & win condition | open, **substantially answered**; **the ending moved a fourth time 2026-08-09** — loss is the **enemy hero reaching a WC3-style power threshold**, specifics wishy-washy by his own account; **the forward structure's job is answered 2026-08-07/09** (dormant structures, telegraphed lane events, hero garrison) with its specifics open; ~15-min match, ~5-min event cadence. **2026-08-11: exhaustion is NOT a loss condition** — the pool survives as a **resource**, its three levers untouched — and the ticket gains its **central axis with a stated payout on the pushing side**: **lanes pay gold on any hero minion kill (no last-hitting), jungle pays unique items plus less gold, gold buys power-ups at the main base**. **Cards split into lane-state and structure-imbue uses**; the telegraph gains a **~1-min lead and a known event type**. **Rare units at structures cut *"for now"***; **forward creep spawning is not dead but has no mechanism**; **threshold, tuning and power-to-win conversion parked by his instruction**. **⚠ 2026-08-11, later the same day — the largest structural change so far: the forward structure is CUT and the front line is the hero's leash** (*"i like your replacement, lets go with that (hero leash)"*). The hero's legal roam in a lane reaches **as far forward as that lane's front line** — not confinement, not free crossing — which **dissolves the contradiction that a winning push handed your gold income to your opponent**. **Everything structure-dependent is retired, rehoused or open, kept as history**; **events survive the building** (~5-min cadence, ~1-min telegraph, large-minion type) and **event lane placement becomes a variable** (player-chooses or mechanism — **he picked neither**), making collision **emergent**. **New unmet requirement: something must stop an early lane collapse.** **The shrinking home field is a floated, unchosen candidate for it.** **Imbue confirmed visible to the opponent**; **where the imbue lives is now open**. **⚠ 2026-08-11, backlog answers — AMENDED AGAIN: the shrinking home field is LOCKED IN** as the early-rush brake (*"let's lock that concept in"*), so that requirement is **met at concept level** while everything beneath it stays open. **Map control's worth is REVERSED to ECONOMIC denial** — he rejected the information answer himself because a minimap shows both heroes at all times — which opened two new questions: **how a pushed-back player pushes the line back**, and **something that pushes the game toward an ending** (*"not literally a berserk timer"*; the retracting field **may** already be it, flagged not assumed). **Event lane placement is answered in principle — influence, not selection** — with the **mechanism commissioned and unchosen**. **The imbue now has three threads and none is chosen**, including his own proposal that **the home field absorb the structure's creep buff** — an automatic positional constant in place of a prepared per-event card decision. **A hold-position order is neither ruled in nor out, but must be easily accessible and cancellable if it exists.** **The card system is RESET** to his restated goal, with five commissioned shapes and **none chosen**; **⚠ 2026-08-12/13 — REBUILT AGAIN from his play-test of the prototype.** **The leash is a LIMIT, not a barrier**: tapping past the front line is **always accepted**, the hero **travels as far as it legally can and then settles** (*"defaults to a move after you've reached your target spot"*), and it must **never grind at an invisible barrier taking damage**. **The leash gets no rendering of its own** — already visible through the creeps forming the front line — **which does NOT retire the leash readout as a bottom-25% claimant (01's question, untouched)**. **The home field is expressed as a boundary in the lane, not a drawn volume.** **NEW MECHANIC — the lingering buff:** the empowerment **persists for a period after a minion leaves the field**, *"so they can't just sit at the line of the force field and then wait for them to come out and farm minions"*, buying the defender *"a little bit of breathing room"*. **Its duration is NOT a decision.** **⚠ Newly open and never put to him: whether that lingering buff is meant to soften the field's retraction from a cliff into a gradient** |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
 | 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
 | 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open; **new 2026-08-07 (from 05): the command bar should centre on the enemy hero's status** — recorded, not rebuilt; **2026-08-11 (from 05): map control's value is framed as denying the opponent information**, which gives board-open/hand-hidden a strategic consequence — recorded, not rebuilt; **2026-08-11 later the same day (from 05): an imbue IS visible to the opponent** (*"I would say so"*), extending board-open/hand-hidden to **prep**, and **map control's mechanism is now the front line** though its worth is unchanged — recorded, not rebuilt; **⚠ 2026-08-11, backlog answers (from 05): map control's worth is REVERSED — it is ECONOMIC denial, not informational.** He rejected the information answer himself because **a minimap shows both heroes at all times**, so nobody pushes blind and there is no fog to fear; pushing past their front line **makes their farming dangerous, so they earn less gold.** The **effect** on their scaling is unchanged; the **mechanism of the harm** is not. Also **still unanswered: whether the opponent can see your event lane placement before committing**, the natural companion to the imbue being visible. Recorded, **not rebuilt**; **⚠ 2026-08-11 (from 01): the 2026-08-07 enemy-centred command bar constraint recorded here is now one of two live framings** — he has since described **both heroes** in the middle panel — and **the choice between them is DELEGATED to whoever builds it, not a captain question.** **The tension is preserved and unresolved; it is not a reversal.** Recorded, **not rebuilt** |
 | 11 | Card accrual economy | open; **⚠ 2026-08-11 (from 05): the card system is RESET** — hand size, freeze slot and deck size **set aside** in favour of his restated four-clause goal, and **five commissioned shapes are on the table with none chosen.** The **unpriced-combining** finding bears directly on accrual. Recorded, **not rebuilt** |
-| 12 | The jungle — role and autonomy | open, **substantially answered — REBUILT 2026-08-11 from two dumps of its own**. **Where the jungle sits: answered** (typical MOBA layout, bases top and bottom, three lanes, jungle between all of it, **nothing really traversable on the outsides**; his Heroes of Newerth remark is a **reference, explicitly not a request**). **Jungle *control*: dissolved, not answered** — no ganks, no teammates, no vision needed, so the MOBA concept has no substrate here; **what remains is jungle access**, governed by the leash and the retracting home field. **Trees are destructible walls** separating chambers and lanes, so **jungle geometry is mutable mid-match** and aggro-pull reach changes with it — **its relation to terrain manipulation is unasked**. **Autonomy answered rung by rung:** **rung 2 adopted** (a **pre-commitment readout** — difficulty, time, damage, mana, expected gold and possible items, ~six camps a side), **rung 3 adopted but narrowed from game state to match TIME**, **rung 4 open with a shape** (timer/cadence, not continuous; unclaimed neutrals unresolved), **rung 4a adopted** with the principle *"you're not getting power from the jungle, but you are claiming something of the jungle that then benefits you"*, **rung 5 rejected** (chaotic, **and it interferes with the player's own pathing**). **The chasm is cut *"for now"*** on the retracting field and the leash, **and for scope** — *"there's a lot that has to be done already"* — so **the two halves connect by ordinary traversal**. **The home field does not gate jungle access.** **⚠ The hero-autonomy record is amended** — *"A hero is not fully autonomous"*, **control is tapping the map** — and **move-versus-attack-move through one tap is open prototype work**. **Still open:** jungle contents (**commissioned**), **symmetry** (direction given, tension unresolved), **whether invading the enemy jungle is possible at all** (reduced gold, no items, time-boxed, measure unchosen; **an anti-stomp device by his own statement**). Earlier: playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt** |
+| 12 | The jungle — role and autonomy | open, **substantially answered — REBUILT 2026-08-11 from two dumps of its own**. **Where the jungle sits: answered** (typical MOBA layout, bases top and bottom, three lanes, jungle between all of it, **nothing really traversable on the outsides**; his Heroes of Newerth remark is a **reference, explicitly not a request**). **Jungle *control*: dissolved, not answered** — no ganks, no teammates, no vision needed, so the MOBA concept has no substrate here; **what remains is jungle access**, governed by the leash and the retracting home field. **Trees are destructible walls** separating chambers and lanes, so **jungle geometry is mutable mid-match** and aggro-pull reach changes with it — **its relation to terrain manipulation is unasked**. **Autonomy answered rung by rung:** **rung 2 adopted** (a **pre-commitment readout** — difficulty, time, damage, mana, expected gold and possible items, ~six camps a side), **rung 3 adopted but narrowed from game state to match TIME**, **rung 4 open with a shape** (timer/cadence, not continuous; unclaimed neutrals unresolved), **rung 4a adopted** with the principle *"you're not getting power from the jungle, but you are claiming something of the jungle that then benefits you"*, **rung 5 rejected** (chaotic, **and it interferes with the player's own pathing**). **The chasm is cut *"for now"*** on the retracting field and the leash, **and for scope** — *"there's a lot that has to be done already"* — so **the two halves connect by ordinary traversal**. **The home field does not gate jungle access.** **⚠ The hero-autonomy record is amended** — *"A hero is not fully autonomous"*, **control is tapping the map** — and **move-versus-attack-move through one tap is open prototype work**. **Still open:** jungle contents (**commissioned**), **symmetry** (direction given, tension unresolved), **whether invading the enemy jungle is possible at all** (reduced gold, no items, time-boxed, measure unchosen; **an anti-stomp device by his own statement**). Earlier: playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt**; **⚠ 2026-08-12/13 — REBUILT AGAIN from his play-test of the prototype.** **The jungle is SEMI-OPEN** — *"a forested area with clear openings and paths to traverse and little pockets where the creeps will hang out"*, and *"the hero does walk through the jungle. It is accepted"* — a **clarification of what the jungle physically is, NOT a reversal of destructible trees**, which stand along with aggro-pull geometry. **New requirement: traversal must be a much better experience** — routes, angles and choices, **not** sightline denial, which he ruled out himself. **The symmetry tension is DISSOLVED** — rotational stays for fairness, mirror-with-a-ruled-axis goes; **the distinction is a firstmate reading and his reaction to the built result is not yet recorded.** **Hero intent is decided: one tap attack-move, two taps move**, because *"panic is spammy"*; **tap-to-move is VALIDATED BY PLAY** (*"the tap to move is actually really good"*). **Still open and now the sharpest input question: how a spam sequence swaps to a single-tap intent on a dime** |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new**; **2026-08-11 (from 05): the hero talent-tree idea would put a pre-match pick in the design** — *"a variable you choose prior to starting the game"*, two or three imbue options per hero. **Floated, unchosen** — recorded, not rebuilt; **⚠ 2026-08-11, backlog answers (from 05): he did not recognise the talent-tree idea as his own**, asking whether it meant a hero aura — **it did not; it was about where the *options* for an imbue come from.** **Owed a plain restatement, not a decision**, and a **third thread** now exists (the home field absorbing the structure's creep buff). Recorded, **not rebuilt** |
-| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26; **2026-08-11 (from 05): the leash bounds where a hero may roam — it does NOT change how the hero is steered** (still coarse standing orders), and **whether that meets the per-lane-pool condition is not stated**; separately the **talent-tree idea** gives each hero *"two or three ways that they can affect it"* — recorded, not rebuilt; **⚠ 2026-08-11 (from 12): the hero-autonomy line is AMENDED — *"A hero is not fully autonomous"*, and control is DECIDED as tapping the map** (joystick and preset buttons not chosen). **This ticket still carries the superseded *"you don't get to control your hero directly"* phrasing, stated twice, and is NOT rebuilt** — read it against the amendment. **Whether tap-to-move meets the per-lane-pool condition is not stated by him.** **Newly open: move versus attack-move through one tap — prototype work** |
+| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26; **2026-08-11 (from 05): the leash bounds where a hero may roam — it does NOT change how the hero is steered** (still coarse standing orders), and **whether that meets the per-lane-pool condition is not stated**; separately the **talent-tree idea** gives each hero *"two or three ways that they can affect it"* — recorded, not rebuilt; **⚠ 2026-08-11 (from 12): the hero-autonomy line is AMENDED — *"A hero is not fully autonomous"*, and control is DECIDED as tapping the map** (joystick and preset buttons not chosen). **This ticket still carries the superseded *"you don't get to control your hero directly"* phrasing, stated twice, and is NOT rebuilt** — read it against the amendment. **Whether tap-to-move meets the per-lane-pool condition is not stated by him.** **Newly open: move versus attack-move through one tap — prototype work**; **⚠ 2026-08-12/13 (from 12): tap-to-move is VALIDATED BY PLAY** (*"the tap to move is actually really good"*), and **hero intent is decided — one tap attack-move, two taps move only**, his rationale being that **panic is spammy so spam must resolve to fleeing.** **What remains open is how a spam sequence swaps to a single-tap intent on a dime.** **Whether any of this changes the per-lane-pool condition is still not stated by him.** Recorded, **not rebuilt** |
 | 16 | Deckbuilding — 100 cards, bring 20 | open; **⚠ 2026-08-11 (from 05): the card system is RESET to its goal** — deck size is one of the specifics **set aside**, and **no shape is chosen.** Recorded, **not rebuilt** |
 | 17 | Gold and items — the in-match economy | open, **flat-vs-tiered fork**; **2026-08-11 (from 05): gold is earned whenever the hero kills a minion (last-hitting explicitly will not work), lanes pay more gold than the jungle, the jungle pays unique items and power-ups plus a smaller gold drop, and gold buys similar-but-not-identical power-ups at the main base** — this is where hero power is bought. Recorded, **not rebuilt**; the economy items are **parked by his own scope instruction** |
 | 18 | Slice sequencing — what ships | open, **new**, standing gate |
@@ -1004,6 +1120,20 @@ method; treat them as "this informs that," not as a build order.
   - **✅ ADOPTED 2026-08-11 — it is no longer floated.** See the decision entry in
     "Decisions so far". **The three questions beneath it are untouched and still
     open, and none has been put to him.**
+  - **🔧 2026-08-13 — expression answered, one question partly addressed, and a
+    new mechanic attached.** The field is **a boundary marked in the lane, not a
+    drawn volume**, which bears on **readability** without closing it; the
+    **gold-rule interaction** and **whether it stacks with the leash** are
+    **untouched and still unasked**. **New: the buff LINGERS** for a period after
+    a minion leaves the field, **so the line cannot be camped** — his mechanic,
+    **its duration not a decision**. 05.
+- **🆕⚠ Whether the lingering buff is MEANT to soften the field's retraction.**
+  `[open]` 2026-08-13, **and it has NOT been put to him.** The retraction is on
+  record as **a schedule of legitimacy that defines the game's phases**; a buff
+  that persists past the field's radius **makes that boundary a gradient in time
+  rather than a cliff.** **Surfaced independently by firstmate and by the
+  prototype worker** — recorded for that reason rather than assumed either way.
+  **Not framed as a defect, and not resolved.** 05.
 - **⚠ Where the imbue lives, now that there is nothing to imbue.** `[open]`
   2026-08-11. The structure-imbue card use is **homeless unless the imbue moves
   onto the hero**, and his own **talent-tree idea** — *"either hero choice or
@@ -1131,6 +1261,40 @@ method; treat them as "this informs that," not as a build order.
     **Newly open in its place:** how **move** and **attack-move** are both
     expressed through **one tap** — recorded as **prototype work**, his concern
     being that a locked-in wrong intent *"will feel really bad."* 12, 15.
+  - **✅ VALIDATED BY PLAY 2026-08-12** — *"the tap to move is actually really
+    good."* The control decision is no longer only argued; it is played. **What
+    that does to the per-lane-pool condition is still not stated by him** and is
+    still not inferred here. 12, 15.
+- **⚠ How a fast tap sequence resolves into intent — the sharpest open input
+  question in the design.** `[open]` 2026-08-13, **his words**: *"how do you spam
+  tap to force your hero to move without attacking really quickly, but then
+  somehow swap on a dime to the last tap being taken as a single tap?"* **The
+  assignment is settled** — one tap attack-move, two taps move — **but with
+  tap-count semantics a rapid sequence is ambiguous by construction**: every
+  single tap must wait out the double-tap window, so **either attack-move is
+  delayed or a fast run of moves is chopped into alternating intents.**
+  **Unresolved.** The prototype carries an implementation and its cost;
+  **cited, not adopted, and he has not reacted to it.** 12, 15.
+- **🆕 The camera's actual zoom level, and what texture costs on a phone.**
+  `[open]` 2026-08-13. The **direction** is his — *"closer to the max zoom out of
+  typical MOBAs, but maybe slightly more"* — **with his hedge attached**, and
+  **no level is chosen.** Under it sits the new requirement that **texture and
+  material be legible**, whose frame cost **exceeded the prototype's own budget
+  line** and is **still measured only in a desktop browser, never on a phone.**
+  The standing rule that **prototypes must be observed running** applies. 01.
+- **🆕 The command bar's proportion.** `[open]` 2026-08-12 — he asked for
+  **bigger and gave no number.** **The sizing principle is settled** (the bar is
+  fixed, the board absorbs variation); **the split is not**, and the recorded
+  ~75/25 stays `[provisional]`. Its companion: **how the bar carries cost and
+  worth without numbers**, hardest for **the jungle pre-commitment readout**,
+  which is numeric by construction and **is his own request.** 01, touches 12.
+- **🆕 What makes jungle traversal interesting.** `[open]` 2026-08-13 — *"the
+  ability to traverse the jungle needs to be made a much better experience"*:
+  **routes, angles and choices about which way to go, not corridors with
+  alcoves.** **Explicitly NOT sightline denial** — he ruled that out himself,
+  since there is no fog and a minimap shows both heroes at all times. **A
+  requirement with no accepted answer**, and it **raises the price of the
+  commissioned what-the-jungle-contains question** without answering it. 12.
 - ~~**What replaces "destroy their base."**~~ **Answered 2026-07-29** —
   reinforcement exhaustion, one condition with three levers. The base was never
   the problem; the tower-chain route was. See the resolved challenge above and
@@ -1332,6 +1496,16 @@ method; treat them as "this informs that," not as a build order.
     allocate a permanent slot per job.** **Which lever holds the fixed right slot
     is undecided**, with four candidates recorded and none chosen, and **the
     minimap and the leash readout are still claimants.** 01.
+  - **🔧 2026-08-12/13, from his play-test — a sizing principle and a hard
+    constraint, still no allocation.** **The bar gets the fixed real estate and
+    the board absorbs the variation, because the board pans and the bar cannot**
+    — he asked for **bigger with no number**, so **no proportion is recorded as
+    his.** And **the bar must not be a numeric HUD** (*"way too much information
+    and it was all about numbers and moving numbers"*) — **the existing
+    decision-substrate constraint being enforced.** **⚠ The leash readout remains
+    a claimant**: the 2026-08-13 answer that **the leash needs no rendering on
+    the board** says nothing about whether the **bar** wants one. **Do not extend
+    that cascade.** 01, 05.
 - **Whether any gesture survives.** The "never drawn symbols" rejection still
   binds, but with casting reduced to selection it is unclear whether flicks and
   drags remain anywhere — combining cards together, steering the hero (15 asks
@@ -1358,6 +1532,12 @@ method; treat them as "this informs that," not as a build order.
   versus the potential benefits you get from being on a certain side versus ones
   you don't."* His **League** and **Heroes of the Storm** remarks are
   **references describing shapes, not requests.** **Do not resolve it.** 12.
+  - **✅ DISSOLVED 2026-08-13 — the two halves were never in conflict.**
+    **Rotational symmetry (fairness) stays; mirror symmetry with a ruled axis
+    (the NASCAR read) goes**, and **irregular internal geometry carries the
+    variety.** **His direction is satisfied, not overridden.** **The distinction
+    is a firstmate reading, and his reaction to the built result is not yet
+    recorded.** See the decision entry above. 12.
 - **What the jungle actually contains.** `[open]` 2026-08-11 — **commissioned as
   its own session** at his instruction: *"this is going to have to be its own
   giant dump."* A brainstorm report exists outside this repo and is **cited, not
