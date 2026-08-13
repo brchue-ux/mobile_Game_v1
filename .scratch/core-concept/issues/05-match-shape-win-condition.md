@@ -44,6 +44,16 @@ taking one — is **retired or rehoused, and kept below as history with its
 reasons.** **Events survive the building**; **event lane placement becomes a
 variable**; and a **new unmet requirement** lands: something must stop an early
 lane collapse. See "🔴 DECISION — the front line is the leash" below.
+**⚠ Updated 2026-08-12/13 by his play-test of the prototype.** **The leash is a
+LIMIT, not a barrier** — tapping past the front line is **always accepted**, the
+hero travels as far as it legally can and then **settles**, and it must never
+grind at the edge taking damage. **The leash gets no rendering of its own**; it
+is already visible through the creeps forming the front line. **The home field is
+expressed as a boundary in the lane, not a drawn volume.** **NEW MECHANIC — the
+lingering buff:** the empowerment **persists for a period after a minion leaves
+the field**, so the boundary cannot be camped. **Its duration is not a decision**,
+and **whether it is meant to soften the field's retraction has NOT been put to
+him.** **The live open-questions list is now at the foot of this file.**
 Blocked by: —
 
 ## 🔴 The forward structure is cut, and the front line becomes the hero's leash — 2026-08-11
@@ -2192,6 +2202,121 @@ shapes on the table and none is chosen. Do not adopt one.**
 [02](02-combining-mechanic.md), [11](11-accrual-economy.md) and
 [16](16-deckbuilding.md); **none is rebuilt here.**
 
+## Play-test — 2026-08-12 / 2026-08-13: the leash is a limit, the field is a boundary, and the buff lingers
+
+> **⚠ Source note.** His reactions to the playable prototype in
+> `.scratch/core-concept/prototypes/` — the **shipped build** on 2026-08-12 and
+> the **corrected build** on 2026-08-13, both played on an S26 Ultra. **Quoted
+> passages are his own wording as captured**; unquoted material is
+> record-paraphrase. The prototype's own artifacts —
+> [`COMMITMENT-overgrowth.md`](../prototypes/COMMITMENT-overgrowth.md) and its
+> `## Amendments`, and
+> [`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md) — are
+> **cited, never imported.**
+
+### ✅ The leash is a LIMIT, not a barrier `[provisional]`
+
+**Tapping past the front line is always accepted:**
+
+> *"I think you should always be able to tap past the frontline to have your hero
+> run in that direction."*
+
+**His requirement, and it is the substantive part:**
+
+> *"there needs to be some sort of mechanism where it doesn't just constantly
+> attempt to run through an invisible barrier taking damage."*
+
+**His own resolution:** a tap aimed past the limit — including one aimed at
+enemies beyond it — has the hero travel **as far as it legally can and then
+settle**, *"defaults to a move after you've reached your target spot"* rather
+than continuing to pursue. **So the input is never rejected and the hero never
+grinds at the edge.**
+
+**He is content that some of this is the player's responsibility:** *"I guess
+that's just up to the player to pay attention to."*
+
+**What this settles:** the leash is **a limit the hero stops at**, not a wall
+that refuses input. **It does not change the leash rule itself** — the hero's
+legal roam still extends as far forward as that lane's front line (2026-08-11).
+**What it adds is the required behaviour at the boundary.**
+
+### ✅ The leash gets NO RENDERING OF ITS OWN `[provisional]`
+
+**This closes a question his 2026-08-12 play-test opened.** Looking at the
+shipped build he could not tell the two territorial systems apart:
+
+> *"the way that you did the force field was no. I don't even - I'm not even sure
+> what it is to be honest. I see like these lines. Is that the leash? I don't
+> know."*
+
+He then held the question open himself — *"The leash shouldn't be visible.
+Right?... Or maybe it needs to be sort of visible. I don't know. But not the way
+you did it."* — and **agreed on 2026-08-13 that it is already visible through the
+creeps forming the front line.** **The boundary IS the front line, and the front
+line is visible by definition**, so a second drawn territorial system is what
+made the leash and the home field indistinguishable.
+
+**⚠ Scope, stated because this design has a standing gotcha about over-extended
+cascades.** This answers **what is drawn on the board**. It does **not** by
+itself retire **the leash readout as a claimant on the bottom 25%** — that
+question is 01's and is **untouched here**. Nothing about *where the hero may go*
+being legible on the board says whether the bar also wants to state it.
+
+### ✅ The home field is expressed as a BOUNDARY, not a volume `[provisional]`
+
+> *"I imagine the force field being not a literal force field, just being some
+> sort of visual indicator maybe in the lane that tells you the line in the sand
+> of where minions will be buffed versus where they won't be."*
+
+**A line in the lane, not a drawn area.** The field's **shape and job are
+unchanged** — the base emits it, minions inside are empowered, it retracts over
+the match, and it is the locked-in early-rush brake. **What is recorded here is
+how it is expressed to the player**, which bears directly on the **readability**
+question standing open beneath the lock.
+
+### 🆕 NEW MECHANIC — the lingering buff `[provisional]`
+
+**This is design, not prototype feedback.** His words:
+
+> *"as minions leave the force field, as they're pathing through their lane and
+> walking out of the force field, there is a timer that it is still up before it
+> dissipates."*
+
+**The buff persists for a period after a minion leaves the field.**
+
+**Its purpose, in his words:**
+
+> *"so that way they can't just sit at the line of the force field and then wait
+> for them to come out and farm minions."*
+
+**Without it the boundary is a camping spot** — an attacker parks just outside
+the line and harvests minions the instant they lose protection. **What it buys
+the defender, in his words:** *"the minions still will give the defending player
+a little bit of breathing room."*
+
+**⚠ Duration is NOT recorded as a decision.** The prototype implements a
+provisional value on its tuner, **crude like every other number in it** — see
+[`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md), **cited, not
+adopted.** **The mechanic is his; the number is not a decision of his.**
+
+#### ⚠ OPEN, and NOT PUT TO HIM — does the lingering buff soften the retraction on purpose?
+
+**The retraction is on record as a schedule of legitimacy that defines the game's
+phases.** A buff that persists past the field's own radius **converts that
+retraction from a hard cliff into a gradient in time** — the protection ends
+where the field ends *plus however long the timer runs*, so the phase boundary
+becomes soft rather than sharp.
+
+**Whether that softening is intended has not been asked.** It is recorded here
+because **firstmate and the prototype worker surfaced it independently**, which
+is why it is worth recording rather than assuming either way. **It is not framed
+as a defect and it is not resolved here.**
+
+**Related and still open beneath the lock:** the field's **readability** of an
+indirect cause — which the boundary expression above bears on but does not close
+— the **interaction with the gold rule**, and **whether the field stacks with the
+leash or replaces part of it.** **None of the three has been put to him.**
+
 ## Reach outside this ticket — recorded after the leash decision, not acted on
 
 **None of these tickets is rebuilt in this pass.**
@@ -2327,8 +2452,13 @@ marked answered, delegated or moot above is still live. New and revised:
 
 ## Open questions after the backlog answers
 
-**This is the live list.** Everything from the earlier lists that is not marked
-answered, delegated or moot above is still live. New and revised:
+**⚠ Bookkeeping: superseded as the live list by the play-test.** Original text
+kept verbatim; status markers added in place, nothing deleted. The live list is
+now "[Open questions after the play-test](#open-questions-after-the-play-test)"
+at the end of this file.
+
+~~**This is the live list.**~~ Everything from the earlier lists that is not
+marked answered, delegated or moot above is still live. New and revised:
 
 - **🆕 How a pushed-back player pushes the line back.** *"I'm not really sure of
   what the mechanism is to help them push the line back to be able to even the
@@ -2360,6 +2490,44 @@ answered, delegated or moot above is still live. New and revised:
 - **The home field's own open beneath-the-lock questions** — **readability** of
   an indirect cause, the **interaction with the gold rule**, and **whether it
   stacks with the leash or replaces part of it.** **None put to him.**
+  - **🔧 Partly addressed 2026-08-13 — readability only, and not closed.** The
+    field is **expressed as a boundary marked in the lane, not a drawn volume**:
+    *"just some sort of visual indicator maybe in the lane that tells you the
+    line in the sand of where minions will be buffed versus where they won't
+    be."* **The other two are untouched and still unasked.**
 - **Whether the leash itself supplies part of the early-rush brake** — still
   **unanalysed**, and now a question about **overlap** rather than about
   sufficiency, since the field is locked in.
+
+## Open questions after the play-test
+
+**This is the live list.** Everything from the earlier lists that is not marked
+answered, delegated or moot above is still live. New and revised:
+
+- **🆕⚠ Whether the lingering buff is MEANT to soften the field's retraction —
+  NOT PUT TO HIM.** The buff persisting past the field's radius **turns the
+  retraction from a hard cliff into a gradient in time**, which touches the
+  retraction's recorded job as **a schedule of legitimacy that defines the game's
+  phases**. **Firstmate and the prototype worker surfaced this independently.**
+  **Recorded as open, not as a defect, and not resolved.**
+- **The lingering buff's duration** — **the mechanic is his, the number is not.**
+  The prototype carries a provisional tuner value; **it is cited, not adopted**,
+  and **no duration is recorded here as a decision.**
+- **The home field's remaining beneath-the-lock questions** — the **interaction
+  with the gold rule** and **whether it stacks with the leash or replaces part of
+  it.** **Still unasked.** **Readability is partly addressed** by the boundary
+  expression, **not closed.**
+- **⚠ The leash readout in the bottom 25%** — **still live and owned by
+  [01](01-battlefield-geometry.md).** The 2026-08-13 answer that **the leash gets
+  no rendering of its own on the board** does **not** settle whether the **bar**
+  wants a readout. **Do not extend that cascade.**
+- **⚠ The snowball risk of the leash** — **unchanged, still open.** The
+  boundary-behaviour answer is about input and feedback, **not about how a lead
+  compounds.**
+- **How a pushed-back player pushes the line back**, **something that pushes the
+  game toward an ending**, **where the imbue lives**, **the event lane placement
+  mechanism**, **a hold-position order**, and **the card system from the goal
+  up** — **all unchanged by the play-test.**
+- **The power threshold, its tuning, the "exodia moment", and how hero power
+  converts into a win** — **unchanged, and still parked by his own scope
+  instruction.**

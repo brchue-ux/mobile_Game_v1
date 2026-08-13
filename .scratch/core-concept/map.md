@@ -390,6 +390,43 @@ rather than performing certainty. Ticket 08 promotes or revises.
 
 ## Decisions so far
 
+- **The leash is a LIMIT, not a barrier, and it gets no rendering of its own**
+  `[provisional]` (2026-08-12/13, from his play-test) — **tapping past the front
+  line is always accepted**: *"I think you should always be able to tap past the
+  frontline to have your hero run in that direction."* **His requirement:**
+  *"there needs to be some sort of mechanism where it doesn't just constantly
+  attempt to run through an invisible barrier taking damage."* **His own
+  resolution:** a tap aimed past the limit **defaults to a move on arrival**
+  rather than continuing to pursue — the hero **travels as far as it legally can
+  and then settles**. **Never rejects input, never grinds at the edge**, and he
+  is content that some of it is the player's job: *"I guess that's just up to the
+  player to pay attention to."* **Separately, the leash needs no drawn boundary**
+  — he agreed it is already visible through **the creeps forming the front
+  line**, and the previously drawn version made the leash and the home field
+  indistinguishable: *"I'm not even sure what it is... I see like these lines. Is
+  that the leash? I don't know."* **⚠ Scope: this answers what is drawn on the
+  board. It does NOT retire the leash readout as a claimant on the bottom 25%** —
+  that is 01's question and is untouched. **Do not extend the cascade.** See
+  [05](issues/05-match-shape-win-condition.md).
+- **The home field is expressed as a BOUNDARY, and the buff LINGERS**
+  `[provisional]` (2026-08-13) — **on expression:** *"not a literal force field,
+  just some sort of visual indicator maybe in the lane that tells you the line in
+  the sand of where minions will be buffed versus where they won't be."* **A line
+  in the lane, not a drawn volume**; the field's shape and its job as the
+  locked-in early-rush brake are **unchanged**. **NEW MECHANIC, his:** *"as
+  minions leave the force field, as they're pathing through their lane and
+  walking out of the force field, there is a timer that it is still up before it
+  dissipates."* **The buff persists for a period after a minion leaves the
+  field.** **Its purpose in his words:** *"so they can't just sit at the line of
+  the force field and then wait for them to come out and farm minions"* —
+  **without it the boundary is a camping spot** — and it buys the defender *"a
+  little bit of breathing room."* **⚠ The duration is NOT a decision** — the
+  prototype carries a provisional tuner value, cited and not adopted. **⚠ Open
+  and never put to him:** the lingering buff also **turns the field's retraction
+  from a hard cliff into a gradient in time**, and **whether that softening is
+  intended is unasked** — surfaced independently by firstmate and the prototype
+  worker, which is why it is recorded rather than assumed. See
+  [05](issues/05-match-shape-win-condition.md).
 - **The jungle is SEMI-OPEN, and traversal must be interesting** `[provisional]`
   (2026-08-13, from his play-test of the prototype) — *"The jungle is not an open
   forested area, neither is it a completely dense forested area. It is a forested
@@ -990,7 +1027,7 @@ method; treat them as "this informs that," not as a build order.
 | 02 | What "combining cards" actually means | resolved + amended; **⚠ 2026-08-11 (from 05): a finding from commissioned card-system work, recorded as a finding and not as his — *combining is currently unpriced*.** 02 chose payload + modifiers and left the cap, reversibility and failure cases open, and nothing states **what combining costs**, so *combine everything, every time* is the dominant line and **the keystone mechanic has no decision in it.** Recorded, **not rebuilt** |
 | 03 | Gesture as skill expression | **closed — removed** 2026-07-26 |
 | 04 | Pressure vs. complexity — the learning curve | open, **eased**; now owns "where does skill live" |
-| 05 | Match shape & win condition | open, **substantially answered**; **the ending moved a fourth time 2026-08-09** — loss is the **enemy hero reaching a WC3-style power threshold**, specifics wishy-washy by his own account; **the forward structure's job is answered 2026-08-07/09** (dormant structures, telegraphed lane events, hero garrison) with its specifics open; ~15-min match, ~5-min event cadence. **2026-08-11: exhaustion is NOT a loss condition** — the pool survives as a **resource**, its three levers untouched — and the ticket gains its **central axis with a stated payout on the pushing side**: **lanes pay gold on any hero minion kill (no last-hitting), jungle pays unique items plus less gold, gold buys power-ups at the main base**. **Cards split into lane-state and structure-imbue uses**; the telegraph gains a **~1-min lead and a known event type**. **Rare units at structures cut *"for now"***; **forward creep spawning is not dead but has no mechanism**; **threshold, tuning and power-to-win conversion parked by his instruction**. **⚠ 2026-08-11, later the same day — the largest structural change so far: the forward structure is CUT and the front line is the hero's leash** (*"i like your replacement, lets go with that (hero leash)"*). The hero's legal roam in a lane reaches **as far forward as that lane's front line** — not confinement, not free crossing — which **dissolves the contradiction that a winning push handed your gold income to your opponent**. **Everything structure-dependent is retired, rehoused or open, kept as history**; **events survive the building** (~5-min cadence, ~1-min telegraph, large-minion type) and **event lane placement becomes a variable** (player-chooses or mechanism — **he picked neither**), making collision **emergent**. **New unmet requirement: something must stop an early lane collapse.** **The shrinking home field is a floated, unchosen candidate for it.** **Imbue confirmed visible to the opponent**; **where the imbue lives is now open**. **⚠ 2026-08-11, backlog answers — AMENDED AGAIN: the shrinking home field is LOCKED IN** as the early-rush brake (*"let's lock that concept in"*), so that requirement is **met at concept level** while everything beneath it stays open. **Map control's worth is REVERSED to ECONOMIC denial** — he rejected the information answer himself because a minimap shows both heroes at all times — which opened two new questions: **how a pushed-back player pushes the line back**, and **something that pushes the game toward an ending** (*"not literally a berserk timer"*; the retracting field **may** already be it, flagged not assumed). **Event lane placement is answered in principle — influence, not selection** — with the **mechanism commissioned and unchosen**. **The imbue now has three threads and none is chosen**, including his own proposal that **the home field absorb the structure's creep buff** — an automatic positional constant in place of a prepared per-event card decision. **A hold-position order is neither ruled in nor out, but must be easily accessible and cancellable if it exists.** **The card system is RESET** to his restated goal, with five commissioned shapes and **none chosen** |
+| 05 | Match shape & win condition | open, **substantially answered**; **the ending moved a fourth time 2026-08-09** — loss is the **enemy hero reaching a WC3-style power threshold**, specifics wishy-washy by his own account; **the forward structure's job is answered 2026-08-07/09** (dormant structures, telegraphed lane events, hero garrison) with its specifics open; ~15-min match, ~5-min event cadence. **2026-08-11: exhaustion is NOT a loss condition** — the pool survives as a **resource**, its three levers untouched — and the ticket gains its **central axis with a stated payout on the pushing side**: **lanes pay gold on any hero minion kill (no last-hitting), jungle pays unique items plus less gold, gold buys power-ups at the main base**. **Cards split into lane-state and structure-imbue uses**; the telegraph gains a **~1-min lead and a known event type**. **Rare units at structures cut *"for now"***; **forward creep spawning is not dead but has no mechanism**; **threshold, tuning and power-to-win conversion parked by his instruction**. **⚠ 2026-08-11, later the same day — the largest structural change so far: the forward structure is CUT and the front line is the hero's leash** (*"i like your replacement, lets go with that (hero leash)"*). The hero's legal roam in a lane reaches **as far forward as that lane's front line** — not confinement, not free crossing — which **dissolves the contradiction that a winning push handed your gold income to your opponent**. **Everything structure-dependent is retired, rehoused or open, kept as history**; **events survive the building** (~5-min cadence, ~1-min telegraph, large-minion type) and **event lane placement becomes a variable** (player-chooses or mechanism — **he picked neither**), making collision **emergent**. **New unmet requirement: something must stop an early lane collapse.** **The shrinking home field is a floated, unchosen candidate for it.** **Imbue confirmed visible to the opponent**; **where the imbue lives is now open**. **⚠ 2026-08-11, backlog answers — AMENDED AGAIN: the shrinking home field is LOCKED IN** as the early-rush brake (*"let's lock that concept in"*), so that requirement is **met at concept level** while everything beneath it stays open. **Map control's worth is REVERSED to ECONOMIC denial** — he rejected the information answer himself because a minimap shows both heroes at all times — which opened two new questions: **how a pushed-back player pushes the line back**, and **something that pushes the game toward an ending** (*"not literally a berserk timer"*; the retracting field **may** already be it, flagged not assumed). **Event lane placement is answered in principle — influence, not selection** — with the **mechanism commissioned and unchosen**. **The imbue now has three threads and none is chosen**, including his own proposal that **the home field absorb the structure's creep buff** — an automatic positional constant in place of a prepared per-event card decision. **A hold-position order is neither ruled in nor out, but must be easily accessible and cancellable if it exists.** **The card system is RESET** to his restated goal, with five commissioned shapes and **none chosen**; **⚠ 2026-08-12/13 — REBUILT AGAIN from his play-test of the prototype.** **The leash is a LIMIT, not a barrier**: tapping past the front line is **always accepted**, the hero **travels as far as it legally can and then settles** (*"defaults to a move after you've reached your target spot"*), and it must **never grind at an invisible barrier taking damage**. **The leash gets no rendering of its own** — already visible through the creeps forming the front line — **which does NOT retire the leash readout as a bottom-25% claimant (01's question, untouched)**. **The home field is expressed as a boundary in the lane, not a drawn volume.** **NEW MECHANIC — the lingering buff:** the empowerment **persists for a period after a minion leaves the field**, *"so they can't just sit at the line of the force field and then wait for them to come out and farm minions"*, buying the defender *"a little bit of breathing room"*. **Its duration is NOT a decision.** **⚠ Newly open and never put to him: whether that lingering buff is meant to soften the field's retraction from a cliff into a gradient** |
 | 06 | Unlock progression & the hook | open, **needs revisit after 16** |
 | 07 | Monetization model | open |
 | 08 | Consolidation pass | open (terminal) |
@@ -1049,6 +1086,20 @@ method; treat them as "this informs that," not as a build order.
   - **✅ ADOPTED 2026-08-11 — it is no longer floated.** See the decision entry in
     "Decisions so far". **The three questions beneath it are untouched and still
     open, and none has been put to him.**
+  - **🔧 2026-08-13 — expression answered, one question partly addressed, and a
+    new mechanic attached.** The field is **a boundary marked in the lane, not a
+    drawn volume**, which bears on **readability** without closing it; the
+    **gold-rule interaction** and **whether it stacks with the leash** are
+    **untouched and still unasked**. **New: the buff LINGERS** for a period after
+    a minion leaves the field, **so the line cannot be camped** — his mechanic,
+    **its duration not a decision**. 05.
+- **🆕⚠ Whether the lingering buff is MEANT to soften the field's retraction.**
+  `[open]` 2026-08-13, **and it has NOT been put to him.** The retraction is on
+  record as **a schedule of legitimacy that defines the game's phases**; a buff
+  that persists past the field's radius **makes that boundary a gradient in time
+  rather than a cliff.** **Surfaced independently by firstmate and by the
+  prototype worker** — recorded for that reason rather than assumed either way.
+  **Not framed as a defect, and not resolved.** 05.
 - **⚠ Where the imbue lives, now that there is nothing to imbue.** `[open]`
   2026-08-11. The structure-imbue card use is **homeless unless the imbue moves
   onto the hero**, and his own **talent-tree idea** — *"either hero choice or
