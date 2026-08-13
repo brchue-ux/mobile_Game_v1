@@ -390,6 +390,51 @@ rather than performing certainty. Ticket 08 promotes or revises.
 
 ## Decisions so far
 
+- **The jungle is SEMI-OPEN, and traversal must be interesting** `[provisional]`
+  (2026-08-13, from his play-test of the prototype) — *"The jungle is not an open
+  forested area, neither is it a completely dense forested area. It is a forested
+  area with clear openings and paths to traverse and little pockets where the
+  creeps will hang out."* And: *"The hero does walk through the jungle. It is
+  accepted."* **Paths and clearings by default, camps in pockets off them,
+  passage the default state.** **⚠ This is a CLARIFICATION of what the jungle
+  physically is, NOT a reversal:** **destructible trees stand**, **aggro-pull
+  geometry as a function of current geometry stands**, and it is **consistent
+  with the traversal-by-default pricing baseline** — blocking passage is only
+  worth a card because passage is the default. What it amends in place is this
+  map's own phrasing *"a set of chambers, not one open field"*, **which was the
+  map's reading of his aggro condition, not his words.** **A requirement arrives
+  with it:** *"the ability to traverse the jungle needs to be made a much better
+  experience"* — **routes, angles and choices, not corridors with alcoves** —
+  and **he ruled out sightline denial himself** as the reason, since there is no
+  fog and a minimap shows both heroes. See [12](issues/12-jungle-role.md).
+- **Jungle symmetry — the tension is DISSOLVED by a distinction** `[provisional]`
+  (2026-08-13) — his objection to the corrected prototype was *"I'm not crazy
+  about the layout. It's very symmetrical... their maps don't look so NASCAR
+  track with a line in the middle."* **Rotational symmetry stays** — it is what
+  keeps a **1v1 with no draft** fair, there being no pick order to absorb a side
+  advantage — **while mirror symmetry with a ruled straight axis goes**, that
+  being what produces the NASCAR read. **Irregular internal geometry supplies the
+  variety he asked for without handing either side an advantage**, so **his
+  2026-08-11 tension — *"I'm not sure how to weigh the repetitiveness of symmetry
+  versus the potential benefits you get from being on a certain side"* — was
+  never a real conflict.** His direction (*"not totally symmetrical"*) is
+  **satisfied, not overridden**. **⚠ The objection is his; the distinction is a
+  firstmate reading offered to be overruled, and his reaction to the built result
+  is not yet recorded.** See [12](issues/12-jungle-role.md).
+- **Hero intent: one tap is attack-move, two taps is move only** `[provisional]`
+  (2026-08-13) — *"maybe attack is one and then just move is two. So if a player
+  chooses to spam to run away, it's always run away versus choosing to attack is
+  deliberate."* **His rationale outlives the mechanism: panic is spammy, so spam
+  must resolve to fleeing**, and attacking is the deliberate act. He had offered
+  the pairing on 2026-08-12 **without choosing which way round**, under the
+  constraint *"maybe we don't need another verb"* — **both intents on one
+  gesture, no extra control, no screen space.** **This answers the *assignment*
+  half of 12's move-versus-attack-move problem and not the other half** — see
+  "Not yet specified". **Separately, tap-to-move is VALIDATED BY PLAY** — *"the
+  tap to move is actually really good"* — which closes the
+  joystick-versus-minimap-versus-buttons question **by evidence rather than by
+  argument.** See [12](issues/12-jungle-role.md), reaches
+  [15](issues/15-heroes.md).
 - [What "combining cards" actually means](issues/02-combining-mechanic.md) —
   at-cast combining is **payload + modifiers** `[provisional]`; accessibility
   beats novelty `[committed]`; shape-composition dead once gestures were ruled to
@@ -952,10 +997,10 @@ method; treat them as "this informs that," not as a build order.
 | 09 | Banking — combining over time | **shelved** — **⚠ may have found its payoff** 2026-07-26, awaiting user yes/no |
 | 10 | Information — what you see of your opponent | **largely answered** — board open, hand hidden; partial-visibility detail still open; **new 2026-08-07 (from 05): the command bar should centre on the enemy hero's status** — recorded, not rebuilt; **2026-08-11 (from 05): map control's value is framed as denying the opponent information**, which gives board-open/hand-hidden a strategic consequence — recorded, not rebuilt; **2026-08-11 later the same day (from 05): an imbue IS visible to the opponent** (*"I would say so"*), extending board-open/hand-hidden to **prep**, and **map control's mechanism is now the front line** though its worth is unchanged — recorded, not rebuilt; **⚠ 2026-08-11, backlog answers (from 05): map control's worth is REVERSED — it is ECONOMIC denial, not informational.** He rejected the information answer himself because **a minimap shows both heroes at all times**, so nobody pushes blind and there is no fog to fear; pushing past their front line **makes their farming dangerous, so they earn less gold.** The **effect** on their scaling is unchanged; the **mechanism of the harm** is not. Also **still unanswered: whether the opponent can see your event lane placement before committing**, the natural companion to the imbue being visible. Recorded, **not rebuilt**; **⚠ 2026-08-11 (from 01): the 2026-08-07 enemy-centred command bar constraint recorded here is now one of two live framings** — he has since described **both heroes** in the middle panel — and **the choice between them is DELEGATED to whoever builds it, not a captain question.** **The tension is preserved and unresolved; it is not a reversal.** Recorded, **not rebuilt** |
 | 11 | Card accrual economy | open; **⚠ 2026-08-11 (from 05): the card system is RESET** — hand size, freeze slot and deck size **set aside** in favour of his restated four-clause goal, and **five commissioned shapes are on the table with none chosen.** The **unpriced-combining** finding bears directly on accrual. Recorded, **not rebuilt** |
-| 12 | The jungle — role and autonomy | open, **substantially answered — REBUILT 2026-08-11 from two dumps of its own**. **Where the jungle sits: answered** (typical MOBA layout, bases top and bottom, three lanes, jungle between all of it, **nothing really traversable on the outsides**; his Heroes of Newerth remark is a **reference, explicitly not a request**). **Jungle *control*: dissolved, not answered** — no ganks, no teammates, no vision needed, so the MOBA concept has no substrate here; **what remains is jungle access**, governed by the leash and the retracting home field. **Trees are destructible walls** separating chambers and lanes, so **jungle geometry is mutable mid-match** and aggro-pull reach changes with it — **its relation to terrain manipulation is unasked**. **Autonomy answered rung by rung:** **rung 2 adopted** (a **pre-commitment readout** — difficulty, time, damage, mana, expected gold and possible items, ~six camps a side), **rung 3 adopted but narrowed from game state to match TIME**, **rung 4 open with a shape** (timer/cadence, not continuous; unclaimed neutrals unresolved), **rung 4a adopted** with the principle *"you're not getting power from the jungle, but you are claiming something of the jungle that then benefits you"*, **rung 5 rejected** (chaotic, **and it interferes with the player's own pathing**). **The chasm is cut *"for now"*** on the retracting field and the leash, **and for scope** — *"there's a lot that has to be done already"* — so **the two halves connect by ordinary traversal**. **The home field does not gate jungle access.** **⚠ The hero-autonomy record is amended** — *"A hero is not fully autonomous"*, **control is tapping the map** — and **move-versus-attack-move through one tap is open prototype work**. **Still open:** jungle contents (**commissioned**), **symmetry** (direction given, tension unresolved), **whether invading the enemy jungle is possible at all** (reduced gold, no items, time-boxed, measure unchosen; **an anti-stomp device by his own statement**). Earlier: playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt** |
+| 12 | The jungle — role and autonomy | open, **substantially answered — REBUILT 2026-08-11 from two dumps of its own**. **Where the jungle sits: answered** (typical MOBA layout, bases top and bottom, three lanes, jungle between all of it, **nothing really traversable on the outsides**; his Heroes of Newerth remark is a **reference, explicitly not a request**). **Jungle *control*: dissolved, not answered** — no ganks, no teammates, no vision needed, so the MOBA concept has no substrate here; **what remains is jungle access**, governed by the leash and the retracting home field. **Trees are destructible walls** separating chambers and lanes, so **jungle geometry is mutable mid-match** and aggro-pull reach changes with it — **its relation to terrain manipulation is unasked**. **Autonomy answered rung by rung:** **rung 2 adopted** (a **pre-commitment readout** — difficulty, time, damage, mana, expected gold and possible items, ~six camps a side), **rung 3 adopted but narrowed from game state to match TIME**, **rung 4 open with a shape** (timer/cadence, not continuous; unclaimed neutrals unresolved), **rung 4a adopted** with the principle *"you're not getting power from the jungle, but you are claiming something of the jungle that then benefits you"*, **rung 5 rejected** (chaotic, **and it interferes with the player's own pathing**). **The chasm is cut *"for now"*** on the retracting field and the leash, **and for scope** — *"there's a lot that has to be done already"* — so **the two halves connect by ordinary traversal**. **The home field does not gate jungle access.** **⚠ The hero-autonomy record is amended** — *"A hero is not fully autonomous"*, **control is tapping the map** — and **move-versus-attack-move through one tap is open prototype work**. **Still open:** jungle contents (**commissioned**), **symmetry** (direction given, tension unresolved), **whether invading the enemy jungle is possible at all** (reduced gold, no items, time-boxed, measure unchosen; **an anti-stomp device by his own statement**). Earlier: playable space, not a wall, aggro leash; **reframed 2026-08-09 by 05** as one of the levers of the hero power race (jungle creeps/items feed the threshold), not a separate system — recorded there, not rebuilt here; **2026-08-11 (from 05): the jungle is now explicitly one arm of the central strategic choice** — unique items and power-ups plus a smaller gold drop, weighed against pushing lanes for gold and map control — recorded, not rebuilt; **⚠ 2026-08-11 later the same day (from 05): the jungle's reachability is now a function of the front line** — how much of it your hero can work is set by how far the lane has been pushed, and conceding ground **closes your own jungle toward your base**. The other arm now **gates access** to this one — recorded, **not rebuilt**; **⚠ 2026-08-12/13 — REBUILT AGAIN from his play-test of the prototype.** **The jungle is SEMI-OPEN** — *"a forested area with clear openings and paths to traverse and little pockets where the creeps will hang out"*, and *"the hero does walk through the jungle. It is accepted"* — a **clarification of what the jungle physically is, NOT a reversal of destructible trees**, which stand along with aggro-pull geometry. **New requirement: traversal must be a much better experience** — routes, angles and choices, **not** sightline denial, which he ruled out himself. **The symmetry tension is DISSOLVED** — rotational stays for fairness, mirror-with-a-ruled-axis goes; **the distinction is a firstmate reading and his reaction to the built result is not yet recorded.** **Hero intent is decided: one tap attack-move, two taps move**, because *"panic is spammy"*; **tap-to-move is VALIDATED BY PLAY** (*"the tap to move is actually really good"*). **Still open and now the sharpest input question: how a spam sequence swaps to a single-tap intent on a dime** |
 | 13 | Prototype — sixty seconds of a match | resolved |
 | 14 | Pre-match setup & the pre-game state | open, **new**; **2026-08-11 (from 05): the hero talent-tree idea would put a pre-match pick in the design** — *"a variable you choose prior to starting the game"*, two or three imbue options per hero. **Floated, unchosen** — recorded, not rebuilt; **⚠ 2026-08-11, backlog answers (from 05): he did not recognise the talent-tree idea as his own**, asking whether it meant a hero aura — **it did not; it was about where the *options* for an imbue come from.** **Owed a plain restatement, not a decision**, and a **third thread** now exists (the home field absorbing the structure's creep buff). Recorded, **not rebuilt** |
-| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26; **2026-08-11 (from 05): the leash bounds where a hero may roam — it does NOT change how the hero is steered** (still coarse standing orders), and **whether that meets the per-lane-pool condition is not stated**; separately the **talent-tree idea** gives each hero *"two or three ways that they can affect it"* — recorded, not rebuilt; **⚠ 2026-08-11 (from 12): the hero-autonomy line is AMENDED — *"A hero is not fully autonomous"*, and control is DECIDED as tapping the map** (joystick and preset buttons not chosen). **This ticket still carries the superseded *"you don't get to control your hero directly"* phrasing, stated twice, and is NOT rebuilt** — read it against the amendment. **Whether tap-to-move meets the per-lane-pool condition is not stated by him.** **Newly open: move versus attack-move through one tap — prototype work** |
+| 15 | Heroes — stats, roles, differentiation | open, **substantially answered**; standing orders added 2026-07-26; **2026-08-11 (from 05): the leash bounds where a hero may roam — it does NOT change how the hero is steered** (still coarse standing orders), and **whether that meets the per-lane-pool condition is not stated**; separately the **talent-tree idea** gives each hero *"two or three ways that they can affect it"* — recorded, not rebuilt; **⚠ 2026-08-11 (from 12): the hero-autonomy line is AMENDED — *"A hero is not fully autonomous"*, and control is DECIDED as tapping the map** (joystick and preset buttons not chosen). **This ticket still carries the superseded *"you don't get to control your hero directly"* phrasing, stated twice, and is NOT rebuilt** — read it against the amendment. **Whether tap-to-move meets the per-lane-pool condition is not stated by him.** **Newly open: move versus attack-move through one tap — prototype work**; **⚠ 2026-08-12/13 (from 12): tap-to-move is VALIDATED BY PLAY** (*"the tap to move is actually really good"*), and **hero intent is decided — one tap attack-move, two taps move only**, his rationale being that **panic is spammy so spam must resolve to fleeing.** **What remains open is how a spam sequence swaps to a single-tap intent on a dime.** **Whether any of this changes the per-lane-pool condition is still not stated by him.** Recorded, **not rebuilt** |
 | 16 | Deckbuilding — 100 cards, bring 20 | open; **⚠ 2026-08-11 (from 05): the card system is RESET to its goal** — deck size is one of the specifics **set aside**, and **no shape is chosen.** Recorded, **not rebuilt** |
 | 17 | Gold and items — the in-match economy | open, **flat-vs-tiered fork**; **2026-08-11 (from 05): gold is earned whenever the hero kills a minion (last-hitting explicitly will not work), lanes pay more gold than the jungle, the jungle pays unique items and power-ups plus a smaller gold drop, and gold buys similar-but-not-identical power-ups at the main base** — this is where hero power is bought. Recorded, **not rebuilt**; the economy items are **parked by his own scope instruction** |
 | 18 | Slice sequencing — what ships | open, **new**, standing gate |
@@ -1131,6 +1176,27 @@ method; treat them as "this informs that," not as a build order.
     **Newly open in its place:** how **move** and **attack-move** are both
     expressed through **one tap** — recorded as **prototype work**, his concern
     being that a locked-in wrong intent *"will feel really bad."* 12, 15.
+  - **✅ VALIDATED BY PLAY 2026-08-12** — *"the tap to move is actually really
+    good."* The control decision is no longer only argued; it is played. **What
+    that does to the per-lane-pool condition is still not stated by him** and is
+    still not inferred here. 12, 15.
+- **⚠ How a fast tap sequence resolves into intent — the sharpest open input
+  question in the design.** `[open]` 2026-08-13, **his words**: *"how do you spam
+  tap to force your hero to move without attacking really quickly, but then
+  somehow swap on a dime to the last tap being taken as a single tap?"* **The
+  assignment is settled** — one tap attack-move, two taps move — **but with
+  tap-count semantics a rapid sequence is ambiguous by construction**: every
+  single tap must wait out the double-tap window, so **either attack-move is
+  delayed or a fast run of moves is chopped into alternating intents.**
+  **Unresolved.** The prototype carries an implementation and its cost;
+  **cited, not adopted, and he has not reacted to it.** 12, 15.
+- **🆕 What makes jungle traversal interesting.** `[open]` 2026-08-13 — *"the
+  ability to traverse the jungle needs to be made a much better experience"*:
+  **routes, angles and choices about which way to go, not corridors with
+  alcoves.** **Explicitly NOT sightline denial** — he ruled that out himself,
+  since there is no fog and a minimap shows both heroes at all times. **A
+  requirement with no accepted answer**, and it **raises the price of the
+  commissioned what-the-jungle-contains question** without answering it. 12.
 - ~~**What replaces "destroy their base."**~~ **Answered 2026-07-29** —
   reinforcement exhaustion, one condition with three levers. The base was never
   the problem; the tower-chain route was. See the resolved challenge above and
@@ -1358,6 +1424,12 @@ method; treat them as "this informs that," not as a build order.
   versus the potential benefits you get from being on a certain side versus ones
   you don't."* His **League** and **Heroes of the Storm** remarks are
   **references describing shapes, not requests.** **Do not resolve it.** 12.
+  - **✅ DISSOLVED 2026-08-13 — the two halves were never in conflict.**
+    **Rotational symmetry (fairness) stays; mirror symmetry with a ruled axis
+    (the NASCAR read) goes**, and **irregular internal geometry carries the
+    variety.** **His direction is satisfied, not overridden.** **The distinction
+    is a firstmate reading, and his reaction to the built result is not yet
+    recorded.** See the decision entry above. 12.
 - **What the jungle actually contains.** `[open]` 2026-08-11 — **commissioned as
   its own session** at his instruction: *"this is going to have to be its own
   giant dump."* A brainstorm report exists outside this repo and is **cited, not

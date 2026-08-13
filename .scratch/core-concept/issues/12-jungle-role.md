@@ -14,6 +14,16 @@ walls**, so jungle geometry is mutable mid-match. **⚠ The hero-autonomy record
 amended** — a hero is *"not fully autonomous"*, and **control is by tapping the
 map**. **Still open:** what the jungle contains (commissioned), jungle symmetry,
 and whether invading the opponent's jungle is possible at all.
+**⚠ Amended again 2026-08-12/13 by his play-test of the prototype:** **the jungle
+is SEMI-OPEN** — *"a forested area with clear openings and paths to traverse and
+little pockets where the creeps will hang out"* — a **clarification of what the
+jungle physically is, NOT a reversal of destructible trees**; **traversal must be
+made a much better experience** (routes and angles, **not** sightline denial);
+**the symmetry tension is dissolved** — rotational stays, mirror with a ruled
+axis goes; **tap-to-move is validated by play**; and **hero intent is one tap
+attack-move / two taps move**, leaving the **spam-to-single-tap problem** as the
+sharpest open input question. **The live open-questions list is now at the foot
+of this file.**
 Blocked by: 01
 
 ## Question
@@ -510,9 +520,171 @@ maybe they all are, I don't know."*
 side asymmetry is a **fairness** question and not only a variety question — there
 is no team composition or pick order to absorb a side advantage.
 
+## Play-test — 2026-08-12 / 2026-08-13: the jungle's physical character, traversal, symmetry, and tap intent
+
+> **⚠ Source note.** His reactions to the playable prototype in
+> `.scratch/core-concept/prototypes/` — the **shipped build** on 2026-08-12 and
+> the **corrected build** on 2026-08-13, both played on an S26 Ultra. **Quoted
+> passages are his own wording as captured**; unquoted material is
+> record-paraphrase. The prototype's own artifacts —
+> [`COMMITMENT-overgrowth.md`](../prototypes/COMMITMENT-overgrowth.md) and its
+> `## Amendments`, and
+> [`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md) — are
+> **cited, never imported**.
+
+### ✅ AMENDMENT — the jungle is SEMI-OPEN, and this is a clarification, not a reversal `[provisional]`
+
+**His definition, which is new material and supersedes an earlier reading:**
+
+> *"The jungle is not an open forested area, neither is it a completely dense
+> forested area. It is a forested area with clear openings and paths to traverse
+> and little pockets where the creeps will hang out."*
+
+And, separately:
+
+> *"The hero does walk through the jungle. It is accepted."*
+
+**What it establishes:** **paths and clearings by default, camps sitting in
+pockets off them, and passage as the default state.**
+
+**⚠ How this is recorded, precisely — it is a clarification of what the jungle
+physically IS, not a reversal.**
+
+- **Destructible trees stand.** Trees still separate jungle areas from each other
+  and from the lanes, they are still destructible, and **aggro-pull geometry is
+  still a function of current geometry** (see the 2026-08-11 first dump). **None
+  of that is withdrawn.**
+- **What the amendment touches is the *default density*.** The map's phrasing —
+  *"the jungle is a set of chambers, not one open field"* — **was the map's
+  reading of his aggro condition, not his words**, and it is **amended in place**
+  by his definition above: the openings and paths are the normal state, and the
+  trees are what stands between and beside them.
+- **It is consistent with the standing traversal-by-default pricing baseline**
+  (2026-07-26): blocking passage is only worth a card *because* passage is the
+  default. His *"the hero does walk through the jungle"* restates that baseline
+  rather than changing it.
+
+**Sequence, kept so the record is diffable.** On 2026-08-12 he saw the hero path
+straight through the jungle and **deferred rather than accepted** it — *"the only
+issue being it's going through the jungle and stuff like that, but I guess that
+doesn't matter right now."* That deferral was recorded at the time as **not** a
+design change. The 2026-08-13 statement above is what settles it, in his words.
+
+### 🆕 REQUIREMENT — traversing the jungle must be a much better experience `[provisional]`
+
+**His words, and the requirement stands on its own:**
+
+> *"the ability to traverse the jungle needs to be made a much better
+> experience"*
+
+**What prompted it, and what he then ruled out himself:**
+
+> *"The jungle literally is just two vertical lines with pockets, right? There's
+> no angles that create fog of war, like vision cutoffs."*
+
+He immediately supplied the caveat himself — *"I guess that doesn't really matter
+if you can always see where their hero is"* — since **there is no fog and a
+minimap shows both heroes at all times.** **So sightline denial is explicitly
+not the point.**
+
+**What the requirement asks for instead:** the jungle should be **interesting to
+move through** — **angles, routes, and choices about which way to go** — rather
+than **corridors with alcoves.** This sits directly on the recorded principle
+that **route planning is the player's main spatial act** (rung 5's rejection,
+2026-08-11), and it raises the price of the still-commissioned
+what-the-jungle-contains question without answering it.
+
+### ✅ Jungle symmetry — the tension is RESOLVED BY A DISTINCTION `[provisional]`
+
+**His objection to the corrected layout:**
+
+> *"I'm not crazy about the layout. It's very symmetrical... when I picture other
+> games, their maps don't look so NASCAR track with a line in the middle."*
+
+**The resolution, and it splits one word into two things:**
+
+- **Rotational symmetry stays** — the map landing on itself when turned 180° is
+  **what keeps a 1v1 with no draft fair.** There is no draft and no team
+  composition to absorb a side advantage, so this is close to mandatory.
+- **Mirror symmetry with a ruled straight axis goes** — a perimeter shape with a
+  line down the middle is **what produces the NASCAR read.** That is the thing he
+  is objecting to.
+
+**Irregular internal geometry supplies the variety he asked for without handing
+either side an advantage** — which **dissolves the tension he recorded on
+2026-08-11** and could not weigh: *"I'm not sure how to weigh the repetitiveness
+of symmetry versus the potential benefits you get from being on a certain side
+versus ones you don't."* **The two were never in conflict**, which is what that
+tension assumed. His direction — *"I would like it to not be totally
+symmetrical"* — is **unchanged and satisfied**, not overridden.
+
+**⚠ Attribution, stated so it is not misread as his.** **The objection is his.
+The rotational-versus-mirror distinction is a firstmate reading**, offered to be
+overruled, and the corrected prototype was built to it — see
+[`COMMITMENT-overgrowth.md`](../prototypes/COMMITMENT-overgrowth.md)'s
+`## Amendments`, **A3**, which amends the card's own symmetry refusal for the
+same reason. **His reaction to the result is not yet recorded.**
+
+### ✅ Hero control — one tap is attack-move, two taps is move only `[provisional]`
+
+**He reasoned it aloud and landed on the assignment himself:**
+
+> *"maybe attack is one and then just move is two. So if a player chooses to spam
+> to run away, it's always run away versus choosing to attack is deliberate."*
+
+**One tap = attack-move. Two taps = move only.**
+
+**⚠ His rationale is the load-bearing part and outlives the mechanism: panic is
+spammy, so spam must resolve to fleeing**, while **attacking is the deliberate
+act.** A control scheme that inverted this would punish exactly the moment a
+player is least deliberate.
+
+**Sequence:** he first offered it on 2026-08-12 **without choosing which way
+round** — *"Maybe one tap is attack move and two taps is move, or the opposite"* —
+with the constraint *"Maybe we don't need another verb"*, i.e. **both intents on
+one gesture, no extra control added and no screen space spent.** The 2026-08-13
+reasoning above is what chose the direction.
+
+**This answers the *assignment* half of the move-versus-attack-move problem
+recorded on 2026-08-11. It does not answer the half below.**
+
+#### ⚠ OPEN, and it is the sharpest input question in the design
+
+**His words:**
+
+> *"how do you spam tap to force your hero to move without attacking really
+> quickly, but then somehow swap on a dime to the last tap being taken as a
+> single tap?"*
+
+**The problem stated precisely: with tap-count semantics a rapid sequence is
+ambiguous by construction.** Every single tap must wait out the double-tap window
+to find out whether a second tap is coming, so **either attack-move is delayed by
+that window, or a fast run of intended moves is chopped into alternating
+intents.** **Unresolved.** The prototype carries an implementation and its cost is
+documented in
+[`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md) — **cited, not
+adopted, and he has not reacted to it.**
+
+### ✅ Tap-to-move — VALIDATED BY PLAY
+
+> *"The tap to move is actually really good."*
+
+**The largest control risk in the design is closed by evidence rather than by
+argument.** The 2026-08-11 decision chose tapping the map over **a joystick** and
+**preset move-to-area buttons** on reasoning alone; this is the first time it has
+been played. **Cross-reference [15](15-heroes.md)**, which still carries the
+superseded *"you don't get to control your hero directly"* phrasing and is **not
+rebuilt here**, and **[01](01-battlefield-geometry.md)**, which owns the viewport
+the taps land on.
+
 ## Open questions after the 2026-08-11 dumps
 
-**This is the live list for this ticket.**
+**⚠ Bookkeeping: superseded as the live list by the play-test.** Original text
+kept verbatim; status markers added in place, nothing deleted. The live list is
+now "[Open questions after the play-test](#open-questions-after-the-play-test)"
+at the end of this file.
+
+~~**This is the live list for this ticket.**~~
 
 - **📤 What the jungle actually contains** — **commissioned as its own session**
   at his instruction. The brainstorm report exists and is **cited, not adopted**;
@@ -520,6 +692,11 @@ is no team composition or pick order to absorb a side advantage.
 - **⚠ Jungle symmetry** — **direction given** (not totally symmetrical, for
   variety), **tension unresolved** (repetition versus side advantage). **His to
   weigh.**
+  - **✅ DISSOLVED 2026-08-13 by a distinction** — **rotational symmetry stays
+    (fairness), mirror symmetry with a ruled axis goes (the NASCAR read)**, and
+    irregular internal geometry carries the variety. **His direction is
+    unchanged and satisfied.** **The distinction is a firstmate reading; his
+    reaction to the built result is not yet recorded.**
 - **⚠ Whether invading the opponent's jungle is possible at all** — his own
   conditional. If it is: **reduced gold, no items**, **time-boxed**, and **the
   measure is undecided** (five minutes / 3% / 50%, none chosen). **Purpose is
@@ -530,6 +707,10 @@ is no team composition or pick order to absorb a side advantage.
 - **How move versus attack-move is expressed through one tap.** **Prototype
   work**, his stated concern being that a locked-in wrong intent *"will feel
   really bad."*
+  - **✅🔧 HALF-ANSWERED 2026-08-13.** **The assignment is his: one tap is
+    attack-move, two taps is move only**, because *"panic is spammy"* — spam must
+    resolve to fleeing. **What remains open is the spam-to-single-tap problem in
+    his own words**, and it is **the sharpest input question in the design.**
 - **How trees, terrain manipulation and jungle geometry relate to each other** —
   **not asked.** The chasm is cut *"for now"*; **trees and terrain manipulation
   both stay live and must not be collapsed.**
@@ -542,3 +723,36 @@ is no team composition or pick order to absorb a side advantage.
 - **An explanation owed to him** of the carried *"lanes take cast spells, the
   jungle takes merged banks"* candidate — **an explanation, not a decision**, and
   possibly moot since it originates in shelved 09.
+
+## Open questions after the play-test
+
+**This is the live list for this ticket.** Everything above that is not marked
+answered, commissioned or dissolved is still live. New and revised:
+
+- **⚠ How a fast tap sequence resolves into intent.** *"how do you spam tap to
+  force your hero to move without attacking really quickly, but then somehow swap
+  on a dime to the last tap being taken as a single tap?"* **Tap-count semantics
+  make a rapid sequence ambiguous by construction** — either attack-move waits
+  out the double-tap window or a fast run of moves is chopped into alternating
+  intents. **The sharpest open input question in the design.** **The assignment
+  itself is settled** (one tap attack-move, two taps move). 15.
+- **🆕 What makes jungle traversal interesting.** *"the ability to traverse the
+  jungle needs to be made a much better experience"* — **routes, angles and
+  choices, not corridors with alcoves**, and **explicitly not sightline denial**,
+  which he ruled out himself because there is no fog and both heroes are always
+  visible. **A requirement with no accepted answer**, and it lands on the
+  **still-commissioned** what-the-jungle-contains question.
+- **📤 What the jungle actually contains** — **unchanged, still commissioned as
+  its own session.** The traversal requirement above **raises its price**: the
+  contents now have to sit in a route network rather than in alcoves.
+- **⚠ Whether invading the opponent's jungle is possible at all** — **unchanged
+  and untouched by the play-test.**
+- **🔧 Rung 4 — whether anything leaves the jungle for a lane** — **unchanged.**
+- **How trees, terrain manipulation and jungle geometry relate** — **still not
+  asked**, and **the semi-open amendment does not answer it.** Trees stay
+  destructible, terrain manipulation stays live, and **they must not be collapsed
+  into one system.**
+- **Whether the leash, the home field and the invasion penalty are all needed**
+  to bound early aggression — **unchanged, still not put to him.**
+- **The rung-2 readout's downstream decisions**, and **rung-3's tuning** —
+  **unchanged, deliberately not opened.**
