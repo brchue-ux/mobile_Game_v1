@@ -1,7 +1,11 @@
 # Heroes — stats, roles, and differentiation
 
 Type: grilling
-Status: open, substantially answered
+Status: open, substantially answered. **Rebuilt 2026-08-19/21 for two items
+only:** heroes gain XP and level from the same jungle-creep and lane-minion kills
+that pay gold, while what levels grant stays open; and the twice-revised
+hero-weakening rule is recorded below. Hero selection, roster, controls, and
+ability design are untouched by this pass.
 Blocked by: —
 
 ## Question
@@ -203,6 +207,51 @@ condition** — indirectly, through how hard he can push a lane. See 05 and
   power constraint (06, 07, 14).
 
 Interacts: 01, 05, 06, 11, 12, 14, 17, 18.
+
+## Rebuild — 2026-08-19 / 2026-08-21: experience and hero weakening
+
+### ✅ Heroes gain experience and level; the source mirrors gold `[provisional]`
+
+> *"Heroes will definitely level, creeps will provide experience as well as
+> minions."*
+
+Heroes gain XP from **jungle creeps and lane minions**, on the same kills that
+already pay gold. XP is a **second income stream riding existing kills**, not a
+separate resource node or activity to farm. This closes the existence-and-source
+half of `mg-hero-experience-and-levelling`.
+
+### ❓ What levelling grants remains fully open
+
+Whether a level grants **stat growth, ability unlocks, or something else** was
+not answered and is tracked separately as `mg-hero-level-grants`. Nothing in
+this rebuild chooses or narrows it.
+
+### ⚠ Hero weakening — the final rule after a same-session walkback
+
+The captain first stated an absolute rule: a hero could never be weakened by
+anything except enemy hero spells or abilities, and those effects are
+duration-based. **He then explicitly walked that absolute back in the next
+dump.** The final, operative rule is:
+
+- An **enemy hero's spells or abilities** may weaken a hero, duration-based.
+- An **item's own debuff effect** may weaken a hero.
+- **Terrain** may weaken a hero, including reducing **movement speed, damage, or
+  accuracy**.
+- **Gold and the merchant never weaken a hero directly.** The lane-targeted
+  merchant idea is already covered by the existing hurt-their-lane terrain
+  channels, not a hero debuff SKU; see 17.
+
+**This is a genuine walkback, not a reinterpretation.** His later words reopen
+items — *"if an item ends up having some sort of debuff, then sure, that can
+affect it"* — and reopen terrain beyond movement friction to real combat-stat
+debuffs.
+
+### ❌ HoN uphill miss is rejected; general terrain accuracy reduction survives
+
+The specific chance-to-miss-when-attacking-uphill mechanic is rejected as
+*"just extra stuff not necessary for a MOBA game."* That narrow rejection does
+**not** reverse the broader permission for terrain to reduce accuracy; the two
+are distinct and recorded that way.
 
 ## Source — verbatim, both dumps
 

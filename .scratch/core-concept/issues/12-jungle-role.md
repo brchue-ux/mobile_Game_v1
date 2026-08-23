@@ -24,6 +24,17 @@ axis goes; **tap-to-move is validated by play**; and **hero intent is one tap
 attack-move / two taps move**, leaving the **spam-to-single-tap problem** as the
 sharpest open input question. **The live open-questions list is now at the foot
 of this file.**
+**⚠ Rebuilt 2026-08-18 through 2026-08-21:** access is now a **per-lane,
+interpolated boundary field**; jungle side layouts lean **asymmetric but bounded**
+with fairness only through randomized side assignment across matches, still
+hedged *"I don't know"* / *"maybe not"*; there is **no jungle ownership**;
+invasion is confirmed possible through the same push gate; jungle contents never
+touch reinforcements; rung 4 is a **kill-then-capture HotS camp** whose units
+march to their lane on their own pace; the steal risk is closed by **pause, not
+transfer**; the ramp/fog idea is rejected; and merchant mercenaries are placed
+only in your currently-owned lane space. Encounter novelty is explicitly
+deferred and remains open. The dated rebuild below is authoritative for these
+points.
 Blocked by: 01
 
 ## Question
@@ -123,6 +134,9 @@ rebuilt. They are the standing context every 2026-08-11 answer below sits on.
   power-ups** from its monsters, **plus a smaller gold drop**. **Lanes pay more
   gold than the jungle.** Gold buys similar-but-not-identical power-ups at the
   main base.
+  - **⚠ Corrected 2026-08-19:** gold buys **no hero power**. It funds creep/unit
+    upgrades, buyback, and the neutral merchant; hero power comes from
+    jungle-item drops and cards/chosen skills. See 05 and 17.
 - **Jungle creeps and items are one of the three sources feeding the hero power
   threshold** (2026-08-09), which is the loss condition.
 - **⚠ Jungle reachability is a function of the front line** (2026-08-11, the
@@ -756,3 +770,140 @@ answered, commissioned or dissolved is still live. New and revised:
   to bound early aggression — **unchanged, still not put to him.**
 - **The rung-2 readout's downstream decisions**, and **rung-3's tuning** —
   **unchanged, deliberately not opened.**
+
+## Rebuild — 2026-08-18 through 2026-08-21: the boundary field, access, camps, and merchant
+
+### ✅ Jungle access is an interpolated field across all three lanes `[provisional]`
+
+Each lane has its own push line, and **all three lines extend into and shape the
+jungle boundary**. If all three lanes are pushed equally, the boundary is
+**linear**. When they are uneven, it **curves toward whichever lane is behind**,
+preserving safer farm near that lane for either side. This replaces the old
+question of which single lane governs a between-lanes chamber: the answer is a
+continuously recomputed field, not nearest-lane lookup.
+
+**Still open, exactly as hedged:** the curve is *"a sine wave or a wave, I don't
+know exactly which one."* No curve function, weighting rule, or balance number
+is chosen here.
+
+### 🔧 Jungle symmetry points toward bounded asymmetry, still hedged
+
+**This corrects rather than silently overwrites the 2026-08-13 firstmate reading
+that rotational symmetry settled fairness within each match.** The captain's
+later direction is genuine per-side asymmetry, bounded so it does not largely
+affect gameplay, with side assignment randomized so exposure tends toward
+fifty/fifty over a player's lifetime of matches. Fairness is therefore supplied
+**across matches**, not by making each individual map rotationally identical.
+
+His uncertainty is part of the decision record and remains verbatim: *"I don't
+know"* and *"maybe not."* This is a direction, **not a lock**.
+
+### ✅ No jungle ownership; push earns access uniformly
+
+Nothing in the jungle belongs to either player. There is no separately owned,
+neutral, or enemy jungle territory: **a hero may reach any jungle point only
+when the same push-based boundary field has opened access to it.** The merchant
+is contestable because this general rule applies there too, not because it sits
+inside a special neutral zone.
+
+### ✅ Jungle contents never touch reinforcements
+
+**No jungle content adds to, removes from, or otherwise changes the reinforcement
+pool.** Jungle creeps pay hero power/economy returns and create the push-versus-
+farm positioning choice; they are not a fourth reinforcement lever.
+
+### ✅ Jungle invasion exists, through the same boundary
+
+Invasion is possible. The hero must first push far enough for the interpolated
+boundary to admit it into that part of the opposing side's jungle. **Only the
+existence half closes here.** The previously recorded penalty remains unchanged:
+reduced gold, no items, time-boxed, intended as an anti-stomp device. **Its exact
+measure remains parked** — five minutes / 3% / 50% were examples and none was
+chosen.
+
+### ✅ Rung 4 is kill, then capture; captured units march independently
+
+The adopted HotS-style sequence is:
+
+1. Kill the camp.
+2. After the camp clears, a capture circle opens for a short window.
+3. Stand in it uncontested to claim the camp.
+4. Claimed units march toward their **corresponding lane** on their own pace,
+   **not synchronized to the minion wave**.
+
+Incidental alignment with a minion wave is fine either way and is not engineered.
+The 2026-08-21 *captured-camp lane push* question was raised and confirmed as
+**already fully covered by this rung-4 decision**, not a new rule.
+
+### ✅ The camp-steal risk closes as “pause, not transfer”
+
+The 2026-08-19 baseline left capture stealing open as potentially *"cheesy."*
+The captain later adopted the actual HotS contest rule: **either side must stand
+in the circle uncontested; if both heroes are present, the circle remains
+contested and neither side's progress completes.** The first hero to arrive does
+not silently win the camp.
+
+**Attribution boundary:** he confirmed this mechanic itself. He did **not**
+independently confirm the scout's two companion measures — shared notification
+of the kill/capture window, or treating the boundary field as sufficient risk
+containment. Those remain scout recommendations only. He separately accepted
+melee-versus-caster contest fairness as a known, intended hero-choice risk; it
+creates no new hold.
+
+### ❌ Vision-blocking height/ramp terrain is rejected
+
+The HoN-style rise that hides a camp until the hero climbs it was first floated,
+then downgraded to *"just a spitball idea"*, then rejected: *"Okay, skip the
+ramp idea."* **Reason:** it is the same hidden-information shape as the
+fog-for-camps idea he already floated and walked back, while this design has no
+fog anywhere because casting is selection and selectable targets must be visible.
+
+The narrower **HoN uphill-miss** rule is also rejected as *"just extra stuff not
+necessary for a MOBA game."* This does not prohibit terrain from reducing a
+hero's accuracy generally; that distinct rule lives in 15.
+
+### 🔧 Merchant siting leans toward a multi-lane confluence, not a lock
+
+The merchant is **not dead-center-mid**, where creeps crash. The captain accepted
+the confluence-spine framing: multiple lanes must be pushed to reach it, not only
+mid — *"that's what I want anyway"* — while preserving *"I guess."* This is a
+lean, not a locked site. **The existing W2 dead-zone and mid-region-lopsidedness
+holds remain open and untouched.**
+
+**Cross-reference to 17:** a mercenary unit bought at the merchant is
+**tap-to-place and restricted to your own currently-owned lane space under this
+boundary field.**
+
+### ❓ Jungle camp encounter novelty remains open and deferred
+
+The captain explicitly deferred this to a future session: *"I don't know. I'll
+have to revisit that another time."* Two candidates must not be re-proposed as
+answers:
+
+- **State-dependent/sequential composition changes** are rejected: if the change
+  is consistent, *"what's the point?"*; if random, he does not want it.
+- **Roaming camps** were already rejected as inconsistent and as interference
+  with player pathing.
+
+No replacement candidate is invented here. The static-camp baseline remains
+while encounter novelty stays open.
+
+## Open questions after the 2026-08-21 rebuild
+
+**This is the live addendum; every earlier open item not explicitly closed above
+remains live.** In particular:
+
+- The boundary's exact curve remains open: *"a sine wave or a wave, I don't know
+  exactly which one."*
+- Jungle camp encounter novelty beyond a static camp is deferred to a future
+  session.
+- Merchant siting is only a confluence-spine lean; **W2 dead zone** and
+  **mid-region lopsidedness** remain open.
+- All balance values remain parked, including rung-3 tuning, the capture-window
+  length, and the invasion-penalty measure.
+- The fast-tap intent problem, traversal-quality requirement, tree/terrain
+  relationship, and readout downstream decisions remain unchanged.
+
+**No longer open:** whether invasion exists; whether rung 4 is claimed; the
+camp-capture steal risk; and whether a merchant can sell anything beyond terrain
+effects (17 records the mercenary unit).
