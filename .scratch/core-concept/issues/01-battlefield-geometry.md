@@ -443,6 +443,25 @@ reacted to it; **that is the build's derivation, cited and not adopted.** The
 recorded **~75 / ~25 split (2026-07-26) is `[provisional]`** and is **the thing
 his "a tad small" bears on** — **no new split is decided here.**
 
+**✅ DECIDED 2026-08-22 — he gave the number.** *"15% bigger than its current
+built size"*, closing the one `/hone` prerequisite the captain needed to give
+a figure for (the readiness report's own naming of it). `[provisional]` like
+every number here — the principle above is what outlives it, and the previous
+paragraphs stand as the record of what preceded the number. Built as one
+scale factor over every content dimension in the bar — height 32%→36.8% of
+screen, floor 226→260px, ceiling 312→359px, the 44px card-target floor itself
+to 50.6px — with the bar's own 1px rules held fixed (a hairline is a Materials
+property, not a proportion, so 1.15px would have read as sloppy rather than
+bigger). **What it cost, stated rather than hidden:** the board absorbs the
+growth per the principle above, so the camera's zoom `s` drops **~7%**
+(1.148→1.067 at 390×844), which measurably thins the margin on the round-2
+dead-block gate — 2.4%→9.5–11.9% at 390×844, 1.2%→11.9% at 320×568, **both
+still inside the 14.3% threshold**. Two floor repairs were forced by the same
+squeeze (the jungle glyph key and the hand panel's status caption both held
+at their pre-scale size so the six camp rows and three card slots stay
+visible at 320 wide, per the card's own Floor). Full record:
+`prototypes/HONE-overgrowth.md`.
+
 ### ⚠ The bar must NOT be a numeric HUD — an existing constraint being ENFORCED
 
 > *"While the lower panel with all the information was good, there was way too
@@ -485,16 +504,17 @@ he asked for. **Not his, not adopted.**
   actually really good"*), and **intent is one tap attack-move / two taps move
   only** (2026-08-13, from [12](12-jungle-role.md)). **The viewport this ticket
   owns is now an input surface with two intents on it**, and **how a spam
-  sequence resolves is open** — see 12.
+  sequence resolves is open** — see 12. **✅ DECIDED 2026-08-22, see 12** — the
+  run-latch scheme is accepted as-is, for now.
 
 ### Open after the play-test
 
 - **The camera's actual zoom level.** *"Closer to the max zoom out of typical
   MOBAs, but maybe slightly more"*, with his own hedge — *"I'm not totally sure
   there"* — attached. **A direction, not a figure.**
-- **The command bar's proportion.** He asked for **bigger with no number.** The
-  **sizing principle is recorded**; **the split is not decided**, and the
-  recorded ~75/25 is `[provisional]`.
+- ~~**The command bar's proportion.**~~ **✅ DECIDED 2026-08-22** — see
+  "The command bar is LARGER" above: 15% bigger than the round-2 built size,
+  his own number.
 - **How the bar carries cost and worth without numbers**, especially for the
   **jungle pre-commitment readout**, which is numeric by construction and is
   **his own request.**

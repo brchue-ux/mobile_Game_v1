@@ -154,11 +154,12 @@ cd .scratch/core-concept/prototypes && python3 -m http.server 8931
 a phone over LAN or Tailscale — it is a touch game and does not read on desktop.
 
 The current one is the **whole-as-envisioned** build, **corrected 2026-08-13**
-against his play-test. Read that directory's `README.md` first — it lists what to
-react to and what is deliberately crude, and it points at the commitment card,
-the delegated centre-screen decision, and the finish-gate findings that sit
-beside it. `/hone` is the next pass on it and was deliberately held until the
-corrections landed: *"I don't want to hone an incorrect verve."*
+against his play-test and **honed 2026-08-22**. Read that directory's
+`README.md` first — it lists what to react to and what is deliberately crude,
+and it points at the commitment card, the delegated centre-screen decision,
+the finish-gate findings, and the hone pass's own findings
+(`HONE-overgrowth.md`) that sit beside it. Real-device frame measurement is
+still not met — see that file's own accounting.
 
 ## Hard-won gotchas
 

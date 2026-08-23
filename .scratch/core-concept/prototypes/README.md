@@ -96,6 +96,21 @@ the finish gate from 9 dead blocks to 2 on its own.
 deleting the second territorial system is what he asked for and the card's
 original wording ruled it out.
 
+### `/hone` pass — 2026-08-22
+
+Run once both of `/hone`'s own named prerequisites had a captain answer: the
+**tap-sequence disambiguation** (the run-latch scheme above, cited-not-adopted
+until now) is **accepted as-is**, and the **command bar is 15% bigger** than
+its round-2 built size — his own number, closing the one prerequisite that
+needed one. Full record, including what the 15%-bigger bar cost (camera zoom
+down 7%, dead-block margin thinner but still passing) and the two changes the
+pass actually made — button press states (nothing under the finger answered
+touch before this) and a brighter instant on the scar the moment ground
+changes hands (the signature, pushed further, not a second one) — is in
+[`HONE-overgrowth.md`](HONE-overgrowth.md). **Real-device frame measurement is
+still not met** — CPU-throttling stands in as a labelled approximation, not a
+phone.
+
 Design decisions and the reasoning behind them:
 
 - [`COMMITMENT-overgrowth.md`](COMMITMENT-overgrowth.md) — the commitment card,
@@ -104,6 +119,9 @@ Design decisions and the reasoning behind them:
   and its reason, as his instruction requires.
 - [`FINDINGS-overgrowth.md`](FINDINGS-overgrowth.md) — what the finish gate
   caught, measured at two phone sizes, and the A-versus-B comparison.
+- [`HONE-overgrowth.md`](HONE-overgrowth.md) — the `/hone` pass: the two build
+  decisions it was run against, what got measurably better, and what is
+  named as still open.
 
 **React to:**
 
