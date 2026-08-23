@@ -25,6 +25,14 @@
 <style>
   :root{
     --bar:#14120e; --bar-2:#1c1a15; --rule:#3a362c; --ink:#e6e0d2; --ink-dim:#8e8875;
+    /* BAR SCALE, captain decision 2026-08-22: "15% bigger than its current built
+       size" -- the one open /hone prerequisite he gave a number for. One factor,
+       applied to every content dimension below via calc(), so the 15% is a single
+       auditable constant rather than thirty hand-rounded pixel guesses. Border
+       widths are NOT scaled -- the Materials line specifies "1px rules" as a
+       fixed property of the bar's strict order, not a proportional one; a 1.15px
+       hairline anti-aliases into mush and reads as sloppy, not bigger. */
+    --bx: 1.15;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;height:100%;overflow:hidden;background:#000;
@@ -47,6 +55,31 @@
   #recentre{position:absolute;right:6px;top:33px;font-size:10px;color:#cfc7b4;background:rgba(7,13,9,.8);
     border:1px solid #2c3a29;padding:3px 6px;letter-spacing:.04em;font-family:inherit;border-radius:0}
 
+  /* ---- press states: nothing touchable in this file had one before this
+     pass. -webkit-tap-highlight-color is suppressed globally above, so every
+     button here gave ZERO feedback between finger-down and lift -- only the
+     RESULT arrived (a selection swap, a note), a beat late and only on
+     release. HONE L3: the press itself now lands in the same frame, and it
+     borrows the board's own vocabulary for "a tap registered" (S.tapAck's
+     ivory #efe6cd) rather than inventing a new one, so a press anywhere in
+     the bar reads as the same acknowledgement the board already gives a tap.
+     Displacement is straight down, no radius, no glow -- F4/F6 unchanged.
+     Driven by a delegated .pressed class (below), not :active -- :active
+     needs a trusted UA press and cannot be forced or verified from a
+     dispatched pointer event, and this prototype already prefers explicit
+     state over relying on native gesture recognition (see the canvas's own
+     pointerdown/up handling). Release eases (declared on the rest rule,
+     since .pressed itself sets transition:none so the press lands
+     instantly); press does not. */
+  .card, #tuneBtn, #recentre, #cSkip, .trow button, #closeTune {
+    transition: transform 130ms ease-out, background-color 130ms ease-out, border-color 130ms ease-out, color 130ms ease-out;
+  }
+  .card.pressed{transition:none;transform:translateY(calc(1.5px * var(--bx)));background:#4e421f;border-color:#efe6cd;color:#fff}
+  .card.empty.pressed{background:#2a2519;border-color:#7d7669;color:#c9c3b2}
+  #tuneBtn.pressed{transition:none;color:#fff}
+  #recentre.pressed,#cSkip.pressed{transition:none;transform:translateY(1.5px);background:#20301c;border-color:#efe6cd;color:#fff}
+  .trow button.pressed,#closeTune.pressed{transition:none;transform:translateY(1.5px);background:#4a4433;border-color:#efe6cd;color:#fff}
+
   /* ---- command bar: strict order, nothing irregular ----------------
      SIZED FROM ITS CONTENTS, not from a fraction. The floor is what the bar
      actually needs: three thumb-sized card targets (3 x 44 + gaps), enough
@@ -55,50 +88,54 @@
      comes to ~226px of content under a ~30px state strip. The board takes the
      remainder and absorbs the loss by panning; the bar cannot pan, and every
      target in it sits where a thumb has to reach. */
-  #bar{flex:0 0 auto;height:32%;min-height:226px;max-height:312px;background:var(--bar);border-top:1px solid var(--rule);
+  #bar{flex:0 0 auto;height:calc(32% * var(--bx));min-height:calc(226px * var(--bx));max-height:calc(312px * var(--bx));background:var(--bar);border-top:1px solid var(--rule);
     display:grid;grid-template-columns:29fr 33fr 38fr;grid-template-rows:auto 1fr;overflow:hidden;position:relative}
   #strip{grid-column:1/4;display:flex;border-bottom:1px solid var(--rule);background:var(--bar-2)}
-  #strip>div{flex:1 1 0;min-width:0;padding:3px 5px 4px;border-right:1px solid var(--rule);
-    font-size:8px;letter-spacing:.07em;color:var(--ink-dim);white-space:nowrap;overflow:hidden}
+  #strip>div{flex:1 1 0;min-width:0;padding:calc(3px * var(--bx)) calc(5px * var(--bx)) calc(4px * var(--bx));border-right:1px solid var(--rule);
+    font-size:calc(8px * var(--bx));letter-spacing:.07em;color:var(--ink-dim);white-space:nowrap;overflow:hidden}
   #strip>div:last-child{border-right:0}
-  #strip u{display:block;text-decoration:none;font-size:7.5px;letter-spacing:.09em;color:#7d7767;margin-bottom:2px}
-  #tuneBtn{background:none;border:0;color:#cbbd8d;font:inherit;font-size:12px;padding:0;
+  #strip u{display:block;overflow:hidden;text-overflow:ellipsis;text-decoration:none;font-size:calc(7.5px * var(--bx));letter-spacing:.09em;color:#7d7767;margin-bottom:calc(2px * var(--bx))}
+  #tuneBtn{background:none;border:0;color:#cbbd8d;font:inherit;font-size:calc(12px * var(--bx));padding:0;
     text-decoration:underline;border-radius:0}
 
   /* ---- glanceable gauges: length, count, fill and position. No moving
      numbers. The bar is the decision substrate, not a HUD. ---- */
-  .gtrk{position:relative;height:5px;background:#221f18;border:1px solid #302c22;margin-bottom:2px;overflow:hidden}
-  .gtrk.thin{height:3px}
+  .gtrk{position:relative;height:calc(5px * var(--bx));background:#221f18;border:1px solid #302c22;margin-bottom:calc(2px * var(--bx));overflow:hidden}
+  .gtrk.thin{height:calc(3px * var(--bx))}
   .gfill{position:absolute;left:0;top:0;bottom:0;width:0}
   .gfill.me{background:#d9cfba} .gfill.them{background:#8f9caa}
   .gfill.hp{background:#c2a86a} .gfill.mp{background:#5f7c93}
   .gfill.warn{background:#9c5a34}
-  .pips{display:flex;gap:1.5px;flex-wrap:wrap;height:6px;overflow:hidden}
-  .pips b{display:block;width:4px;height:4px;background:#c9b071;font-size:0}
+  .pips{display:flex;gap:calc(1.5px * var(--bx));flex-wrap:wrap;height:calc(6px * var(--bx));overflow:hidden}
+  .pips b{display:block;width:calc(4px * var(--bx));height:calc(4px * var(--bx));background:#c9b071;font-size:0}
   .pips b.off{background:#332f26}
   .pips.item b{background:#8ea277} .pips.item b.off{background:#2b2a20}
 
   .panel{min-width:0;overflow:hidden;border-right:1px solid var(--rule);display:flex;flex-direction:column}
   .panel:last-child{border-right:0}
-  .ptitle{font-size:7.5px;letter-spacing:.09em;color:#7d7767;padding:3px 5px 2px;border-bottom:1px solid #262319;
-    white-space:nowrap;overflow:hidden}
-  .pbody{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:3px 4px}
+  .ptitle{font-size:calc(7.5px * var(--bx));letter-spacing:.09em;color:#7d7767;padding:calc(3px * var(--bx)) calc(5px * var(--bx)) calc(2px * var(--bx));border-bottom:1px solid #262319;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pbody{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:calc(3px * var(--bx)) calc(4px * var(--bx))}
 
   /* thumb-sized card targets: 44px is the floor and the bar is sized around it */
-  .card{display:block;width:100%;min-height:44px;text-align:left;background:#1e1b14;border:1px solid var(--rule);
-    color:#ded7c4;padding:4px 5px;margin-bottom:3px;font:inherit;font-size:9px;line-height:1.2;border-radius:0}
-  .card .cn{display:flex;justify-content:space-between;gap:3px;font-size:11px;color:#efe8d6;
+  .card{display:block;width:100%;min-height:calc(44px * var(--bx));text-align:left;background:#1e1b14;border:1px solid var(--rule);
+    color:#ded7c4;padding:calc(4px * var(--bx)) calc(5px * var(--bx));margin-bottom:calc(3px * var(--bx));font:inherit;font-size:calc(9px * var(--bx));line-height:1.2;border-radius:0}
+  .card .cn{display:flex;justify-content:space-between;gap:calc(3px * var(--bx));font-size:calc(11px * var(--bx));color:#efe8d6;
     white-space:nowrap;overflow:hidden}
-  .card .cn i{font-style:normal;color:#9b957f;font-size:8px;flex:0 0 auto}
-  .card .cd{display:block;font-size:8.5px;color:#9b957f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card .cn i{font-style:normal;color:#9b957f;font-size:calc(8px * var(--bx));flex:0 0 auto}
+  .card .cd{display:block;font-size:calc(8.5px * var(--bx));color:#9b957f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .card.sel{background:#3d3520;border-color:#a8945c;color:#fff}
   .card.mod{background:#2c2718;border-color:#7d7043}
   .card.empty{background:#16140f;border-style:dotted;border-color:#332f26;color:#5d584c}
   .card.empty .cn span,.card.empty .cd{color:#5d584c}
+  /* FLOOR REPAIR, not scaled by --bx: same class of squeeze as .pfoot below --
+     this status caption wrapping onto more lines at 320 wide was pushing the
+     hand panel's scrollHeight past its box, and the three card slots (the
+     actual decision content) are what must stay visible, not this caption. */
   .cnote{font-size:7.5px;color:#6f6a5b;letter-spacing:.04em;margin-top:2px;line-height:1.3}
   /* the accrual track: the next card arrives as a DISTANCE closing, and the
      combine cost is the extra distance hatched onto the end of it */
-  #accrual{position:relative;height:6px;background:#221f18;border:1px solid #302c22;margin:1px 0 2px;overflow:hidden}
+  #accrual{position:relative;height:calc(6px * var(--bx));background:#221f18;border:1px solid #302c22;margin:calc(1px * var(--bx)) 0 calc(2px * var(--bx));overflow:hidden}
   #accFill{position:absolute;left:0;top:0;bottom:0;width:0;background:#8a7a48}
   #accCost{position:absolute;top:0;bottom:0;right:0;width:0;
     background:repeating-linear-gradient(90deg,#5a4f2e 0 2px,#221f18 2px 4px)}
@@ -108,45 +145,52 @@
 
   /* ---- the camp readout: same information, carried by length, count and fill.
      Nothing in a row is a figure. ---- */
-  .camp{display:grid;grid-template-columns:15px 1fr 1fr;gap:4px;align-items:center;
-    height:18px;padding:0 1px;border-bottom:1px solid #201e16}
-  .camp .ctier{display:flex;gap:1.5px}
-  .camp .ctier b{display:block;width:3.5px;height:8px;background:#c9b071;font-size:0}
+  .camp{display:grid;grid-template-columns:calc(15px * var(--bx)) 1fr 1fr;gap:calc(4px * var(--bx));align-items:center;
+    height:calc(18px * var(--bx));padding:0 calc(1px * var(--bx));border-bottom:1px solid #201e16}
+  .camp .ctier{display:flex;gap:calc(1.5px * var(--bx))}
+  .camp .ctier b{display:block;width:calc(3.5px * var(--bx));height:calc(8px * var(--bx));background:#c9b071;font-size:0}
   .camp .ctier b.off{background:#2e2a20}
   .camp .cz{min-width:0}
   .camp.gone{opacity:.42}
   .camp.sel{background:#2a2618}
   .camp.sel .ctier b{background:#f2ead6}
-  .chdr{display:grid;grid-template-columns:15px 1fr 1fr;gap:4px;font-size:6.5px;letter-spacing:.08em;
-    color:#665f52;padding-bottom:2px;white-space:nowrap}
+  .chdr{display:grid;grid-template-columns:calc(15px * var(--bx)) 1fr 1fr;gap:calc(4px * var(--bx));font-size:calc(6.5px * var(--bx));letter-spacing:.08em;
+    color:#665f52;padding-bottom:calc(2px * var(--bx));white-space:nowrap}
   /* the key to the glyphs is what makes them learnable, so it is pinned as a
      footer and never scrolls away — the last gate caught this exact class of
      failure at 320 wide */
+  /* FLOOR REPAIR, not scaled by --bx: at 15% bigger this footnote's own text
+     wraps enough extra lines inside its unchanged column width that it was
+     stealing room from the six camp rows, which the card's Floor requires
+     visible without scrolling at every size. This is the densest, least
+     load-bearing text in the panel -- a footnote, not decision content -- so
+     it is what gives, not the rows above it. Measured: restores rBody's
+     6-row budget at 320x568. */
   .pfoot{flex:0 0 auto;border-top:1px solid #262319;padding:2px 4px 2px;
     font-size:6.8px;color:#5f5a4d;letter-spacing:.02em;line-height:1.25}
   .pfoot em{font-style:normal;color:#9c5a34} .pfoot s{text-decoration:none;color:#5f7c93}
   .pfoot span{display:block;color:#4e4a3f;margin-top:1px;font-size:6.2px;line-height:1.25}
-  #evtBox{font-size:10px;color:#ded7c4;line-height:1.4}
-  #evtBox u{display:block;text-decoration:none;font-size:8px;letter-spacing:.1em;color:#8f8874;margin-top:4px;
+  #evtBox{font-size:calc(10px * var(--bx));color:#ded7c4;line-height:1.4}
+  #evtBox u{display:block;text-decoration:none;font-size:calc(8px * var(--bx));letter-spacing:.1em;color:#8f8874;margin-top:calc(4px * var(--bx));
     white-space:normal}
   /* the event's lane is a POSITION in three cells, not a lane number */
-  .lanes3{display:flex;gap:3px;margin-top:3px}
-  .lanes3 b{flex:1 1 0;height:9px;background:#221f18;border:1px solid #302c22;font-size:0}
+  .lanes3{display:flex;gap:calc(3px * var(--bx));margin-top:calc(3px * var(--bx))}
+  .lanes3 b{flex:1 1 0;height:calc(9px * var(--bx));background:#221f18;border:1px solid #302c22;font-size:0}
   .lanes3 b.me{background:#d9cfba;border-color:#d9cfba}
   .lanes3 b.them{background:#8f9caa;border-color:#8f9caa}
   .lanes3 b.both{background:#9c5a34;border-color:#9c5a34}
 
-  #tuner{position:absolute;inset:0;background:#0d0c08;border:1px solid #4a4433;padding:9px;
+  #tuner{position:absolute;inset:0;background:#0d0c08;border:1px solid #4a4433;padding:calc(9px * var(--bx));
     overflow:auto;display:none;z-index:5}
   #tuner.on{display:block}
-  #tuner h3{margin:0 0 5px;font-size:9px;letter-spacing:.13em;color:#9a937c;font-weight:400}
-  .trow{display:flex;align-items:center;gap:5px;padding:2px 0;border-bottom:1px solid #201e16;font-size:11px}
+  #tuner h3{margin:0 0 calc(5px * var(--bx));font-size:calc(9px * var(--bx));letter-spacing:.13em;color:#9a937c;font-weight:400}
+  .trow{display:flex;align-items:center;gap:calc(5px * var(--bx));padding:calc(2px * var(--bx)) 0;border-bottom:1px solid #201e16;font-size:calc(11px * var(--bx))}
   .trow span{flex:1 1 auto;min-width:0;color:#b8b19a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .trow b{width:58px;text-align:right;color:#efe8d6;font-weight:400}
-  .trow button,#closeTune{width:26px;height:22px;background:#211e16;border:1px solid #4a4433;
+  .trow b{width:calc(58px * var(--bx));text-align:right;color:#efe8d6;font-weight:400}
+  .trow button,#closeTune{width:calc(26px * var(--bx));height:calc(22px * var(--bx));background:#211e16;border:1px solid #4a4433;
     color:#ded7c4;font:inherit;border-radius:0;padding:0}
-  #closeTune{width:auto;padding:2px 9px;margin-top:6px}
-  #perf{font-size:9px;color:#7d7767;margin-top:5px}
+  #closeTune{width:auto;padding:calc(2px * var(--bx)) calc(9px * var(--bx));margin-top:calc(6px * var(--bx))}
+  #perf{font-size:calc(9px * var(--bx));color:#7d7767;margin-top:calc(5px * var(--bx))}
 </style>
 </head>
 <body>
@@ -920,10 +964,32 @@ function drawTerrainSlice() {
       }
 
       /* scar: ground that changed hands, fading over SCAR_S */
-      var sk = scar[idx] * cw;
+      var scv = scar[idx];
+      var sk = scv * cw;
       if (sk > 0.01) {
         tctx.fillStyle = "rgba(232,220,192," + (sk * 0.44).toFixed(3) + ")";
         tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
+        /* HONE -- the signature pushed further, not a second one. The wash
+           above is what a scar settles into; the instant it was BORN had no
+           reflex of its own, so "the hero, pressed against nothing visible a
+           second ago, is free to walk into it" landed exactly as quiet as
+           the 18s of history it leaves behind. scar[] is exactly 1.0 at
+           creation and decays LINEARLY over SCAR_S, so thresholding it
+           isolates a window from its own existing value -- no new array, no
+           new timer, updateClaim() is untouched. The window is 0.9s, not the
+           card's own ~0.4s claim-lag figure, because this function only
+           repaints 1/REBUILD_SLICES of the board per frame -- a full sweep
+           costs ~470ms at 60fps and more under load (measured elsewhere in
+           this pass) -- and a flash shorter than that would go unpainted for
+           a cell whose slice had just had its turn. 0.9s outlives one full
+           sweep with margin at any frame rate this file has been measured
+           at. Same colour, same mechanism, additive on top of the wash. */
+        var fk = (scv - 0.95) / 0.05;
+        if (fk > 0) {
+          fk = fk > 1 ? 1 : fk; fk *= fk;
+          tctx.fillStyle = "rgba(232,220,192," + (fk * cw * 0.9).toFixed(3) + ")";
+          tctx.fillRect(px, py, cs + 0.6, cs + 0.6);
+        }
       }
 
       /* THE WILD — two independent facts, combined:
@@ -1864,6 +1930,20 @@ cv.addEventListener("pointerup", function (e) {
   tap(p.x, p.y);
 });
 cv.addEventListener("pointercancel", function () { down = null; });
+
+/* HONE L3 -- NOTHING DEAD UNDER THE FINGER. Delegated once on #app rather
+   than wired per button, so a card slot rebuilt by buildHand() or a tuner
+   row rebuilt by buildTuner() never has to remember to wire its own press
+   state. Sets/clears .pressed synchronously in the handler, same frame as
+   the pointer event -- no timer, no debounce. */
+var appEl = document.getElementById("app");
+function pressOn(e) { var b = e.target.closest && e.target.closest("button"); if (b) b.classList.add("pressed"); }
+function pressOff(e) { var b = e.target.closest && e.target.closest("button"); if (b) b.classList.remove("pressed"); }
+appEl.addEventListener("pointerdown", pressOn);
+appEl.addEventListener("pointerup", pressOff);
+appEl.addEventListener("pointercancel", pressOff);
+appEl.addEventListener("pointerleave", pressOff, true);
+
 /* momentum, applied on the frame clock rather than the event clock */
 function stepPan(dt) {
   if (down && panned) return;
@@ -2138,14 +2218,20 @@ function updateBar() {
     lastHandKey = key;
     for (var si = 0; si < 3; si++) {
       var el = slotEls[si], id = S.hand[si], cd = null, ci;
+      /* HONE L3: className used to be overwritten wholesale here, which wiped
+         .pressed out from under a finger still on the button whenever a
+         redraw landed mid-press (a card arriving, a selection elsewhere).
+         classList.toggle touches only the tokens this function owns. */
       for (ci = 0; ci < CARDS.length; ci++) if (CARDS[ci].id === id) cd = CARDS[ci];
       if (!cd) {
-        el.className = "card empty";
+        el.classList.add("empty"); el.classList.remove("sel", "mod");
         el.querySelector(".nm").textContent = "—";
         el.querySelector("i").textContent = "";
         el.querySelector(".cd").textContent = "empty slot";
       } else {
-        el.className = "card" + (S.sel === id ? " sel" : "") + (S.mod === id ? " mod" : "");
+        el.classList.remove("empty");
+        el.classList.toggle("sel", S.sel === id);
+        el.classList.toggle("mod", S.mod === id);
         el.querySelector(".nm").textContent = cd.n;
         el.querySelector("i").textContent = cd.g;
         el.querySelector(".cd").textContent = cd.d;

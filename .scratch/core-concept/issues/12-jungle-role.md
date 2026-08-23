@@ -662,7 +662,7 @@ reasoning above is what chose the direction.
 **This answers the *assignment* half of the move-versus-attack-move problem
 recorded on 2026-08-11. It does not answer the half below.**
 
-#### ⚠ OPEN, and it is the sharpest input question in the design
+#### ✅ DECIDED 2026-08-22 — was the sharpest open input question in the design
 
 **His words:**
 
@@ -674,10 +674,23 @@ recorded on 2026-08-11. It does not answer the half below.**
 ambiguous by construction.** Every single tap must wait out the double-tap window
 to find out whether a second tap is coming, so **either attack-move is delayed by
 that window, or a fast run of intended moves is chopped into alternating
-intents.** **Unresolved.** The prototype carries an implementation and its cost is
-documented in
+intents.** The prototype carries an implementation and its cost is documented in
 [`FINDINGS-overgrowth.md`](../prototypes/FINDINGS-overgrowth.md) — **cited, not
 adopted, and he has not reacted to it.**
+
+**✅ DECIDED 2026-08-22 — the cited implementation is now the accepted answer,
+for now.** *"For now"* is his own qualifier — not a permanent lock, and a
+reversal would be recorded as one rather than silently dropped, per this
+map's own append-only rule. Decision record:
+`mg-prototype-redesign-readiness-decision-tap-sequence-disambiguation`. The
+run-latch scheme, unchanged from `FINDINGS-overgrowth.md` §5: an aimed tap
+fires attack-move immediately; a second tap within 0.36s upgrades to travel
+and latches travel-intent for 0.5s, refreshed by every further tap; any
+aimed tap (a camp, a tree) breaks the latch instantly; the known, stated cost
+is no attack-move onto empty ground within 0.5s of a flee-tap. The
+2026-08-22 `/hone` pass built against it without touching it and re-verified
+the whole table by driving `tap()` directly — see
+[`HONE-overgrowth.md`](../prototypes/HONE-overgrowth.md).
 
 ### ✅ Tap-to-move — VALIDATED BY PLAY
 
@@ -743,13 +756,9 @@ at the end of this file.
 **This is the live list for this ticket.** Everything above that is not marked
 answered, commissioned or dissolved is still live. New and revised:
 
-- **⚠ How a fast tap sequence resolves into intent.** *"how do you spam tap to
-  force your hero to move without attacking really quickly, but then somehow swap
-  on a dime to the last tap being taken as a single tap?"* **Tap-count semantics
-  make a rapid sequence ambiguous by construction** — either attack-move waits
-  out the double-tap window or a fast run of moves is chopped into alternating
-  intents. **The sharpest open input question in the design.** **The assignment
-  itself is settled** (one tap attack-move, two taps move). 15.
+- ~~**How a fast tap sequence resolves into intent.**~~ **✅ DECIDED
+  2026-08-22** — see "DECIDED 2026-08-22" above: the run-latch scheme is
+  accepted as-is, for now. 15.
 - **🆕 What makes jungle traversal interesting.** *"the ability to traverse the
   jungle needs to be made a much better experience"* — **routes, angles and
   choices, not corridors with alcoves**, and **explicitly not sightline denial**,

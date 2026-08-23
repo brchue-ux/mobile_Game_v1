@@ -417,6 +417,10 @@ rather than performing certainty. Ticket 08 promotes or revises.
   with a little more panning. **⚠ No proportion is recorded as his** — the
   corrected build derived roughly a third of screen height from its contents and
   **he has not reacted to it**; the recorded ~75/25 split stays `[provisional]`.
+  **✅ DECIDED 2026-08-22 — he gave the number: 15% bigger** than the round-2
+  built size, closing the one `/hone` prerequisite that needed a figure. Full
+  record, including what the growth cost the camera's zoom and the dead-block
+  gate's margin: "Not yet specified" and `prototypes/HONE-overgrowth.md`.
   **Separately:** *"there was way too much information and it was all about
   numbers and moving numbers. It needs to be a lot more intuitive."* **Recorded
   as the EXISTING constraint being enforced, not as a new preference** — the
@@ -501,7 +505,9 @@ rather than performing certainty. Ticket 08 promotes or revises.
   constraint *"maybe we don't need another verb"* — **both intents on one
   gesture, no extra control, no screen space.** **This answers the *assignment*
   half of 12's move-versus-attack-move problem and not the other half** — see
-  "Not yet specified". **Separately, tap-to-move is VALIDATED BY PLAY** — *"the
+  "Not yet specified". **✅ 2026-08-22: the other half is decided too** — the
+  run-latch scheme is accepted as-is, for now; full record under "Not yet
+  specified". **Separately, tap-to-move is VALIDATED BY PLAY** — *"the
   tap to move is actually really good"* — which closes the
   joystick-versus-minimap-versus-buttons question **by evidence rather than by
   argument.** See [12](issues/12-jungle-role.md), reaches
@@ -1281,6 +1287,16 @@ method; treat them as "this informs that," not as a build order.
   delayed or a fast run of moves is chopped into alternating intents.**
   **Unresolved.** The prototype carries an implementation and its cost;
   **cited, not adopted, and he has not reacted to it.** 12, 15.
+  - **✅ DECIDED 2026-08-22.** The run-latch scheme above is **accepted as-is,
+    for now** — "for now" is his own qualifier, not a lock, and the append-only
+    rule still applies if it is later reversed. It moves from cited-not-adopted
+    to the accepted current answer: an aimed tap fires attack-move immediately;
+    a second tap within 0.36s upgrades to travel and latches travel-intent for
+    0.5s; any aimed tap breaks the latch instantly; the known, stated cost is
+    no attack-move onto empty ground within 0.5s of a flee-tap. Decision record:
+    `mg-prototype-redesign-readiness-decision-tap-sequence-disambiguation`. The
+    `/hone` pass of the same date built against this unchanged and re-verified
+    it by driving the sequence (`prototypes/HONE-overgrowth.md`). 12, 15.
 - **🆕 The camera's actual zoom level, and what texture costs on a phone.**
   `[open]` 2026-08-13. The **direction** is his — *"closer to the max zoom out of
   typical MOBAs, but maybe slightly more"* — **with his hedge attached**, and
@@ -1294,6 +1310,20 @@ method; treat them as "this informs that," not as a build order.
   ~75/25 stays `[provisional]`. Its companion: **how the bar carries cost and
   worth without numbers**, hardest for **the jungle pre-commitment readout**,
   which is numeric by construction and **is his own request.** 01, touches 12.
+  - **✅ DECIDED 2026-08-22 — he gave the number: 15% bigger than the build's
+    round-2 size.** `[provisional]` like every other number here. Built as a
+    single scale factor over every content dimension in the bar (32%→36.8% of
+    screen height, floor 226→260px, ceiling 312→359px, card target 44→50.6px),
+    with the bar's own 1px rules held fixed rather than scaled — a hairline is
+    a material property, not a proportion. **Cost, stated rather than hidden:**
+    the board absorbs the growth per the sizing principle above, so the camera
+    zoom drops ~7% (1.148→1.067 at 390×844), which measurably thins the margin
+    on the round-2 dead-block gate (2.4%→9.5–11.9% at 390×844, 1.2%→11.9% at
+    320×568) — both still pass the 14.3% threshold. Full record, including two
+    floor repairs the resize forced (the jungle glyph key and the hand panel's
+    status caption both held at their old size so the six camp rows and three
+    card slots stay visible at 320 wide): `prototypes/HONE-overgrowth.md`. 01,
+    touches 12.
 - **🆕 What makes jungle traversal interesting.** `[open]` 2026-08-13 — *"the
   ability to traverse the jungle needs to be made a much better experience"*:
   **routes, angles and choices about which way to go, not corridors with
