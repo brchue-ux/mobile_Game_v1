@@ -1112,12 +1112,24 @@ kills pays.
 - **Gold buys similar — not identical — power-ups at the main base**, which is
   **the same place units are upgraded.**
 
+> **⚠ CORRECTED 2026-08-19, original line kept as written.** *"Gold won't buy
+> the hero any power."* Gold funds **creep/unit upgrades only** — weapons,
+> armor, and unit-type changes such as a mage variant — plus the separately
+> confirmed buyback and neutral-merchant sinks recorded in 17. Hero power comes
+> only from jungle-item drops and cards/chosen skills. This is a reversal of the
+> line above, not a reinterpretation of "similar power-ups."
+
 **His own statement of the choice this creates:**
 
 > *"Are you going to push for map control and earn gold via that and then use
 > that gold to increase your hero's power, or are you going to farm the jungle to
 > get the unique items that are in the from the monsters there and then supplement
 > with the gold that they drop... or a balance of the two."*
+
+> **⚠ The gold-to-hero-power clause in this historical quote is superseded by
+> the 2026-08-19 correction above.** The push-versus-farm axis and its two
+> currencies survive; gold now converts into **creep/unit strength, buyback, and
+> merchant effects**, never hero power.
 
 **Why this is the central axis and not just an economy detail.** The 2026-08-09
 power race had no stated cost on the farming side and no stated payout on the
@@ -1138,9 +1150,11 @@ flavour:
   **hero choice**, **farm choice** and **cards**, so the push-or-farm decision is
   **re-made each match rather than solved once.**
 
-Note this **wires the main base into the axis** as the place gold converts into
+~~Note this **wires the main base into the axis** as the place gold converts into
 power, which connects this ticket to the upgrade-tree work rather than leaving
-that work adjacent.
+that work adjacent.~~ **⚠ Superseded 2026-08-19:** the base may still host
+creep/unit upgrades, but it is not a gold-to-hero-power conversion site. The
+neutral merchant is the other confirmed gold-conversion site; see 17.
 
 #### What map control is, and what it is worth
 
@@ -1459,6 +1473,9 @@ him. **Recorded as commissioned. No event types are proposed here.**
 - **[17](17-gold-and-items.md) — gold and items.** Jungle farming is named as
   **gold-and-items accumulation feeding hero power**, and **gold buys power-ups at
   the main base**. That is where hero power is bought. 17 is **not rebuilt.**
+  - **⚠ CORRECTED 2026-08-19:** the historical reach above is superseded. Gold
+    buys **no hero power**; it funds creep/unit upgrades, buyback, and merchant
+    stock. Jungle items and cards/chosen skills are the hero-power channels.
 - **[10](10-information-visibility.md) — information.** **Map control's value is
   framed as denying the opponent information**, which gives 10's board-open /
   hand-hidden split a **strategic** consequence it did not have. 10 is **not
@@ -2531,3 +2548,38 @@ answered, delegated or moot above is still live. New and revised:
 - **The power threshold, its tuning, the "exodia moment", and how hero power
   converts into a win** — **unchanged, and still parked by his own scope
   instruction.**
+
+## Dump — 2026-08-19: map control without fog, and the gold correction
+
+### ✅ Map control is worth safe farm and denied farm `[provisional]`
+
+**This sharpens and replaces the prior economic-denial wording rather than
+returning to information denial.** His definition:
+
+> *"Map control is just the ability to farm safely and deny farm."*
+
+The mechanical outcome is two-sided: **hold ground so your hero can farm safely,
+and deny the opponent safe farm.** It survives no-fog cleanly because it does
+not depend on hiding anything. The earlier information-denial framing was for a
+fog-of-war game this design never had; he explicitly wants both heroes' actions
+and positions visible so the match reads as *"a strategic real-time puzzle"*
+without the turtling he associates with fog.
+
+**What is not claimed here:** the 2026-08-18 jungle-boundary field is an obvious
+candidate mechanism for both halves, but the captain did not explicitly make
+that connection in this dump. It remains a flagged connection, not an additional
+decision.
+
+### ⚠ Gold buying hero power is REVERSED and corrected
+
+The 2026-08-11 line says gold buys similar power-ups at the main base. The
+captain corrected it directly:
+
+> *"Gold won't buy the hero any power. Gold will be for, like, upgrading the
+> creeps and shit like that. Like I said, like, with weapons or armor or, like, a
+> mage or something like that."*
+
+**Operative rule:** gold buys **creep/unit upgrades, not hero power**. Hero power
+comes only from **jungle-item drops and cards/chosen skills**. The old line is
+kept and marked in place above so the contradiction cannot disappear into a
+rewrite. Ticket 17 owns the complete sink list and the remaining item fork.
