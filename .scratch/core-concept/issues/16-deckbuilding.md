@@ -50,3 +50,42 @@ since deck quality now varies with collection size. **06 must be revisited after
 this lands.**
 
 Interacts: 02, 09, 11, 06, 14, 15, 04.
+
+## Amendment — 2026-08-26: the pool stays, the deck shrinks `[provisional]`
+
+**Standing caveat, in his own words (2026-08-27):** *"yes to both, but its
+written in pencil not stone."* `[provisional]`, not `[committed]`.
+
+The card system is decided as a **composite**, and lane-state cards run on
+**Shape A (Cycle)** — a small deck on deterministic rotation, with combining
+priced as cycle cost. See [02](02-combining-mechanic.md).
+
+- **The ~100-card pool STANDS**, unchanged. So does *every card in your deck is
+  available within the match*, and *combinable cards share a common denominator*.
+- **⚠ REVERSAL — the ~20 brought per match becomes ~8–12.** Recorded as a
+  reversal of this ticket's own `[provisional]` line above and of the same
+  figure in the map, per the append-only rule. **Shape A's depth device only
+  exists if the deck actually cycles**; ~20 in a ~15-minute timer-accrual match
+  is a **pool, not a deck**. This is a **mechanism** constraint — where inside
+  8–12 the line sits is balance.
+
+**The number is recorded identically in [11](11-accrual-economy.md), which
+carries the reasoning in full. Keep the two consistent; do not restate the
+reasoning here.** This ticket's title still reads *"bring 20"* — **left as
+written on purpose**, so the reversal stays visible rather than disappearing into
+a rename.
+
+### What this sharpens, and what it does not
+
+- **The common denominator gets harder, not easier.** A deck of 8–12 is a
+  **small identity**, so ~100 cards of breadth now have to be expressible in far
+  fewer slots — the direct cost of Shape A, and it presses on this ticket's
+  flavour-and-customisation job. **Recorded as a cost, not solved.**
+- **The card-face legibility watch item stands, and now covers the claim badge
+  too** (see [12](12-jungle-role.md)): if a player must **remember** which cards
+  share a denominator, or what an active claim does, recipe memorisation has
+  re-entered by the side door.
+- **Still open and untouched:** what the common denominator actually is,
+  duplicates, hero-constrained decks, and whether construction is a wall for new
+  players. **06 still needs its revisit** — a smaller deck sharpens the
+  collection-size fairness question rather than relieving it.

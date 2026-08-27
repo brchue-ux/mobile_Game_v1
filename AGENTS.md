@@ -101,9 +101,17 @@ All `[provisional]` unless marked.
 - **Terrain manipulation** — water, lava, holes impeding enemy traversal. No
   longer a candidate *objective* in its own right: it is lever 2 on the one win
   condition.
-- **Cards:** ~100, bring ~20. All obtainable by every player, none
+- **Cards:** ~100, bring **~8–12** (reversed from ~20 on 2026-08-26 so the
+  Shape A rotation can cycle; the map and 11/16 carry the reversal). All obtainable by every player, none
   purchase-exclusive. **All hero power variance is match-bound** `[committed]` —
   no persistent power, no purchased power, no gacha.
+- **Card system shape:** a **composite**, one price per arm `[provisional]`
+  (2026-08-26/27, *"written in pencil not stone"*) — lane-state cards on Shape A
+  (cycle cost), the imbue arm on Prep + **Sealed Beats** (read risk, and the
+  imbue now lives on the **hero as an aura** via a talent pick), the jungle arm
+  on **Claimed Grammar** (affinity charge). A won/defended event pays a small
+  on-scoreboard bonus, **existence only** — currency and size still parked.
+  **⚠ The affinity charge is banking-as-a-slot; parked, and 09 stays shelved.**
 - **Cards must be judgeable against visible battle state.** The bottom bar is the
   **decision substrate**, not a HUD.
 - **No comeback mechanic may reward deliberate losing** `[committed]`.
