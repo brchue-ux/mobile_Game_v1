@@ -2583,3 +2583,135 @@ captain corrected it directly:
 comes only from **jungle-item drops and cards/chosen skills**. The old line is
 kept and marked in place above so the contradiction cannot disappear into a
 rewrite. Ticket 17 owns the complete sink list and the remaining item fork.
+
+## ✅ DECISION — 2026-08-26 / 2026-08-27: the imbue arm, rehoused and sealed, and events pay
+
+**Standing caveat, in his own words (2026-08-27):** *"yes to both, but its
+written in pencil not stone."* Every line in this section is `[provisional]`,
+**never `[committed]`**, and none of it is harder to revisit than any other
+provisional line here. If any of it changes, it is flagged as a reversal per the
+map's append-only rule — but no ceremony and no new hold is needed to change it.
+
+This section closes three things this ticket had left open: **where the imbue
+lives**, **what the imbue decision is now made of**, and **whether winning an
+event pays anything at all.** It does **not** touch the power threshold, its
+tuning, or the win-conversion — those stay parked by his own scope instruction.
+
+### ✅ The imbue rehouses onto the HERO, as an aura `[provisional]`
+
+**The imbue has had no target since the forward structure was cut.** It now has
+one: **the hero.** The imbue is a **hero aura**, and **which aura is available is
+selected by a pre-match talent-tree pick, or by in-match hero choice.**
+
+**⚠ This adopts his own aura reading, which an earlier entry in this ticket
+recorded as a misreading — flagged as a reversal of that correction, not
+absorbed silently.** Under *"Where the imbue lives — two live threads"* above,
+his question of whether the talent-tree idea meant *a hero aura buffing
+surrounding minions* was answered **no** — the talent tree was about where the
+**options** for an imbue come from. **That answer is now overtaken: it is both.**
+The talent tree supplies the options **and** the imbue's host is a hero aura.
+The earlier entry stands as written and is not rewritten; this is the newer line.
+
+**Thread 1 — the home field absorbing the structure's creep buff — is NOT what
+was chosen**, and is not withdrawn either. It stays recorded above as a live
+merge proposal he made himself. **What this decision does is remove the pressure
+that made it necessary**: the imbue is no longer homeless, so trading a decision
+for a constant is no longer the only way to house it.
+
+### ✅ Talents COMPLEMENT the imbue loop; they do not replace it `[provisional]`
+
+**This is the load-bearing half of the rehousing, and it is stated separately
+because it is the part most easily lost.** The talent pick **selects or enables**
+which imbue options you have. **It does not do the imbuing.** The **live,
+in-match combine-and-reveal still happens at every event** — you still hold ice
+for a fire monster, you still build the combine under the deadline, and the
+telegraph still carries a real decision rather than a countdown.
+
+**Without this line the rehousing would hollow the loop out**: a pre-match pick
+alone would turn the imbue from a prepared per-event decision into a constant,
+which is precisely the trade *"Thread 1"* was flagged for above. The imbue loop
+recorded earlier in this ticket — **card prep against a telegraphed, typed
+event** — survives intact. Reaches [14](14-pre-match-setup.md) (the pre-match
+pick is now real, not floated) and [15](15-heroes.md) (each hero's two or three
+ways of affecting it); **neither is rebuilt here.**
+
+### ✅ Sealed Beats — the imbue combine is queued privately and revealed
+simultaneously `[provisional]`
+
+**No new clock is invented. The ~1-minute event telegraph already recorded above
+gains a reveal moment it did not have.**
+
+- During the **existing ~1-minute telegraph**, each player **privately queues**
+  their imbue combine for the coming event.
+- **Nothing resolves and nothing is shown** until the last seconds of the window.
+- **Both commitments reveal SIMULTANEOUSLY**, a beat before the event itself
+  fires. You cannot react to their reveal, because it is simultaneous by
+  construction.
+
+**⚠ Lane-state cards — use (1) of the two distinct card uses recorded above —
+are COMPLETELY UNTOUCHED.** They keep resolving **continuously and instantly**,
+exactly as today. This decision reaches only the imbue/event half of the card
+system. Lane-state cards are priced separately, as cycle cost — see
+[02](02-combining-mechanic.md).
+
+**What this prices:** combining, on this arm, costs **read risk** — a bigger
+imbue commitment is a bigger bet locked in before either player can see whether
+the opponent under- or over-committed to the same event. **Not a resource, not a
+meter.**
+
+**⚠ This re-opens the `[provisional]` imbue-visible line, and that is a
+legitimate re-opening, not a reversal of anything `[committed]`.** *"An imbue is
+visible to the opponent"* (2026-08-11, *"I would say so"*) now has a **third
+answer** it did not have before: not always visible, not always hidden, but
+**hidden until a scheduled reveal.** The board stays fully open the whole time —
+what is briefly sealed is **near-future intent already committed to a known,
+telegraphed event**, which is materially narrower than fog and does not touch
+the no-fog constraint. Reaches [10](10-information-visibility.md); **not rebuilt
+there.**
+
+**⚠ Named rather than waved past:** a scheduled simultaneous-reveal moment is the
+closest anything in this design comes to the no-turns line. The game stays
+real-time and cooldown-based, and this grafts onto a beat the design **already
+schedules and already teaches** — but the proximity is recorded on purpose.
+
+**What is NOT borrowed, recorded so it is not read in later:** per-lane
+power-total scoring. That would collapse lane combat into a comparable number
+per lane, which is **the tug-of-war abstraction rejected twice** wearing a new
+name. Excluded deliberately, not overlooked.
+
+### ✅ A won or defended lane event PAYS — existence only `[provisional]`
+
+**A won or defended lane event pays a small, direct, on-scoreboard bonus.**
+
+**That is the whole decision: that a payoff EXISTS.** It is:
+
+- **small** — not a swing,
+- **direct** — it lands on the scoreboard, not through a chain of consequences,
+- and **on-scoreboard** — the player can see that winning the event did
+  something.
+
+**⚠ The currency and the amount are NOT decided here and must not be inferred.**
+Whether it is gold, progress toward the power threshold, or something else, and
+how much of it, stay **fully parked** — owned by
+`mg-lane-event-brainstorm-decision-event-payout-currency` and by his own
+2026-08-11 *"breadth before nitty-gritty"* instruction. **Anyone reading this
+section as licence to pick a currency has over-read it.**
+
+**Why this line matters beyond itself:** the imbue arm's whole value is
+conditional on **events being worth preparing for**. The live risk already
+recorded was that if events pay nothing, they are simply ignored — and an
+ignorable event makes the Sealed Beats decision above worth nothing. This
+answers *that* risk, without answering the size.
+
+### What this decision does NOT settle
+
+- **The event payout's currency and size** — parked, above.
+- **Where the power threshold sits, its tuning, and how hero power converts into
+  a win** — unchanged, still parked by his own instruction.
+- **Whether the opponent sees your event lane placement before committing** —
+  unchanged. Sealed Beats seals the *combine*, not the *placement*.
+- **`mg-card-system-brainstorm-decision-banking-return`** — still open, and now
+  load-bearing. See [02](02-combining-mechanic.md); **[09](09-banking-mechanic.md)
+  is untouched.**
+- **The snowball risk of the leash**, **how a pushed-back player pushes the line
+  back**, and **the hold-position order** — all unchanged.

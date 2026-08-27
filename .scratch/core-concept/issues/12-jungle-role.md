@@ -916,3 +916,75 @@ remains live.** In particular:
 **No longer open:** whether invasion exists; whether rung 4 is claimed; the
 camp-capture steal risk; and whether a merchant can sell anything beyond terrain
 effects (17 records the mercenary unit).
+
+## Rebuild — 2026-08-26: the jungle arm of the card system — claim drops
+
+**Standing caveat, in his own words (2026-08-27):** *"yes to both, but its
+written in pencil not stone."* `[provisional]`, not `[committed]`.
+
+### 🆕 Certain camps drop a CLAIM instead of gold `[provisional]`
+
+The card system is decided as a **composite** mapped onto the game's three arms,
+and **the jungle is one of those arms.** Its content is a new drop category:
+
+**A subset of jungle camps drops a *claim* — a small, named, match-bound rule
+change to combining — instead of gold.** It is shown as a **persistent badge**
+near the hero readout: **a badge, not a number.**
+
+Illustrative and explicitly unchosen: *a payload's modifier also splashes onto
+your hero*; *fire-tagged modifiers cost one fewer combine slot*; *your first
+combine each accrual cycle is free*.
+
+**This lands directly on the rung-4a attribution principle already recorded
+above** — *"you're not getting power from the jungle, but you are claiming
+something of the jungle that then benefits you."* A claim is exactly that: **a
+thing you claim, not a dispenser you receive from.** It is the same test, applied
+to a new drop category rather than a new principle.
+
+### ⚠ A claim is NOT an item, and does NOT affect the map
+
+**Stated plainly because the confusion would be expensive.** A claim:
+
+- **is not an item** — it does not occupy a slot, it cannot be sold for gold, and
+  it is not part of the WC3-style random-drop system [17](17-gold-and-items.md)
+  owns;
+- **does not affect the map, or any board state at all.** It changes **a rule of
+  the card system**, nothing on the field. The *"items never affect the map"*
+  line in 17 is therefore **untouched** — not because a claim is exempt, but
+  because a claim is not in that category to begin with;
+- **is match-bound with no exception** — it vanishes at the final whistle, so no
+  persistent power is created;
+- **is obtainable by anyone** — any player can walk to the camp. Nothing behind a
+  paywall or a grind.
+- **is public by construction.** The badge sits on the open board side, so it
+  cannot leak hand information. Board open, hand hidden, unchanged.
+
+### The spend — cross-referenced, not restated
+
+Invoking a claim's loosened grammar spends an **affinity charge**, a slow
+regenerating pip beside the badge. **The mechanic and its price belong to
+[02](02-combining-mechanic.md); it is not duplicated here.** Two things this
+ticket does need to carry:
+
+- **⚠ The affinity charge is structurally banking-as-a-slot**, and that is
+  **explicitly parked pending
+  `mg-card-system-brainstorm-decision-banking-return`.** **This ticket does not
+  resolve it, and [09](09-banking-mechanic.md) is untouched and still shelved.**
+  Until that is answered, **the drop can be recorded but the arm cannot be built
+  out.**
+- **The claim prices only the bonus grammar, never the baseline.** Base combining
+  is still priced as cycle cost on the lane-state arm. A claim adds a layer; it
+  does not replace a price.
+
+### What this does not change
+
+**Nothing else in this ticket moves.** Camp siting, the interpolated boundary
+field, kill-then-capture, pause-not-transfer, invasion, the merchant, symmetry,
+traversal quality and the encounter-novelty deferral are all **unchanged** — a
+claim is a new thing a camp can drop, not a new thing a camp is. **Whether the
+claim drop rides on the existing six-a-side camps or on a camp type of its own is
+open**, and is not decided here.
+
+**⚠ The standing risk, recorded not solved:** this is a further thing to track on
+an already-oversubscribed board and bar. Keeping its whole footprint to **one
+badge** mitigates that; it does not eliminate it. See [01](01-battlefield-geometry.md).
